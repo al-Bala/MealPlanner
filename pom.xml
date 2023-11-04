@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mealplanner</groupId>
-    <artifactId>webapp</artifactId>
+    <artifactId>server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>MealPlanner</name>
     <description>MealPlanner</description>
