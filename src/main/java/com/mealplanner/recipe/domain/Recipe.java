@@ -1,4 +1,4 @@
-package com.mealplanner.recipe.domain.model;
+package com.mealplanner.recipe.domain;
 
 import lombok.Builder;
 import org.springframework.data.annotation.Id;

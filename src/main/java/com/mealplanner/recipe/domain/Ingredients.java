@@ -1,4 +1,4 @@
-package com.mealplanner.recipe.domain.model;
+package com.mealplanner.recipe.domain;
 
 import org.springframework.data.mongodb.core.mapping.Field;
 
