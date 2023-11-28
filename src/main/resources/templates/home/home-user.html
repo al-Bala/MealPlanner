@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Meal Planner</title>
+</head>
+<body>
+<nav>
+    <div>
+        <a th:href="@{/home/user}">Home</a>
+        <div>
+            <ul>
+                <li>
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br /><br />
+<div>
+    <div>
+        <h1> Meal Planner </h1>
+        <p> Logged user: <span sec:authentication="name"></span> </p>
+        <p> Role: <span sec:authentication="principal.authorities"></span> </p>
+    </div>
+</div>
+</body>
+</html>
