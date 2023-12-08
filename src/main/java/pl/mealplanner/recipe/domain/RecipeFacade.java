@@ -3,12 +3,18 @@ package pl.mealplanner.recipe.domain;
 import pl.mealplanner.home.HomeFacade;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.mealplanner.plangenerator.domain.dto.OneMeal;
+import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
+
+import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Component
 public class RecipeFacade {
 
-    private final RecipeRepository repository;
+    private final RecipeRepository recipeRepository;
+    private final IngredientRepository ingredientRepository;
     private final HomeFacade homeFacade;
 
     public String findAllRecipes(){
@@ -23,7 +29,7 @@ public class RecipeFacade {
         homeFacade.checkUser();
 
         Recipe recipe = RecipeMapper.mapFromRecipeDtoToRecipe(recipeDto);
-        Recipe savedRecipe = repository.save(recipe);
+        Recipe savedRecipe = recipeRepository.save(recipe);
         return RecipeMapper.mapFromRecipeToRecipeDto(savedRecipe);
     }
 

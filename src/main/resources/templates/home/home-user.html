@@ -25,6 +25,9 @@
         <p> Logged user: <span sec:authentication="name"></span> </p>
         <p> Role: <span sec:authentication="principal.authorities"></span> </p>
     </div>
+    <div>
+        <a th:href="@{/plan}">Plan</a>
+    </div>
 </div>
 </body>
 </html>

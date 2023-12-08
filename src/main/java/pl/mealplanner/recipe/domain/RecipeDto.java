@@ -12,7 +12,7 @@ public record RecipeDto(
         int prepareTime,
         int maxStorageTime,
         String diet,
-        List<Ingredients> ingredients,
+        List<Ingredient> ingredients,
         List<String> steps
 ) {
 }

@@ -15,49 +15,9 @@ import pl.mealplanner.loginandregister.domain.dto.UserDto;
 @Controller
 class LoginAndRegisterController {
     private final LoginAndRegisterFacade facade;
-    //private final JwtAuthenticatorFacade jwtAuthenticatorFacade;
-
-
-//    @GetMapping("/show-login-form")
-//    public ModelAndView showLoginForm() {
-//        ModelAndView modelAndView = new ModelAndView("loginandregister/login-form");
-//        modelAndView.addObject("userDto", UserDto.builder().build());
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/submit-login-from")
-//    @ResponseStatus(HttpStatus.OK)
-//    public ModelAndView submitLoginForm(@ModelAttribute("userDto") UserDto userDto) {
-//        JwtResponseDto user = jwtAuthenticatorFacade.authenticateAndGenerateToken(userDto);
-//
-////        UserDto foundUserDto = facade.findByUsername(userDto.username());
-////        TokenRequest tokenRequest = new TokenRequest(foundUserDto.username(), foundUserDto.password());
-////        facade.authenticateAndGenerateToken(tokenRequest);
-//
-//        ModelAndView modelAndView = new ModelAndView("loginandregister/login-info");
-//        modelAndView.addObject("username", user.username());
-//        return modelAndView;
-//    }
-//
-//    @GetMapping("/show-signup-form")
-//    public ModelAndView showSignupForm() {
-//        ModelAndView modelAndView = new ModelAndView("loginandregister/signup-form");
-//        modelAndView.addObject("userDto", UserDto.builder().build());
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/submit-signup-from")
-//    public String submitSignupForm(@ModelAttribute("userDto") UserDto userDto, Model model) {
-//        UserDto savedUserDto = facade.saveUser(userDto);
-//
-//        //widok
-//        model.addAttribute("username", savedUserDto.username());
-//        return "loginandregister/signup-info";
-//    }
-
     @GetMapping("/login")
     public String login(){
-        return "/loginandregister/login";
+        return "/loginandregister/login-page";
     }
 
     @GetMapping("/register")

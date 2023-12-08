@@ -77,7 +77,10 @@ class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/home").permitAll()
-                                .requestMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
+                                .requestMatchers("/plan/guest").permitAll()
+                                //.requestMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
+                                //.requestMatchers("/plan/**").hasAnyAuthority("USER", "ADMIN")
+                                .anyRequest().authenticated()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")

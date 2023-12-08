@@ -15,13 +15,6 @@ public class LoginAndRegisterFacade {
 
     private final LoginAndRegisterRepository repository;
     private final PasswordEncoder passwordEncoder;
-    //private final JwtAuthenticatorFacade jwtAuthenticatorFacade;
-
-//    public UserDto findByUsername(String username){
-//        return repository.findByUsername(username)
-//                .map(UserMapper::mapFromUserToUserDto)
-//                .orElseThrow(() -> new BadCredentialsException("User not found"));
-//    }
 
     public UserDto findUserByEmail(String email){
         return repository.findByEmail(email)

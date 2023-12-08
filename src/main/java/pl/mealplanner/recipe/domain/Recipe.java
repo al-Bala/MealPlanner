@@ -15,10 +15,10 @@ record Recipe(
         @Field("author") String author,
         @Field("public") boolean isPublic,
         @Field("portions") int portions,
-        @Field("prepare_time") int prepareTime,
-        @Field("max_storage_time") int maxStorageTime,
+        @Field("prepare_time") int prepareTimeMin,
+        @Field("max_storage_time") int maxStorageTimeDays,
         @Field("diet") String diet,
-        @Field("ingredients") List<Ingredients> ingredients,
+        @Field("ingredients") List<Ingredient> ingredients,
         @Field("steps") List<String> steps,
         @Field("photo") String url
 ) {

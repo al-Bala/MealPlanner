@@ -1,12 +1,99 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan</title>
+    <title>Meal Planner</title>
 </head>
 <body>
-<h2>Plan</h2>
-<p th:text="${plan}"></p>
+<nav>
+    <div>
+        <a th:href="@{/home/user}">Home</a>
+        <div>
+            <ul>
+                <li>
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br /><br />
+<div>
+    <div>
+        <h1> Plan Generator </h1>
+        <p th:text="${plan}"></p>
+    </div>
+</div>
+<div>
+    <div>
+        <div>
+            <div th:if="${param.error}">
+                <div>Invalid Email or Password</div>
+            </div>
+            <div th:if="${param.logout}">
+                <div> You have been logged out.</div>
+            </div>
+
+            <div>
+                <div>
+                    <h2>Preferencje:</h2>
+                </div>
+                <div>
+                    <form
+                            method="post"
+                            role="form"
+                            th:action="@{/preferences}"
+                            class="form-horizontal"
+                    >
+                        <div>
+                            <label>Ilość porcji</label>
+                            <input
+                                    type="text"
+                                    id="portions"
+                                    name="portions"
+                                    class="form-control"
+                                    placeholder="Ilość porcji"
+                            />
+                        </div>
+                        <div>
+                            <label>Rodzaj diety</label>
+                            <input
+                                    type="text"
+                                    id="diet"
+                                    name="diet"
+                                    class="form-control"
+                                    placeholder="Rodzaj diety"
+                            />
+                        </div>
+                        <div>
+                            <label>Nielubiane produkty</label>
+                            <input
+                                    type="text"
+                                    id="dislikedProducts"
+                                    name="dislikedProducts"
+                                    class="form-control"
+                                    placeholder="Nielubiane produkty"
+                            />
+                        </div>
+                        <div>
+                            <label>Posiadane produkty do wykorzystania</label>
+                            <input
+                                    type="text"
+                                    id="productsToUse"
+                                    name="productsToUse"
+                                    class="form-control"
+                                    placeholder="Posiadane produkty"
+                            />
+                        </div>
+                        <div>
+                            <button type="submit">Zatwierdź</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
