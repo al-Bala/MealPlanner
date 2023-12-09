@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @Controller
 class HomeController {
-    PlanGeneratorFacade planGeneratorFacade;
     @GetMapping("/home")
     public String home(Model view) {
         view.addAttribute("message", "Meal Planner" );

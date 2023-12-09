@@ -1,4 +1,4 @@
-package com.mealplanner.loginandregister;
+package pl.mealplanner.loginandregister;
 
 import static org.junit.jupiter.api.Assertions.*;
 

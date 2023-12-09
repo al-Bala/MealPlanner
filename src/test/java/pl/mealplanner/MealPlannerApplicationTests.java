@@ -1,4 +1,4 @@
-package com.mealplanner;
+package pl.mealplanner;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

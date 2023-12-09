@@ -3,11 +3,6 @@ package pl.mealplanner.recipe.domain;
 import pl.mealplanner.home.HomeFacade;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.plangenerator.domain.dto.OneMeal;
-import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
-
-import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Component
