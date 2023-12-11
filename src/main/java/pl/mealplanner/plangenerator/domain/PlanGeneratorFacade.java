@@ -8,6 +8,7 @@ import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
 import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
 import pl.mealplanner.plangenerator.mealscounter.MealsCounterFacade;
 import pl.mealplanner.plangenerator.mealsfilter.MealsFilterFacade;
+import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class PlanGeneratorFacade {
     private final MealsCounterFacade mealsCounterFacade;
     private final MealsFilterFacade mealsFilterFacade;
 
-    public List<String> generateMealPlanner(UserPreferencesDto preferencesDto, WeekInfoDto weekInfoDto){
+    public List<FilteredRecipeDto> generateMealPlanner(UserPreferencesDto preferencesDto, WeekInfoDto weekInfoDto){
 
         List<OneMealInfo> oneMealInfoList = mealsCounterFacade.countNumberOfMeals(weekInfoDto);
 

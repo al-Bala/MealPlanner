@@ -1,12 +1,11 @@
 package pl.mealplanner.plangenerator.mealsfilter;
 
-import org.springframework.stereotype.Repository;
+import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
 
 import java.util.List;
 
-interface MealFilterRepository{
-//    Recipe findOneMatchingRecipe(SearchingAllMealsDto searchingAllMealsDto);
-    List<String> findOneMatchingRecipe(
+interface MealsFilterRepository {
+    FilteredRecipeDto findOneMatchingRecipe(
             int forHowManyDays,
             String diet,
             int timeForPrepareMin,

@@ -1,9 +1,9 @@
 package pl.mealplanner.plangenerator.mealsfilter;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
+import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
 
 import java.util.List;
 
@@ -11,22 +11,20 @@ import java.util.List;
 @Service
 class MealsFilterService {
 
-    private final MealFilterRepository mealFilterRepository;
+    private final MealsFilterRepository mealsFilterRepository;
 
-    public List<String> findMeals(InfoForMealsSearch infoForMealsSearch){
+    public List<FilteredRecipeDto> findMeals(InfoForMealsSearch infoForMealsSearch){
 
-        List<String> foundRecipes = infoForMealsSearch.oneMealInfoList().stream()
-                .map(oneMealInfo -> mealFilterRepository.findOneMatchingRecipe(
+        List<FilteredRecipeDto> foundRecipes = infoForMealsSearch.oneMealInfoList().stream()
+                .map(oneMealInfo -> mealsFilterRepository.findOneMatchingRecipe(
                         oneMealInfo.forHowManyDays(),
                         infoForMealsSearch.preferencesDto().diet(),
                         oneMealInfo.timeForPrepareMin(),
                         infoForMealsSearch.preferencesDto().productsToUse(),
-                        infoForMealsSearch.preferencesDto().dislikedProducts()).toString())
+                        infoForMealsSearch.preferencesDto().dislikedProducts()))
                 .toList();
 
         return foundRecipes;
-
-        //return null;
     }
     String checkPreviousWeek(){
         return null;
