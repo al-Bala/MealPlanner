@@ -1,5 +1,6 @@
 package pl.mealplanner.feature;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.mealplanner.BaseIntegrationTest;
@@ -26,16 +27,7 @@ public class MealsFilterIntegrationTest extends BaseIntegrationTest {
     public void database_test(){
         MealsFilterFacade mealsFilterFacade = filterConfig.createForTest();
 
-        UserPreferencesDto preferences = new UserPreferencesDto(
-                4,
-                "wegetariańska",
-                Collections.emptyList(),
-                Collections.emptyList()
-        );
-        List<OneMealInfo> oneMealInfoList = List.of(
-                new OneMealInfo(LocalDate.of(2023, 12,9), 2, 30));
-//                new OneMealInfo(LocalDate.of(2023, 12,11), 2, 60));
-        InfoForMealsSearch infoForMealsSearch = new InfoForMealsSearch(oneMealInfoList, preferences);
+        InfoForMealsSearch infoForMealsSearch = getInfoForMealsSearch();
 
         // when
         List<FilteredRecipeDto> foundMeals = mealsFilterFacade.findMeals(infoForMealsSearch);
@@ -58,5 +50,18 @@ public class MealsFilterIntegrationTest extends BaseIntegrationTest {
         );
 
         assertEquals(expectedFoundMeals, foundMeals);
+    }
+
+    @NotNull
+    private static InfoForMealsSearch getInfoForMealsSearch() {
+        UserPreferencesDto preferences = UserPreferencesDto.builder()
+                .numberOfPortions(4)
+                .diet("wegetariańska")
+                .productsToUse(List.of("marchew", "brokuły"))
+                .dislikedProducts(List.of("sos sojowy"))
+                .build();
+        List<OneMealInfo> oneMealInfoList = List.of(
+                new OneMealInfo(LocalDate.of(2023, 12,9), 1, 30));
+        return new InfoForMealsSearch(oneMealInfoList, preferences);
     }
 }
