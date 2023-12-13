@@ -7,6 +7,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.mealplanner.loginandregister.domain.dto.Role;
 import pl.mealplanner.loginandregister.domain.dto.UserDto;
+import pl.mealplanner.loginandregister.domain.dto.UserPlanHistory;
+import pl.mealplanner.loginandregister.domain.entity.User;
 
 @Log4j2
 @AllArgsConstructor
@@ -20,6 +22,11 @@ public class LoginAndRegisterFacade {
         return repository.findByEmail(email)
                 .map(UserMapper::mapFromUserToUserDto)
                 .orElseThrow(() -> new BadCredentialsException("Email not found"));
+    }
+
+    public UserPlanHistory findPlanHistoryByUsername(String username){
+        User user = repository.findByUsername(username);
+        return UserMapper.mapFromUserToUserPlanHistory(user);
     }
 
     public UserDto saveUser(UserDto userDto){

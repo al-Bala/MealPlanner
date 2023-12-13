@@ -3,30 +3,27 @@ package pl.mealplanner.feature;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.test.context.support.WithMockUser;
 import pl.mealplanner.BaseIntegrationTest;
 import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
 import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
 import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
-import pl.mealplanner.plangenerator.mealsfilter.MealsFilterConfig;
 import pl.mealplanner.plangenerator.mealsfilter.MealsFilterFacade;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
 import pl.mealplanner.plangenerator.mealsfilter.dto.ProductDto;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MealsFilterIntegrationTest extends BaseIntegrationTest {
-
     @Autowired
-    private MealsFilterConfig filterConfig;
-
+    public MealsFilterFacade mealsFilterFacade;
     @Test
+    @WithMockUser(username = "testUser", roles = "USER")
     public void database_test(){
-        MealsFilterFacade mealsFilterFacade = filterConfig.createForTest();
-
+        // given
         InfoForMealsSearch infoForMealsSearch = getInfoForMealsSearch();
 
         // when

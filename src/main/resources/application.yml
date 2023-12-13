@@ -5,8 +5,8 @@ server:
 spring:
   data:
    mongodb:
-     uri: mongodb://admin:admin@localhost:27017/planner
+     host: localhost
+     port: 27017
      database: planner
-     collection: recipes
 
 

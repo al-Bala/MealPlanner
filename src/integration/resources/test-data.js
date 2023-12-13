@@ -1,14 +1,26 @@
 db = db.getSiblingDB('testDatabase');
 
-// db.createUser({
-//     user: 'test_container',
-//     pwd: 'test_container',
-//     roles: [
-//         { role: 'readWrite', db: 'testDatabase' }
-//     ]
-// });
+db.users.insertMany([
+    {
+        id: "#",
+        role: "USER",
+        username: "testUser",
+        password: "password",
+        email: "email@email.pl",
+        user_preferences: {
+            portions: 2,
+            diet: "wege",
+            disliked_products: [""]
+        },
+        user_recipes: [""],
+        plan_history: [
+            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')},
+            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9424')}
+        ],
+    },
+]);
 
-db.testRecipes.insertMany([
+db.recipes.insertMany([
     {
         name: "Kasza jaglana z warzywami",
         portions: 4,

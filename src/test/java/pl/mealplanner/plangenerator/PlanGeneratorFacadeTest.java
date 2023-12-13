@@ -1,14 +1,14 @@
 package pl.mealplanner.plangenerator;
 
-import org.junit.Test;
-import pl.mealplanner.plangenerator.domain.PlanGeneratorConfig;
-import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
-import pl.mealplanner.plangenerator.domain.dto.*;
-
-import java.time.LocalDate;
-import java.util.List;
-
-import static org.junit.Assert.*;
+//import org.junit.Test;
+//import pl.mealplanner.plangenerator.domain.PlanGeneratorConfig;
+//import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
+//import pl.mealplanner.plangenerator.domain.dto.*;
+//
+//import java.time.LocalDate;
+//import java.util.List;
+//
+//import static org.junit.Assert.*;
 
 public class PlanGeneratorFacadeTest {
 

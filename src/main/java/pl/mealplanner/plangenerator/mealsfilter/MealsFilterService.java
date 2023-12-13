@@ -1,9 +1,15 @@
 package pl.mealplanner.plangenerator.mealsfilter;
 
 import lombok.AllArgsConstructor;
+import org.bson.types.ObjectId;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
+import pl.mealplanner.loginandregister.domain.dto.PlanHistoryDto;
 import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
+import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
 
 import java.util.List;
 
@@ -11,26 +17,30 @@ import java.util.List;
 @Service
 class MealsFilterService {
 
-    private final MealsFilterRepository mealsFilterRepository;
+    private final MealsFinder mealsFinder;
+    private final HistoryChecker historyChecker;
+    private final IngredientsCalculator ingredientsCalculator;
 
     public List<FilteredRecipeDto> findMeals(InfoForMealsSearch infoForMealsSearch){
 
-        List<FilteredRecipeDto> foundRecipes = infoForMealsSearch.oneMealInfoList().stream()
-                .map(oneMealInfo -> mealsFilterRepository.findOneMatchingRecipe(
-                        oneMealInfo.forHowManyDays(),
-                        infoForMealsSearch.preferencesDto().diet(),
-                        oneMealInfo.timeForPrepareMin(),
-                        infoForMealsSearch.preferencesDto().productsToUse(),
-                        infoForMealsSearch.preferencesDto().dislikedProducts()))
-                .toList();
+        List<FilteredRecipeDto> allRecipesForPlan = getInfoForFiltering(infoForMealsSearch).stream()
+                        .map(mealsFinder::findMatchingRecipes)
+                        .map(historyChecker::checkPreviousWeek)
+                        .toList();
 
-        return foundRecipes;
+        return allRecipesForPlan;
     }
-    String checkPreviousWeek(){
-        return null;
-    }
-    String calculateIngredients(){
-        return null;
+
+    private List<InfoForFiltering> getInfoForFiltering(InfoForMealsSearch infoForMealsSearch){
+        return infoForMealsSearch.oneMealInfoList().stream()
+                .map(oneMealInfo -> InfoForFiltering.builder()
+                        .forHowManyDays(oneMealInfo.forHowManyDays())
+                        .diet(infoForMealsSearch.preferencesDto().diet())
+                        .timeForPrepareMin(oneMealInfo.timeForPrepareMin())
+                        .productsToUse(infoForMealsSearch.preferencesDto().productsToUse())
+                        .dislikedProducts(infoForMealsSearch.preferencesDto().dislikedProducts())
+                        .build())
+                .toList();
     }
     String saveTheLastLeftovers(){
         return null;

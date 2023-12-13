@@ -35,8 +35,8 @@ public class BaseIntegrationTest {
     // połaczenie aplikacji z bazą danych w kontenerze
     @DynamicPropertySource
     public static void propertyOverride(DynamicPropertyRegistry registry){
-        registry.add("spring.data.mongodb.uri", () -> "mongodb://" + mongoDBContainer.getHost() + ":" + mongoDBContainer.getMappedPort(27017));
+        registry.add("spring.data.mongodb.host", mongoDBContainer::getHost);
+        registry.add("spring.data.mongodb.port", mongoDBContainer::getFirstMappedPort);
         registry.add("spring.data.mongodb.database", () -> "testDatabase");
-        registry.add("spring.data.mongodb.collection", () -> "testRecipes");
     }
 }

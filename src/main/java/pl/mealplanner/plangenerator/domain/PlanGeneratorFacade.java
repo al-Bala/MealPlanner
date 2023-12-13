@@ -6,6 +6,7 @@ import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
 import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
 import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
 import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
+import pl.mealplanner.plangenerator.leftproductscounter.LeftProductsCounterFacade;
 import pl.mealplanner.plangenerator.mealscounter.MealsCounterFacade;
 import pl.mealplanner.plangenerator.mealsfilter.MealsFilterFacade;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
@@ -28,10 +29,9 @@ public class PlanGeneratorFacade {
                 .preferencesDto(preferencesDto)
                 .build();
 
-        return mealsFilterFacade.findMeals(infoForMealsSearch);
+        List<FilteredRecipeDto> filteredRecipes = mealsFilterFacade.findMeals(infoForMealsSearch);
 
-
-        //return null;
+        return null;
     }
 
 

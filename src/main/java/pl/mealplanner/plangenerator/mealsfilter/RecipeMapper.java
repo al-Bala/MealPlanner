@@ -2,6 +2,7 @@ package pl.mealplanner.plangenerator.mealsfilter;
 
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
 import pl.mealplanner.plangenerator.mealsfilter.dto.ProductDto;
+import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
 
 class RecipeMapper {
     public static FilteredRecipeDto mapFromRecipeToFilteredRecipeDto(Recipe recipe) {
@@ -20,4 +21,6 @@ class RecipeMapper {
                         .toList())
                 .build();
     }
+
+
 }
