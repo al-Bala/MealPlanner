@@ -5,7 +5,7 @@ import org.bson.types.ObjectId;
 
 import java.util.List;
 
-@Builder
+@Builder(toBuilder=true)
 public record FilteredRecipeDto(
         ObjectId id,
         String name,

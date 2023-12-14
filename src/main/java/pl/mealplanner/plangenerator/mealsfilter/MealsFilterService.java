@@ -22,10 +22,16 @@ class MealsFilterService {
     private final IngredientsCalculator ingredientsCalculator;
 
     public List<FilteredRecipeDto> findMeals(InfoForMealsSearch infoForMealsSearch){
+        int nrPortionsUser = infoForMealsSearch.preferencesDto().numberOfPortions();
 
+        // szuka jednego przepisu na każdy dzień planu
         List<FilteredRecipeDto> allRecipesForPlan = getInfoForFiltering(infoForMealsSearch).stream()
+                        // szuka max 10 przepisów pasujących do wymagań
                         .map(mealsFinder::findMatchingRecipes)
+                        // bierze pierwszy możliwy którego nie było poprzednio
                         .map(historyChecker::checkPreviousWeek)
+                        // przelicza składniki na podaną ilość porcji
+                        .map(recipe -> ingredientsCalculator.calculateIngredients(recipe, nrPortionsUser))
                         .toList();
 
         return allRecipesForPlan;
