@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class MealsCounterFacadeTest {
+public class MealsPackingChooserServiceFacadeTest {
     MealsCounterConfig config = new MealsCounterConfig();
     @Test
     public void should_count_nr_of_meals_for_week(){

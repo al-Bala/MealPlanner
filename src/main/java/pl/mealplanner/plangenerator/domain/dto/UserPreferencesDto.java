@@ -1,6 +1,8 @@
 package pl.mealplanner.plangenerator.domain.dto;
 
 import lombok.Builder;
+import pl.mealplanner.plangenerator.leftproductscounter.dto.ProductDto;
+import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +11,7 @@ import java.util.Optional;
 public record UserPreferencesDto(
         int numberOfPortions,
         String diet,
-        List<String> productsToUse,
+        List<IngredientDto> productsToUse,
         List<String> dislikedProducts
 ) {
 }

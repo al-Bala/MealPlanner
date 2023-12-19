@@ -10,7 +10,7 @@ import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
 import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
 import pl.mealplanner.plangenerator.mealsfilter.MealsFilterFacade;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
-import pl.mealplanner.plangenerator.mealsfilter.dto.ProductDto;
+import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,7 +27,7 @@ public class MealsFilterIntegrationTest extends BaseIntegrationTest {
         InfoForMealsSearch infoForMealsSearch = getInfoForMealsSearch();
 
         // when
-        List<FilteredRecipeDto> foundMeals = mealsFilterFacade.findMeals(infoForMealsSearch);
+        List<FilteredRecipeDto> foundMeals = mealsFilterFacade.findRecipes(infoForMealsSearch);
 
         // then
         List<FilteredRecipeDto> expectedFoundMeals = List.of(
@@ -38,10 +38,10 @@ public class MealsFilterIntegrationTest extends BaseIntegrationTest {
                         .max_storage_time(2)
                         .diet("wegetariańska")
                         .ingredients(List.of(
-                                new ProductDto("kasza jaglana", 200, "g"),
-                                new ProductDto("marchew", 2, "szt"),
-                                new ProductDto("brokuły", 150, "g"),
-                                new ProductDto("oliwa z oliwek", 30, "ml")
+                                new IngredientDto("kasza jaglana", 200, "g"),
+                                new IngredientDto("marchew", 2, "szt"),
+                                new IngredientDto("brokuły", 150, "g"),
+                                new IngredientDto("oliwa z oliwek", 30, "ml")
                         ))
                         .build()
         );
@@ -54,7 +54,10 @@ public class MealsFilterIntegrationTest extends BaseIntegrationTest {
         UserPreferencesDto preferences = UserPreferencesDto.builder()
                 .numberOfPortions(4)
                 .diet("wegetariańska")
-                .productsToUse(List.of("marchew", "brokuły"))
+                .productsToUse(List.of(
+                        new IngredientDto("marchew", 100, "g"),
+                        new IngredientDto("brokuły", 1, "szt")
+                ))
                 .dislikedProducts(List.of("sos sojowy"))
                 .build();
         List<OneMealInfo> oneMealInfoList = List.of(

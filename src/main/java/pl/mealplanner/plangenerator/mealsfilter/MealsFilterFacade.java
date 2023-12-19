@@ -2,19 +2,65 @@ package pl.mealplanner.plangenerator.mealsfilter;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
 import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
+import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
+import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
+import pl.mealplanner.plangenerator.leftproductscounter.LeftProductsCounterFacade;
+import pl.mealplanner.plangenerator.leftproductscounter.dto.Leftover;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
+import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
+import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
 @Component
 public class MealsFilterFacade {
+    private final MealsFinder mealsFinder;
+    private final HistoryChecker historyChecker;
+    private final IngredientsCalculator ingredientsCalculator;
+    private final LeftProductsCounterFacade leftProductsCounterFacade;
 
-    private final MealsFilterService mealsFilterService;
+    public List<FilteredRecipeDto> findRecipes(InfoForMealsSearch infoForMealsSearch) {
+        UserPreferencesDto preferences = infoForMealsSearch.preferencesDto();
+        int nrPortionsUser = preferences.numberOfPortions();
+        List<IngredientDto> productsToUse = new ArrayList<>(preferences.productsToUse());
+        List<FilteredRecipeDto> allRecipesForPlan = new ArrayList<>();
 
-    public List<FilteredRecipeDto> findMeals(InfoForMealsSearch infoForMealsSearch){
-        return mealsFilterService.findMeals(infoForMealsSearch);
+        for (OneMealInfo oneMealInfo : infoForMealsSearch.oneMealInfoList()) {
+            InfoForFiltering info = getInfoForFiltering(oneMealInfo, preferences, productsToUse);
+            FilteredRecipeDto recipe = getFilteredRecipe(info, nrPortionsUser);
+            allRecipesForPlan.add(recipe);
+            calculateLeftoversFromPreviousRecipeInPlan(recipe, productsToUse);
+        }
+        return allRecipesForPlan;
+    }
+
+    private InfoForFiltering getInfoForFiltering(OneMealInfo oneMealInfo, UserPreferencesDto preferences, List<IngredientDto> productsToUse) {
+        return InfoForFiltering.builder()
+                .forHowManyDays(oneMealInfo.forHowManyDays())
+                .diet(preferences.diet())
+                .timeForPrepareMin(oneMealInfo.timeForPrepareMin())
+                .productsToUse(productsToUse)
+                .dislikedProducts(preferences.dislikedProducts())
+                .build();
+    }
+
+    private FilteredRecipeDto getFilteredRecipe(InfoForFiltering info, int nrPortionsUser) {
+        List<FilteredRecipeDto> matchingRecipes = mealsFinder.findMatchingRecipes(info);
+        FilteredRecipeDto recipe = historyChecker.checkPreviousWeek(matchingRecipes);
+        return ingredientsCalculator.calculateIngredients(recipe, nrPortionsUser);
+    }
+
+    private void calculateLeftoversFromPreviousRecipeInPlan(FilteredRecipeDto recipe, List<IngredientDto> productsToUse) {
+        productsToUse.clear();
+        List<Leftover> leftovers = leftProductsCounterFacade.calculateLeftovers(recipe);
+        List<IngredientDto> productsToUseFromLeftovers = MealsFilterMapper.mapFromLeftoverToIngredientDto(leftovers);
+        productsToUse.addAll(productsToUseFromLeftovers);
+    }
+
+    String saveTheLastLeftovers(List<IngredientDto> productsToUse) {
+        return null;
     }
 }

@@ -9,7 +9,7 @@ public record InfoForFiltering(
         int forHowManyDays,
         String diet,
         int timeForPrepareMin,
-        List<String> productsToUse,
+        List<IngredientDto> productsToUse,
         List<String> dislikedProducts
 ) {
 }

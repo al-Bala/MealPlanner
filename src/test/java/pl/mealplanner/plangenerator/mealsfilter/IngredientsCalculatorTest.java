@@ -3,7 +3,7 @@ package pl.mealplanner.plangenerator.mealsfilter;
 import org.junit.Assert;
 import org.junit.Test;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
-import pl.mealplanner.plangenerator.mealsfilter.dto.ProductDto;
+import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ public class IngredientsCalculatorTest {
                 .name("name")
                 .portions(2)
                 .ingredients(List.of(
-                        new ProductDto("product1", 100, "ml"),
-                        new ProductDto("product2", 125, "g")
+                        new IngredientDto("product1", 100, "ml"),
+                        new IngredientDto("product2", 125, "g")
                 ))
                 .build();
 
@@ -31,8 +31,8 @@ public class IngredientsCalculatorTest {
                 .name("name")
                 .portions(3)
                 .ingredients(List.of(
-                        new ProductDto("product1", 150, "ml"),
-                        new ProductDto("product2", 187.5f, "g")
+                        new IngredientDto("product1", 150, "ml"),
+                        new IngredientDto("product2", 187.5f, "g")
                         ))
                 .build();
 

@@ -1,10 +1,13 @@
 package pl.mealplanner.plangenerator.mealsfilter;
 
+import pl.mealplanner.plangenerator.leftproductscounter.dto.Leftover;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
-import pl.mealplanner.plangenerator.mealsfilter.dto.ProductDto;
+import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
 
-class RecipeMapper {
+import java.util.List;
+
+class MealsFilterMapper {
     public static FilteredRecipeDto mapFromRecipeToFilteredRecipeDto(Recipe recipe) {
         return FilteredRecipeDto.builder()
                 .name(recipe.name())
@@ -13,7 +16,7 @@ class RecipeMapper {
                 .max_storage_time(recipe.maxStorageTimeDays())
                 .diet(recipe.diet())
                 .ingredients(recipe.ingredients().stream()
-                        .map(ing -> ProductDto.builder()
+                        .map(ing -> IngredientDto.builder()
                                 .name(ing.name())
                                 .amount(ing.amount())
                                 .unit(ing.unit())
@@ -23,4 +26,15 @@ class RecipeMapper {
     }
 
 
+    public static List<String> mapFromListIngredientDtoToListString(List<IngredientDto> productsToUse) {
+        return productsToUse.stream()
+                .map(IngredientDto::name)
+                .toList();
+    }
+
+    public static List<IngredientDto> mapFromLeftoverToIngredientDto(List<Leftover> leftovers) {
+        return leftovers.stream()
+                .map(l -> new IngredientDto(l.name(), l.surplus(), l.unit()))
+                .toList();
+    }
 }

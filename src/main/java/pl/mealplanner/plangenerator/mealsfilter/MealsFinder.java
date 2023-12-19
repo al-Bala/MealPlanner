@@ -15,7 +15,13 @@ class MealsFinder {
     private final MealsFilterRepository repository;
 
     public List<FilteredRecipeDto> findMatchingRecipes(InfoForFiltering info) {
-        List<Recipe> list = repository.findMatchingRecipes(info.forHowManyDays(), info.diet(), info.timeForPrepareMin(), info.productsToUse(), info.dislikedProducts());
+        List<String> namesProductsToUse = MealsFilterMapper.mapFromListIngredientDtoToListString(info.productsToUse());
+
+        /**
+         * TODO: Inne zapytania w razie gdyby pierwsze nic nie zwróciło
+         */
+
+        List<Recipe> list = repository.findMatchingRecipes(info.forHowManyDays(), info.diet(), info.timeForPrepareMin(), namesProductsToUse, info.dislikedProducts());
         return getFilteredRecipesDtoList(list);
     }
 
@@ -25,6 +31,10 @@ class MealsFinder {
                 .map(this::convert)
                 .toList();
     }
+
+    /**
+     * TODO: Wybieranie przepisów według składników (ilość) zamiast pierwszych 10
+     */
     private List<Recipe> choseMaxFirst10(List<Recipe> recipesDb) {
         if(recipesDb.size() > 10){
             return recipesDb.subList(0,10);
@@ -33,6 +43,6 @@ class MealsFinder {
         }
     }
     private FilteredRecipeDto convert(Recipe choseRecipe) {
-        return RecipeMapper.mapFromRecipeToFilteredRecipeDto(choseRecipe);
+        return MealsFilterMapper.mapFromRecipeToFilteredRecipeDto(choseRecipe);
     }
 }

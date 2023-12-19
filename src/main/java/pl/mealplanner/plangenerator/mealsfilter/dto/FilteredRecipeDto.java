@@ -13,6 +13,6 @@ public record FilteredRecipeDto(
         int prepare_time,
         int max_storage_time,
         String diet,
-        List<ProductDto> ingredients
+        List<IngredientDto> ingredients
 ) {
 }
