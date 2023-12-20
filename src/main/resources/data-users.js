@@ -2,7 +2,6 @@ db.createCollection("users")
 
 db.users.insertMany([
     {
-        id: "#1",
         role: "USER",
         username: "user",
         password: "1234",
@@ -19,7 +18,6 @@ db.users.insertMany([
         ],
     },
     {
-        id: "#2",
         role: "ADMIN",
         username: "admin",
         password: "1234",

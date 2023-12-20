@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
+import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
 
 @Controller
 class PlanGeneratorController {
@@ -27,8 +28,9 @@ class PlanGeneratorController {
 
     @PostMapping("/preferences")
     public String addPreferences(@ModelAttribute("preferences") UserPreferencesDto preferencesDto,
-                               BindingResult result,
-                               Model model){
+                                 @ModelAttribute("weekInfo") WeekInfoDto weekInfoDto,
+                                 BindingResult result,
+                                 Model model){
 //        UserDto existingUser = facade.findUserByEmail(userDto.email());
 //
 //        if(existingUser != null && existingUser.email() != null && !existingUser.email().isEmpty()){
@@ -44,4 +46,5 @@ class PlanGeneratorController {
 //        facade.saveUser(userDto);
         return "redirect:/plangenerator/plan?success";
     }
+
 }

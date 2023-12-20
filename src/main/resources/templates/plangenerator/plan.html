@@ -44,6 +44,7 @@
                             method="post"
                             role="form"
                             th:action="@{/preferences}"
+                            th:object="${preferences}"
                             class="form-horizontal"
                     >
                         <div>
@@ -54,6 +55,7 @@
                                     name="portions"
                                     class="form-control"
                                     placeholder="Ilość porcji"
+                                    th:field="*{numberOfPortions}"
                             />
                         </div>
                         <div>
@@ -64,16 +66,7 @@
                                     name="diet"
                                     class="form-control"
                                     placeholder="Rodzaj diety"
-                            />
-                        </div>
-                        <div>
-                            <label>Nielubiane produkty</label>
-                            <input
-                                    type="text"
-                                    id="dislikedProducts"
-                                    name="dislikedProducts"
-                                    class="form-control"
-                                    placeholder="Nielubiane produkty"
+                                    th:field="*{diet}"
                             />
                         </div>
                         <div>
@@ -84,6 +77,18 @@
                                     name="productsToUse"
                                     class="form-control"
                                     placeholder="Posiadane produkty"
+                                    th:field="*{productsToUse}"
+                            />
+                        </div>
+                        <div>
+                            <label>Nielubiane produkty</label>
+                            <input
+                                    type="text"
+                                    id="dislikedProducts"
+                                    name="dislikedProducts"
+                                    class="form-control"
+                                    placeholder="Nielubiane produkty"
+                                    th:field="*{dislikedProducts}"
                             />
                         </div>
                         <div>
