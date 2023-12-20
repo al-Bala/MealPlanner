@@ -15,7 +15,7 @@ public class LeftProductsPackingChooserServiceFacadeTest {
     @Test
     public void test(){
         // given
-        LeftProductsCounterFacade facade = new LeftProductsCounterFacade(packingChooserConfig.createForTest(), new LeftProductsCounterRepositoryTestImpl());
+        LeftProductsCounterFacade facade = new LeftProductsCounterFacade(packingChooserConfig.createForTest(), new LeftProductsCounterRepositoryTestImpl() ,new GroceryList());
         FilteredRecipeDto recipe = FilteredRecipeDto.builder()
                 .ingredients(List.of(
 //                        new IngredientDto("mleko", 150f, "ml"),
@@ -24,7 +24,7 @@ public class LeftProductsPackingChooserServiceFacadeTest {
                 ))
                 .build();
         // when
-        List<Leftover> result = facade.calculateLeftovers(recipe);
+        List<Leftover> result = facade.calculateProducts(recipe);
         System.out.println(result);
 
         // then

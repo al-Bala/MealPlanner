@@ -4,8 +4,9 @@ import lombok.Builder;
 
 @Builder
 public record ShoppingInfo(
+        String name,
         float packingMeasure,
         int nrOfPackets,
-        float surplus
+        String unit
 ) {
 }

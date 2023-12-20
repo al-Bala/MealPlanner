@@ -6,6 +6,8 @@ import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
 import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
 import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
 import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
+import pl.mealplanner.plangenerator.leftproductscounter.GroceryList;
+import pl.mealplanner.plangenerator.leftproductscounter.dto.ShoppingInfo;
 import pl.mealplanner.plangenerator.mealscounter.MealsCounterFacade;
 import pl.mealplanner.plangenerator.mealsfilter.MealsFilterFacade;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
@@ -18,8 +20,10 @@ public class PlanGeneratorFacade {
 
     private final MealsCounterFacade mealsCounterFacade;
     private final MealsFilterFacade mealsFilterFacade;
+    private final GroceryList groceryList;
 
     public List<FilteredRecipeDto> generateMealPlanner(UserPreferencesDto preferencesDto, WeekInfoDto weekInfoDto){
+        groceryList.clearGroceryList();
 
         List<OneMealInfo> oneMealInfoList = mealsCounterFacade.countNumberOfMeals(weekInfoDto);
 
@@ -28,12 +32,10 @@ public class PlanGeneratorFacade {
                 .preferencesDto(preferencesDto)
                 .build();
 
-        List<FilteredRecipeDto> filteredRecipes = mealsFilterFacade.findRecipes(infoForMealsSearch);
-
-
-
-        return null;
+        return mealsFilterFacade.findRecipes(infoForMealsSearch);
     }
 
-
+    public List<ShoppingInfo> getGroceryListForPlan(){
+        return groceryList.getGroceryList();
+    }
 }

@@ -32,7 +32,7 @@ public class MealsFilterFacade {
             InfoForFiltering info = getInfoForFiltering(oneMealInfo, preferences, productsToUse);
             FilteredRecipeDto recipe = getFilteredRecipe(info, nrPortionsUser);
             allRecipesForPlan.add(recipe);
-            calculateLeftoversFromPreviousRecipeInPlan(recipe, productsToUse);
+            calculateLeftoversAndAddProductsToGroceryList(recipe, productsToUse);
         }
         return allRecipesForPlan;
     }
@@ -53,9 +53,9 @@ public class MealsFilterFacade {
         return ingredientsCalculator.calculateIngredients(recipe, nrPortionsUser);
     }
 
-    private void calculateLeftoversFromPreviousRecipeInPlan(FilteredRecipeDto recipe, List<IngredientDto> productsToUse) {
+    private void calculateLeftoversAndAddProductsToGroceryList(FilteredRecipeDto recipe, List<IngredientDto> productsToUse) {
         productsToUse.clear();
-        List<Leftover> leftovers = leftProductsCounterFacade.calculateLeftovers(recipe);
+        List<Leftover> leftovers = leftProductsCounterFacade.calculateProducts(recipe);
         List<IngredientDto> productsToUseFromLeftovers = MealsFilterMapper.mapFromLeftoverToIngredientDto(leftovers);
         productsToUse.addAll(productsToUseFromLeftovers);
     }

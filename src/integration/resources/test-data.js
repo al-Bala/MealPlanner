@@ -96,5 +96,35 @@ db.recipes.insertMany([
     }
 ]);
 
+db.products.insertMany([
+    {
+        name: "kasza jaglana",
+        packing_measures: [
+            { amount: 200, unit: "g" },
+            { amount: 400, unit: "g" }
+        ],
+    },
+    {
+        name: "marchew",
+        packing_measures: [
+            { amount: 200, unit: "g" },
+            { amount: 100, unit: "g" }
+        ],
+    },
+    {
+        name: "brokuły",
+        packing_measures: [
+            { amount: 50, unit: "g" },
+            { amount: 180, unit: "g" }
+        ],
+    },
+    {
+        name: "oliwa z oliwek",
+        packing_measures: [
+            { amount: 50, unit: "ml" }
+        ],
+    }
+]);
+
 
 
