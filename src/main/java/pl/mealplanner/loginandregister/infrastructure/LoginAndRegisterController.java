@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
 import pl.mealplanner.loginandregister.domain.dto.UserDto;
 
@@ -16,7 +18,8 @@ import pl.mealplanner.loginandregister.domain.dto.UserDto;
 class LoginAndRegisterController {
     private final LoginAndRegisterFacade facade;
     @GetMapping("/login")
-    public String login(){
+    public String loginPage(){
+
         return "/loginandregister/login-page";
     }
 
@@ -29,9 +32,8 @@ class LoginAndRegisterController {
     }
 
     @PostMapping("/register/save")
-    public String registration(@ModelAttribute("user") UserDto userDto,
-                               BindingResult result,
-                               Model model){
+    public RedirectView registration(@ModelAttribute("user") UserDto userDto,
+                                     BindingResult result){
 //        UserDto existingUser = facade.findUserByEmail(userDto.email());
 //
 //        if(existingUser != null && existingUser.email() != null && !existingUser.email().isEmpty()){
@@ -39,12 +41,11 @@ class LoginAndRegisterController {
 //                    "There is already an account registered with the same email");
 //        }
 
-        if(result.hasErrors()){
-            model.addAttribute("user", userDto);
-            return "/loginandregister/register";
-        }
-
+//        if(result.hasErrors()){
+//            model.addAttribute("user", userDto);
+//            return "/loginandregister/register";
+//        }
         facade.saveUser(userDto);
-        return "redirect:/loginandregister/register?success";
+        return new RedirectView ("/meal-planner/register?success");
     }
 }
