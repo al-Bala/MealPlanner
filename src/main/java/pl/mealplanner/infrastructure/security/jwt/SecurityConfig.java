@@ -22,7 +22,8 @@ import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
-class SecurityConfig {
+class
+SecurityConfig {
 //    @Bean
 //    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 //        return authenticationConfiguration.getAuthenticationManager();

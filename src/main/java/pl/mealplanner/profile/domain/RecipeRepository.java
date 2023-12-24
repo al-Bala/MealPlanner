@@ -1,4 +1,4 @@
 package pl.mealplanner.profile.domain;
 
-interface RecipeRepository {
+public interface RecipeRepository {
 }

@@ -1,6 +1,7 @@
 package pl.mealplanner.loginandregister.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -17,6 +18,7 @@ import java.util.List;
 @Builder
 @Document("users")
 record User(
+
         @Id ObjectId id,
         @Field("role") Role role,
 
@@ -39,6 +41,10 @@ record User(
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public ObjectId getID() {
+        return id;
     }
 
     @Override
