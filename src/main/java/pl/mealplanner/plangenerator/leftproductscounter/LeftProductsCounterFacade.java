@@ -2,7 +2,7 @@ package pl.mealplanner.plangenerator.leftproductscounter;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.plangenerator.leftproductscounter.dto.IngredientsToUseInfo;
+import pl.mealplanner.plangenerator.leftproductscounter.dto.IngredientToUseInfo;
 import pl.mealplanner.plangenerator.leftproductscounter.dto.Leftover;
 import pl.mealplanner.plangenerator.leftproductscounter.dto.ShoppingInfo;
 import pl.mealplanner.plangenerator.leftproductscounter.entity.Product;
@@ -22,8 +22,8 @@ public class LeftProductsCounterFacade {
 
     public List<Leftover> calculateProducts(FilteredRecipeDto recipe){
 
-        List<IngredientsToUseInfo> IngredientsToUseList = recipe.ingredients().stream()
-                .map(ingredient -> calculatePacketAndLeftovers(getProduct(ingredient), ingredient.amount()))
+        List<IngredientToUseInfo> IngredientsToUseList = recipe.ingredients().stream()
+                .map(ingredient -> calculatePacketAndLeftovers(getProduct(ingredient), ingredient))
                 .toList();
 
         IngredientsToUseList.forEach(this::addToGroceryList);
@@ -39,11 +39,11 @@ public class LeftProductsCounterFacade {
                 .orElseThrow();
     }
 
-    private IngredientsToUseInfo calculatePacketAndLeftovers(Product product, float recipeAmount){
-        return packingChooserFacade.choosePacking(product, recipeAmount);
+    private IngredientToUseInfo calculatePacketAndLeftovers(Product product, IngredientDto ingRecipe){
+        return packingChooserFacade.choosePacking(product, ingRecipe);
     }
     
-    private void addToGroceryList(IngredientsToUseInfo ing){
+    private void addToGroceryList(IngredientToUseInfo ing){
         ShoppingInfo productToBuy = LeftoverMapper.mapFromIngredientsToUseInfoToShoppingInfo(ing);
         groceryList.addProductToGroceryList(productToBuy);
     }

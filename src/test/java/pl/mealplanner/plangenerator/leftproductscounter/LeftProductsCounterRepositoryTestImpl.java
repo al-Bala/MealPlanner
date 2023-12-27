@@ -32,7 +32,10 @@ public class LeftProductsCounterRepositoryTestImpl implements LeftProductsCounte
                 new PackingMeasures(250f, "g")
 //                new PackingMeasures(500f, "kg")
         )));
-
+        products.put("marchew", new Product("marchew", List.of(
+                new PackingMeasures(0f, "g"),
+                new PackingMeasures(0f, "szt")
+        )));
     }
 
     @Override

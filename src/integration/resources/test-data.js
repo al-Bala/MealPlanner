@@ -107,15 +107,15 @@ db.products.insertMany([
     {
         name: "marchew",
         packing_measures: [
-            { amount: 200, unit: "g" },
-            { amount: 100, unit: "g" }
+            { amount: 0, unit: "g" },
+            { amount: 0, unit: "szt" }
         ],
     },
     {
         name: "brokuły",
         packing_measures: [
-            { amount: 50, unit: "g" },
-            { amount: 180, unit: "g" }
+            { amount: 0, unit: "g" },
+            { amount: 0, unit: "szt" }
         ],
     },
     {

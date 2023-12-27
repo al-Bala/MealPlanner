@@ -1,7 +1,7 @@
 package pl.mealplanner.plangenerator.packingchooser;
 
 import org.springframework.stereotype.Component;
-import pl.mealplanner.plangenerator.leftproductscounter.dto.IngredientsToUseInfo;
+import pl.mealplanner.plangenerator.leftproductscounter.dto.IngredientToUseInfo;
 import pl.mealplanner.plangenerator.leftproductscounter.dto.ProductMeasureInfo;
 
 import java.util.ArrayList;
@@ -9,13 +9,13 @@ import java.util.List;
 
 @Component
 class PackingChooserService {
-    public IngredientsToUseInfo chooseTheBestBiggerPacket(float recipeAmount, List<ProductMeasureInfo> listOfMeasures){
-        List<IngredientsToUseInfo> array = new ArrayList<>();
+    public IngredientToUseInfo chooseTheBestBiggerPacket(float recipeAmount, List<ProductMeasureInfo> listOfMeasures){
+        List<IngredientToUseInfo> array = new ArrayList<>();
 
         for (ProductMeasureInfo productMeasureInfo :listOfMeasures) {
 //            int nrOfPackets = (int)(beforeCounting.amount() / recipeAmount);
             float surplus = productMeasureInfo.amount() - recipeAmount;
-            array.add(IngredientsToUseInfo.builder()
+            array.add(IngredientToUseInfo.builder()
                     .name(productMeasureInfo.name())
                     .packingMeasure(productMeasureInfo.amount())
                     .nrOfPackets(1)
@@ -26,14 +26,14 @@ class PackingChooserService {
         return getMinSurplus(array);
     }
 
-    public IngredientsToUseInfo chooseTheBestSmallerPacket(float recipeAmount, List<ProductMeasureInfo> listOfMeasures) {
-        List<IngredientsToUseInfo> array = new ArrayList<>();
+    public IngredientToUseInfo chooseTheBestSmallerPacket(float recipeAmount, List<ProductMeasureInfo> listOfMeasures) {
+        List<IngredientToUseInfo> array = new ArrayList<>();
 
         for (ProductMeasureInfo productMeasureInfo : listOfMeasures) {
             int nrOfPackets = (int) (recipeAmount / productMeasureInfo.amount());
             float theRest = recipeAmount % productMeasureInfo.amount();
             float surplus = productMeasureInfo.amount() - theRest;
-            array.add(IngredientsToUseInfo.builder()
+            array.add(IngredientToUseInfo.builder()
                     .name(productMeasureInfo.name())
                     .packingMeasure(productMeasureInfo.amount())
                     .nrOfPackets(nrOfPackets + 1)
@@ -52,7 +52,7 @@ class PackingChooserService {
         }
     }
 
-    private IngredientsToUseInfo getMinSurplus(List<IngredientsToUseInfo> array) {
+    private IngredientToUseInfo getMinSurplus(List<IngredientToUseInfo> array) {
         return array.stream()
                 .min((f1, f2) -> Float.compare(f1.surplus(), f2.surplus()))
                 .orElse(null);

@@ -3,7 +3,7 @@ package pl.mealplanner.plangenerator.leftproductscounter.dto;
 import lombok.Builder;
 
 @Builder
-public record IngredientsToUseInfo (
+public record IngredientToUseInfo(
         String name,
         float packingMeasure,
         int nrOfPackets,

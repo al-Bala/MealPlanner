@@ -2,10 +2,11 @@ package pl.mealplanner.plangenerator.packingchooser;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.plangenerator.leftproductscounter.dto.IngredientsToUseInfo;
+import pl.mealplanner.plangenerator.leftproductscounter.dto.IngredientToUseInfo;
 import pl.mealplanner.plangenerator.leftproductscounter.dto.ProductMeasureInfo;
 import pl.mealplanner.plangenerator.leftproductscounter.entity.PackingMeasures;
 import pl.mealplanner.plangenerator.leftproductscounter.entity.Product;
+import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,31 +16,40 @@ import java.util.List;
 public class PackingChooserFacade {
 
     private final PackingChooserService service;
-
-    public IngredientsToUseInfo choosePacking(Product product, float recipeAmount){
+    public IngredientToUseInfo choosePacking(Product product, IngredientDto ingRecipe){
         List<ProductMeasureInfo> biggerPackingMeasures = new ArrayList<>();
         List<ProductMeasureInfo> smallerPackingMeasures = new ArrayList<>();
 
-        for (PackingMeasures pm:product.packingMeasures()
-        ) {
-            if(pm.amount() == recipeAmount){
-                return new IngredientsToUseInfo(product.name(), pm.amount(), 1, 0, pm.unit());
-            }
-            else if(pm.amount() > recipeAmount){
-                biggerPackingMeasures.add(new ProductMeasureInfo(product.name(), pm.amount(), pm.unit()));
-            }
-            else{
-                smallerPackingMeasures.add(new ProductMeasureInfo(product.name(), pm.amount(), pm.unit()));
-            }
-        }
+        List<PackingMeasures> chosePackingMeasures = getUnit(product, ingRecipe);
 
-        if(smallerPackingMeasures.isEmpty()){
-            return service.chooseTheBestBiggerPacket(recipeAmount, biggerPackingMeasures);
-        } else if (biggerPackingMeasures.isEmpty()){
-            return service.chooseTheBestSmallerPacket(recipeAmount, smallerPackingMeasures);
+        if(chosePackingMeasures.size() == 1 && chosePackingMeasures.get(0).amount() == 0){
+            return IngredientToUseInfo.builder()
+                    .name(ingRecipe.name())
+                    .packingMeasure(ingRecipe.amount())
+                    .unit(ingRecipe.unit())
+                    .build();
         } else {
-            IngredientsToUseInfo big = service.chooseTheBestBiggerPacket(recipeAmount, biggerPackingMeasures);
-            IngredientsToUseInfo small = service.chooseTheBestSmallerPacket(recipeAmount, smallerPackingMeasures);
+            for (PackingMeasures pm:chosePackingMeasures) {
+                if(pm.amount() == ingRecipe.amount()){
+                    return new IngredientToUseInfo(product.name(), pm.amount(), 1, 0, pm.unit());
+                }
+                else if(pm.amount() > ingRecipe.amount()){
+                    biggerPackingMeasures.add(new ProductMeasureInfo(product.name(), pm.amount(), pm.unit()));
+                }
+                else{ smallerPackingMeasures.add(new ProductMeasureInfo(product.name(), pm.amount(), pm.unit()));}
+            }
+            return compareAndChooseTheBestPacket(biggerPackingMeasures, smallerPackingMeasures, ingRecipe);
+        }
+    }
+
+    private IngredientToUseInfo compareAndChooseTheBestPacket(List<ProductMeasureInfo> biggerPackingMeasures, List<ProductMeasureInfo> smallerPackingMeasures, IngredientDto ingRecipe){
+        if(smallerPackingMeasures.isEmpty()){
+            return service.chooseTheBestBiggerPacket(ingRecipe.amount(), biggerPackingMeasures);
+        } else if (biggerPackingMeasures.isEmpty()){
+            return service.chooseTheBestSmallerPacket(ingRecipe.amount(), smallerPackingMeasures);
+        } else {
+            IngredientToUseInfo big = service.chooseTheBestBiggerPacket(ingRecipe.amount(), biggerPackingMeasures);
+            IngredientToUseInfo small = service.chooseTheBestSmallerPacket(ingRecipe.amount(), smallerPackingMeasures);
 
             float bigIdk = big.nrOfPackets() * big.surplus();
             float smallIdk = small.nrOfPackets() * small.surplus();
@@ -50,5 +60,11 @@ public class PackingChooserFacade {
                 return big;
             }
         }
+    }
+
+    private List<PackingMeasures> getUnit(Product product, IngredientDto ingRecipe){
+        return product.packingMeasures().stream()
+                .filter(p -> p.unit().equals(ingRecipe.unit()))
+                .toList();
     }
 }
