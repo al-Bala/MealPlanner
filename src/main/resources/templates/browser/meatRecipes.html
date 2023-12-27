@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wyszukiwanie przepisów</title>
+</head>
+<body>
+<h1>Przepisy mięsne</h1>
+
+
+<h2>Lista:</h2>
+<ul>
+  <!-- Wyświetlanie przepisów mięsnych -->
+    <li th:each="recipe : ${meatRecipes}">
+      <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.nazwa()}"></a>
+    </li>
+</ul>
+
+<table>
+  <thead>
+  <tbody>
+  <tr th:each="recipet : ${randomRecipes}">
+    <td th:text="${recipet.nazwa()}"></td>
+  </tr>
+  </tbody>
+</table>
+
+
+</body>
+</html>

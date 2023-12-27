@@ -1,4 +1,4 @@
-package pl.mealplanner.recipe.infrastructure;
+/*package pl.mealplanner.recipe.infrastructure;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ class RecipeController {
         return "recipe/recipe-list";
     }
 
-    @GetMapping("/recipes/{id}")
+    //@GetMapping("/recipes/{id}")
     public String getRecipeById(@PathVariable Long id) {
 
         return "recipe/recipe-page";
@@ -26,3 +26,5 @@ class RecipeController {
         return "recipe/recipe-form";
     }
 }
+
+*/

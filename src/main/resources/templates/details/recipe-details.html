@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Szczegóły przepisu</title>
+</head>
+<body>
+<h1>Szczegóły przepisu</h1>
+<p>Dieta: <span th:text="${diet}"></span></p>
+<p>Czas przygotowania: <span th:text="${prepareTime}"></span></p>
+<p>Nazwa: <span th:text="${name}"></span></p>
+<img th:src="@{/images/{imageName}(imageName=${image})}" alt="Obrazek">
+<!-- Inne pola przepisu, jeśli są -->
+</body>
+</html>

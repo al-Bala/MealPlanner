@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 @Document("recipes")
 record Recipe(
-        @Id Long id,
+        //@Id Long id,
         @Field("name") String name,
         @Field("author") String author,
         @Field("public") boolean isPublic,

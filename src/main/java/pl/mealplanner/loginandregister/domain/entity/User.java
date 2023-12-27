@@ -1,6 +1,7 @@
-package pl.mealplanner.loginandregister.domain.entity;
+package pl.mealplanner.loginandregister.domain;
 
 import lombok.Builder;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,20 +16,21 @@ import java.util.List;
 
 @Builder
 @Document("users")
-public record User(
-        @Id String id,
+record User(
+
+        @Id ObjectId id,
         @Field("role") Role role,
 
-        @Field("username")
-        @Indexed(unique = true)
-        String username,
-        @Field("password") String password,
+//        @Field("username")
+//        @Indexed(unique = true)
+//        String username,
         @Field("email")
         @Indexed(unique = true)
         String email,
-        @Field("user_preferences") UserPreferences preferences,
-        @Field("user_recipes") List<String> userRecipes,
-        @Field("plan_history") List<PlanHistory> planHistory
+        @Field("password") String password
+//        @Field("user_preferences") UserPreferences preferences,
+//        @Field("user_recipes") List<Long> userRecipes,
+//        @Field("plan_history") PlanHistory planHistory
 ) implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
