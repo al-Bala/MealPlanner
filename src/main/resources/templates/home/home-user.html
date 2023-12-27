@@ -26,7 +26,7 @@
         <p> Role: <span sec:authentication="principal.authorities"></span> </p>
     </div>
     <div>
-        <a th:href="@{/plan}">Wygeneruj plan</a>
+        <a th:href="@{/plan/info}">Wygeneruj plan</a>
         <a th:href="@{'/user/' + ${userId}}">Twój profl</a>
         <a th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
     </div>

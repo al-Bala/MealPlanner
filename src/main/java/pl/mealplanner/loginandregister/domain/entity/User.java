@@ -1,4 +1,4 @@
-package pl.mealplanner.loginandregister.domain;
+package pl.mealplanner.loginandregister.domain.entity;
 
 import lombok.Builder;
 import org.bson.types.ObjectId;
@@ -16,21 +16,21 @@ import java.util.List;
 
 @Builder
 @Document("users")
-record User(
+public record User(
 
         @Id ObjectId id,
         @Field("role") Role role,
 
-//        @Field("username")
-//        @Indexed(unique = true)
-//        String username,
+        @Field("username")
+        @Indexed(unique = true)
+        String username,
         @Field("email")
         @Indexed(unique = true)
         String email,
-        @Field("password") String password
+        @Field("password") String password,
 //        @Field("user_preferences") UserPreferences preferences,
 //        @Field("user_recipes") List<Long> userRecipes,
-//        @Field("plan_history") PlanHistory planHistory
+        @Field("plan_history") List<PlanHistory> planHistory
 ) implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
