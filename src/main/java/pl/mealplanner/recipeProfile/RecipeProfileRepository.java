@@ -1,6 +1,5 @@
-package pl.mealplanner.recipes;
+package pl.mealplanner.recipeProfile;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 import pl.mealplanner.displayer.Recipes;
 
 public interface RecipeProfileRepository extends MongoRepository<Recipes

@@ -1,4 +1,4 @@
-package pl.mealplanner.recipes;
+package pl.mealplanner.recipeProfile;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +26,10 @@ public class RecipeProfileController {
             model.addAttribute("diet", recipe.getDiet());
             model.addAttribute("prepareTime", recipe.getPrepareTime());
             model.addAttribute("name", recipe.getName());
-            return "recipe-details"; // Nazwa pliku HTML z szablonem dla szczegółów przepisu
+            model.addAttribute("image", recipe.getImage());
+            return "details/recipe-details"; // Nazwa pliku HTML z szablonem dla szczegółów przepisu
         } else {
-            return "recipe-details"; // Widok HTML informujący o braku przepisu
+            return "details/recipe-details"; // Widok HTML informujący o braku przepisu
         }
     }
 }

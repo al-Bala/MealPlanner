@@ -16,5 +16,15 @@
     </li>
 </ul>
 
+<table>
+  <thead>
+  <tbody>
+  <tr th:each="recipet : ${randomRecipes}">
+    <td th:text="${recipet.nazwa()}"></td>
+  </tr>
+  </tbody>
+</table>
+
+
 </body>
 </html>

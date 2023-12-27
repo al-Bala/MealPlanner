@@ -1,4 +1,4 @@
-package pl.mealplanner.recipes;
+package pl.mealplanner.recipeProfile;
 
 import org.springframework.stereotype.Service;
 import pl.mealplanner.displayer.Recipes;

@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.mealplanner.profile.infrastructure.UserService;
 
-import java.util.Optional;
-
 @Controller
 public class UserController {
 
@@ -24,9 +22,9 @@ public class UserController {
         if (user != null) {
             model.addAttribute("user", user);
             model.addAttribute("role", user.getRole());
-            return "user-details"; // nazwa widoku (user-details.html)
+            return "details/user-details"; // nazwa widoku (user-details.html)
         } else {
-            return "user-details"; // widok informujący o braku użytkownika
+            return "details/user-details"; // widok informujący o braku użytkownika
         }
     }
 }

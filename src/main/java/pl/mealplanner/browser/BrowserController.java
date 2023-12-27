@@ -21,8 +21,11 @@ public class BrowserController {
     @GetMapping("/przepisy-miesne")
         public String showMeatRecipesByDiet (Model model){
 
+
             List<Recipes> meatRecipes = browserRepository.findByDiet("mięsna");
-            model.addAttribute("meatRecipes", meatRecipes); // Przekazanie mięsnych przepisów do modelu
+
+            model.addAttribute("meatRecipes", meatRecipes);
+
             return "browser/meatRecipes"; // Zwraca nazwę widoku HTML
         }
 

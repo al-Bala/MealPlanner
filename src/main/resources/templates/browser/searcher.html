@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wyszukiwarka</title>
+</head>
+<body>
+<h1>Znajdź przepis</h1>
+<form action="#" th:action="@{/wyszukiwarka}" method="get">
+    <input type="text" name="keyword" placeholder="Enter keyword" />
+    <button type="submit">Szukaj</button>
+</form>
+<div>
+    <h2>Wyniki:</h2>
+    <ul>
+        <li th:each="recipe : ${recipes}">
+            <td><a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.nazwa()}"></a></td>
+        </li>
+    </ul>
+
+    <a th:href="@{'/przepisy-miesne'}">Przepisy miesne</a>
+    <a th:href="@{'/przepisy-wegetarianskie'}">Przepisy wegetarianskie</a>
+
+    <h1>Polecane przepisy na dzisiaj!</h1>
+    <table>
+        <thead>
+        <tbody>
+        <tr th:each="recipe : ${randomRecipes}">
+            <td><a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.nazwa()}"></a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

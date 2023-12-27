@@ -37,6 +37,7 @@ public class RecipesController {
 
         model.addAttribute("recipes", randomRecipes); // Przekazanie losowych rekordów do modelu
 
+
         return "displayer/display"; // Zwrócenie nazwy szablonu HTML
     }
     private boolean containsIndex(int[] array, int index) {
@@ -48,4 +49,3 @@ public class RecipesController {
         return false;
     }
 }
-

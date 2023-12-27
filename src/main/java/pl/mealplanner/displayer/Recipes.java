@@ -1,10 +1,12 @@
 package pl.mealplanner.displayer;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import pl.mealplanner.recipe.domain.Ingredient;
+
 
 import java.util.List;
 
@@ -13,8 +15,10 @@ public class Recipes {
 
     @Id
     @Getter
+    @Setter
     private String id; // ObjectId jako String
     @Getter
+    @Setter
     private String name;
     @Getter
     private String diet;
@@ -30,6 +34,8 @@ public class Recipes {
     @Getter
     private int maxStorageTime;
     // ... other fields
+    @Getter
+    private String image;
 
 
     @Override
