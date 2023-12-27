@@ -17,12 +17,19 @@ class MealsFinder {
     public List<FilteredRecipeDto> findMatchingRecipes(InfoForFiltering info) {
         List<String> namesProductsToUse = MealsFilterMapper.mapFromListIngredientDtoToListString(info.productsToUse());
 
-        /**
-         * TODO: Inne zapytania w razie gdyby pierwsze nic nie zwróciło
-         */
-
-        List<Recipe> list = repository.findMatchingRecipes(info.forHowManyDays(), info.diet(), info.timeForPrepareMin(), namesProductsToUse, info.dislikedProducts());
-        return getFilteredRecipesDtoList(list);
+        List<Recipe> result5Req = repository.findRecipesWithAllRequirements(info.forHowManyDays(), info.diet(), info.timeForPrepareMin(), namesProductsToUse, info.dislikedProducts());
+        if(result5Req.isEmpty()){
+            List<Recipe> result4Req = repository.findRecipesWithoutDislikedProducts(info.forHowManyDays(), info.diet(), info.timeForPrepareMin(), namesProductsToUse);
+            if(result4Req.isEmpty()){
+                List<Recipe> result3Req = repository.findRecipesWithoutDislikedProductsAndProductsToUse(info.forHowManyDays(), info.diet(), info.timeForPrepareMin());
+                if(result3Req.isEmpty()){
+                    System.out.println("Nie udało się znaleźć żadnego pasującego przepisu :(");
+                }
+                return getFilteredRecipesDtoList(result3Req);
+            }
+            return getFilteredRecipesDtoList(result4Req);
+        }
+        return getFilteredRecipesDtoList(result5Req);
     }
 
     private List<FilteredRecipeDto> getFilteredRecipesDtoList(List<Recipe> recipesDb) {

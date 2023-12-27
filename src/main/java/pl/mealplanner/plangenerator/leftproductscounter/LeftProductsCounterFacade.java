@@ -35,7 +35,8 @@ public class LeftProductsCounterFacade {
     }
 
     private Product getProduct(IngredientDto ingredient){
-        return repository.findByName(ingredient.name());
+        return repository.findByName(ingredient.name())
+                .orElseThrow();
     }
 
     private IngredientsToUseInfo calculatePacketAndLeftovers(Product product, float recipeAmount){

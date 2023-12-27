@@ -36,8 +36,8 @@ public class LeftProductsCounterRepositoryTestImpl implements LeftProductsCounte
     }
 
     @Override
-    public Product findByName(String name) {
-        return products.get(name);
+    public Optional<Product> findByName(String name) {
+        return Optional.ofNullable(products.get(name));
     }
 
     @Override

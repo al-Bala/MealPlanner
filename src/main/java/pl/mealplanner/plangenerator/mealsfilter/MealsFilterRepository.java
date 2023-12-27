@@ -10,5 +10,11 @@ import java.util.List;
 @Repository
 interface MealsFilterRepository extends MongoRepository<Recipe, String>{
     @Query("{'max_storage_time': { $gte: ?0 }, 'diet': { $eq: ?1 }, 'prepare_time': { $lte: ?2 }, 'ingredients.name': { $all: ?3, $nin: ?4 }}")
-    List<Recipe> findMatchingRecipes(int maxStorageTime, String diets, int prepareTime, List<String> productsToUse, List<String> dislikedProducts);
+    List<Recipe> findRecipesWithAllRequirements(int maxStorageTime, String diets, int prepareTime, List<String> productsToUse, List<String> dislikedProducts);
+
+    @Query("{'max_storage_time': { $gte: ?0 }, 'diet': { $eq: ?1 }, 'prepare_time': { $lte: ?2 }, 'ingredients.name': { $all: ?3}}")
+    List<Recipe> findRecipesWithoutDislikedProducts(int maxStorageTime, String diets, int prepareTime, List<String> productsToUse);
+
+    @Query("{'max_storage_time': { $gte: ?0 }, 'diet': { $eq: ?1 }, 'prepare_time': { $lte: ?2 }}")
+    List<Recipe> findRecipesWithoutDislikedProductsAndProductsToUse(int maxStorageTime, String diets, int prepareTime);
 }
