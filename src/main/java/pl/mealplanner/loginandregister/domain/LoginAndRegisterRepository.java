@@ -8,6 +8,9 @@ import java.util.Optional;
 
 @Repository
 interface LoginAndRegisterRepository extends MongoRepository<User, String> {
-    Optional<User> findByEmail(String email);
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
+
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
 }

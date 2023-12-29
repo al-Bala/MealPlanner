@@ -10,6 +10,7 @@ import java.util.List;
 class UserMapper {
     public static User mapFromUserDtoToUser(UserDto userDto) {
         return User.builder()
+                .username(userDto.username())
                 .email(userDto.email())
                 .password(userDto.password())
                 .build();
@@ -17,6 +18,7 @@ class UserMapper {
 
     public static UserDto mapFromUserToUserDto(User user) {
         return UserDto.builder()
+                .username(user.username())
                 .email(user.email())
                 .password(user.password())
                 .role(user.role())

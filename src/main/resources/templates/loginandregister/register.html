@@ -39,29 +39,41 @@
                         th:object="${user}"
                 >
                     <div>
+                        <label>Login</label>
+                        <input
+                                id="username"
+                                name="username"
+                                placeholder="Podaj login"
+                                th:field="*{username}"
+                                type="text"
+                        />
+                        <p th:errors = "*{username}"
+                           th:if="${#fields.hasErrors('username')}">Username Error</p>
+                    </div>
+                    <div>
                         <label>Email</label>
                         <input
                                 id="email"
                                 name="email"
-                                placeholder="Enter email address"
+                                placeholder="Podaj email"
                                 th:field="*{email}"
                                 type="email"
                         />
                         <p th:errors = "*{email}"
-                           th:if="${#fields.hasErrors('email')}"></p>
+                           th:if="${#fields.hasErrors('email')}">Email Error</p>
                     </div>
 
                     <div>
-                        <label>Password</label>
+                        <label>Hasło</label>
                         <input
                                 id="password"
                                 name="password"
-                                placeholder="Enter password"
+                                placeholder="Podaj hasło"
                                 th:field="*{password}"
                                 type="password"
                         />
                         <p th:errors = "*{password}"
-                           th:if="${#fields.hasErrors('password')}"></p>
+                           th:if="${#fields.hasErrors('password')}">Password Error</p>
                     </div>
                     <div>
                         <button type="submit">Register</button>
