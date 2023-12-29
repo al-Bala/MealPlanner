@@ -38,10 +38,10 @@ class LoginAndRegisterController {
     public String registration(@ModelAttribute("user") @Valid UserDto userDto,
                                     BindingResult result){
         if(facade.isUsernameExists(userDto.username())){
-            result.rejectValue("username", null, "Ten login jest już zajęty.");
+            result.rejectValue("username", "username.exist");
         }
         if(facade.isEmailExists(userDto.email())){
-            result.rejectValue("email", null, "Ten email już istnieje. Spróbuj się zalogować.");
+            result.rejectValue("email", "email.exist");
         }
 
         if(result.hasErrors()){
