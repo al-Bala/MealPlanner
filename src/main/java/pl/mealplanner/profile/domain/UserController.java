@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import pl.mealplanner.loginandregister.domain.entity.User;
 import pl.mealplanner.profile.infrastructure.UserService;
 
 @Controller
@@ -15,13 +16,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/{email}")
-    public String showUserDetails(@PathVariable String email, Model model) {
-        User user = userService.getUserByEmail(email);
+    @GetMapping("/user/{username}")
+    public String showUserDetails(@PathVariable String username, Model model) {
+        User user = userService.getUserByUsername(username);
 
         if (user != null) {
-            model.addAttribute("user", user);
-            model.addAttribute("role", user.getRole());
+            model.addAttribute("user", user.username());
+            model.addAttribute("role", user.role());
             return "details/user-details"; // nazwa widoku (user-details.html)
         } else {
             return "details/user-details"; // widok informujący o braku użytkownika
