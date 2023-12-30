@@ -10,6 +10,7 @@
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
 </head>
 
+
 <body>
     <nav>
         <div class="menu__wrapper">
@@ -60,6 +61,21 @@
             </div>
         </div>
     </div>
+    <div>
+        <label>Password</label>
+        <input id="password" name="password" placeholder="Enter password" th:field="*{password}" type="password" />
+        <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
+    </div>
+    <div>
+        <button type="submit">Register</button>
+        <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
 </body>
+
 
 </html>
