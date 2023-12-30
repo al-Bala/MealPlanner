@@ -29,6 +29,12 @@ nav {
     }
 }
 
+.active {
+    &__item{
+        display: flex;
+    }
+}
+
 .test-content {
     width: 100%;
     height: 300px;
