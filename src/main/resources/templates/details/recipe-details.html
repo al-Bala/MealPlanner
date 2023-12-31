@@ -8,7 +8,7 @@
 <p>Dieta: <span th:text="${diet}"></span></p>
 <p>Czas przygotowania: <span th:text="${prepareTime}"></span></p>
 <p>Nazwa: <span th:text="${name}"></span></p>
-<img th:src="@{/images/{imageName}(imageName=${image})}" alt="Obrazek">
+<img th:src="${imageUrl}" alt="Obraz"/>
 <!-- Inne pola przepisu, jeśli są -->
 </body>
 </html>
