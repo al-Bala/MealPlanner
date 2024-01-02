@@ -40,12 +40,11 @@ class HomeController {
     public String homeUser(Model view) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName(); // Załóżmy, że ID użytkownika jest przechowywane jako nazwa użytkownika
-
+        String username = authentication.getName(); // Załóżmy, że ID użytkownika jest przechowywane jako nazwa użytkownika
 
         //view.addAttribute("userId", userId);
         view.addAttribute("message", "Meal Planner");
-        view.addAttribute("userId", userId);
+        view.addAttribute("username", username);
         return "home/home-user";
     }
 }

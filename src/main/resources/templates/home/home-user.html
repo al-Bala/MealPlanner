@@ -1,35 +1,60 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>Meal Planner</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealPlanner</title>
+
+    <link rel="stylesheet" href="../../../../../css/home-style.css">
+
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-<nav>
-    <div>
-        <a th:href="@{/home/user}">Home</a>
+    <nav>
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+
+        <ul class="menu">
+            <li class="menu__item">
+                <a class="menu__link" th:href="@{/home/user}">Strona główna</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__link">Wygeneruj plan</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__link">Zarządzaj przepisami</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__link">Wyszukaj przepis</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__link">Twój profil</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__link" th:href="@{/logout}">Wyloguj się</a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <div class="test-content">
         <div>
-            <ul>
-                <li>
-                    <a th:href="@{/logout}">Logout</a>
-                </li>
-            </ul>
+            <h1> Meal Planner </h1>
+            <p> Logged user: <span sec:authentication="name"></span> </p>
+            <p> Role: <span sec:authentication="principal.authorities"></span> </p>
+        </div>
+        <div>
+            <a th:href="@{/plan/info}">Wygeneruj plan</a>
+            <a th:href="@{'/user/' + ${userId}}">Twój profl</a>
+            <a th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
         </div>
     </div>
-</nav>
-<br /><br />
-<div>
-    <div>
-        <h1> Meal Planner </h1>
-        <p> Logged user: <span sec:authentication="name"></span> </p>
-        <p> Role: <span sec:authentication="principal.authorities"></span> </p>
-    </div>
-    <div>
-        <a th:href="@{/plan/info}">Wygeneruj plan</a>
-        <a th:href="@{'/user/' + ${userId}}">Twój profl</a>
-        <a th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
-    </div>
-</div>
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <script src="../../static/js/burgerMenu.js"></script>
 </body>
+
 </html>

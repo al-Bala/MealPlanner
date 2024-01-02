@@ -1,76 +1,70 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
->
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Meal Planner</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejestracja - MealPlanner</title>
+
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
 </head>
+
+
 <body>
-<nav>
-    <div>
-        <a th:href="@{/home}">Home</a>
-        <div>
-            <ul>
-                <li>
-                    <a th:href="@{/login}">Login</a>
+    <nav>
+        <div class="menu__wrapper">
+            <ul class="menu">
+                <li class="menu__item">
+                    <a class="menu__link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="menu__item">
+                    <a class="menu__link" th:href="@{/login}">Login</a>
                 </li>
             </ul>
         </div>
-    </div>
-</nav>
-<br /><br /><br />
-<div>
+    </nav>
+
+    <br /><br /><br />
     <div>
         <div>
             <div>
-                <h2>Registration</h2>
-            </div>
-            <div th:if="${param.success}">
                 <div>
-                    You have successfully registered our app!
+                    <h2>Registration</h2>
                 </div>
-            </div>
-            <div>
-                <form
-                        method="post"
-                        role="form"
-                        th:action="@{/register/save}"
-                        th:object="${user}"
-                >
+                <div th:if="${param.success}">
                     <div>
-                        <label>Email</label>
-                        <input
-                                id="email"
-                                name="email"
-                                placeholder="Enter email address"
-                                th:field="*{email}"
-                                type="email"
-                        />
-                        <p th:errors = "*{email}"
-                           th:if="${#fields.hasErrors('email')}"></p>
+                        You have successfully registered our app!
                     </div>
+                </div>
+                <div>
+                    <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+                        <div>
+                            <label>Login</label>
+                            <input id="username" name="username" placeholder="Podaj login" th:field="*{username}" type="text"/>
+                            <p th:errors = "*{username}" th:if="${#fields.hasErrors('username')}">Username Error</p>
+                        </div>
+                        <div>
+                            <label>Email</label>
+                            <input id="email" name="email" placeholder="Enter email address" th:field="*{email}"
+                                type="email" />
+                            <p th:errors="*{email}" th:if="${#fields.hasErrors('email')}">Email Error</p>
+                        </div>
 
-                    <div>
-                        <label>Password</label>
-                        <input
-                                id="password"
-                                name="password"
-                                placeholder="Enter password"
-                                th:field="*{password}"
-                                type="password"
-                        />
-                        <p th:errors = "*{password}"
-                           th:if="${#fields.hasErrors('password')}"></p>
-                    </div>
-                    <div>
-                        <button type="submit">Register</button>
-                        <span>Already registered? <a th:href="@{/login}">Login here</a></span>
-                    </div>
-                </form>
+                        <div>
+                            <label>Hasło</label>
+                            <input id="password" name="password" placeholder="Enter password" th:field="*{password}"
+                                type="password" />
+                            <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Password Error</p>
+                        </div>
+                        <div>
+                            <button type="submit">Register</button>
+                            <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

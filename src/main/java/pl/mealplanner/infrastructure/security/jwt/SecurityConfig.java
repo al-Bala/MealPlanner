@@ -1,6 +1,6 @@
 package pl.mealplanner.infrastructure.security.jwt;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
@@ -16,59 +16,27 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.NullRequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
 
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
-class
-SecurityConfig {
-//    @Bean
-//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-//        return authenticationConfiguration.getAuthenticationManager();
-//    }
-//
-//    // decyduje gdzie jest nasza baza danych z użytkownikami
-//    @Bean
-//    public UserDetailsService userDetailsService(LoginAndRegisterFacade loginAndRegisterFacade) {
-//        return new LoginUserDetailsService(loginAndRegisterFacade);
-//    }
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.csrf().disable();
-//        httpSecurity.authorizeRequests()
-//                .antMatchers("/**").permitAll()
-//                .antMatchers("/token/**").permitAll()
-//                .antMatchers("/login/**").permitAll()
-//                .antMatchers("/register/**").permitAll()
-////                .antMatchers("/swagger-ui/**").permitAll()
-////                .antMatchers("/v3/api-docs").permitAll()
-////                .antMatchers("/webjars/**").permitAll()
-////                .antMatchers("/swagger-resources/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .headers().frameOptions().disable()
-//                .and().httpBasic().disable()
-//                //???????????????
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .exceptionHandling();
-//        return httpSecurity.build();
-//    }
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+public class SecurityConfig {
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-    // decyduje gdzie jest nasza baza danych z użytkownikami
-    @Bean
-    public UserDetailsService userDetailsService(LoginAndRegisterFacade loginAndRegisterFacade) {
-        return new LoginUserDetailsService(loginAndRegisterFacade);
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -77,18 +45,21 @@ SecurityConfig {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
+                                .requestMatchers("/login/**").permitAll()
                                 .requestMatchers("/home").permitAll()
                                 .requestMatchers("/plan/guest").permitAll()
                                 //.requestMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
                                 //.requestMatchers("/plan/**").hasAnyAuthority("USER", "ADMIN")
                                 .anyRequest().authenticated()
-                ).formLogin(
+                )
+                .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
                                 .defaultSuccessUrl("/home/user")
                                 .permitAll()
-                ).logout(
+                )
+                .logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .logoutSuccessUrl("/home")
@@ -107,7 +78,6 @@ SecurityConfig {
 
     @Bean
     static MethodSecurityExpressionHandler methodSecurityExpressionHandler(RoleHierarchy roleHierarchy) {
-
         DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
         expressionHandler.setRoleHierarchy(roleHierarchy);
         return expressionHandler;
