@@ -43,19 +43,20 @@
                     <form
                             method="post"
                             role="form"
-                            th:action="@{/plan/preferences}"
-                            th:object="${preferences}"
+                            th:action="@{/plan/info}"
+                            th:object="${info}"
                             class="form-horizontal"
                     >
                         <div>
                             <label>Ilość porcji</label>
                             <input
-                                    type="text"
+                                    type="number"
+                                    min="1"
                                     id="portions"
                                     name="portions"
                                     class="form-control"
                                     placeholder="Ilość porcji"
-                                    th:field="*{numberOfPortions}"
+                                    th:field="*{preferences.numberOfPortions}"
                             />
                         </div>
                         <div>
@@ -66,31 +67,45 @@
                                     name="diet"
                                     class="form-control"
                                     placeholder="Rodzaj diety"
-                                    th:field="*{diet}"
+                                    th:field="*{preferences.diet}"
                             />
                         </div>
                         <div>
                             <label>Posiadane produkty do wykorzystania</label>
-                            <input
-                                    type="text"
-                                    id="productsToUse"
-                                    name="productsToUse"
-                                    class="form-control"
-                                    placeholder="Posiadane produkty"
-                                    th:field="*{productsToUse}"
-                            />
+                            <div th:each="productsU, idU : *{preferences.productsToUse}">
+                                <div class="productsU" id="productU-__${idU.index}__">
+                                    <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].name}" placeholder="Name">
+                                    <input type="number" min="0" th:field="*{preferences.productsToUse[__${idU.index}__].amount}" placeholder="Amount">
+                                    <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].unit}" placeholder="Unit">
+                                    <button type="button" onclick="removeProductToUse(this)">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" onclick="addProductToUse()">Dodaj kolejny składnik</button>
                         </div>
+
                         <div>
                             <label>Nielubiane produkty</label>
-                            <input
-                                    type="text"
-                                    id="dislikedProducts"
-                                    name="dislikedProducts"
-                                    class="form-control"
-                                    placeholder="Nielubiane produkty"
-                                    th:field="*{dislikedProducts}"
-                            />
+                            <div th:each="productsD, idD : *{preferences.dislikedProducts}">
+                                <div class="productsD" id="productD-__${idU.index}__">
+                                    <input type="text" th:field="*{preferences.dislikedProducts[__${idD.index}__].name}" placeholder="Name">
+                                    <button type="button" onclick="removeDislikedProducts(this)">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" onclick="addDislikedProducts()">Dodaj kolejny składnik</button>
                         </div>
+
+                        <br><br>
+<!--                        <div>-->
+<!--                            <label>WeekInfo</label>-->
+<!--                            <select id="eatingStatus" name="selectedStatus" th:field="*{weekInfo.dayInfoList[0].eatingPlan.status}">-->
+<!--                                <option th:each="s : ${eatingStatuses}" th:value="${s}" th:text="${s}"></option>-->
+<!--                            </select>-->
+<!--                            <div>-->
+<!--                                <input type="text" id="day" th:field="*{weekInfo.dayInfoList[0].day}" placeholder="Dzień"/>-->
+<!--                                <input type="text" id="amount" th:field="*{weekInfo.dayInfoList[0].eatingPlan}" placeholder="Ilość"/>-->
+<!--                                <input type="text" id="unit" th:field="*{preferences.productsToUse[0].unit}" placeholder="Jednostka"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div>
                             <button type="submit">Zatwierdź</button>
                         </div>
@@ -100,5 +115,90 @@
         </div>
     </div>
 </div>
+
+<script th:inline="javascript">
+    function addProductToUse() {
+        // Znajdź ostatni kontener .productsU
+        var lastProductToUseContainer = document.querySelector('.productsU:last-child');
+
+        // Utwórz nowy kontener dla ProductToUse
+        var newProductToUseContainer = document.createElement('div');
+        newProductToUseContainer.classList.add('productsU');
+
+        // Utwórz pola dla name, amount i unit
+        var nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = 'Name';
+        newProductToUseContainer.appendChild(nameInput);
+
+        var amountInput = document.createElement('input');
+        amountInput.type = 'text';
+        amountInput.placeholder = 'Amount';
+        newProductToUseContainer.appendChild(amountInput);
+
+        var unitInput = document.createElement('input');
+        unitInput.type = 'text';
+        unitInput.placeholder = 'Unit';
+        newProductToUseContainer.appendChild(unitInput);
+
+        // Dodaj nowy kontener z polami do ostatniego kontenera .productsU
+        lastProductToUseContainer.parentNode.appendChild(newProductToUseContainer);
+
+        // Utwórz przycisk "Remove" dla nowego kontenera
+        var removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = function () {
+            removeProductToUse(this);
+        };
+
+        // Dodaj przycisk "Remove" do nowego kontenera
+        newProductToUseContainer.appendChild(removeButton);
+    }
+
+    function removeProductToUse(button) {
+        var productToUseContainer = button.parentElement;
+        if (document.querySelectorAll('.productsU').length > 1) {
+            productToUseContainer.remove();
+        }
+    }
+
+    function addDislikedProducts() {
+        // Znajdź ostatni kontener .productsD
+        var lastDislikedProductContainer = document.querySelector('.productsD:last-child');
+
+        // Utwórz nowy kontener dla DislikedProduct
+        var newDislikedProductContainer = document.createElement('div');
+        newDislikedProductContainer.classList.add('productsD');
+
+        // Utwórz pole dla name
+        var nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = 'Name';
+        newDislikedProductContainer.appendChild(nameInput);
+
+        // Dodaj nowy kontener z polami do ostatniego kontenera .productsD
+        lastDislikedProductContainer.parentNode.appendChild(newDislikedProductContainer);
+
+        // Utwórz przycisk "Remove" dla nowego kontenera
+        var removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = function () {
+            removeDislikedProducts(this);
+        };
+
+        // Dodaj przycisk "Remove" do nowego kontenera
+        newDislikedProductContainer.appendChild(removeButton);
+    }
+
+    function removeDislikedProducts(button) {
+        var dislikedProductContainer = button.parentElement;
+        if (document.querySelectorAll('.productsD').length > 1) {
+            dislikedProductContainer.remove();
+        }
+    }
+</script>
+
 </body>
 </html>
