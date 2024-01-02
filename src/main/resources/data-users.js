@@ -1,39 +1,39 @@
-db.createCollection("users")
+db.users.updateOne(
+    { _id: ObjectId('658e7e82267fb7171492ffa5') },
+    {
+        $set: {
+            user_preferences: {
+                portions: 2,
+                diet: "wegańska",
+                disliked_products: [""]
+            },
+            user_recipes: [""],
+            plan_history: [
+                { day: new Date(2023,12,11), recipe: ObjectId('6577660abbac733a111c9421')},
+                { day: new Date(2023,12,12), recipe: ObjectId('6577660abbac733a111c9424')}
+            ],
+        },
+    }
+);
 
-db.users.insertMany([
+db.users.updateOne(
+    { _id: ObjectId('658e801c20709749de3faf9a') },
     {
-        role: "USER",
-        username: "user",
-        password: "1234",
-        email: "uuu@uu.u",
-        user_preferences: {
-            portions: 2,
-            diet: "wegańska",
-            disliked_products: [""]
+        $set: {
+            role: "ADMIN",
+            user_preferences: {
+                portions: 2,
+                diet: "mięsna",
+                disliked_products: [""]
+            },
+            user_recipes: [""],
+            plan_history: [
+                { day: new Date(2023,12,5), recipe: ObjectId('6577660abbac733a111c9421')},
+                { day: new Date(2023,12,7), recipe: ObjectId('6577660abbac733a111c9424')}
+            ],
         },
-        user_recipes: [""],
-        plan_history: [
-            { day: new Date(2023,12,11), recipe: ObjectId('6577660abbac733a111c9421')},
-            { day: new Date(2023,12,12), recipe: ObjectId('6577660abbac733a111c9424')}
-        ],
-    },
-    {
-        role: "ADMIN",
-        username: "admin",
-        password: "1234",
-        email: "aaa@aa.a",
-        user_preferences: {
-            portions: 2,
-            diet: "mięsna",
-            disliked_products: [""]
-        },
-        user_recipes: [""],
-        plan_history: [
-            { day: new Date(2023,12,5), recipe: ObjectId('6577660abbac733a111c9421')},
-            { day: new Date(2023,12,7), recipe: ObjectId('6577660abbac733a111c9424')}
-        ],
-    },
-]);
+    }
+);
 
 
 

@@ -40,17 +40,22 @@
                 <div>
                     <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
                         <div>
+                            <label>Login</label>
+                            <input id="username" name="username" placeholder="Podaj login" th:field="*{username}" type="text"/>
+                            <p th:errors = "*{username}" th:if="${#fields.hasErrors('username')}">Username Error</p>
+                        </div>
+                        <div>
                             <label>Email</label>
                             <input id="email" name="email" placeholder="Enter email address" th:field="*{email}"
                                 type="email" />
-                            <p th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></p>
+                            <p th:errors="*{email}" th:if="${#fields.hasErrors('email')}">Email Error</p>
                         </div>
 
                         <div>
-                            <label>Password</label>
+                            <label>Hasło</label>
                             <input id="password" name="password" placeholder="Enter password" th:field="*{password}"
                                 type="password" />
-                            <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
+                            <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Password Error</p>
                         </div>
                         <div>
                             <button type="submit">Register</button>
@@ -61,21 +66,5 @@
             </div>
         </div>
     </div>
-    <div>
-        <label>Password</label>
-        <input id="password" name="password" placeholder="Enter password" th:field="*{password}" type="password" />
-        <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
-    </div>
-    <div>
-        <button type="submit">Register</button>
-        <span>Already registered? <a th:href="@{/login}">Login here</a></span>
-    </div>
-    </form>
-    </div>
-    </div>
-    </div>
-    </div>
 </body>
-
-
 </html>
