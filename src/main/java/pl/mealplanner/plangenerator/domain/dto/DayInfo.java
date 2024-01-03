@@ -9,7 +9,4 @@ public record DayInfo(
         LocalDate day,
         Eating eatingPlan
 ) {
-    public DayInfo(){
-        this(LocalDate.now(), new Eating());
-    }
 }

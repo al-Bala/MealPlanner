@@ -1,15 +1,10 @@
 package pl.mealplanner.plangenerator.mealscounter;
 
 import org.junit.Test;
-import pl.mealplanner.plangenerator.domain.dto.DayInfo;
-import pl.mealplanner.plangenerator.domain.dto.EatingPlans;
 import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
-import pl.mealplanner.plangenerator.domain.dto.WeekInfoRequest;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class MealsPackingChooserServiceFacadeTest {
     MealsCounterConfig config = new MealsCounterConfig();

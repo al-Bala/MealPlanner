@@ -1,15 +1,19 @@
 package pl.mealplanner.plangenerator.infrastructure.dto;
 
-import lombok.Builder;
-import pl.mealplanner.plangenerator.domain.dto.UserPreferencesRequest;
-import pl.mealplanner.plangenerator.domain.dto.WeekInfoRequest;
+import lombok.Data;
+import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
 
-@Builder
-public record PlanRequest(
-        UserPreferencesRequest preferences,
-        WeekInfoRequest weekInfo
-) {
+@Data
+public class PlanRequest {
+    UserPreferencesRequest preferences;
+    WeekInfoRequest weekInfo;
+
     public PlanRequest(){
-        this(new UserPreferencesRequest(), new WeekInfoRequest());
+
+    }
+
+    public PlanRequest(UserPreferencesRequest preferences, WeekInfoRequest weekInfo) {
+        this.preferences = preferences;
+        this.weekInfo = weekInfo;
     }
 }
