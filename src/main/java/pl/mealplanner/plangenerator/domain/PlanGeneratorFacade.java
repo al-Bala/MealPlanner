@@ -2,10 +2,9 @@ package pl.mealplanner.plangenerator.domain;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
-import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
-import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
-import pl.mealplanner.plangenerator.domain.dto.WeekInfoRequest;
+import pl.mealplanner.plangenerator.domain.dto.*;
+import pl.mealplanner.plangenerator.infrastructure.dto.UserPreferencesRequest;
+import pl.mealplanner.plangenerator.infrastructure.dto.WeekInfoRequest;
 import pl.mealplanner.plangenerator.leftproductscounter.GroceryList;
 import pl.mealplanner.plangenerator.leftproductscounter.dto.ShoppingInfo;
 import pl.mealplanner.plangenerator.mealscounter.MealsCounterFacade;
@@ -22,14 +21,16 @@ public class PlanGeneratorFacade {
     private final MealsFilterFacade mealsFilterFacade;
     private final GroceryList groceryList;
 
-    public List<FilteredRecipeDto> generateMealPlanner(UserPreferencesDto preferencesDto, WeekInfoRequest weekInfoRequest){
+    public List<FilteredRecipeDto> generateMealPlanner(UserPreferencesRequest preferencesRequest, WeekInfoRequest weekInfoRequest){
         groceryList.clearGroceryList();
 
-        List<OneMealInfo> oneMealInfoList = mealsCounterFacade.countNumberOfMeals(weekInfoRequest);
+        UserPreferencesDto preferences = PlanMapper.mapFromUserPreferencesRequestToUserPreferencesDto(preferencesRequest);
+        WeekInfoDto weekInfo = PlanMapper.mapFromWeekInfoRequestToWeekInfoDto(weekInfoRequest);
 
+        List<OneMealInfo> oneMealInfoList = mealsCounterFacade.countNumberOfMeals(weekInfo);
         InfoForMealsSearch infoForMealsSearch = InfoForMealsSearch.builder()
                 .oneMealInfoList(oneMealInfoList)
-                .preferencesDto(preferencesDto)
+                .preferencesDto(preferences)
                 .build();
 
         return mealsFilterFacade.findRecipes(infoForMealsSearch);

@@ -8,7 +8,4 @@ public record IngredientDto(
         float amount,
         String unit
 ) {
-    public IngredientDto(){
-        this("", 0, "");
-    }
 }

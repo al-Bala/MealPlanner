@@ -5,10 +5,7 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record WeekInfoRequest(
+public record WeekInfoDto(
         List<DayInfo> dayInfoList
 ) {
-    public WeekInfoRequest(){
-        this(List.of(new DayInfo()));
-    }
 }
