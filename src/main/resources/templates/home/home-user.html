@@ -29,7 +29,16 @@
             <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
             <a class="menu__item" th:href="@{'/user/' + ${userId}}">Twój profil</a>
             <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
+
+
         </div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
+            <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${userId}}"><i
+                    class="fa-solid fa-user"></i></a>
+        </div>
+
+
 
     </nav>
 
@@ -37,13 +46,17 @@
         <section class="plan-generator">
             <div class="graphic">
                 <img class="graphic__image" src="../../static/images/Talerz.png" alt="talerz z pizzą">
+                <img class="graphic__image2 image_dsc" src="../../static/images/u_485kmhchiv_jasny.png"
+                    alt="talerz z kurczakiem">
+                <img class="graphic__image3 image_dsc" src="../../static/images/marker_photography_v2.png"
+                    alt="Talerz z tagiatelle">
             </div>
             <button class="plan-generator__btn">
                 <a class="plan-generator__link" th:href="@{/plan/info}">Wygeneruj plan!</a>
             </button>
         </section>
 
-        <section class="plan-info container--md">
+        <section class="plan-info container">
             <img class="plan-info__image" src="../../static/images/triangle.svg"
                 alt="trójkąt - od dymku z informacjami">
 
@@ -58,22 +71,37 @@
             </div>
         </section>
 
-        <section class="about-us container--md">
+        <section class="about-us container">
             <h2 class="about-us__header">Co znajdziesz na naszej stronie?</h2>
             <div class="about-us__wrapper">
-                <button class="recipe-btn">
-                    <a class="recipe-link" href="#">Zarządzaj przepisami<img class="about-us__image"
-                            src="../../static/images/nicolettazanella.jpg" alt="kurkuma i pomarańcze"></a>
-                </button>
-
-
-                <p class="content about-us__text">MealPlanner oferuje o wiele więcej niż wygenerowanie planu posiłków.
-                    Poprzez zakładkę Zarządzaj przepisami, możesz edytować, dodawać nowe, wyszukiwać oraz usuwać
-                    przepisy.
-                </p>
-                <p class="content about-us__ps">
-                    Dodatkowo po stworzeniu planu możesz wygodnie pobrać listę zakupów, dzięki czemu nie zapomnisz o
-                    żadnym składniku!</p>
+                <div class="recipes  element">
+                    <a class="recipes__link" href="#">Zarządzaj przepisami</a>
+                    <img class="about-us__image" src="../../static/images/nicolettazanella.jpg"
+                        alt="kurkuma i pomarańcze">
+                </div>
+                <div class="about-us__text-content element">
+                    <p class="content about-us__text">MealPlanner oferuje o wiele więcej niż wygenerowanie planu
+                        posiłków.
+                        Poprzez zakładkę Zarządzaj przepisami, możesz edytować, dodawać nowe oraz usuwać
+                        przepisy.
+                    </p>
+                    <p class="content about-us__ps">
+                        Dodatkowo po stworzeniu planu możesz wygodnie pobrać listę zakupów, dzięki czemu nie zapomnisz o
+                        żadnym składniku!</p>
+                </div>
+                <div class="recipes element">
+                    <a class="recipes__link" href="#">Wyszukaj przepis</a>
+                    <img class="about-us__image" src="../../static/images/keram.jpg" alt="kurkuma i pomarańcze">
+                </div>
+                <div class="about-us__text-content element">
+                    <p class="content about-us__text">Skorzystaj też z naszej specjalnej wyszukiwarki przepisów i
+                        wyszukaj
+                        przepis, który Cię interesuje. Co więcej, w wyszukiwarce czekają na Ciebie losowo wybrane
+                        przepis
+                        dla złamania kulinarnej rutyny
+                    </p>
+                    <p class="content about-us__ps">Daj się zaskoczyć lub wyszukaj coś dla siebie!</p>
+                </div>
             </div>
 
         </section>
