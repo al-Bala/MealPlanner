@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MealPlanner</title>
 
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
     <link rel="stylesheet" href="../../../../../css/home-style.css">
 
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
@@ -17,29 +18,66 @@
         <button class="burger-btn">
             <i class="fa-solid fa-burger"></i>
         </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
 
-        <ul class="menu">
-            <li class="menu__item">
-                <a class="menu__link" th:href="@{/home/user}">Strona główna</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__link">Wygeneruj plan</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__link">Zarządzaj przepisami</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__link">Wyszukaj przepis</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__link">Twój profil</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__link" th:href="@{/logout}">Wyloguj się</a>
-            </li>
-        </ul>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/info}">Wygeneruj plan</a>
+            <a class="menu__item">Zarządzaj przepisami</a>
+            <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{'/user/' + ${userId}}">Twój profil</a>
+            <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
+        </div>
 
     </nav>
+
+    <main>
+        <section class="plan-generator">
+            <div class="graphic">
+                <img class="graphic__image" src="../../static/images/Talerz.png" alt="talerz z pizzą">
+            </div>
+            <button class="plan-generator__btn">
+                <a class="plan-generator__link" th:href="@{/plan/info}">Wygeneruj plan!</a>
+            </button>
+        </section>
+
+        <section class="plan-info container--md">
+            <img class="plan-info__image" src="../../static/images/triangle.svg"
+                alt="trójkąt - od dymku z informacjami">
+
+            <div class="plan-info-wrapper">
+                <h2 class="plan-info__header">Wygeneruj spresonalizowany plan posiłków na cały tydzień!</h2>
+                <p class="content plan-info__text">Ten przycisk przeniesie Cię do specjalnego generatora posiłków,
+                    gdzie
+                    będziesz mógł wybrać dietę, ilość porcji, którą zamierzasz przygotować na dany dzień czy produkty,
+                    których potrzebujesz oraz wiele innych.</p>
+                <p class="content plan-info__ps">
+                    Nie zwlekaj i sprawdź co dla Ciebie przygotowaliśmy. </p>
+            </div>
+        </section>
+
+        <section class="about-us container--md">
+            <h2 class="about-us__header">Co znajdziesz na naszej stronie?</h2>
+            <div class="about-us__wrapper">
+                <button class="recipe-btn">
+                    <a class="recipe-link" href="#">Zarządzaj przepisami<img class="about-us__image"
+                            src="../../static/images/nicolettazanella.jpg" alt="kurkuma i pomarańcze"></a>
+                </button>
+
+
+                <p class="content about-us__text">MealPlanner oferuje o wiele więcej niż wygenerowanie planu posiłków.
+                    Poprzez zakładkę Zarządzaj przepisami, możesz edytować, dodawać nowe, wyszukiwać oraz usuwać
+                    przepisy.
+                </p>
+                <p class="content about-us__ps">
+                    Dodatkowo po stworzeniu planu możesz wygodnie pobrać listę zakupów, dzięki czemu nie zapomnisz o
+                    żadnym składniku!</p>
+            </div>
+
+        </section>
+    </main>
 
     <div class="test-content">
         <div>
@@ -47,12 +85,25 @@
             <p> Logged user: <span sec:authentication="name"></span> </p>
             <p> Role: <span sec:authentication="principal.authorities"></span> </p>
         </div>
-        <div>
-            <a th:href="@{/plan/info}">Wygeneruj plan</a>
-            <a th:href="@{'/user/' + ${userId}}">Twój profl</a>
-            <a th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
-        </div>
     </div>
+
+    <footer class="footer">
+        <div class="footer__section contact">
+            <h4 class="footer__header">Kontakt</h4>
+            <div class="email">
+                <i class="fa-solid fa-envelope"></i>
+                <p class="email__text">email@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__section social-media">
+            <h4 class="footer__header">Znajdziesz nas tutaj</h4>
+            <div class="social-media__links">
+                <a class="social-media__link" href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                <a class="social-media__link" href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-media__link" href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
     <script src="../../static/js/burgerMenu.js"></script>
 </body>
