@@ -5,6 +5,7 @@ import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
 import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
 
+import java.util.Collections;
 import java.util.List;
 
 class MealsFilterMapper {
@@ -27,6 +28,9 @@ class MealsFilterMapper {
 
 
     public static List<String> mapFromListIngredientDtoToListString(List<IngredientDto> productsToUse) {
+        if(productsToUse == null){
+            return Collections.emptyList();
+        }
         return productsToUse.stream()
                 .map(IngredientDto::name)
                 .toList();

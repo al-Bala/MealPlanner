@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Meal Planner</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script th:src="@{'/js/plan-preferences.js'}"></script>
     <script th:src="@{'/js/plan-weekInfo.js'}"></script>
 </head>
@@ -47,10 +48,10 @@
                 <div>
                     <label>Posiadane produkty do wykorzystania</label>
                     <div th:each="productsU, idU : *{preferences.productsToUse}">
-                        <div class="productsU" id="productU-__${idU.index}__">
-                            <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].name}" placeholder="Name">
-                            <input type="number" min="0" th:field="*{preferences.productsToUse[__${idU.index}__].amount}" placeholder="Amount">
-                            <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].unit}" placeholder="Unit">
+                        <div class="productsU">
+<!--                            <input class="search" id="productNameU" name="productName" type="text" th:field="*{preferences.productsToUse[__${idU.index}__].name}" placeholder="Name">-->
+<!--                            <input type="number" min="0" th:field="*{preferences.productsToUse[__${idU.index}__].amount}" placeholder="Amount">-->
+<!--                            <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].unit}" placeholder="Unit">-->
                         </div>
                     </div>
                     <button type="button" class="add-productU">Dodaj składnik</button>
@@ -59,8 +60,8 @@
                 <div>
                     <label>Nielubiane produkty</label>
                     <div th:each="productsD, idD : *{preferences.dislikedProducts}">
-                        <div class="productsD" id="productD-__${idU.index}__">
-                            <input type="text" th:field="*{preferences.dislikedProducts[__${idD.index}__].name}" placeholder="Name">
+                        <div class="productsD">
+<!--                            <input type="text" th:field="*{preferences.dislikedProducts[__${idD.index}__].name}" placeholder="Name">-->
                         </div>
                     </div>
                     <button type="button" class="add-productD">Dodaj składnik</button>

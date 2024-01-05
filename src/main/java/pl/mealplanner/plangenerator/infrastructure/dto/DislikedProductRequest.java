@@ -8,5 +8,6 @@ public class DislikedProductRequest {
     String name;
 
     public DislikedProductRequest(){
+        this.name = "";
     }
 }

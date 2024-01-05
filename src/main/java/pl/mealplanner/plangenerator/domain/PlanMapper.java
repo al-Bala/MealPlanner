@@ -4,6 +4,7 @@ import pl.mealplanner.plangenerator.domain.dto.*;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
 import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 
+import java.util.Collections;
 import java.util.List;
 
 class PlanMapper {
@@ -17,6 +18,9 @@ class PlanMapper {
     }
 
     private static List<IngredientDto> mapFromIngredientRequestToIngredientDto(List<IngredientRequest> ingredientRequests){
+        if(ingredientRequests == null){
+            return Collections.emptyList();
+        }
         return ingredientRequests.stream()
                 .map(ing -> IngredientDto.builder()
                         .name(ing.getName())
@@ -26,6 +30,9 @@ class PlanMapper {
                 .toList();
     }
     private static List<String> mapFromDislikedProductDtoToString(List<DislikedProductRequest> dislikedProductsRequests){
+        if(dislikedProductsRequests == null){
+            return Collections.emptyList();
+        }
         return dislikedProductsRequests.stream()
                 .map(DislikedProductRequest::getName)
                 .toList();
