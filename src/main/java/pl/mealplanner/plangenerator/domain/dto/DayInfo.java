@@ -7,6 +7,6 @@ import java.time.LocalDate;
 @Builder
 public record DayInfo(
         LocalDate day,
-        Eating eatingPlan
+        EatingPlansDto eatingPlan
 ) {
 }

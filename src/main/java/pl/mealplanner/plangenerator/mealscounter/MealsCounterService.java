@@ -27,24 +27,24 @@ class MealsCounterService {
     }
 
     private void checkEatingPlan(DayInfo dayInfo){
-//        switch (dayInfo.eatingPlan().id()) {
-//            case "C01" -> {
-//                daysNumber++;
-//                oneMealInfoList.add(
-//                        OneMealInfo.builder()
-//                                .dayOfWeek(dayInfo.day())
-//                                .forHowManyDays(daysNumber)
-//                                .timeForPrepareMin(dayInfo.eatingPlan().timeMin())
-//                                .build()
-//                );
-//                daysNumber = 0;
-//            }
-//            case "B02" -> {
-//            }
-//            case "E03" -> {
-//                daysNumber++;
-//            }
-//            default -> log.error("Wrong EatingPlan ID");
-//        }
+        switch (dayInfo.eatingPlan().id()) {
+            case "C01" -> {
+                daysNumber++;
+                oneMealInfoList.add(
+                        OneMealInfo.builder()
+                                .dayOfWeek(dayInfo.day())
+                                .forHowManyDays(daysNumber)
+                                .timeForPrepareMin(dayInfo.eatingPlan().timeMin())
+                                .build()
+                );
+                daysNumber = 0;
+            }
+            case "B02" -> {
+            }
+            case "E03" -> {
+                daysNumber++;
+            }
+            default -> log.error("Wrong EatingPlan ID");
+        }
     }
 }
