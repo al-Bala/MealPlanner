@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
-import pl.mealplanner.plangenerator.domain.dto.Eating;
+import pl.mealplanner.plangenerator.infrastructure.dto.EatingPlansRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
+import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -30,7 +32,6 @@ class PlanGeneratorController {
     @GetMapping("/generator")
     public ModelAndView generatePlan() {
         ModelAndView modelAndView = new ModelAndView("plangenerator/plan-info");
-//        modelAndView.addObject("eatingStatuses", Eating.EatingStatus.values());
 
         modelAndView.addObject("info",
                 new PlanRequest(
@@ -38,7 +39,7 @@ class PlanGeneratorController {
                                 List.of(new IngredientRequest()),
                                 List.of(new DislikedProductRequest())),
                         new WeekInfoRequest(
-                                List.of(new DayInfoRequest(new Eating())))
+                                List.of(new DayInfoRequest(new EatingPlansRequest())))
                 ));
         return modelAndView;
     }
@@ -47,8 +48,18 @@ class PlanGeneratorController {
     public String addInfo(@ModelAttribute("info") PlanRequest planRequest,
                                 BindingResult result,
                                 Model model) {
-//        List<FilteredRecipeDto> recipesPlan = planGeneratorFacade.generateMealPlanner(planRequest.getPreferences(), planRequest.getWeekInfo());
-//        System.out.println(recipesPlan);
+
+        LocalDate date = planRequest.getWeekInfo().getDayInfoList().get(0).getDay();
+        List<DayInfoRequest> list = planRequest.getWeekInfo().getDayInfoList();
+
+        int i = 0;
+        for (DayInfoRequest day : list) {
+            day.setDay(date.plusDays(i));
+            i++;
+        }
+
+        List<FilteredRecipeDto> recipesPlan = planGeneratorFacade.generateMealPlanner(planRequest.getPreferences(), planRequest.getWeekInfo());
+        System.out.println(recipesPlan);
         return "plangenerator/planner";
     }
 }

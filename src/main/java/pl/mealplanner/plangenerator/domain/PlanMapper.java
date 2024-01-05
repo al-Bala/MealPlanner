@@ -1,8 +1,6 @@
 package pl.mealplanner.plangenerator.domain;
 
-import pl.mealplanner.plangenerator.domain.dto.DayInfo;
-import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
-import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
+import pl.mealplanner.plangenerator.domain.dto.*;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
 import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 
@@ -43,8 +41,15 @@ class PlanMapper {
         return dayInfoRequests.stream()
                 .map(dayInfo -> DayInfo.builder()
                         .day(dayInfo.getDay())
-                        .eatingPlan(dayInfo.getEatingPlan())
+                        .eatingPlan(mapFromEatingPlanToEatingPlanDto(dayInfo.getEatingPlan()))
                         .build())
                 .toList();
+    }
+
+    private static EatingPlansDto mapFromEatingPlanToEatingPlanDto(EatingPlansRequest eatingPlansRequest){
+        return EatingPlansDto.builder()
+                .id(eatingPlansRequest.getId())
+                .timeMin(eatingPlansRequest.getTimeMin())
+                .build();
     }
 }
