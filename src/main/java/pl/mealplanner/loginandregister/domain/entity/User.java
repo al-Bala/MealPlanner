@@ -1,6 +1,8 @@
 package pl.mealplanner.loginandregister.domain.entity;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -30,7 +32,12 @@ public record User(
         @Field("password") String password,
 //        @Field("user_preferences") UserPreferences preferences,
 //        @Field("user_recipes") List<Long> userRecipes,
-        @Field("plan_history") List<PlanHistory> planHistory
+        @Field("plan_history") List<PlanHistory> planHistory,
+        @Getter @Setter
+        @Field("favorites") List <String> favorites
+
+
+
 ) implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -46,6 +53,9 @@ public record User(
     public String getUsername() {
         return email;
     }
+
+
+
 
     @Override
     public boolean isAccountNonExpired() {

@@ -1,5 +1,7 @@
 package pl.mealplanner.profile.domain;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +21,13 @@ public class UserController {
     @GetMapping("/user/{username}")
     public String showUserDetails(@PathVariable String username, Model model) {
         User user = userService.getUserByUsername(username);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 
         if (user != null) {
             model.addAttribute("user", user.username());
             model.addAttribute("role", user.role());
+            model.addAttribute("favorites", userService.getFavoriteRecipes(username));
             return "details/user-details"; // nazwa widoku (user-details.html)
         } else {
             return "details/user-details"; // widok informujący o braku użytkownika

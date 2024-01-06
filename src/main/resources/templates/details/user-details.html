@@ -9,6 +9,14 @@
 <p>Role: <span th:text="${role}"></span></p>
 
 <a th:href="@{/change-email}">Edytuj profil</a>
+
+<h2>Ulubione przepisy</h2>
+<ul>
+    <li th:each="recipe : ${favorites}">
+        <span th:text="${recipe.name}">Nazwa przepisu</span>
+    </li>
+</ul>
+
 <!-- Inne pola użytkownika, jeśli są -->
 </body>
 </html>

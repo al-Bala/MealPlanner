@@ -8,7 +8,21 @@
 <p>Dieta: <span th:text="${diet}"></span></p>
 <p>Czas przygotowania: <span th:text="${prepareTime}"></span></p>
 <p>Nazwa: <span th:text="${name}"></span></p>
+
 <img th:src="${imageUrl}" alt="Obraz"/>
+
+
+<div th:if="${favoriteMessage}" style="color: green;">
+    <p th:text="${favoriteMessage}"></p>
+</div>
+
+<form method="post" th:action="@{/recipes/{id}/favorite(id=${id})}">
+    <button type="submit">Dodaj do ulubionych</button>
+</form>
+
 <!-- Inne pola przepisu, jeśli są -->
 </body>
+
+
+
 </html>
