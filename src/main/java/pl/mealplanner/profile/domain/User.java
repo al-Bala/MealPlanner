@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "users")
 public class User {
 
@@ -14,6 +16,9 @@ public class User {
     private String email;
     @Getter
     private String role;
+
+
+    private List<String> favorites;
 
 
     public String getID() {

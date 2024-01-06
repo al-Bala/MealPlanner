@@ -66,4 +66,7 @@ public record User(
     public boolean isEnabled() {
         return true;
     }
+
+
+
 }

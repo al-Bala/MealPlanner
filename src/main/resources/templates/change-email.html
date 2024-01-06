@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Zmień adres e-mail</title>
+</head>
+<body>
+
+
+
+<p>Edycja profilu użytkownika :  <span th:text="${usere}"></span></p>
+
+
+<h1>Zmień adres e-mail oraz hasło : </h1>
+
+<form method="post" th:action="@{/change-email}">
+    <input type="email" name="newEmail" placeholder="Nowy adres e-mail" required>
+    <input type="password" name="newPassword" placeholder="Nowe hasło">
+    <button type="submit">Zmień e-mail i hasło</button>
+</form>
+
+
+
+<p th:if="${param.error != null && param.error.equals('email-in-use')}">Ten adres e-mail jest już w użyciu.</p>
+</body>
+</html>

@@ -3,7 +3,7 @@ package pl.mealplanner.loginandregister.domain;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class PasswordValidator implements ConstraintValidator<Password, String> {
+public class   PasswordValidator implements ConstraintValidator<Password, String> {
     @Override
     public void initialize(Password param) {
 //        ConstraintValidator.super.initialize(constraintAnnotation);
