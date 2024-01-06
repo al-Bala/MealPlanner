@@ -1,8 +1,9 @@
 package pl.mealplanner.plangenerator.domain.dto;
 
-import java.util.Optional;
+import lombok.Builder;
 
-public record EatingPlans(
+@Builder
+public record EatingPlansDto(
         String id,
         int timeMin
 ) {

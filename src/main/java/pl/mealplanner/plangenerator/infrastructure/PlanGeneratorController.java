@@ -4,14 +4,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
-import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
-import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
+import pl.mealplanner.plangenerator.infrastructure.dto.*;
+import pl.mealplanner.plangenerator.leftproductscounter.entity.ProductClass;
+import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @Controller
@@ -19,29 +21,58 @@ import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
 class PlanGeneratorController {
 
     private final PlanGeneratorFacade planGeneratorFacade;
-
-    @GetMapping("/info")
-    public ModelAndView generatePlan() {
-        ModelAndView modelAndView = new ModelAndView("plangenerator/plan-info");
-        modelAndView.addObject("preferences", UserPreferencesDto.builder().build());
-        modelAndView.addObject("weekInfo", WeekInfoDto.builder().build());
-        return modelAndView;
-    }
+    private final ProductsFetcher productsFetcher;
 
     @GetMapping("/guest")
     public String loginToGetPlan() {
         return "redirect:/login?planAth";
     }
 
-    @PostMapping("/preferences")
-    public ModelAndView addPreferences(@ModelAttribute("preferences") UserPreferencesDto preferencesDto,
-//                                 @ModelAttribute("weekInfo") WeekInfoDto weekInfoDto,
-                                 BindingResult result,
-                                 Model model){
-        ModelAndView modelAndView = new ModelAndView("plangenerator/planner");
+    @GetMapping("/generator")
+    public ModelAndView generatePlan() {
+        ModelAndView modelAndView = new ModelAndView("plangenerator/plan-info");
 
-//        List<FilteredRecipeDto> planner = planGeneratorFacade.generateMealPlanner(preferencesDto, weekInfoDto);
-//        modelAndView.addObject("planner", planner);
+        modelAndView.addObject("info",
+                new PlanRequest(
+                        new UserPreferencesRequest(
+                                List.of(new IngredientRequest()),
+                                List.of(new DislikedProductRequest())),
+                        new WeekInfoRequest(
+                                List.of(new DayInfoRequest(new EatingPlansRequest())))
+                ));
         return modelAndView;
+    }
+
+    @PostMapping("/info")
+    public String addInfo(@ModelAttribute("info") PlanRequest planRequest,
+                                BindingResult result,
+                                Model model) {
+
+        LocalDate date = planRequest.getWeekInfo().getDayInfoList().get(0).getDay();
+        List<DayInfoRequest> list = planRequest.getWeekInfo().getDayInfoList();
+
+        int i = 0;
+        for (DayInfoRequest day : list) {
+            day.setDay(date.plusDays(i));
+            i++;
+        }
+
+        List<FilteredRecipeDto> recipesPlan = planGeneratorFacade.generateMealPlanner(planRequest.getPreferences(), planRequest.getWeekInfo());
+        System.out.println(recipesPlan);
+        return "plangenerator/planner";
+    }
+
+    @RequestMapping(value="/plantNamesAutocomplete")
+    @ResponseBody
+    public List<String> plantNamesAutocomplete(@RequestParam(value="term", required = false, defaultValue="") String term)  {
+        List<String> suggestions = new ArrayList<>();
+
+        List<ProductClass> allProducts = productsFetcher.fetch(term);
+
+        for (ProductClass product : allProducts) {
+            suggestions.add(product.getName());
+            }
+        return suggestions;
+
     }
 }

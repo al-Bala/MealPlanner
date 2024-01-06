@@ -1,7 +1,6 @@
 package pl.mealplanner.plangenerator.mealscounter;
 
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import pl.mealplanner.plangenerator.domain.dto.DayInfo;
 import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
@@ -28,14 +27,14 @@ class MealsCounterService {
     }
 
     private void checkEatingPlan(DayInfo dayInfo){
-        switch (dayInfo.eatingPlans().id()) {
+        switch (dayInfo.eatingPlan().id()) {
             case "C01" -> {
                 daysNumber++;
                 oneMealInfoList.add(
                         OneMealInfo.builder()
                                 .dayOfWeek(dayInfo.day())
                                 .forHowManyDays(daysNumber)
-                                .timeForPrepareMin(dayInfo.eatingPlans().timeMin())
+                                .timeForPrepareMin(dayInfo.eatingPlan().timeMin())
                                 .build()
                 );
                 daysNumber = 0;

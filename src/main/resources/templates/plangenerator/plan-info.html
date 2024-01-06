@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Meal Planner</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script th:src="@{'/js/plan-preferences.js'}"></script>
+    <script th:src="@{'/js/plan-weekInfo.js'}"></script>
 </head>
 <body>
 <nav>
@@ -20,84 +24,68 @@
 </nav>
 <br /><br />
 <div>
-    <div>
-        <h1> Plan Generator </h1>
-        <p th:text="${plan}"></p>
-    </div>
+    <h1> Plan Generator </h1>
 </div>
 <div>
+    <div th:if="${param.error}">
+        <div>Invalid Email or Password</div>
+    </div>
+    <div th:if="${param.logout}">
+        <div> You have been logged out.</div>
+    </div>
     <div>
-        <div>
-            <div th:if="${param.error}">
-                <div>Invalid Email or Password</div>
-            </div>
-            <div th:if="${param.logout}">
-                <div> You have been logged out.</div>
-            </div>
-
+        <form method="post" th:action="@{/plan/info}" th:object="${info}">
             <div>
+                <h2>Preferencje:</h2>
                 <div>
-                    <h2>Preferencje:</h2>
+                    <label>Ilość porcji</label>
+                    <input type="number" min="1" id="portions" name="portions" placeholder="Ilość porcji" th:field="*{preferences.numberOfPortions}"/>
                 </div>
                 <div>
-                    <form
-                            method="post"
-                            role="form"
-                            th:action="@{/plan/preferences}"
-                            th:object="${preferences}"
-                            class="form-horizontal"
-                    >
-                        <div>
-                            <label>Ilość porcji</label>
-                            <input
-                                    type="text"
-                                    id="portions"
-                                    name="portions"
-                                    class="form-control"
-                                    placeholder="Ilość porcji"
-                                    th:field="*{numberOfPortions}"
-                            />
+                    <label>Rodzaj diety</label>
+                    <input type="text" id="diet" name="diet" class="form-control" placeholder="Rodzaj diety" th:field="*{preferences.diet}"/>
+                </div>
+                <div>
+                    <label>Posiadane produkty do wykorzystania</label>
+                    <div th:each="productsU, idU : *{preferences.productsToUse}">
+                        <div class="productsU">
+<!--                            <input class="search" id="productNameU" name="productName" type="text" th:field="*{preferences.productsToUse[__${idU.index}__].name}" placeholder="Name">-->
+<!--                            <input type="number" min="0" th:field="*{preferences.productsToUse[__${idU.index}__].amount}" placeholder="Amount">-->
+<!--                            <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].unit}" placeholder="Unit">-->
                         </div>
-                        <div>
-                            <label>Rodzaj diety</label>
-                            <input
-                                    type="text"
-                                    id="diet"
-                                    name="diet"
-                                    class="form-control"
-                                    placeholder="Rodzaj diety"
-                                    th:field="*{diet}"
-                            />
+                    </div>
+                    <button type="button" class="add-productU">Dodaj składnik</button>
+                </div>
+
+                <div>
+                    <label>Nielubiane produkty</label>
+                    <div th:each="productsD, idD : *{preferences.dislikedProducts}">
+                        <div class="productsD">
+<!--                            <input type="text" th:field="*{preferences.dislikedProducts[__${idD.index}__].name}" placeholder="Name">-->
                         </div>
-                        <div>
-                            <label>Posiadane produkty do wykorzystania</label>
-                            <input
-                                    type="text"
-                                    id="productsToUse"
-                                    name="productsToUse"
-                                    class="form-control"
-                                    placeholder="Posiadane produkty"
-                                    th:field="*{productsToUse}"
-                            />
-                        </div>
-                        <div>
-                            <label>Nielubiane produkty</label>
-                            <input
-                                    type="text"
-                                    id="dislikedProducts"
-                                    name="dislikedProducts"
-                                    class="form-control"
-                                    placeholder="Nielubiane produkty"
-                                    th:field="*{dislikedProducts}"
-                            />
-                        </div>
-                        <div>
-                            <button type="submit">Zatwierdź</button>
-                        </div>
-                    </form>
+                    </div>
+                    <button type="button" class="add-productD">Dodaj składnik</button>
                 </div>
             </div>
-        </div>
+            <br><br>
+            <div>
+                <h2>WeekInfo:</h2>
+                <div>
+                    <label>Wybierz dzień rozpoczęcia planu: </label>
+                    <input type="date" id="startDate" name="startDate" th:field="*{weekInfo.dayInfoList[0].day}" required>
+                    <div th:each="days, idDay : *{weekInfo.dayInfoList}">
+                        <div class="days" id="days-__${idDay.index}__"></div>
+                    </div>
+                    <div>
+                        <button type="button" id="addNextDay">Dodaj plan na kolejny dzień</button>
+                        <button type="button" id="removeLastDay">Usuń ostatni dzień</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit">Zatwierdź</button>
+            </div>
+        </form>
     </div>
 </div>
 </body>
