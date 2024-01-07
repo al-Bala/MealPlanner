@@ -6,6 +6,4 @@ public interface RecipesRepository extends MongoRepository<Recipes, String> {
 
     List<Recipes> findByDiet(String diet);
 
-
-
 }

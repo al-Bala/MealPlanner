@@ -46,7 +46,7 @@ public class Recipes {
     }
 
     public String nazwa() {
-        return "Nazwa przepisu: " + name;
+        return name;
     }
     // Getters and setters
 }

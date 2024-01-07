@@ -1,35 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <title>Wyszukiwarka</title>
+    <title>Przepisy</title>
 </head>
 <body>
-<h1>Znajdź przepis</h1>
-<form action="#" th:action="@{/wyszukiwarka}" method="get">
-    <input type="text" name="keyword" placeholder="Enter keyword" />
-    <button type="submit">Szukaj</button>
+<h1>Wyszukiwarka przepisów</h1>
+
+// wyszukiwarka do wstawienia
+
+<form method="post" th:action="@{/wyszukiwarka}">
+    <button type="submit">Losuj</button>
 </form>
-<div>
-    <h2>Wyniki:</h2>
-    <ul>
-        <li th:each="recipe : ${recipes}">
-            <td><a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.nazwa()}"></a></td>
-        </li>
-    </ul>
 
-    <a th:href="@{'/przepisy-miesne'}">Przepisy miesne</a>
-    <a th:href="@{'/przepisy-wegetarianskie'}">Przepisy wegetarianskie</a>
+<form method="post" th:action="@{/wyszukiwarka/wegetarianskie}">
+    <button type="submit">Wegetariańskie</button>
+</form>
 
-    <h1>Polecane przepisy na dzisiaj!</h1>
-    <table>
-        <thead>
-        <tbody>
-        <tr th:each="recipe : ${randomRecipes}">
-            <td><a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.nazwa()}"></a></td>
-        </tr>
-        </tbody>
-    </table>
+<form method="post" th:action="@{/wyszukiwarka/miesne}">
+    <button type="submit">Mięsne</button>
+</form>
 
-</div>
+
+
+<ul>
+    <li th:each="recipe : ${recipes}">
+        <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.nazwa()}"></a>
+    </li>
+</ul>
 </body>
 </html>

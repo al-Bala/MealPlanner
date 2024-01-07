@@ -8,9 +8,7 @@ import java.util.List;
 
 @Repository
 public interface SearcherRepository extends MongoRepository<Recipes, String> {
-    List<Recipes> findByNameContaining(String keyword);
-
-    List<Recipes> findByNameContainingIgnoreCase(String keyword);
+    List<Recipes> findByDiet(String diet);
 
 }
 

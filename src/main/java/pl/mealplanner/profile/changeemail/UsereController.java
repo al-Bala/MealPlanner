@@ -3,7 +3,6 @@ package pl.mealplanner.profile.changeemail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,56 +10,59 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.mealplanner.loginandregister.domain.entity.User;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UsereController {
     @Autowired
     private UsereService usereService;
 
-    @GetMapping("/change-email")
-    public String changeEmailForm( Model model) {
+    @GetMapping("/user/{username}/change-profil")
+    public String changeEmailForm( @PathVariable String username, Model model) {
+        Usere user = usereService.getUserByUsername(username);
 
         Authentication userDetails = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = userDetails.getName();
-        //Usere usere = usereService.findByEmail(currentUsername);
         Usere usere = usereService.getUserByUsername(currentUsername);
-        String usere2 = usere.getUsername();
 
         model.addAttribute("usere", currentUsername);
 
-        return "change-email";
+        return "details/user-change";
     }
 
     @PostMapping("/change-email")
     public String changeEmailSubmit(@RequestParam("newEmail") String newEmail,
-                                    @RequestParam("newPassword") String newPassword
-
-    ) {
+                                    @RequestParam("newPassword") String newPassword,
+                                    @RequestParam("confirmNewPassword") String confirmNewPassword,
+                                    RedirectAttributes redirectAttributes) {
         Authentication userDetails = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = userDetails.getName();
         Usere usere = usereService.getUserByUsername(currentUsername);
 
         if (usere != null) {
-            // Sprawdź, czy nowy adres email jest wolny
-            if (usereService.findByEmail(newEmail) == null) {
-                usere.setEmail(newEmail);
-                // Zaktualizuj hasło, jeśli zostało wprowadzone
-                if (isValid(newPassword)){
-                    // Tutaj możesz zaimplementować kod kodowania nowego hasła
-                    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-                   String encodedPassword = bCryptPasswordEncoder.encode(newPassword);
-                    usere.setPassword(encodedPassword);
-                }
-                usereService.saveUser(usere);
-                return "redirect:/profile"; // Przekierowanie do strony profilu lub innego widoku
-            } else {
-                // Obsłuż błąd - nowy adres email jest już w użyciu
-                return "redirect:/change-email?error=email-in-use";
+            if (usereService.findByEmail(newEmail) != null) {
+                redirectAttributes.addFlashAttribute("error", "Email zajęty");
+                return "redirect:/change-email";
             }
+
+            if (!newPassword.equals(confirmNewPassword)) {
+                redirectAttributes.addFlashAttribute("error", "Podane hasła nie są jednakowe");
+                return "redirect:/change-email";
+            }
+
+            if (!isValid(newPassword)) {
+                redirectAttributes.addFlashAttribute("error", "Hasło musi zawierać znaki specjalne");
+                return "redirect:/change-email";
+            }
+
+            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = bCryptPasswordEncoder.encode(newPassword);
+            usere.setPassword(encodedPassword);
+            usere.setEmail(newEmail);
+            usereService.saveUser(usere);
+            return "redirect:/profile";
         } else {
-            // Obsłuż błąd - użytkownik nie został znaleziony
-            return "redirect:/error-page"; // Przekierowanie na stronę błędu
+            return "redirect:/error-page";
         }
 
 
