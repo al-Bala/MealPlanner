@@ -1,0 +1,148 @@
+@import '../css/__reset.css';
+@import '../css/__variables.css';
+@import '../css/__navigation.css';
+@import '../css/__footer.css';
+
+nav .active .menu__item:nth-child(3) {
+    order: 1;
+    width: auto;
+    padding: 16px 30px;
+    margin-top: 40px;
+    border: 1px solid #FFB342;
+    border-radius: 5px;
+  }
+  nav .active .menu__item:nth-child(1) {
+    color: #FFB342;
+  }
+  nav .active .menu__item:nth-child(2) {
+    color: #767676;
+  }
+  nav .active .menu__item:nth-child(4) {
+    width: 100vw;
+    padding: 28px 0;
+    font-size: 14px;
+    border: 1px solid #F3F3F3;
+    margin: 0;
+  }
+  
+  @media (min-width: 992px) {
+    .menu__item:nth-child(3), .menu__item:nth-child(4) {
+      display: none;
+    }
+  }
+  main {
+    width: 100vw;
+    font-family: "Now", sans-serif;
+  }
+  main .about-us__header {
+    margin: 140px 40px 20px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #767676;
+    -moz-text-align-last: left;
+         text-align-last: left;
+  }
+  @media (min-width: 992px) {
+    main .about-us__header {
+      width: 400px;
+      margin: 220px auto 100px;
+      font-size: 22px;
+      -moz-text-align-last: center;
+           text-align-last: center;
+    }
+  }
+  @media (min-width: 992px) {
+    main .about-us .element {
+      width: 50%;
+      flex-basis: 50%;
+    }
+    main .about-us .element:nth-child(3) {
+      order: 1;
+    }
+    main .about-us .element:nth-child(1),
+    main .about-us .element:nth-child(2) {
+      margin-bottom: 40px;
+    }
+  }
+  main .about-us .recipes {
+    position: relative;
+  }
+  main .about-us .recipes__link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 0px 4px 6.7px rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+    border-radius: 15px;
+    transition: font-size 0.4s;
+  }
+  main .about-us .recipes__link:active {
+    font-size: 20px;
+  }
+  @media (min-width: 992px) {
+    main .about-us .recipes__link:active {
+      font-size: 16px;
+    }
+    main .about-us .recipes__link:hover {
+      font-size: 25px;
+      border-radius: 15px;
+    }
+  }
+  main .about-us__image {
+    width: 100%;
+    border-radius: 15px;
+    filter: brightness(80%);
+  }
+  main .about-us__wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+  }
+  @media (min-width: 992px) {
+    main .about-us__wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    main .about-us .about-us__text-content {
+      padding: 0 50px;
+    }
+  }
+  main .about-us__text {
+    margin: 40px 0 20px;
+  }
+  main .about-us__ps {
+    margin-bottom: 40px;
+  }
+  main .about-us .content {
+    display: block;
+    font-size: 13px;
+    line-height: 18px;
+    color: #FFB342;
+  }
+  @media (min-width: 992px) {
+    main .about-us .content {
+      font-size: 18px;
+      line-height: 25px;
+    }
+  }
+  
+  .test-content {
+    display: none;
+  }
+  
+  @media (min-width: 992px) {
+    .container {
+      max-width: 1400px;
+    }
+  }

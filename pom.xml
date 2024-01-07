@@ -141,31 +141,13 @@
                     <resources>
                     <resource>
                         <source>
-                        <directory>${basedir}/src/main/sass</directory>
+                        <directory>${basedir}/src/main/resources/static/sass</directory>
                         </source>
                         <destination>${project.build.directory}/css</destination>
                     </resource>
                     </resources>
                 </configuration>
             </plugin>
-            <!-- <plugin>
-                <groupId>com.github.warmuuh</groupId>
-                <artifactId>libsass-maven-plugin</artifactId>
-                <version>0.2.10-libsass_3.5.4</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <inputPath>${project.basedir}/src/main/scss</inputPath>
-                            <outputPath>${project.build.directory}/classes/static/css</outputPath>
-                            <includePath>${project.basedir}/src/main/scss</includePath>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin> -->
         </plugins>
     </build>
 
