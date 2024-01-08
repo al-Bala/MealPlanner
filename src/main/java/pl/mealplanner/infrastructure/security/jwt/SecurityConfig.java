@@ -22,42 +22,46 @@ import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
-class
-SecurityConfig {
-//    @Bean
-//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-//        return authenticationConfiguration.getAuthenticationManager();
-//    }
-//
-//    // decyduje gdzie jest nasza baza danych z użytkownikami
-//    @Bean
-//    public UserDetailsService userDetailsService(LoginAndRegisterFacade loginAndRegisterFacade) {
-//        return new LoginUserDetailsService(loginAndRegisterFacade);
-//    }
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.csrf().disable();
-//        httpSecurity.authorizeRequests()
-//                .antMatchers("/**").permitAll()
-//                .antMatchers("/token/**").permitAll()
-//                .antMatchers("/login/**").permitAll()
-//                .antMatchers("/register/**").permitAll()
-////                .antMatchers("/swagger-ui/**").permitAll()
-////                .antMatchers("/v3/api-docs").permitAll()
-////                .antMatchers("/webjars/**").permitAll()
-////                .antMatchers("/swagger-resources/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .headers().frameOptions().disable()
-//                .and().httpBasic().disable()
-//                //???????????????
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .exceptionHandling();
-//        return httpSecurity.build();
-//    }
+class SecurityConfig {
+    // @Bean
+    // public AuthenticationManager
+    // authenticationManager(AuthenticationConfiguration
+    // authenticationConfiguration) throws Exception {
+    // return authenticationConfiguration.getAuthenticationManager();
+    // }
+    //
+    // // decyduje gdzie jest nasza baza danych z użytkownikami
+    // @Bean
+    // public UserDetailsService userDetailsService(LoginAndRegisterFacade
+    // loginAndRegisterFacade) {
+    // return new LoginUserDetailsService(loginAndRegisterFacade);
+    // }
+    // @Bean
+    // public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
+    // throws Exception {
+    // httpSecurity.csrf().disable();
+    // httpSecurity.authorizeRequests()
+    // .antMatchers("/**").permitAll()
+    // .antMatchers("/token/**").permitAll()
+    // .antMatchers("/login/**").permitAll()
+    // .antMatchers("/register/**").permitAll()
+    //// .antMatchers("/swagger-ui/**").permitAll()
+    //// .antMatchers("/v3/api-docs").permitAll()
+    //// .antMatchers("/webjars/**").permitAll()
+    //// .antMatchers("/swagger-resources/**").permitAll()
+    // .anyRequest().authenticated()
+    // .and()
+    // .headers().frameOptions().disable()
+    // .and().httpBasic().disable()
+    // //???????????????
+    // .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    // .and()
+    // .exceptionHandling();
+    // return httpSecurity.build();
+    // }
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -68,32 +72,33 @@ SecurityConfig {
     }
 
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/home").permitAll()
-                                .requestMatchers("/plan/guest").permitAll()
-                                //.requestMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
-                                //.requestMatchers("/plan/**").hasAnyAuthority("USER", "ADMIN")
-                                .anyRequest().authenticated()
-                ).formLogin(
+                .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/register/**").permitAll()
+                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/plan/guest").permitAll()
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/js/**").permitAll()
+                        // .requestMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
+                        // .requestMatchers("/plan/**").hasAnyAuthority("USER", "ADMIN")
+                        .anyRequest().authenticated())
+                .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
                                 .defaultSuccessUrl("/home/user")
-                                .permitAll()
-                ).logout(
+                                .permitAll())
+                .logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .logoutSuccessUrl("/home")
-                                .permitAll()
-                );
+                                .permitAll());
         return http.build();
     }
 
