@@ -48,7 +48,7 @@ function updateIndexes(wrapper, fieldPrefix) {
 
 function initializeAutocomplete(element) {
     element.autocomplete({
-        source: "plantNamesAutocomplete",
+        source: "productNamesAutocomplete",
         minLength: 3,
     });
 }

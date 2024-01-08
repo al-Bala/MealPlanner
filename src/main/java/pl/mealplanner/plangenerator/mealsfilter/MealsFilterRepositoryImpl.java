@@ -23,10 +23,10 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
         Query query3 = new Query();
 
         Criteria criteriaMaxStorageTime = Criteria.where("max_storage_time").gte(info.forHowManyDays());
-        Criteria criteriaDiet = choseDiet(info.diet());
-        Criteria criteriaPrepareTime = Criteria.where("prepare_time").lte(info.timeForPrepareMin());
+        Criteria criteriaDiet = isEmptyDiet(info.diet());
+        Criteria criteriaPrepareTime = isEmptyPrepareTime(info.timeForPrepareMin());
         Criteria criteriaProductsToUse = Criteria.where("ingredients.name").all(namesProductsToUse);
-        Criteria criteriaToUseAndDislikedProducts = chose2(namesProductsToUse, info.dislikedProducts());
+        Criteria criteriaToUseAndDislikedProducts = isEmptyToUseAndDislikedProducts(namesProductsToUse, info.dislikedProducts());
 
         List<Criteria> c1 = List.of(criteriaMaxStorageTime, criteriaDiet, criteriaPrepareTime, criteriaToUseAndDislikedProducts);
         List<Criteria> c2 = List.of(criteriaMaxStorageTime, criteriaDiet, criteriaPrepareTime, criteriaProductsToUse);
@@ -59,7 +59,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
         }
     }
 
-    private Criteria chose2(List<String> namesProductsToUse, List<String> dislikedProducts){
+    private Criteria isEmptyToUseAndDislikedProducts(List<String> namesProductsToUse, List<String> dislikedProducts){
         if (!namesProductsToUse.isEmpty() && !dislikedProducts.isEmpty()) {
             return Criteria.where("ingredients.name").all(namesProductsToUse).nin(dislikedProducts);
         }
@@ -72,10 +72,17 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
         return new Criteria();
     }
 
-    private Criteria choseDiet(String diet){
+    private Criteria isEmptyDiet(String diet){
         if(!diet.isEmpty()){
             return Criteria.where("diet").is(diet);
         }
         return new Criteria();
+    }
+
+    private Criteria isEmptyPrepareTime(int prepareTime){
+        if(prepareTime == -1){
+            return new Criteria();
+        }
+        return Criteria.where("prepare_time").lte(prepareTime);
     }
 }

@@ -62,9 +62,9 @@ class PlanGeneratorController {
         return "plangenerator/planner";
     }
 
-    @RequestMapping(value="/plantNamesAutocomplete")
+    @RequestMapping(value="/productNamesAutocomplete")
     @ResponseBody
-    public List<String> plantNamesAutocomplete(@RequestParam(value="term", required = false, defaultValue="") String term)  {
+    public List<String> productNamesAutocomplete(@RequestParam(value="term", required = false, defaultValue="") String term)  {
         List<String> suggestions = new ArrayList<>();
 
         List<ProductClass> allProducts = productsFetcher.fetch(term);
