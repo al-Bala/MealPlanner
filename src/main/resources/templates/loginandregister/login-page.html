@@ -1,81 +1,67 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Meal Planner</title>
 </head>
+
 <body>
-<nav>
-    <div>
-        <a th:href="@{/home}">Home</a>
+    <nav>
         <div>
-            <ul>
-                <li>
-                    <a th:href="@{/register}">Register</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<br /><br />
-<div>
-    <div>
-        <div>
-            <div th:if="${param.planAth}">
-                <div>Musisz sie zalogować aby wygenerować plan.</div>
-            </div>
-            <div th:if="${param.error}">
-                <div>Login lub hasło są niepoprawne.</div>
-            </div>
-            <div th:if="${param.successReg}">
-                <div> Zostałeś zarejestrowany. Możesz się teraz zalogować.</div>
-            </div>
-
+            <a th:href="@{/home}">Home</a>
             <div>
-                <div>
-                    <h2>Login Form</h2>
+                <ul>
+                    <li>
+                        <a th:href="@{/register}">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br /><br />
+    <div>
+        <div>
+            <div>
+                <div th:if="${param.planAth}">
+                    <div>Musisz sie zalogować aby wygenerować plan.</div>
                 </div>
-                <div>
-                    <form
-                            method="post"
-                            role="form"
-                            th:action="@{/login}"
-                            class="form-horizontal"
-                    >
-                        <div>
-                            <label> Login</label>
-                            <input
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    class="form-control"
-                                    placeholder="Podaj login"
-                            />
-                        </div>
+                <div th:if="${param.error}">
+                    <div>Login lub hasło są niepoprawne.</div>
+                </div>
+                <div th:if="${param.successReg}">
+                    <div> Zostałeś zarejestrowany. Możesz się teraz zalogować.</div>
+                </div>
 
-                        <div>
-                            <label> Hasło</label>
-                            <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    class="form-control"
-                                    placeholder="Podaj hasło"
-                            />
-                        </div>
-                        <div>
-                            <button type="submit">Log in</button>
-                            <span> Not registered ?
-                                <a th:href="@{/register}">Register here</a>
-                            </span>
-                        </div>
-                    </form>
+                <div>
+                    <div>
+                        <h2>Login Form</h2>
+                    </div>
+                    <div>
+                        <form method="post" role="form" th:action="@{/login}" class="form-horizontal">
+                            <div>
+                                <label> Login</label>
+                                <input type="text" id="username" name="username" class="form-control"
+                                    placeholder="Podaj login" />
+                            </div>
+
+                            <div>
+                                <label> Hasło</label>
+                                <input type="password" id="password" name="password" class="form-control"
+                                    placeholder="Podaj hasło" />
+                            </div>
+                            <div>
+                                <button type="submit">Log in</button>
+                                <span> Not registered ?
+                                    <a th:href="@{/register}">Register here</a>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
+
 </html>

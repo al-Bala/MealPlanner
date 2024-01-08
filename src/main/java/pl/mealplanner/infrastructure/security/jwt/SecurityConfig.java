@@ -20,6 +20,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.NullRequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import lombok.AllArgsConstructor;
 import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
 
 @Configuration
@@ -43,28 +45,27 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/login/**").permitAll()
-                                .requestMatchers("/home").permitAll()
-                                .requestMatchers("/plan/guest").permitAll()
-                                //.requestMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
-                                //.requestMatchers("/plan/**").hasAnyAuthority("USER", "ADMIN")
-                                .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/register/**").permitAll()
+                        .requestMatchers("/login/**").permitAll()
+                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/plan/guest").permitAll()
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/js/**").permitAll()
+                        // .requestMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
+                        // .requestMatchers("/plan/**").hasAnyAuthority("USER", "ADMIN")
+                        .anyRequest().authenticated())
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
                                 .defaultSuccessUrl("/home/user")
-                                .permitAll()
-                )
+                                .permitAll())
                 .logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .logoutSuccessUrl("/home")
-                                .permitAll()
-                );
+                                .permitAll());
         return http.build();
     }
 
