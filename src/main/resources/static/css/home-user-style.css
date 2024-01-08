@@ -51,8 +51,8 @@ main .plan-generator {
     padding: 9px 18px;
     margin: 190px auto 30px;
     font-size: 14px;
-    color: #FFFFFF;
-    background-color: #FFB342;
+    color: var(--white);
+    background-color: var(--gold);
     border-radius: 11px;
     animation: clickMe 1.5s ease-in-out infinite;
   }
@@ -79,7 +79,7 @@ main .plan-generator {
     max-width: 600px;
     padding: 20px 40px;
     margin: 0 auto;
-    background-color: #F3F3F3;
+    background-color: var(--light-gray);
     border-radius: 40px 0px;
   }
   @media (min-width: 992px) {
@@ -93,7 +93,7 @@ main .plan-generator {
     font-size: 18px;
     font-weight: 500;
     line-height: 25px;
-    color: #FFB342;
+    color: var(--gold);
   }
   @media (min-width: 992px) {
     main .plan-info__header {
@@ -107,7 +107,7 @@ main .plan-generator {
   main .plan-info .content {
     font-size: 13px;
     line-height: 18px;
-    color: #767676;
+    color: var(--dark-gray);
   }
   @media (min-width: 992px) {
     main .plan-info .content {
@@ -119,7 +119,7 @@ main .plan-generator {
     margin: 80px 40px 20px;
     font-size: 18px;
     font-weight: 500;
-    color: #767676;
+    color: var(--dark-gray);
     -moz-text-align-last: left;
          text-align-last: left;
   }
@@ -161,7 +161,7 @@ main .plan-generator {
     letter-spacing: 1px;
     text-transform: uppercase;
     text-shadow: 0px 4px 6.7px rgba(0, 0, 0, 0.5);
-    color: #FFFFFF;
+    color: var(--white);
     border-radius: 15px;
     transition: font-size 0.4s;
   }
@@ -209,7 +209,7 @@ main .plan-generator {
     display: block;
     font-size: 13px;
     line-height: 18px;
-    color: #FFB342;
+    color: var(--gold);
   }
   @media (min-width: 992px) {
     main .about-us .content {

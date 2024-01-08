@@ -7,12 +7,12 @@
   gap: 20px;
   padding: 22px 16px 0;
   margin-top: 40px;
-  background-color: #FFFFFF;
+  background-color: var(--white);
   box-shadow: 0px -4px 25.2px 0px rgba(0, 0, 0, 0.25);
 }
 .footer__section {
   font-family: "Now", sans-serif;
-  color: #767676;
+  color: var(--dark-gray);
 }
 .footer__section .email {
   display: flex;
@@ -46,7 +46,7 @@
 }
 .footer__section .social-media__link {
   font-size: 22px;
-  color: #FFB342;
+  color: var(--gold);
 }
 @media (min-width: 992px) {
   .footer__section .social-media__link {
@@ -54,7 +54,7 @@
     transition: color 0.4s;
   }
   .footer__section .social-media__link:hover {
-    color: #FF7F37;
+    color: var(--orange);
   }
 }
 .footer__header {
