@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MealPlanner</title>
     <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/css/home-user-style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home-user-style.css}">
 </head>
 
 <body>
@@ -35,10 +35,10 @@
     <main>
         <section class="plan-generator">
             <div class="graphic">
-                <img class="graphic__image" src="../../static/images/Talerz.png" alt="talerz z pizzą">
-                <img class="graphic__image2 image_dsc" src="../../static/images/u_485kmhchiv_jasny.png"
+                <img class="graphic__image" th:src="@{/images/Talerz.png}" alt="talerz z pizzą">
+                <img class="graphic__image2 image_dsc" th:src="@{/images/u_485kmhchiv_jasny.png}"
                     alt="talerz z kurczakiem">
-                <img class="graphic__image3 image_dsc" src="../../static/images/marker_photography_v2.png"
+                <img class="graphic__image3 image_dsc" th:src="@{/images/marker_photography_v2.png}"
                     alt="Talerz z tagiatelle">
             </div>
             <button class="plan-generator__btn">
@@ -46,8 +46,7 @@
             </button>
         </section>
         <section class="plan-info container">
-            <img class="plan-info__image" src="../../static/images/triangle.svg"
-                alt="trójkąt - od dymku z informacjami">
+            <img class="plan-info__image" th:src="@{/images/triangle.svg}" alt="trójkąt - od dymku z informacjami">
 
             <div class="plan-info-wrapper">
                 <h2 class="plan-info__header">Wygeneruj spresonalizowany plan posiłków na cały tydzień!</h2>
@@ -63,9 +62,8 @@
             <h2 class="about-us__header">Co znajdziesz na naszej stronie?</h2>
             <div class="about-us__wrapper">
                 <div class="recipes  element">
-                    <a class="recipes__link" href="#">Zarządzaj przepisami</a>
-                    <img class="about-us__image" src="../../static/images/nicolettazanella.jpg"
-                        alt="kurkuma i pomarańcze">
+                    <a class="recipes__link">Zarządzaj przepisami</a>
+                    <img class="about-us__image" th:src="@{/images/nicolettazanella.jpg}" alt="kurkuma i pomarańcze">
                 </div>
                 <div class="about-us__text-content element">
                     <p class="content about-us__text">MealPlanner oferuje o wiele więcej niż wygenerowanie planu
@@ -78,8 +76,8 @@
                         żadnym składniku!</p>
                 </div>
                 <div class="recipes element">
-                    <a class="recipes__link" href="#">Wyszukaj przepis</a>
-                    <img class="about-us__image" src="../../static/images/keram.jpg" alt="warzywa">
+                    <a class="recipes__link">Wyszukaj przepis</a>
+                    <img class="about-us__image" th:src="@{/images/keram.jpg}" alt="warzywa">
                 </div>
                 <div class="about-us__text-content element">
                     <p class="content about-us__text">Skorzystaj też z naszej specjalnej wyszukiwarki przepisów i
@@ -111,14 +109,14 @@
         <div class="footer__section social-media">
             <h4 class="footer__header">Znajdziesz nas tutaj</h4>
             <div class="social-media__links">
-                <a class="social-media__link" href="#"><i class="fa-brands fa-square-facebook"></i></a>
-                <a class="social-media__link" href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a class="social-media__link" href="#"><i class="fa-brands fa-tiktok"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
             </div>
         </div>
     </footer>
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
-    <script src="../../static/js/burgerMenu.js"></script>
+    <script th:src="@{/js/burgerMenu.js}"></script>
 </body>
 
 </html>

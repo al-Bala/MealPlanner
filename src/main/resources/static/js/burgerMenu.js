@@ -1,6 +1,6 @@
 
 
-window.addEventListener("DOMContentLoaded", () => {
+// window.addEventListener("DOMContentLoaded", () => {
     const burgerBtn = document.querySelector('.burger-btn');
     const exitBtn = document.querySelector('.exit-btn');
     const menuItems = document.querySelector('.menu');
@@ -13,4 +13,4 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     burgerBtn.addEventListener('click', showMenu);
     exitBtn.addEventListener('click', showMenu);
-});
+// });

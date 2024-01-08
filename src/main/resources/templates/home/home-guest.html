@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MealPlanner</title>
     <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
-    <link rel="stylesheet" href="../../static/css/home-guest-style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home-guest-style.css}">
 </head>
 
 <body>
@@ -45,8 +45,8 @@
                     <p class="content about-us__ps">Daj się zaskoczyć lub wyszukaj coś dla siebie!</p>
                 </div>
                 <div class="recipes element">
-                    <a class="recipes__link" href="#">Wyszukaj przepis</a>
-                    <img class="about-us__image" src="../../static/images/keram.jpg" alt="warzywa">
+                    <a class="recipes__link">Wyszukaj przepis</a>
+                    <img class="about-us__image" th:src="@{/images/keram.jpg}" alt="warzywa">
                 </div>
                 <div class="about-us__text-content element">
                     <p class="content about-us__text">MealPlanner oferuje o wiele więcej niż przeglądanie przepisów!
@@ -59,8 +59,7 @@
                 </div>
                 <div class="recipes  element">
                     <a class="recipes__link" th:href="@{/register}">Zarejestruj się</a>
-                    <img class="about-us__image" src="../../static/images/nicolettazanella.jpg"
-                        alt="kurkuma i pomarańcze">
+                    <img class="about-us__image" th:src="@{/images/nicolettazanella.jpg}" alt="kurkuma i pomarańcze">
                 </div>
             </div>
         </section>
@@ -76,14 +75,14 @@
         <div class="footer__section social-media">
             <h4 class="footer__header">Znajdziesz nas tutaj</h4>
             <div class="social-media__links">
-                <a class="social-media__link" href="#"><i class="fa-brands fa-square-facebook"></i></a>
-                <a class="social-media__link" href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a class="social-media__link" href="#"><i class="fa-brands fa-tiktok"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
             </div>
         </div>
     </footer>
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
-    <script src="../../static/js/burgerMenu.js"></script>
+    <script th:src="@{/js/burgerMenu.js}"></script>
 </body>
 
 </html>
