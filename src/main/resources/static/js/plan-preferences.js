@@ -12,9 +12,13 @@ function initializeProductFields(wrapper, addButton, fieldPrefix, deleteButtonCl
         if (x < max_fields) {
             var fieldHtml =
                 `<div id="${fieldPrefix}-${x}">
-                    <input name="${fieldPrefix}[${x}].name" type="text" placeholder="Name" class="search"/>
-                    ${fieldPrefix.includes("productsToUse") ? '<input name="' + fieldPrefix + '[' + x + '].amount" type="number" min="0" placeholder="Amount"/>' : ''}
-                    ${fieldPrefix.includes("productsToUse") ? '<input name="' + fieldPrefix + '[' + x + '].unit" type="text" placeholder="Unit"/>' : ''}
+                    <input name="${fieldPrefix}[${x}].name" type="text" placeholder="Name" class="search" onblur="fetchUnits(this.value, ${x})" required/>
+                    ${fieldPrefix.includes("productsToUse") ? 
+                        '<input name="' + fieldPrefix + '[' + x + '].amount" type="number" min="0" placeholder="Amount" required/>' : ''}
+                     ${fieldPrefix.includes("productsToUse") ?
+                        '<select id="units-'+x+'" name="' + fieldPrefix + '[' + x + '].unit" required>' +
+                            '<option value="" disabled selected >Wybierz jednostkę</option>' +
+                        '</select>' : ''}
                     <button type="button" class="${deleteButtonClass}">Usuń</button>
                 </div>`;
 
@@ -46,10 +50,24 @@ function updateIndexes(wrapper, fieldPrefix) {
     });
 }
 
+function fetchUnits(productName, x) {
+    $.get('/meal-planner/plan/unitOptions?productName=' + productName, function (data) {
+        var unitsSelect = $("#units-"+x);
+
+        unitsSelect.empty();
+        unitsSelect.append('<option value="" disabled selected >Wybierz jednostkę</option>');
+
+        $.each(data, function (index, unit) {
+            unitsSelect.append(
+                '<option value="' + unit + '">' + unit + '</option>');
+        });
+    });
+}
+
 function initializeAutocomplete(element) {
     element.autocomplete({
         source: "productNamesAutocomplete",
-        minLength: 3,
+        minLength: 2,
     });
 }
 
