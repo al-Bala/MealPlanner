@@ -74,7 +74,7 @@
                     <label>Wybierz dzień rozpoczęcia planu: </label>
                     <input type="date" id="startDate" name="startDate" th:field="*{weekInfo.dayInfoList[0].day}" required>
                     <div th:each="days, idDay : *{weekInfo.dayInfoList}">
-                        <div class="days" id="days-__${idDay.index}__"></div>
+                        <div class="days"></div>
                     </div>
                     <div>
                         <button type="button" id="addNextDay">Dodaj plan na kolejny dzień</button>

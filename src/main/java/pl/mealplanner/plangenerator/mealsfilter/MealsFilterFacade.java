@@ -18,7 +18,6 @@ import java.util.List;
 @Component
 public class MealsFilterFacade {
     private final MealsFinder mealsFinder;
-    private final HistoryChecker historyChecker;
     private final IngredientsCalculator ingredientsCalculator;
     private final LeftProductsCounterFacade leftProductsCounterFacade;
 
@@ -48,9 +47,8 @@ public class MealsFilterFacade {
     }
 
     private FilteredRecipeDto getFilteredRecipe(InfoForFiltering info, int nrPortionsUser) {
-        List<FilteredRecipeDto> matchingRecipes = mealsFinder.findMatchingRecipes(info);
-        FilteredRecipeDto recipe = historyChecker.checkPreviousWeek(matchingRecipes);
-        return ingredientsCalculator.calculateIngredients(recipe, nrPortionsUser);
+        FilteredRecipeDto matchingRecipe = mealsFinder.findMatchingRecipe(info);
+        return ingredientsCalculator.calculateIngredients(matchingRecipe, nrPortionsUser);
     }
 
     private void calculateLeftoversAndAddProductsToGroceryList(FilteredRecipeDto recipe, List<IngredientDto> productsToUse) {

@@ -10,6 +10,8 @@ import java.util.List;
 @Document("products")
 public record Product(
         @Field("name") String name,
-        @Field("packing_measures") List<PackingMeasures> packingMeasures
+        @Field("packing_units") List<String> packingUnits,
+        @Field("main_unit") String mainUnit,
+        @Field("packing_measures") List<Integer> packingMeasures
 ) {
 }

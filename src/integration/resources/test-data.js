@@ -14,14 +14,15 @@ db.users.insertMany([
         },
         user_recipes: [""],
         plan_history: [
-            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')},
-            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9424')}
+            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')}, // Kasza jaglana z warzywami
+            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9424')}  // Koktajl owocowy
         ],
     },
 ]);
 
 db.recipes.insertMany([
     {
+        _id: ObjectId('6577660abbac733a111c9421'),
         name: "Kasza jaglana z warzywami",
         portions: 4,
         prepare_time: 30,
@@ -36,6 +37,7 @@ db.recipes.insertMany([
         steps: ["Ugotuj kaszę", "Pokrój warzywa", "Smaż warzywa na oliwie", "Podawaj razem"]
     },
     {
+        _id: ObjectId('6577660abbac733a111c9422'),
         name: "Sałatka owocowa",
         portions: 3,
         prepare_time: 15,
@@ -50,6 +52,7 @@ db.recipes.insertMany([
         steps: ["Pokrój owoce", "Połącz z miodem", "Delikatnie wymieszaj", "Gotowe do podania"]
     },
     {
+        _id: ObjectId('6577660abbac733a111c9423'),
         name: "Jajecznica z warzywami",
         portions: 2,
         prepare_time: 15,
@@ -65,6 +68,7 @@ db.recipes.insertMany([
         steps: ["Ubij jajka", "Pokrój warzywa", "Smaż warzywa, dodaj jajka", "Podawaj gorące"]
     },
     {
+        _id: ObjectId('6577660abbac733a111c9424'),
         name: "Koktajl owocowy",
         portions: 1,
         prepare_time: 10,
@@ -80,6 +84,7 @@ db.recipes.insertMany([
         steps: ["Włóż owoce do blendera", "Dodaj sok i jogurt", "Miksuj do uzyskania gładkiego koktajlu", "Gotowe do picia"]
     },
     {
+        _id: ObjectId('6577660abbac733a111c9425'),
         name: "Ryż z warzywami i kurczakiem",
         portions: 3,
         prepare_time: 25,

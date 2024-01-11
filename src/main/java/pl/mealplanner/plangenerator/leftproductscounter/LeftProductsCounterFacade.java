@@ -34,6 +34,11 @@ public class LeftProductsCounterFacade {
                 .toList();
     }
 
+    public Product findProduct(String name){
+        return repository.findByName(name)
+                .orElseThrow();
+    }
+
     private Product getProduct(IngredientDto ingredient){
         return repository.findByName(ingredient.name())
                 .orElseThrow();

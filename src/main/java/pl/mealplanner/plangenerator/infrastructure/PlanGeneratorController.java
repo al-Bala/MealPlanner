@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
+import pl.mealplanner.plangenerator.leftproductscounter.LeftProductsCounterFacade;
+import pl.mealplanner.plangenerator.leftproductscounter.entity.Product;
 import pl.mealplanner.plangenerator.leftproductscounter.entity.ProductClass;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
 
@@ -22,6 +24,7 @@ class PlanGeneratorController {
 
     private final PlanGeneratorFacade planGeneratorFacade;
     private final ProductsFetcher productsFetcher;
+    private final LeftProductsCounterFacade leftProductsCounterFacade;
 
     @GetMapping("/guest")
     public String loginToGetPlan() {
@@ -62,9 +65,9 @@ class PlanGeneratorController {
         return "plangenerator/planner";
     }
 
-    @RequestMapping(value="/plantNamesAutocomplete")
+    @RequestMapping(value="/productNamesAutocomplete")
     @ResponseBody
-    public List<String> plantNamesAutocomplete(@RequestParam(value="term", required = false, defaultValue="") String term)  {
+    public List<String> productNamesAutocomplete(@RequestParam(value="term", required = false, defaultValue="") String term)  {
         List<String> suggestions = new ArrayList<>();
 
         List<ProductClass> allProducts = productsFetcher.fetch(term);
@@ -74,5 +77,12 @@ class PlanGeneratorController {
             }
         return suggestions;
 
+    }
+
+    @RequestMapping(value="/unitOptions")
+    @ResponseBody
+    public List<String> getUnitOptions(@RequestParam(value="productName", required = false, defaultValue="") String productName) {
+        Product product = leftProductsCounterFacade.findProduct(productName);
+        return product.packingUnits();
     }
 }

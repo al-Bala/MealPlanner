@@ -10,7 +10,7 @@ db.recipes.insertMany([
         ingredients: [
             { name: "kasza jaglana", amount: 200, unit: "g" },
             { name: "marchew", amount: 2, unit: "szt" },
-            { name: "brokuły", amount: 150, unit: "g" },
+            { name: "brokuł", amount: 150, unit: "g" },
             { name: "oliwa z oliwek", amount: 30, unit: "ml" }
         ],
         steps: ["Ugotuj kaszę", "Pokrój warzywa", "Smaż warzywa na oliwie", "Podawaj razem"]
@@ -69,7 +69,7 @@ db.recipes.insertMany([
             { name: "ryż", amount: 300, unit: "g" },
             { name: "kurczak", amount: 250, unit: "g" },
             { name: "marchew", amount: 2, unit: "szt" },
-            { name: "brokuły", amount: 150, unit: "g" },
+            { name: "brokuł", amount: 150, unit: "g" },
             { name: "sos sojowy", amount: 30, unit: "ml" }
         ],
         steps: ["Ugotuj ryż", "Pokrój kurczaka i warzywa", "Smaż kurczaka i warzywa, dodaj sos sojowy", "Podawaj razem z ryżem"]

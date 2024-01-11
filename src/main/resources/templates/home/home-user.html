@@ -20,7 +20,7 @@
         </button>
         <div class="menu">
             <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
-            <a class="menu__item" th:href="@{/plan/info}">Wygeneruj plan</a>
+            <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
             <a class="menu__item">Zarządzaj przepisami</a>
             <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
             <a class="menu__item" th:href="@{'/user/' + ${userId}}">Twój profil</a>
@@ -42,7 +42,7 @@
                     alt="Talerz z tagiatelle">
             </div>
             <button class="plan-generator__btn">
-                <a class="plan-generator__link" th:href="@{/plan/info}">Wygeneruj plan!</a>
+                <a class="plan-generator__link" th:href="@{/plan/generator}">Wygeneruj plan!</a>
             </button>
         </section>
         <section class="plan-info container">
