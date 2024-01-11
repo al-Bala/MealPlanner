@@ -1,30 +1,88 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>Meal Planner</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealPlanner</title>
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home-guest-style.css}">
 </head>
+
 <body>
-<nav>
-    <div class="container-fluid">
-        <a th:href="@{/home}">Home</a>
-        <div>
-            <ul>
-                <li>
-                    <a th:href="@{/register}">Register</a>
-                </li>
-                <li>
-                    <a th:href="@{/login}">Login</a>
-                </li>
-            </ul>
+    <nav>
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home}">Strona główna</a>
+            <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
+            <!-- <a th:href="@{/plan/guest}">Plan</a> co to robi? -->
         </div>
-        <a th:href="@{/plan/guest}">Plan</a>
-    </div>
-</nav>
-<br /><br />
-<div>
-    <h1> Meal Planner </h1>
-</div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
+        </div>
+    </nav>
+    <main>
+        <section class="about-us container">
+            <h2 class="about-us__header">Co znajdziesz na naszej stronie?</h2>
+            <div class="about-us__wrapper">
+
+                <div class="about-us__text-content element">
+                    <p class="content about-us__text">Skorzystaj z naszej specjalnej wyszukiwarki przepisów i
+                        wyszukaj
+                        przepis, który Cię interesuje. Co więcej, w wyszukiwarce czekają na Ciebie losowo wybrane
+                        przepisy
+                        dla złamania kulinarnej rutyny
+                    </p>
+                    <p class="content about-us__ps">Daj się zaskoczyć lub wyszukaj coś dla siebie!</p>
+                </div>
+                <div class="recipes element">
+                    <a class="recipes__link">Wyszukaj przepis</a>
+                    <img class="about-us__image" th:src="@{/images/keram.jpg}" alt="warzywa">
+                </div>
+                <div class="about-us__text-content element">
+                    <p class="content about-us__text">MealPlanner oferuje o wiele więcej niż przeglądanie przepisów!
+                        Zarejestruj się, aby otrzymać swój spersonalizowany plan posiłków na cały tydzień już dziś,
+                        dzięki czemu Twój tydzień będzie zorganizowany, a co najważniejsze, nic się nie zmarnuje.
+                    </p>
+                    <p class="content about-us__ps"> Zarejestruj się i skorzystaj z dodatkowych funkcji naszej
+                        aplikacji!
+                    </p>
+                </div>
+                <div class="recipes  element">
+                    <a class="recipes__link" th:href="@{/register}">Zarejestruj się</a>
+                    <img class="about-us__image" th:src="@{/images/nicolettazanella.jpg}" alt="kurkuma i pomarańcze">
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer__section contact">
+            <h4 class="footer__header">Kontakt</h4>
+            <div class="email">
+                <i class="fa-solid fa-envelope"></i>
+                <p class="email__text">email@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__section social-media">
+            <h4 class="footer__header">Znajdziesz nas tutaj</h4>
+            <div class="social-media__links">
+                <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/burgerMenu.js}"></script>
 </body>
+
 </html>

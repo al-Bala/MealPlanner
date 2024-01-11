@@ -1,0 +1,121 @@
+nav {
+    width: 100%;
+    height: 73px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    z-index: 4;
+    font-family: "Now", sans-serif;
+    background-color: var(--white);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  }
+  @media (min-width: 992px) {
+    nav {
+      height: 100px;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 40px 0;
+    }
+  }
+  nav .burger-btn {
+    position: fixed;
+    right: 14px;
+    z-index: 3;
+    font-size: 46px;
+    background: none;
+    color: var(--gold);
+  }
+  @media (min-width: 992px) {
+    nav .burger-btn {
+      display: none;
+    }
+  }
+  nav .exit-btn {
+    display: none;
+  }
+  @media (min-width: 992px) {
+    nav .menu {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: 20px;
+    }
+  }
+  nav .menu__item {
+    display: none;
+  }
+  @media (min-width: 992px) {
+    nav .menu__item {
+      display: block;
+      font-size: 18px;
+      transition: color 0.4s;
+    }
+    nav .menu__item:hover {
+      color: var(--gold);
+    }
+    nav .menu__desktop {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      gap: 20px;
+    }
+    nav .menu__desktop .profile {
+      transition: color 0.4s;
+    }
+    nav .menu__desktop .profile:hover {
+      color: var(--gold);
+    }
+    nav .menu__desktop .profile-icon {
+      font-size: 28px;
+      color: var(--dark-gray);
+    }
+    nav .menu__item:nth-child(6), nav .menu__item:nth-child(5) {
+      display: none;
+    }
+  }
+  nav .active {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    color: var(--dark-gray);
+    background-color: var(--white);
+  }
+  nav .active .menu__item {
+    width: 100vw;
+    display: block;
+    text-align: center;
+    padding: 28px 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: 1px solid var(--light-gray);
+  }
+  nav .active .menu__item:nth-child(2) {
+    color: var(--gold);
+  }
+  nav .active .menu__item:last-child {
+    width: auto;
+    padding: 16px 30px;
+    margin-top: 40px;
+    border: 1px solid var(--gold);
+    border-radius: 5px;
+  }
+  
+  nav.active .burger-btn {
+    display: none;
+  }
+  nav.active .exit-btn {
+    display: block;
+    position: fixed;
+    right: 14px;
+    z-index: 3;
+    font-size: 46px;
+    color: var(--dark-gray);
+    background: none;
+  }
