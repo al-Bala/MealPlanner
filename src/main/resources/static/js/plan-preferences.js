@@ -14,7 +14,7 @@ function initializeProductFields(wrapper, addButton, fieldPrefix, deleteButtonCl
                 `<div id="${fieldPrefix}-${x}">
                     <input name="${fieldPrefix}[${x}].name" type="text" placeholder="Name" class="search" onblur="fetchUnits(this.value, ${x})" required/>
                     ${fieldPrefix.includes("productsToUse") ? 
-                        '<input name="' + fieldPrefix + '[' + x + '].amount" type="number" min="0" placeholder="Amount" required/>' : ''}
+                        '<input name="' + fieldPrefix + '[' + x + '].amount" type="number" placeholder="Amount" required/>' : ''}
                      ${fieldPrefix.includes("productsToUse") ?
                         '<select id="units-'+x+'" name="' + fieldPrefix + '[' + x + '].unit" required>' +
                             '<option value="" disabled selected >Wybierz jednostkę</option>' +

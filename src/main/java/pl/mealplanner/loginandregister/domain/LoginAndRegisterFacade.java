@@ -2,14 +2,17 @@ package pl.mealplanner.loginandregister.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.mealplanner.loginandregister.domain.dto.PlanHistoryDto;
 import pl.mealplanner.loginandregister.domain.dto.Role;
 import pl.mealplanner.loginandregister.domain.dto.UserDto;
-import pl.mealplanner.loginandregister.domain.dto.UserPlanHistory;
 import pl.mealplanner.loginandregister.domain.entity.User;
+
+import java.util.List;
 
 @Log4j2
 @AllArgsConstructor
@@ -33,10 +36,11 @@ public class LoginAndRegisterFacade {
         return repository.existsByEmail(email);
     }
 
-    public UserPlanHistory findPlanHistoryByUsername(String username) {
+    public List<PlanHistoryDto> findPlanHistoryByCurrentUser() {
+        String username = authenticate();
         User user = repository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-        return UserMapper.mapFromUserToUserPlanHistory(user);
+        return UserMapper.mapFromUserToPlanHistoryList(user);
     }
 
 
@@ -50,5 +54,10 @@ public class LoginAndRegisterFacade {
         User savedUser = repository.save(user);
         log.info("User id: " + savedUser.id() + " added to database");
         return UserMapper.mapFromUserToUserDto(savedUser);
+    }
+
+    private String authenticate(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 }

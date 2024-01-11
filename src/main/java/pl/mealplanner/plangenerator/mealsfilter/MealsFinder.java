@@ -14,27 +14,21 @@ class MealsFinder {
 
     private final MealsFilterRepository repository;
 
-    public List<FilteredRecipeDto> findMatchingRecipes(InfoForFiltering info) {
+    public FilteredRecipeDto findMatchingRecipe(InfoForFiltering info) {
         List<Recipe> allRecipes = repository.findMatchingRecipes(info);
         return getFilteredRecipesDtoList(allRecipes);
     }
 
-    private List<FilteredRecipeDto> getFilteredRecipesDtoList(List<Recipe> recipesDb) {
-        List<Recipe> choseRecipes = choseMaxFirst10(recipesDb);
-        return choseRecipes.stream()
-                .map(this::convert)
-                .toList();
+    private FilteredRecipeDto getFilteredRecipesDtoList(List<Recipe> recipesDb) {
+        Recipe choseRecipe = chooseOneRecipe(recipesDb);
+        return convert(choseRecipe);
     }
 
     /**
-     * TODO: Wybieranie przepisów według składników (ilość) zamiast pierwszych 10
+     * TODO: Wybieranie njalepszego przepisu według składników (ilość) zamiast pierwszego w liście
      */
-    private List<Recipe> choseMaxFirst10(List<Recipe> recipesDb) {
-        if(recipesDb.size() > 10){
-            return recipesDb.subList(0,10);
-        } else {
-            return recipesDb;
-        }
+    private Recipe chooseOneRecipe(List<Recipe> recipesDb) {
+        return recipesDb.get(0);
     }
     private FilteredRecipeDto convert(Recipe choseRecipe) {
         return MealsFilterMapper.mapFromRecipeToFilteredRecipeDto(choseRecipe);

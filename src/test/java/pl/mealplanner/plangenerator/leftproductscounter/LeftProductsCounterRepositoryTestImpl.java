@@ -19,23 +19,23 @@ public class LeftProductsCounterRepositoryTestImpl implements LeftProductsCounte
     private final Map<String, Product> products = new HashMap<>();
 
     LeftProductsCounterRepositoryTestImpl(){
-        products.put("mleko", new Product("mleko", List.of(
-                new PackingMeasures(500f, "ml")
-        )));
-        products.put("kasza", new Product("kasza", List.of(
-                new PackingMeasures(180f, "g"),
-                new PackingMeasures(450f, "g"),
-                new PackingMeasures(600f, "g")
-        )));
-        products.put("jogurt", new Product("jogurt", List.of(
-                new PackingMeasures(150f, "g"),
-                new PackingMeasures(250f, "g")
-//                new PackingMeasures(500f, "kg")
-        )));
-        products.put("marchew", new Product("marchew", List.of(
-                new PackingMeasures(0f, "g"),
-                new PackingMeasures(0f, "szt")
-        )));
+//        products.put("mleko", new Product("mleko", List.of(
+//                new PackingMeasures(500f, "ml")
+//        )));
+//        products.put("kasza", new Product("kasza", List.of(
+//                new PackingMeasures(180f, "g"),
+//                new PackingMeasures(450f, "g"),
+//                new PackingMeasures(600f, "g")
+//        )));
+//        products.put("jogurt", new Product("jogurt", List.of(
+//                new PackingMeasures(150f, "g"),
+//                new PackingMeasures(250f, "g")
+////                new PackingMeasures(500f, "kg")
+//        )));
+//        products.put("marchew", new Product("marchew", List.of(
+//                new PackingMeasures(0f, "g"),
+//                new PackingMeasures(0f, "szt")
+//        )));
     }
 
     @Override

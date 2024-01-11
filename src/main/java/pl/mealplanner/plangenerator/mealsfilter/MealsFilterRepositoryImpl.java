@@ -2,71 +2,109 @@ package pl.mealplanner.plangenerator.mealsfilter;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.bson.types.ObjectId;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
+import pl.mealplanner.loginandregister.domain.dto.PlanHistoryDto;
 import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
 import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 @AllArgsConstructor
 @Log4j2
 @Repository
 class MealsFilterRepositoryImpl implements MealsFilterRepository{
     private final MongoTemplate mongoTemplate;
+    private final LoginAndRegisterFacade loginAndRegisterFacade;
     public List<Recipe> findMatchingRecipes(InfoForFiltering info) {
         List<String> namesProductsToUse = MealsFilterMapper.mapFromListIngredientDtoToListString(info.productsToUse());
-
-        Query query1 = new Query();
-        Query query2 = new Query();
-        Query query3 = new Query();
+        List<ObjectId> previousPlanRecipes = getRecipesFromPreviousPlan();
 
         Criteria criteriaMaxStorageTime = Criteria.where("max_storage_time").gte(info.forHowManyDays());
         Criteria criteriaDiet = isEmptyDiet(info.diet());
         Criteria criteriaPrepareTime = isEmptyPrepareTime(info.timeForPrepareMin());
-        Criteria criteriaProductsToUse = Criteria.where("ingredients.name").all(namesProductsToUse);
-        Criteria criteriaToUseAndDislikedProducts = isEmptyToUseAndDislikedProducts(namesProductsToUse, info.dislikedProducts());
+        List<AggregationOperation> agrProductsToUse = isEmptyProductsToUse(namesProductsToUse);
+        Criteria criteriaDislikedProducts = isEmptyDislikedProducts(info.dislikedProducts());
+        Criteria criteriaPlanHistory = Criteria.where("_id").nin(previousPlanRecipes);
 
-        List<Criteria> c1 = List.of(criteriaMaxStorageTime, criteriaDiet, criteriaPrepareTime, criteriaToUseAndDislikedProducts);
-        List<Criteria> c2 = List.of(criteriaMaxStorageTime, criteriaDiet, criteriaPrepareTime, criteriaProductsToUse);
-        List<Criteria> c3 = List.of(criteriaMaxStorageTime, criteriaDiet, criteriaPrepareTime);
+        List<Criteria> c1 = List.of(criteriaMaxStorageTime, criteriaDiet, criteriaPrepareTime, criteriaDislikedProducts, criteriaPlanHistory);  // +agrProductsToUse
+        List<Criteria> c2 = List.of(criteriaMaxStorageTime, criteriaDiet, criteriaPrepareTime, criteriaPlanHistory);    // +agrProductsToUse
 
-        extracted(c1, query1);
-        extracted(c2, query2);
-        extracted(c3, query3);
+        List<AggregationOperation> criteriaList1 = noNullInCriteria(c1);
+        List<AggregationOperation> criteriaList2 = noNullInCriteria(c2);
 
-        List<Recipe> result5Req = mongoTemplate.find(query1, Recipe.class);
-        if(result5Req.isEmpty()){
-            List<Recipe> result4Req = mongoTemplate.find(query2, Recipe.class);
-            if(result4Req.isEmpty()){
-                List<Recipe> result3Req = mongoTemplate.find(query3, Recipe.class);
-                if(result3Req.isEmpty()){
-                    log.error("Nie udało się znaleźć żadnego pasującego przepisu :(");
-                }
-                return result3Req;
+        Aggregation agrWithAllReg = createAggregation(agrProductsToUse, criteriaList1);
+        Aggregation agrWithoutDislikedProd = createAggregation(agrProductsToUse, criteriaList2);
+
+        AggregationResults<Recipe> result1 = mongoTemplate.aggregate(agrWithAllReg, "recipes", Recipe.class);
+        List<Recipe> documents1 = result1.getMappedResults();
+        if(documents1.isEmpty()){
+            AggregationResults<Recipe> result2 = mongoTemplate.aggregate(agrWithoutDislikedProd, "recipes", Recipe.class);
+            List<Recipe> documents2 = result2.getMappedResults();
+            if(documents2.isEmpty()){
+                log.error("Nie udało się znaleźć żadnego pasującego przepisu :(");
             }
-            return result4Req;
+            return documents2;
         }
-        return result5Req;
+        return documents1;
     }
 
-    private static void extracted(List<Criteria> criteria, Query query) {
-        for (Criteria c: criteria) {
+    private Aggregation createAggregation(List<AggregationOperation> agrProductsToUse, List<AggregationOperation> criteria) {
+        List<AggregationOperation> combinedOperations = new ArrayList<>(criteria);
+        combinedOperations.addAll(agrProductsToUse);
+        return Aggregation.newAggregation(combinedOperations);
+    }
+
+    private List<ObjectId> getRecipesFromPreviousPlan(){
+        List<PlanHistoryDto> planHistoryList = loginAndRegisterFacade.findPlanHistoryByCurrentUser();
+        return planHistoryList.stream()
+                .map(PlanHistoryDto::recipeId)
+                .toList();
+    }
+
+    private List<AggregationOperation> noNullInCriteria(List<Criteria> criteriaList) {
+        List<AggregationOperation> agr = new ArrayList<>();
+        for (Criteria c: criteriaList) {
             if(c.getKey() != null){
-                query.addCriteria(c);
+                agr.add(Aggregation.match(c));
             }
         }
+        return agr;
     }
 
-    private Criteria isEmptyToUseAndDislikedProducts(List<String> namesProductsToUse, List<String> dislikedProducts){
-        if (!namesProductsToUse.isEmpty() && !dislikedProducts.isEmpty()) {
-            return Criteria.where("ingredients.name").all(namesProductsToUse).nin(dislikedProducts);
+    // NA PEWNO znjadzie przepis z przynjamniej 1 productToUse
+    private List<AggregationOperation> isEmptyProductsToUse(List<String> namesProductsToUse) {
+        if (!namesProductsToUse.isEmpty()) {
+            return Arrays.asList(
+                    Aggregation.match(Criteria.where("ingredients.name").in(namesProductsToUse)),
+                    Aggregation.project()
+//                            .andInclude("_id", "name", "ingredients")
+                            .andInclude("name", "portions", "prepare_time", "max_storage_time", "diet", "ingredients", "steps")
+                            .and(ArrayOperators.arrayOf(
+                                    SetOperators.SetIntersection.arrayAsSet("ingredients.name")
+                                            .intersects(LiteralOperators.Literal.asLiteral(namesProductsToUse))
+                            ).length())
+                            .as("matchingIngredientsCount"),
+                    Aggregation.group("matchingIngredientsCount")
+                            .push(Aggregation.ROOT).as("recipes"),
+                    Aggregation.sort(Sort.Direction.DESC, "_id"),
+                    Aggregation.limit(1),
+                    Aggregation.unwind("$recipes"),
+                    Aggregation.replaceRoot("$recipes")
+            );
         }
-        else if (!namesProductsToUse.isEmpty()) {
-            return Criteria.where("ingredients.name").all(namesProductsToUse);
-        }
-        else if (!dislikedProducts.isEmpty()) {
+        return new ArrayList<>();
+    }
+
+    private Criteria isEmptyDislikedProducts(List<String> dislikedProducts){
+        if (!dislikedProducts.isEmpty()) {
             return Criteria.where("ingredients.name").nin(dislikedProducts);
         }
         return new Criteria();

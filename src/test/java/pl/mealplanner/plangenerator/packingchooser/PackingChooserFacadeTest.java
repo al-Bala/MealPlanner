@@ -16,10 +16,11 @@ public class PackingChooserFacadeTest {
         // given
         PackingChooserFacade facade = new PackingChooserFacade(new PackingChooserService());
 
-        Product product = new Product("marchew", List.of(
-                new PackingMeasures(0f, "g"),
-                new PackingMeasures(0f, "szt")
-        ));
+        Product product = Product.builder().build();
+//                new Product("marchew", List.of(
+//                new PackingMeasures(0f, "g"),
+//                new PackingMeasures(0f, "szt")
+//        ));
 
         IngredientDto ing = new IngredientDto("marchew", 200f, "g");
 
@@ -37,10 +38,11 @@ public class PackingChooserFacadeTest {
         // given
         PackingChooserFacade facade = new PackingChooserFacade(new PackingChooserService());
 
-        Product product = new Product("marchew", List.of(
-                new PackingMeasures(0f, "g"),
-                new PackingMeasures(0f, "szt")
-        ));
+        Product product = Product.builder().build();
+//        Product product = new Product("marchew", List.of(
+//                new PackingMeasures(0f, "g"),
+//                new PackingMeasures(0f, "szt")
+//        ));
 
         IngredientDto ing = new IngredientDto("marchew", 5f, "szt");
 
@@ -58,11 +60,12 @@ public class PackingChooserFacadeTest {
         // given
         PackingChooserFacade facade = new PackingChooserFacade(new PackingChooserService());
 
-        Product product = new Product("kasza", List.of(
-                new PackingMeasures(180f, "g"),
-                new PackingMeasures(450f, "g"),
-                new PackingMeasures(600f, "g")
-        ));
+        Product product = Product.builder().build();
+//        Product product = new Product("kasza", List.of(
+//                new PackingMeasures(180f, "g"),
+//                new PackingMeasures(450f, "g"),
+//                new PackingMeasures(600f, "g")
+//        ));
 
         IngredientDto ing = new IngredientDto("kasza", 500f, "g");
 
@@ -80,11 +83,12 @@ public class PackingChooserFacadeTest {
         // given
         PackingChooserFacade facade = new PackingChooserFacade(new PackingChooserService());
 
-        Product product = new Product("kasza", List.of(
-                new PackingMeasures(180f, "g"),
-                new PackingMeasures(450f, "g"),
-                new PackingMeasures(600f, "g")
-        ));
+        Product product = Product.builder().build();
+//        Product product = new Product("kasza", List.of(
+//                new PackingMeasures(180f, "g"),
+//                new PackingMeasures(450f, "g"),
+//                new PackingMeasures(600f, "g")
+//        ));
 
         IngredientDto ing = new IngredientDto("kasza", 300f, "g");
 
