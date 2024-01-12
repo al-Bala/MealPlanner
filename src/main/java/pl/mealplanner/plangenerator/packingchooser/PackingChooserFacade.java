@@ -3,7 +3,7 @@ package pl.mealplanner.plangenerator.packingchooser;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.plangenerator.leftproductscounter.dto.IngredientToUseInfo;
+import pl.mealplanner.plangenerator.leftproductscounter.dto.PlanProductInfo;
 import pl.mealplanner.plangenerator.leftproductscounter.entity.Product;
 import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class PackingChooserFacade {
 
     private final PackingChooserService service;
-    public IngredientToUseInfo choosePacking(Product product, IngredientDto ingRecipe){
+    public PlanProductInfo choosePacking(Product product, IngredientDto ingRecipe){
         List<Integer> biggerPackingMeasures = new ArrayList<>();
         List<Integer> smallerPackingMeasures = new ArrayList<>();
 
@@ -26,20 +26,28 @@ public class PackingChooserFacade {
 
         List<Integer> chosePackingMeasures = product.packingMeasures();
 
-        for (Integer amount:chosePackingMeasures) {
-            if(amount == convertedRecipeAmount){
-                return new IngredientToUseInfo(product.name(), amount, 1, 0, product.mainUnit());
+        for (Integer packingMeasure:chosePackingMeasures) {
+            if(packingMeasure == convertedRecipeAmount){
+                return PlanProductInfo.builder()
+                        .name(product.name())
+                        .amountToUse(convertedRecipeAmount)
+                        .packingMeasure(packingMeasure)
+                        .nrOfPackets(1)
+                        .surplus(0)
+                        .unit(product.mainUnit())
+                        .build();
             }
-            else if(amount > convertedRecipeAmount){
-                biggerPackingMeasures.add(amount);
+            else if(packingMeasure > convertedRecipeAmount){
+                biggerPackingMeasures.add(packingMeasure);
             } else {
-                smallerPackingMeasures.add(amount);
+                smallerPackingMeasures.add(packingMeasure);
             }
         }
 
         MainIngToUseInfo mainIngToUseInfo = compareAndChooseTheBestPacket(biggerPackingMeasures, smallerPackingMeasures, convertedRecipeAmount);
-        return IngredientToUseInfo.builder()
+        return PlanProductInfo.builder()
                 .name(product.name())
+                .amountToUse(convertedRecipeAmount)
                 .packingMeasure(mainIngToUseInfo.packingMeasure())
                 .nrOfPackets(mainIngToUseInfo.nrOfPackets())
                 .surplus(mainIngToUseInfo.surplus())

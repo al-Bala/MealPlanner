@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
-import pl.mealplanner.plangenerator.leftproductscounter.entity.PackingMeasures;
 import pl.mealplanner.plangenerator.leftproductscounter.entity.Product;
 
 import java.util.HashMap;
@@ -18,24 +17,11 @@ public class LeftProductsCounterRepositoryTestImpl implements LeftProductsCounte
 
     private final Map<String, Product> products = new HashMap<>();
 
-    LeftProductsCounterRepositoryTestImpl(){
-//        products.put("mleko", new Product("mleko", List.of(
-//                new PackingMeasures(500f, "ml")
-//        )));
-//        products.put("kasza", new Product("kasza", List.of(
-//                new PackingMeasures(180f, "g"),
-//                new PackingMeasures(450f, "g"),
-//                new PackingMeasures(600f, "g")
-//        )));
-//        products.put("jogurt", new Product("jogurt", List.of(
-//                new PackingMeasures(150f, "g"),
-//                new PackingMeasures(250f, "g")
-////                new PackingMeasures(500f, "kg")
-//        )));
-//        products.put("marchew", new Product("marchew", List.of(
-//                new PackingMeasures(0f, "g"),
-//                new PackingMeasures(0f, "szt")
-//        )));
+    public LeftProductsCounterRepositoryTestImpl(){
+        products.put("mleko", new Product("mleko", List.of( "ml", "l"), "ml", List.of(500)));
+        products.put("kasza", new Product("kasza", List.of( "g", "kg"), "g", List.of(180,450,600)));
+        products.put("jogurt", new Product("jogurt", List.of( "g", "kg"), "g", List.of(150,250)));
+        products.put("marchew", new Product("marchew", List.of( "g", "kg", "szt"), "g", List.of(100)));
     }
 
     @Override

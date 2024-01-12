@@ -25,7 +25,8 @@ class MealsFinder {
     }
 
     /**
-     * TODO: Wybieranie njalepszego przepisu według składników (ilość) zamiast pierwszego w liście
+     * TODO: 1) Wybieranie njalepszego przepisu według składników (ilość) zamiast pierwszego w liście
+     * TODO: 1.a) Przeliczanie składników == productsToUse na odpowiednią ilość porcji
      */
     private Recipe chooseOneRecipe(List<Recipe> recipesDb) {
         return recipesDb.get(0);

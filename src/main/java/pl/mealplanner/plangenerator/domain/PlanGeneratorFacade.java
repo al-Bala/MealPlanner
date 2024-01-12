@@ -5,13 +5,14 @@ import org.springframework.stereotype.Component;
 import pl.mealplanner.plangenerator.domain.dto.*;
 import pl.mealplanner.plangenerator.infrastructure.dto.UserPreferencesRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.WeekInfoRequest;
-import pl.mealplanner.plangenerator.leftproductscounter.GroceryList;
-import pl.mealplanner.plangenerator.leftproductscounter.dto.ShoppingInfo;
+import pl.mealplanner.plangenerator.leftproductscounter.ListOfProductsForPlan;
+import pl.mealplanner.plangenerator.leftproductscounter.dto.PlanProductInfo;
 import pl.mealplanner.plangenerator.mealscounter.MealsCounterFacade;
 import pl.mealplanner.plangenerator.mealsfilter.MealsFilterFacade;
 import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
 
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Component
@@ -19,10 +20,10 @@ public class PlanGeneratorFacade {
 
     private final MealsCounterFacade mealsCounterFacade;
     private final MealsFilterFacade mealsFilterFacade;
-    private final GroceryList groceryList;
+    private final ListOfProductsForPlan listOfProductsForPlan;
 
     public List<FilteredRecipeDto> generateMealPlanner(UserPreferencesRequest preferencesRequest, WeekInfoRequest weekInfoRequest){
-        groceryList.clearGroceryList();
+        listOfProductsForPlan.clearListOfProductsForPlan();
 
         UserPreferencesDto preferences = PlanMapper.mapFromUserPreferencesRequestToUserPreferencesDto(preferencesRequest);
         WeekInfoDto weekInfo = PlanMapper.mapFromWeekInfoRequestToWeekInfoDto(weekInfoRequest);
@@ -33,10 +34,12 @@ public class PlanGeneratorFacade {
                 .preferencesDto(preferences)
                 .build();
 
-        return mealsFilterFacade.findRecipes(infoForMealsSearch);
+        System.out.println(mealsFilterFacade.findRecipes(infoForMealsSearch));
+        System.out.println(getGroceryListForPlan());
+        return null;
     }
 
-    public List<ShoppingInfo> getGroceryListForPlan(){
-        return groceryList.getGroceryList();
+    public Set<PlanProductInfo> getGroceryListForPlan(){
+        return listOfProductsForPlan.getListOfProductsForPlan();
     }
 }

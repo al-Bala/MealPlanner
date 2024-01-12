@@ -24,7 +24,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
     private final MongoTemplate mongoTemplate;
     private final LoginAndRegisterFacade loginAndRegisterFacade;
     public List<Recipe> findMatchingRecipes(InfoForFiltering info) {
-        List<String> namesProductsToUse = MealsFilterMapper.mapFromListIngredientDtoToListString(info.productsToUse());
+        List<String> namesProductsToUse = MealsFilterMapper.mapFromPlanProductInfoToListString(info.productsToUse());
         List<ObjectId> previousPlanRecipes = getRecipesFromPreviousPlan();
 
         Criteria criteriaMaxStorageTime = Criteria.where("max_storage_time").gte(info.forHowManyDays());

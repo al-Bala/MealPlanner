@@ -10,11 +10,11 @@ class PackingChooserService {
     public MainIngToUseInfo chooseTheBestBiggerPacket(float recipeAmount, List<Integer> listOfMeasures){
         List<MainIngToUseInfo> array = new ArrayList<>();
 
-        for (Integer productMeasureAmount : listOfMeasures) {
+        for (Integer packingMeasure : listOfMeasures) {
 //            int nrOfPackets = (int)(beforeCounting.amount() / recipeAmount);
-            float surplus = productMeasureAmount - recipeAmount;
+            float surplus = packingMeasure - recipeAmount;
             array.add(MainIngToUseInfo.builder()
-                    .packingMeasure(productMeasureAmount)
+                    .packingMeasure(packingMeasure)
                     .nrOfPackets(1)
                     .surplus(getSurplus(surplus))
                     .build());
@@ -25,12 +25,12 @@ class PackingChooserService {
     public MainIngToUseInfo chooseTheBestSmallerPacket(float recipeAmount, List<Integer> listOfMeasures) {
         List<MainIngToUseInfo> array = new ArrayList<>();
 
-        for (Integer productMeasureAmount : listOfMeasures) {
-            int nrOfPackets = (int) (recipeAmount / productMeasureAmount);
-            float theRest = recipeAmount % productMeasureAmount;
-            float surplus = productMeasureAmount - theRest;
+        for (Integer packingMeasure : listOfMeasures) {
+            int nrOfPackets = (int) (recipeAmount / packingMeasure);
+            float theRest = recipeAmount % packingMeasure;
+            float surplus = packingMeasure - theRest;
             array.add(MainIngToUseInfo.builder()
-                    .packingMeasure(productMeasureAmount)
+                    .packingMeasure(packingMeasure)
                     .nrOfPackets(nrOfPackets + 1)
                     .surplus(getSurplus(surplus))
                     .build());

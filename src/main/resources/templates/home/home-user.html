@@ -23,12 +23,12 @@
             <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
             <a class="menu__item">Zarządzaj przepisami</a>
             <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
-            <a class="menu__item" th:href="@{'/user/' + ${userId}}">Twój profil</a>
+            <a class="menu__item" th:href="@{'/user/' + ${username}}">Twój profil</a>
             <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
-            <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${userId}}"><i
+            <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${username}}"><i
                     class="fa-solid fa-user"></i></a>
         </div>
     </nav>

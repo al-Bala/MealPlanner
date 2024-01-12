@@ -82,7 +82,7 @@ class PlanGeneratorController {
     @RequestMapping(value="/unitOptions")
     @ResponseBody
     public List<String> getUnitOptions(@RequestParam(value="productName", required = false, defaultValue="") String productName) {
-        Product product = leftProductsCounterFacade.findProduct(productName);
+        Product product = leftProductsCounterFacade.findProductByName(productName);
         return product.packingUnits();
     }
 }
