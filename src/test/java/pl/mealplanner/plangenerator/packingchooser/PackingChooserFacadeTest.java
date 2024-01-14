@@ -1,13 +1,5 @@
 package pl.mealplanner.plangenerator.packingchooser;
 
-import org.junit.Assert;
-import org.junit.Test;
-import pl.mealplanner.plangenerator.leftproductscounter.entity.PackingMeasures;
-import pl.mealplanner.plangenerator.leftproductscounter.entity.Product;
-import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
-
-import java.util.List;
-
 public class PackingChooserFacadeTest {
 
 //    @Test

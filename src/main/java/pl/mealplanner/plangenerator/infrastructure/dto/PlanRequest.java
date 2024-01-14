@@ -1,7 +1,6 @@
 package pl.mealplanner.plangenerator.infrastructure.dto;
 
 import lombok.Data;
-import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
 
 @Data
 public class PlanRequest {

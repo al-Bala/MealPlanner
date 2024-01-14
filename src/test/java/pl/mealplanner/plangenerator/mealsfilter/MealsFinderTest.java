@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import pl.mealplanner.BaseIntegrationTest;
-import pl.mealplanner.plangenerator.leftproductscounter.dto.PlanProductInfo;
+import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
 import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
 import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
 
@@ -54,11 +54,11 @@ public class MealsFinderTest extends BaseIntegrationTest {
                 .productsToUse(Set.of(
                         PlanProductInfo.builder()
                                 .name("marchew")
-                                .amountToUse(100)
+                                .amountToUseCount(100)
                                 .packingMeasure(0)
                                 .nrOfPackets(0)
                                 .surplus(0)
-                                .unit("g").build()
+                                .unitCount("g").build()
 //                        new PlanProductInfo("marchew", 100, "g")
 //                        new IngredientDto("oliwa z oliwek", 50, "ml"),
 //                        new IngredientDto("jajka", 2, "szt")

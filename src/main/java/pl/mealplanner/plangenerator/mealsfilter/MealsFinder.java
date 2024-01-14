@@ -2,7 +2,7 @@ package pl.mealplanner.plangenerator.mealsfilter;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
+import pl.mealplanner.plangenerator.mealsfilter.dto.MatchingRecipe;
 import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
 import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
 
@@ -14,12 +14,12 @@ class MealsFinder {
 
     private final MealsFilterRepository repository;
 
-    public FilteredRecipeDto findMatchingRecipe(InfoForFiltering info) {
+    public MatchingRecipe findMatchingRecipe(InfoForFiltering info) {
         List<Recipe> allRecipes = repository.findMatchingRecipes(info);
         return getFilteredRecipesDtoList(allRecipes);
     }
 
-    private FilteredRecipeDto getFilteredRecipesDtoList(List<Recipe> recipesDb) {
+    private MatchingRecipe getFilteredRecipesDtoList(List<Recipe> recipesDb) {
         Recipe choseRecipe = chooseOneRecipe(recipesDb);
         return convert(choseRecipe);
     }
@@ -31,7 +31,7 @@ class MealsFinder {
     private Recipe chooseOneRecipe(List<Recipe> recipesDb) {
         return recipesDb.get(0);
     }
-    private FilteredRecipeDto convert(Recipe choseRecipe) {
+    private MatchingRecipe convert(Recipe choseRecipe) {
         return MealsFilterMapper.mapFromRecipeToFilteredRecipeDto(choseRecipe);
     }
 }

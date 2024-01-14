@@ -50,6 +50,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
             List<Recipe> documents2 = result2.getMappedResults();
             if(documents2.isEmpty()){
                 log.error("Nie udało się znaleźć żadnego pasującego przepisu :(");
+                return null;
             }
             return documents2;
         }

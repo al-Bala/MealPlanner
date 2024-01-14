@@ -1,7 +1,7 @@
 package pl.mealplanner.plangenerator.mealsfilter.dto;
 
 import lombok.Builder;
-import pl.mealplanner.plangenerator.leftproductscounter.dto.PlanProductInfo;
+import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
 
 import java.util.List;
 import java.util.Set;

@@ -10,6 +10,5 @@ public record OneMealInfo(
         LocalDate dayOfWeek,
         int forHowManyDays,
         int timeForPrepareMin
-//        List<String> productsToUse
 ) {
 }

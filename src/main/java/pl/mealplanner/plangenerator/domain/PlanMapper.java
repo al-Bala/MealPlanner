@@ -2,14 +2,14 @@ package pl.mealplanner.plangenerator.domain;
 
 import pl.mealplanner.plangenerator.domain.dto.*;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
-import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
+import pl.mealplanner.plangenerator.domain.dto.IngredientDto;
 
 import java.util.Collections;
 import java.util.List;
 
 class PlanMapper {
-    public static UserPreferencesDto mapFromUserPreferencesRequestToUserPreferencesDto(UserPreferencesRequest request) {
-        return UserPreferencesDto.builder()
+    public static UserPreferences mapFromUserPreferencesRequestToUserPreferencesDto(UserPreferencesRequest request) {
+        return UserPreferences.builder()
                 .numberOfPortions(request.getNumberOfPortions())
                 .diet(request.getDiet())
                 .productsToUse(mapFromIngredientRequestToIngredientDto(request.getProductsToUse()))
@@ -38,8 +38,8 @@ class PlanMapper {
                 .toList();
     }
 
-    public static WeekInfoDto mapFromWeekInfoRequestToWeekInfoDto(WeekInfoRequest request) {
-        return WeekInfoDto.builder()
+    public static WeekInfo mapFromWeekInfoRequestToWeekInfoDto(WeekInfoRequest request) {
+        return WeekInfo.builder()
                 .dayInfoList(mapFromDayInfoRequestToDayInfo(request.getDayInfoList()))
                 .build();
     }
@@ -53,8 +53,8 @@ class PlanMapper {
                 .toList();
     }
 
-    private static EatingPlansDto mapFromEatingPlanToEatingPlanDto(EatingPlansRequest eatingPlansRequest){
-        return EatingPlansDto.builder()
+    private static EatingPlans mapFromEatingPlanToEatingPlanDto(EatingPlansRequest eatingPlansRequest){
+        return EatingPlans.builder()
                 .id(eatingPlansRequest.getId())
                 .timeMin(eatingPlansRequest.getTimeMin())
                 .build();

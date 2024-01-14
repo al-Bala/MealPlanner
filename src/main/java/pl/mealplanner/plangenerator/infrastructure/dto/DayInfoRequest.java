@@ -13,6 +13,11 @@ public class DayInfoRequest {
 
     }
 
+    public DayInfoRequest(LocalDate day, EatingPlansRequest eatingPlan) {
+        this.day = day;
+        this.eatingPlan = eatingPlan;
+    }
+
     public DayInfoRequest(EatingPlansRequest eatingPlan) {
         this.eatingPlan = eatingPlan;
     }

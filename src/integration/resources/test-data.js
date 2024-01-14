@@ -13,8 +13,11 @@ db.users.insertMany([
             disliked_products: [""]
         },
         user_recipes: [""],
+
+        // co jak jest pusta
         plan_history: [
-            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')}, // Kasza jaglana z warzywami
+            // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')}, // Kasza jaglana z warzywami
+            // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9425')}, // Ryż z warzywami i kurczakiem
             { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9424')}  // Koktajl owocowy
         ],
     },
@@ -31,7 +34,7 @@ db.recipes.insertMany([
         ingredients: [
             { name: "kasza jaglana", amount: 200, unit: "g" },
             { name: "marchew", amount: 2, unit: "szt" },
-            { name: "brokuły", amount: 150, unit: "g" },
+            { name: "brokuł", amount: 150, unit: "g" },
             { name: "oliwa z oliwek", amount: 30, unit: "ml" }
         ],
         steps: ["Ugotuj kaszę", "Pokrój warzywa", "Smaż warzywa na oliwie", "Podawaj razem"]
@@ -94,7 +97,7 @@ db.recipes.insertMany([
             { name: "ryż", amount: 300, unit: "g" },
             { name: "kurczak", amount: 250, unit: "g" },
             { name: "marchew", amount: 2, unit: "szt" },
-            { name: "brokuły", amount: 150, unit: "g" },
+            { name: "brokuł", amount: 150, unit: "g" },
             { name: "sos sojowy", amount: 30, unit: "ml" }
         ],
         steps: ["Ugotuj ryż", "Pokrój kurczaka i warzywa", "Smaż kurczaka i warzywa, dodaj sos sojowy", "Podawaj razem z ryżem"]
@@ -103,31 +106,39 @@ db.recipes.insertMany([
 
 db.products.insertMany([
     {
+        _id: ObjectId('658c088e98487458f640453b'),
         name: "kasza jaglana",
-        packing_measures: [
-            { amount: 200, unit: "g" },
-            { amount: 400, unit: "g" }
-        ],
+        packing_units: ["g","kg"],
+        main_unit: "g",
+        packing_measures: [400,1000]
     },
     {
+        _id: ObjectId('658c088e98487458f640453c'),
         name: "marchew",
-        packing_measures: [
-            { amount: 0, unit: "g" },
-            { amount: 0, unit: "szt" }
-        ],
+        packing_units: ["g","kg","szt"],
+        main_unit: "g",
+        packing_measures: [100]
     },
     {
-        name: "brokuły",
-        packing_measures: [
-            { amount: 0, unit: "g" },
-            { amount: 0, unit: "szt" }
-        ],
+        _id: ObjectId('658c088e98487458f640453d'),
+        name: "brokuł",
+        packing_units: ["g","kg","szt"],
+        main_unit: "g",
+        packing_measures: [150]
     },
     {
+        _id: ObjectId('658c088e98487458f640453e'),
         name: "oliwa z oliwek",
-        packing_measures: [
-            { amount: 50, unit: "ml" }
-        ],
+        packing_units: ["ml","l"],
+        main_unit: "ml",
+        packing_measures: [50,250,1000]
+    },
+    {
+        _id: ObjectId('659d8d69d6d8ec0007e14d76'),
+        name: "jajko",
+        packing_units: ["szt"],
+        main_unit: "szt",
+        packing_measures: [6,10]
     }
 ]);
 
