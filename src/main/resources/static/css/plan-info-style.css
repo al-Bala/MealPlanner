@@ -1,0 +1,231 @@
+@import '../css/__reset.css';
+@import '../css/__variables.css';
+@import '../css/__navigation.css';
+@import '../css/__footer.css';
+
+.plan-info-page {
+    font-family: "Now", sans-serif;
+}
+
+/* Header starts */
+.header__wrapper {
+    width: 100%;
+    margin-top: 73px;
+    padding: 53px 40px;
+    background-color: var(--light-gray);
+
+}
+
+h1 {
+    font-size: 16px;
+    text-align: center;
+    color: var(--gold);
+    line-height: 23px;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.header__text {
+    color: var(--dark-gray);
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.header__text:nth-child(3),
+.header__text:nth-child(2) {
+    margin-bottom: 20px;
+}
+
+.chat-triangle {
+    display: block;
+    width: 70px;
+    transform: rotate(180deg);
+    position: relative;
+    top: -5px;
+    margin: 0 auto 40px;
+}
+
+/* Header ends */
+
+/* Planner-form starts*/
+
+/*Diet form starts*/
+.diet-types__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+    margin: 30px 0 40px;
+}
+
+.diet-type {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: var(--orange);
+    border-radius: 10px;
+    border: 2px solid #FF7F37;
+    text-align: center;
+    cursor: pointer;
+}
+
+.question-number {
+    font-family: 'Beau Rivage', cursive;
+    font-size: 64px;
+    color: var(--dark-gray);
+}
+
+.subform__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 0 40px;
+}
+
+.diet-form__question {
+    font-size: 16px;
+    color: var(--gold);
+}
+/*Diet form ends*/
+
+/*Portions form starts*/
+input[type="range"] {
+    accent-color: var(--orange);
+    width: 60%;
+}
+
+.portions-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.portions-info {
+    margin: 15px 0;
+    font-size: 13px;
+    color: var(--dark-gray);
+}
+/*Portions form ends*/
+
+/*Products form starts*/
+
+.products-form {
+    display: flex;
+    flex-direction: column;
+}
+.products__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background-color: var(--light-gray);
+    border-radius: 15px;
+    width: 80%;
+}
+
+.products__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productsU {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 20px;
+    gap: 10px;
+
+}
+
+.product-scroll-container {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.product__field {
+    border-radius: 6px;
+    border: none;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+}
+
+.search {
+    width: 57vw;
+}
+
+.amount {
+    width: 160px;
+}
+
+.unit {
+    width: 160px;
+}
+
+.test {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.deleteU {
+    padding: 8px;
+    color: var(--white);
+    background-color: var(--orange);
+    font-size: 25px;
+    align-self: end;
+    border-radius: 8px;
+    height: 43px;
+}
+
+.products__label {
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+.ui-menu {
+    background-color: var(--white);
+    height: 135px;
+    overflow: auto;
+    top: 1px;
+    padding: 8px 12px;
+    width: 57vw !important;
+    top: -553px !important;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.ui-menu-item {
+    font-size: 13px;
+    color: var(--dark-gray);
+}
+
+.products__label--1 {
+    width: 57vw;
+    text-align: left;
+}
+
+.products__label--2 {
+    width: 160px;
+}
+
+.add-productU {
+    padding: 8px 14px;
+    background-color: var(--orange);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    align-self: center;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+
+/*Products form ends*/
+
+
+/* Planner-form ends*/

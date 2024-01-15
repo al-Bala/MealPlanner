@@ -32,6 +32,7 @@ select {
 }
  
 button {
+    text-decoration: none;
     border: none;
     cursor: pointer;
 }

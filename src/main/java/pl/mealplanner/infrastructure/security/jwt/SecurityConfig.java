@@ -52,6 +52,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
+                        .requestMatchers("/sass/**").permitAll()
                         // .requestMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
                         // .requestMatchers("/plan/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated())

@@ -8,9 +8,14 @@
     <title>MealPlanner</title>
     <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/css/home-guest-style.css}">
+    <!-- <link rel="stylesheet" href="../../static/css/home-guest-style.css">
+    <link rel="stylesheet" href="../../static/css/login-popup-style.css"> -->
+    <link rel="stylesheet" th:href="@{/css/login-popup-style.css}">
+
 </head>
 
-<body>
+<body class="home-guest-page">
+
     <nav>
         <button class="burger-btn">
             <i class="fa-solid fa-burger"></i>
@@ -22,14 +27,58 @@
             <a class="menu__item" th:href="@{/home}">Strona główna</a>
             <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
             <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
-            <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
-            <!-- <a th:href="@{/plan/guest}">Plan</a> co to robi? -->
+            <!-- th:href="@{/login}" -->
+            <a class="menu__item profile menu__login">Zaloguj się</a>
+
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
             <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
         </div>
     </nav>
+    <div class="login-form__wrapper">
+
+
+        <div th:if="${param.planAth}">
+            <div>Musisz sie zalogować aby wygenerować plan.</div>
+        </div>
+        <div th:if="${param.error}">
+            <div>Login lub hasło są niepoprawne.</div>
+        </div>
+        <div th:if="${param.successReg}">
+            <div> Zostałeś zarejestrowany. Możesz się teraz zalogować.</div>
+        </div>
+
+
+        <button class="exit-form-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="login-form__header">
+            <h3 class="header__text">Logowanie</h3>
+        </div>
+        <div class="profile__graphic">
+            <!-- <img src="../../static/images/profile-icon.svg" alt="Ikona profilu" class="profile__image"> -->
+            <img th:src="@{/images/profile-icon.svg}" alt="Ikona profilu" class="profile__image">
+        </div>
+        <form method="post" role="form" th:action="@{/login}" class="form-horizontal login-form">
+            <div class="login-form__field login__field">
+                <label class="login-form__label">Login</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Podaj login" />
+            </div>
+
+            <div class="login-form__field password__field">
+                <label class="login-form__label">Hasło</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Podaj hasło" />
+            </div>
+
+            <button type="submit" class="login-submit-btn">Zaloguj się</button>
+            <div class="not-registered-info">
+                <p class="not-registered-info__text">Nie zarejestrowałeś się?</p>
+                <a th:href="@{/register}" class="not-registered-info__link">Zarejestruj się tutaj!</a>
+            </div>
+        </form>
+    </div>
+    <div class="login-form__background"></div>
     <main>
         <section class="about-us container">
             <h2 class="about-us__header">Co znajdziesz na naszej stronie?</h2>
@@ -83,6 +132,9 @@
     </footer>
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
     <script th:src="@{/js/burgerMenu.js}"></script>
+    <script th:src="@{/js/loginForm.js}"></script>
+    <!-- <script src="../../static/js/burgerMenu.js"></script>
+    <script src="../../static/js/loginForm.js"></script> -->
 </body>
 
 </html>
