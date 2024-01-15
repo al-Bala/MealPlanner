@@ -6,12 +6,12 @@ import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
 import java.util.List;
 import java.util.Set;
 
-@Builder
+@Builder(toBuilder = true)
 public record InfoForFiltering(
         int forHowManyDays,
         String diet,
         int timeForPrepareMin,
-        Set<PlanProductInfo> productsToUse,
+        List<String> productsToUse,
         List<String> dislikedProducts
 ) {
 }

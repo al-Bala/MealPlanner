@@ -23,7 +23,7 @@ public class MealsFinderTest extends BaseIntegrationTest {
         InfoForFiltering infoForFiltering = getInfoForFiltering();
 
         // when
-        List<Recipe> foundMeals = repository.findMatchingRecipes(infoForFiltering);
+        List<Recipe> foundMeals = repository.findMatchingRecipes(infoForFiltering, 1);
         System.out.println(foundMeals);
 
         // then
@@ -51,19 +51,19 @@ public class MealsFinderTest extends BaseIntegrationTest {
                 .diet("")
                 .timeForPrepareMin(-1)
 //                .productsToUse(Collections.emptyList())
-                .productsToUse(Set.of(
-                        PlanProductInfo.builder()
-                                .name("marchew")
-                                .amountToUseCount(100)
-                                .packingMeasure(0)
-                                .nrOfPackets(0)
-                                .surplus(0)
-                                .unitCount("g").build()
+                .productsToUse(List.of("marchew"))
+//                        PlanProductInfo.builder()
+//                                .name("marchew")
+//                                .amountToUseCount(100)
+//                                .packingMeasure(0)
+//                                .nrOfPackets(0)
+//                                .surplus(0)
+//                                .unitCount("g").build()
 //                        new PlanProductInfo("marchew", 100, "g")
 //                        new IngredientDto("oliwa z oliwek", 50, "ml"),
 //                        new IngredientDto("jajka", 2, "szt")
 //                        new IngredientDto("truskawki", 2, "szt")
-                ))
+//                ))
                 .dislikedProducts(Collections.emptyList())
 //                .dislikedProducts(List.of("brokuły"))
                 .build();

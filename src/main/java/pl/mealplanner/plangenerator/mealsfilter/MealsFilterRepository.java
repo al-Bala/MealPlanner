@@ -6,5 +6,5 @@ import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
 import java.util.List;
 
 interface MealsFilterRepository {
-    List<Recipe> findMatchingRecipes(InfoForFiltering info);
+    List<Recipe> findMatchingRecipes(InfoForFiltering info, int limit);
 }

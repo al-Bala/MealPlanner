@@ -23,14 +23,13 @@ import java.util.List;
 class MealsFilterRepositoryImpl implements MealsFilterRepository{
     private final MongoTemplate mongoTemplate;
     private final LoginAndRegisterFacade loginAndRegisterFacade;
-    public List<Recipe> findMatchingRecipes(InfoForFiltering info) {
-        List<String> namesProductsToUse = MealsFilterMapper.mapFromPlanProductInfoToListString(info.productsToUse());
+    public List<Recipe> findMatchingRecipes(InfoForFiltering info, int limit) {
         List<ObjectId> previousPlanRecipes = getRecipesFromPreviousPlan();
 
         Criteria criteriaMaxStorageTime = Criteria.where("max_storage_time").gte(info.forHowManyDays());
         Criteria criteriaDiet = isEmptyDiet(info.diet());
         Criteria criteriaPrepareTime = isEmptyPrepareTime(info.timeForPrepareMin());
-        List<AggregationOperation> agrProductsToUse = isEmptyProductsToUse(namesProductsToUse);
+        List<AggregationOperation> agrProductsToUse = isEmptyProductsToUse(info.productsToUse(), limit);
         Criteria criteriaDislikedProducts = isEmptyDislikedProducts(info.dislikedProducts());
         Criteria criteriaPlanHistory = Criteria.where("_id").nin(previousPlanRecipes);
 
@@ -81,7 +80,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
     }
 
     // NA PEWNO znjadzie przepis z przynjamniej 1 productToUse
-    private List<AggregationOperation> isEmptyProductsToUse(List<String> namesProductsToUse) {
+    private List<AggregationOperation> isEmptyProductsToUse(List<String> namesProductsToUse, int limit) {
         if (!namesProductsToUse.isEmpty()) {
             return Arrays.asList(
                     Aggregation.match(Criteria.where("ingredients.name").in(namesProductsToUse)),
@@ -96,7 +95,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
                     Aggregation.group("matchingIngredientsCount")
                             .push(Aggregation.ROOT).as("recipes"),
                     Aggregation.sort(Sort.Direction.DESC, "_id"),
-                    Aggregation.limit(1),
+                    Aggregation.limit(limit),
                     Aggregation.unwind("$recipes"),
                     Aggregation.replaceRoot("$recipes")
             );

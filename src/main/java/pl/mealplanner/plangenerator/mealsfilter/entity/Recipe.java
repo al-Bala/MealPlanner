@@ -1,6 +1,8 @@
 package pl.mealplanner.plangenerator.mealsfilter.entity;
 
 import lombok.Builder;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -9,7 +11,7 @@ import java.util.List;
 @Builder
 @Document("recipes")
 public record Recipe(
-//        @Id ObjectId id,
+        @Id ObjectId id,
         @Field("name") String name,
         @Field("portions") int portions,
         @Field("prepare_time") int prepareTimeMin,

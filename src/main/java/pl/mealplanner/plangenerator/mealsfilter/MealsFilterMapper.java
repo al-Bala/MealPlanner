@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 class MealsFilterMapper {
-    public static MatchingRecipe mapFromRecipeToFilteredRecipeDto(Recipe recipe) {
+    public static MatchingRecipe mapFromRecipeToMatchingRecipe(Recipe recipe) {
         return MatchingRecipe.builder()
+                .id(recipe.id())
                 .name(recipe.name())
                 .portions(recipe.portions())
                 .prepare_time(recipe.prepareTimeMin())

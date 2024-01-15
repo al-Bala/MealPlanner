@@ -42,7 +42,7 @@ public class GeneralIntegrationTest extends BaseIntegrationTest {
     private static UserPreferencesRequest getPreferences() {
         return new UserPreferencesRequest(
                 2,
-                "wegetariańska",
+                "",
                 List.of(
 //                        new IngredientRequest("marchew", 100, "g")
 //                        new IngredientRequest("marchew", 2, "szt")
@@ -58,6 +58,9 @@ public class GeneralIntegrationTest extends BaseIntegrationTest {
                 List.of(
                         new DayInfoRequest(
                                 LocalDate.of(2024, 1,15),
+                                new EatingPlansRequest("C01", -1)),
+                        new DayInfoRequest(
+                                LocalDate.of(2024, 1,16),
                                 new EatingPlansRequest("C01", -1))
                 )
         );

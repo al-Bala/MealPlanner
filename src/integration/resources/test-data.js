@@ -139,7 +139,28 @@ db.products.insertMany([
         packing_units: ["szt"],
         main_unit: "szt",
         packing_measures: [6,10]
-    }
+    },
+    {
+        _id: ObjectId('65a43bcc6b150200075ba406'),
+        name: "ryż",
+        packing_units: ["g", "kg"],
+        main_unit: "g",
+        packing_measures: [400, 1000]
+    },
+    {
+        _id: ObjectId('65a43be46b150200075ba407'),
+        name: "kurczak",
+        packing_units: ["g", "kg"],
+        main_unit: "g",
+        packing_measures: [400, 600]
+    },
+    {
+        _id: ObjectId('65a43bfc6b150200075ba408'),
+        name: "sos sojowy",
+        packing_units: ["ml", "l"],
+        main_unit: "ml",
+        packing_measures: [150]
+    },
 ]);
 
 

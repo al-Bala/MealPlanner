@@ -11,6 +11,7 @@ import pl.mealplanner.plangenerator.mealsfilter.dto.MatchingRecipe;
 import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class MealsFilterIntegrationTest extends BaseIntegrationTest {
@@ -55,16 +56,7 @@ public class MealsFilterIntegrationTest extends BaseIntegrationTest {
                 .forHowManyDays(1)
                 .diet("")
                 .timeForPrepareMin(30)
-                .productsToUse(Set.of(
-                        PlanProductInfo.builder()
-                                .name("marchew")
-                                .amountToUseCount(0)
-                                .packingMeasure(0)
-                                .nrOfPackets(0)
-                                .surplus(100)
-                                .unitCount("g")
-                                .build())
-                )
+                .productsToUse(List.of("marchew"))
                 .dislikedProducts(Collections.emptyList())
                 .build();
 

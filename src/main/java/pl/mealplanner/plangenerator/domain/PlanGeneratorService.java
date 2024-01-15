@@ -26,10 +26,10 @@ public class PlanGeneratorService {
     private final ListOfProductsForPlan listOfProductsForPlan;
     private final MealsFilterFacade mealsFilterFacade;
     private final ProductsCounterFacade productsCounterFacade;
+    public static List<ConvertedRecipe> allRecipesForPlan = new ArrayList<>();
 
 
     public List<ConvertedRecipe> generatePlan(InfoForMealsSearch infoForMealsSearch) {
-        List<ConvertedRecipe> allRecipesForPlan = new ArrayList<>();
         UserPreferences preferences = infoForMealsSearch.preferencesDto();
         int nrPortionsUser = preferences.numberOfPortions();
 
@@ -49,11 +49,15 @@ public class PlanGeneratorService {
     }
 
     private InfoForFiltering getInfoForFiltering(OneMealInfo oneMealInfo, UserPreferences preferences, Set<PlanProductInfo> productsToUse) {
+        List<String> productNames = productsToUse.stream()
+                .map(PlanProductInfo::getName)
+                .toList();
+
         return InfoForFiltering.builder()
                 .forHowManyDays(oneMealInfo.forHowManyDays())
                 .diet(preferences.diet())
                 .timeForPrepareMin(oneMealInfo.timeForPrepareMin())
-                .productsToUse(productsToUse)
+                .productsToUse(productNames)
                 .dislikedProducts(preferences.dislikedProducts())
                 .build();
     }
