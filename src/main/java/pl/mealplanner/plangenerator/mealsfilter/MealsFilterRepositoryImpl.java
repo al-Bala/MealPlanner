@@ -8,10 +8,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
-import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
 import pl.mealplanner.loginandregister.domain.dto.PlanHistoryDto;
 import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
 import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
+import pl.mealplanner.profile.domain.UserFacade;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +22,7 @@ import java.util.List;
 @Repository
 class MealsFilterRepositoryImpl implements MealsFilterRepository{
     private final MongoTemplate mongoTemplate;
-    private final LoginAndRegisterFacade loginAndRegisterFacade;
+    private final UserFacade userFacade;
     public List<Recipe> findMatchingRecipes(InfoForFiltering info, int limit) {
         List<ObjectId> previousPlanRecipes = getRecipesFromPreviousPlan();
 
@@ -63,7 +63,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
     }
 
     private List<ObjectId> getRecipesFromPreviousPlan(){
-        List<PlanHistoryDto> planHistoryList = loginAndRegisterFacade.findPlanHistoryByCurrentUser();
+        List<PlanHistoryDto> planHistoryList = userFacade.findPlanHistoryByCurrentUser();
         return planHistoryList.stream()
                 .map(PlanHistoryDto::recipeId)
                 .toList();

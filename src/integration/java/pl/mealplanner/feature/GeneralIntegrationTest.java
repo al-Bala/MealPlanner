@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import pl.mealplanner.BaseIntegrationTest;
+import pl.mealplanner.plangenerator.mealsfilter.dto.MealPlanElement;
 import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
 import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
-import pl.mealplanner.plangenerator.mealsfilter.dto.ConvertedRecipe;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -28,7 +28,7 @@ public class GeneralIntegrationTest extends BaseIntegrationTest {
         WeekInfoRequest weekInfoRequest = getWeekInfo();
 
         // when
-        List<ConvertedRecipe> foundMeals = planGeneratorFacade.generateMealPlanner(preferencesRequest, weekInfoRequest);
+        List<MealPlanElement> foundMeals = planGeneratorFacade.generateMealPlanner(preferencesRequest, weekInfoRequest);
         Set<PlanProductInfo> groceryList = planGeneratorFacade.getGroceryListForPlan();
 
         // then

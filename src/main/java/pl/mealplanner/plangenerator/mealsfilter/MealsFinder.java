@@ -49,7 +49,7 @@ class MealsFinder {
     private boolean isRepeated(Recipe recipeToCheck) {
         if(recipeToCheck.id() == null) return true;
         return allRecipesForPlan.stream()
-                .anyMatch(r -> r.id().equals(recipeToCheck.id()));
+                .anyMatch(r -> r.recipe().id().equals(recipeToCheck.id()));
     }
     private MatchingRecipe convert(Recipe choseRecipe) {
         return MealsFilterMapper.mapFromRecipeToMatchingRecipe(choseRecipe);

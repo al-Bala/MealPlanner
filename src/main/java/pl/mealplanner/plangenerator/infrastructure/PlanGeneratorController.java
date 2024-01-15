@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
+import pl.mealplanner.plangenerator.mealsfilter.dto.MealPlanElement;
 import pl.mealplanner.plangenerator.productscounter.ProductsCounterFacade;
 import pl.mealplanner.plangenerator.productscounter.entity.Product;
 import pl.mealplanner.plangenerator.productscounter.entity.ProductClass;
-import pl.mealplanner.plangenerator.mealsfilter.dto.ConvertedRecipe;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ class PlanGeneratorController {
             i++;
         }
 
-        List<ConvertedRecipe> recipesPlan = planGeneratorFacade.generateMealPlanner(planRequest.getPreferences(), planRequest.getWeekInfo());
+        List<MealPlanElement> recipesPlan = planGeneratorFacade.generateMealPlanner(planRequest.getPreferences(), planRequest.getWeekInfo());
 //        System.out.println(recipesPlan);
         return "plangenerator/planner";
     }

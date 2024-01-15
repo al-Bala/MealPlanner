@@ -1,28 +1,28 @@
-package pl.mealplanner.profile.domain;
+package pl.mealplanner.profile.infrastructure;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import pl.mealplanner.loginandregister.domain.entity.User;
-import pl.mealplanner.profile.infrastructure.UserService;
+import pl.mealplanner.profile.domain.User;
+import pl.mealplanner.profile.domain.UserFacade;
 
 @Controller
-public class UserController {
+class UserController {
 
-    private final UserService userService;
+    private final UserFacade userFacade;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserFacade userFacade) {
+        this.userFacade = userFacade;
     }
 
     @GetMapping("/user/{username}")
     public String showUserDetails(@PathVariable String username, Model model) {
-        User user = userService.getUserByUsername(username);
+        User user = userFacade.getUserByUsername(username);
 
         if (user != null) {
-            model.addAttribute("user", user.username());
-            model.addAttribute("role", user.role());
+            model.addAttribute("user", user.getUsername());
+            model.addAttribute("role", user.getRole());
             return "details/user-details"; // nazwa widoku (user-details.html)
         } else {
             return "details/user-details"; // widok informujący o braku użytkownika

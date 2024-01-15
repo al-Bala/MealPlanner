@@ -2,18 +2,19 @@ package pl.mealplanner.plangenerator.domain;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
+import pl.mealplanner.loginandregister.domain.entity.PlanHistory;
 import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
 import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
 import pl.mealplanner.plangenerator.domain.dto.UserPreferences;
 import pl.mealplanner.plangenerator.mealsfilter.MealsFilterFacade;
-import pl.mealplanner.plangenerator.mealsfilter.dto.ConvertedRecipe;
-import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
-import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientConverted;
-import pl.mealplanner.plangenerator.mealsfilter.dto.MatchingRecipe;
-import pl.mealplanner.plangenerator.productscounter.ProductsCounterFacade;
+import pl.mealplanner.plangenerator.mealsfilter.dto.*;
 import pl.mealplanner.plangenerator.productscounter.ListOfProductsForPlan;
+import pl.mealplanner.plangenerator.productscounter.ProductsCounterFacade;
 import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
 import pl.mealplanner.plangenerator.unitconverter.UnitConverterFacade;
+import pl.mealplanner.profile.domain.User;
+import pl.mealplanner.profile.domain.UserFacade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,12 @@ public class PlanGeneratorService {
     private final ListOfProductsForPlan listOfProductsForPlan;
     private final MealsFilterFacade mealsFilterFacade;
     private final ProductsCounterFacade productsCounterFacade;
-    public static List<ConvertedRecipe> allRecipesForPlan = new ArrayList<>();
+    private final LoginAndRegisterFacade loginAndRegisterFacade;
+    private final UserFacade userFacade;
+    public static List<MealPlanElement> allRecipesForPlan = new ArrayList<>();
 
 
-    public List<ConvertedRecipe> generatePlan(InfoForMealsSearch infoForMealsSearch) {
+    public List<MealPlanElement> generatePlan(InfoForMealsSearch infoForMealsSearch) {
         UserPreferences preferences = infoForMealsSearch.preferencesDto();
         int nrPortionsUser = preferences.numberOfPortions();
 
@@ -40,7 +43,11 @@ public class PlanGeneratorService {
             MatchingRecipe matchingRecipe = findRecipe(info);
             ConvertedRecipe convertedRecipe = convertRecipeIngsToMainUnit(matchingRecipe);
             ConvertedRecipe recipeWithCalculatedIngs = calculateIngredients(convertedRecipe, nrPortionsUser);
-            allRecipesForPlan.add(recipeWithCalculatedIngs);
+            MealPlanElement recipePlan = MealPlanElement.builder()
+                    .dayOfWeek(oneMealInfo.dayOfWeek())
+                    .recipe(recipeWithCalculatedIngs)
+                    .build();
+            allRecipesForPlan.add(recipePlan);
 
             List<PlanProductInfo> productsForPlan = choosePacketsAndCalculateLeftovers(recipeWithCalculatedIngs.ingredients());
             addProductsToGroceryList(productsForPlan);
@@ -80,6 +87,11 @@ public class PlanGeneratorService {
 
     private void addProductsToGroceryList(List<PlanProductInfo> productsToUseFromLeftovers) {
         productsToUseFromLeftovers.forEach(listOfProductsForPlan::add);
+    }
+
+    User saveAsPlanHistory(List<PlanHistory> planHistory){
+        String username = userFacade.authenticate();
+        return userFacade.updateUserPlanHistory(username, planHistory);
     }
 
 }
