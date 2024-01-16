@@ -28,7 +28,7 @@ function initializeProductFields(wrapper, addButton, fieldPrefix, deleteButtonCl
                             ${fieldPrefix.includes("productsToUse") ? '<input name="' + fieldPrefix + '[' + x + '].unit" type="text" placeholder="Wybierz jednostkę" class="unit product__field"/>' : ''}
                         </div>                                        
                     </div>
-                    <button type="button" class="${deleteButtonClass}"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
+                    <button type="button" title="Usuń produkt" class="${deleteButtonClass}"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
                 </div>`;
 
             $(wrapper).append(fieldHtml);

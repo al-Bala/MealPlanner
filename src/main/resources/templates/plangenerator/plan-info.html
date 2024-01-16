@@ -63,93 +63,115 @@
 
     <main>
         <form method="post" th:action="@{/plan/info}" th:object="${info}" class="planner-form">
-            <div>
-                <div class="diet-from">
-                    <div class="diet-form__header subform__header">
-                        <p class="question-number">1.</p>
-                        <label class="diet-form__question">Wybierz rodzaj diety:</label>
-                    </div>
+            <div class="diet-from form-basis">
+                <div class="diet-form__header subform__header">
+                    <p class="question-number">1.</p>
+                    <label class="diet-form__question">Wybierz rodzaj diety:</label>
+                </div>
 
-                    <!-- <input type="text" id="diet" name="diet" class="form-control" placeholder="Rodzaj diety"
+                <!-- <input type="text" id="diet" name="diet" class="form-control" placeholder="Rodzaj diety"
                         th:field="*{preferences.diet}" />
                     <input type=""> -->
-                    <div class="diet-types__wrapper">
-                        <div class="diet-type" id="vegetarian" onclick="selectDiet('vegetarian')">
-                            <p class="diet-type__name">Wegetariańska</p>
-                        </div>
-                        <div class="diet-type" id="vegan" onclick="selectDiet('vegan')">
-                            <p class="diet-type__name">Wegańska</p>
-                        </div>
-                        <div class="diet-type" id="noGluten" onclick="selectDiet('noGluten')">
-                            <p class="diet-type__name"> Bezglutenowa</p>
-                        </div>
-                        <div class="diet-type" id="noDiet" onclick="selectDiet('noDiet')">
-                            <p class="diet-type__name">Nie mam diety</p>
-                        </div>
+                <div class="diet-types__wrapper">
+                    <div class="diet-type" id="vegetarian" onclick="selectDiet('vegetarian')">
+                        <p class="diet-type__name">Wegetariańska</p>
                     </div>
-
-                    <button class="test-btn" type="button" onclick="submitForm()">Submit</button>
-
+                    <div class="diet-type" id="vegan" onclick="selectDiet('vegan')">
+                        <p class="diet-type__name">Wegańska</p>
+                    </div>
+                    <div class="diet-type" id="noGluten" onclick="selectDiet('noGluten')">
+                        <p class="diet-type__name"> Bezglutenowa</p>
+                    </div>
+                    <div class="diet-type" id="noDiet" onclick="selectDiet('noDiet')">
+                        <p class="diet-type__name">Nie mam diety</p>
+                    </div>
                 </div>
-                <div class="portions-form">
-                    <div class="diet-form__header subform__header">
-                        <p class="question-number">2.</p>
-                        <label class="diet-form__question">Ile porcji przygotowujesz?</label>
-                    </div>
-                    <div class="portions-bar">
-                        <!-- <input type="number" min="1" id="portions" name="portions" placeholder="Ilość porcji"
+                <button class="test-btn" type="button" onclick="submitForm()">Submit</button>
+            </div>
+
+            <div class="portions-form form-basis">
+                <div class="diet-form__header subform__header">
+                    <p class="question-number">2.</p>
+                    <label class="diet-form__question">Ile porcji przygotowujesz?</label>
+                </div>
+                <div class="portions-bar">
+                    <!-- <input type="number" min="1" id="portions" name="portions" placeholder="Ilość porcji"
                         th:field="*{preferences.numberOfPortions}" /> -->
-                        <input type="range" id="numberInput" name="numberInput" min="1" max="15" value="1">
-                        <div class="portions-info">
-                            <p class="portion-text">Ilość porcji: <span id="selectedNumber">1</span></p>
-                        </div>
+                    <input type="range" id="numberInput" name="numberInput" min="1" max="15" value="1">
+                    <div class="portions-info">
+                        <p class="portion-text">Ilość porcji: <span id="selectedNumber">1</span></p>
                     </div>
                 </div>
-                <div class="products-form">
-                    <div class="products__header subform__header">
-                        <p class="question-number">3.</p>
-                        <label class="diet-form__question">Wybierz składniki, które posiadasz.</label>
-                    </div>
-                    <div th:each="productsU, idU : *{preferences.productsToUse}">
-                        <div class="productsU">
-                            <!--                            <input class="search" id="productNameU" name="productName" type="text" th:field="*{preferences.productsToUse[__${idU.index}__].name}" placeholder="Name">-->
-                            <!--                            <input type="number" min="0" th:field="*{preferences.productsToUse[__${idU.index}__].amount}" placeholder="Amount">-->
-                            <!--                            <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].unit}" placeholder="Unit">-->
-                        </div>
-                    </div>
-                    <button type="button" class="add-productU">Dodaj składnik</button>
+            </div>
 
+            <div class="products-form form-basis">
+                <div class="products__header subform__header">
+                    <p class="question-number">3.</p>
+                    <label class="diet-form__question">Wybierz składniki, które posiadasz.</label>
+                </div>
+                <button type="button" class="add-productU">Dodaj składnik</button>
+                <div th:each="productsU, idU : *{preferences.productsToUse}">
+                    <div class="productsU">
+                        <!--                            <input class="search" id="productNameU" name="productName" type="text" th:field="*{preferences.productsToUse[__${idU.index}__].name}" placeholder="Name">-->
+                        <!--                            <input type="number" min="0" th:field="*{preferences.productsToUse[__${idU.index}__].amount}" placeholder="Amount">-->
+                        <!--                            <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].unit}" placeholder="Unit">-->
+                    </div>
+                </div>
+            </div>
 
-                    <div>
-                        <label>Nielubiane produkty</label>
-                        <div th:each="productsD, idD : *{preferences.dislikedProducts}">
-                            <div class="productsD">
-                                <!--                            <input type="text" th:field="*{preferences.dislikedProducts[__${idD.index}__].name}" placeholder="Name">-->
-                            </div>
-                        </div>
-                        <button type="button" class="add-productD">Dodaj składnik</button>
+            <div class="disliked-products-form form-basis">
+                <div class="products__header subform__header">
+                    <p class="question-number">4.</p>
+                    <label class="diet-form__question">Wybierz składniki których nie lubisz lub nie możesz
+                        jeść.</label>
+                </div>
+                <button type="button" class="add-productD">Dodaj składnik</button>
+                <div th:each="productsD, idD : *{preferences.dislikedProducts}">
+                    <div class="productsD">
+                        <!--                            <input type="text" th:field="*{preferences.dislikedProducts[__${idD.index}__].name}" placeholder="Name">-->
                     </div>
+                </div>
+            </div>
 
-                    <br><br>
-                    <div>
-                        <h2>WeekInfo:</h2>
-                        <div>
-                            <label>Wybierz dzień rozpoczęcia planu: </label>
-                            <input type="date" id="startDate" name="startDate" th:field="*{weekInfo.dayInfoList[0].day}"
-                                required>
-                            <div th:each="days, idDay : *{weekInfo.dayInfoList}">
-                                <div class="days"></div>
-                            </div>
-                            <div>
-                                <button type="button" id="addNextDay">Dodaj plan na kolejny dzień</button>
-                                <button type="button" id="removeLastDay">Usuń ostatni dzień</button>
-                            </div>
-                        </div>
+            <div class="plan-day-form form-basis">
+                <div class="products__header subform__header">
+                    <p class="question-number">5.</p>
+                    <label class="diet-form__question">Wybierz dzień rozpoczęcia planu:</label>
+                </div>
+                <input type="date" id="startDate" name="startDate" th:field="*{weekInfo.dayInfoList[0].day}" required
+                    class="calendar-input">
+            </div>
+
+            <div class="plan-form plan-last-basis">
+                <div class="products__header subform__header">
+                    <p class="question-number">6.</p>
+                    <label class="diet-form__question">W każdym dniu zaznacz na ile dni chcesz przygotować posiłki i
+                        ile czasu chcesz poświęcić (chyba że gotowałeś wcześniej na kilka dni wtedy wybierz opcję
+                        gotowałem/am wcześniej lub jeśli nie chcesz gotować w danym dniu wybierz opcję nie
+                        gotuję)</label>
+                </div>
+                <div th:each="days, idDay : *{weekInfo.dayInfoList}">
+                    <div class="days"></div>
+                </div>
+                <div class="plan-form__buttons">
+                    <div class="next-day__button plan-form__button">
+                        <button type="button" class="plan-btn" id="addNextDay"><i class="fa-solid fa-plus"></i></button>
+                        <div class="arrow"><i class="fa-solid fa-arrow-left"></i></div>
+                        <p class="buttons__info">Dodaj plan na kolejny dzień</p>
                     </div>
-                    <div>
-                        <button type="submit">Zatwierdź</button>
+                    <div class="remove-day__button plan-form__button">
+                        <button type="button" id="removeLastDay" class="plan-btn"><i
+                                class="fa-solid fa-trash-arrow-up"></i></button>
+                        <div class="arrow"><i class="fa-solid fa-arrow-left"></i></div>
+                        <p class="buttons__info">Usuń ostatni dzień</p>
                     </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn-submit-all">Zatwierdź i stwórz plan</button>
+            </div>
         </form>
+
     </main>
 
 
@@ -175,7 +197,7 @@
     <script th:src="@{/js/burgerMenu.js}"></script>
     <script th:src="@{/js/dietFormfunctions.js}"></script>
     <script th:src="@{/js/portionsForm.js}"></script>
-    <script th:src="@{/js/productsForm.js}"></script>
+    <!-- <script th:src="@{/js/productsForm.js}"></script> -->
     <!-- <script src="../../static/js/dietFormfunctions.js"></script>
     <script src="../../static/js/portionsForm.js"></script> -->
 </body>
