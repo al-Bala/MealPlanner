@@ -9,3 +9,15 @@
         transform: scale(1);
     }
 }
+
+@keyframes submitMe {
+    0% {
+        background-color: var(--gold);
+    }
+    50% {
+        background-color: var(--orange);
+    }
+    100% {
+        background-color: var(--gold);
+    }
+}

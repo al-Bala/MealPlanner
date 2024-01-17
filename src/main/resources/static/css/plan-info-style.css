@@ -2,6 +2,7 @@
 @import '../css/__variables.css';
 @import '../css/__navigation.css';
 @import '../css/__footer.css';
+@import '../css/__animations.css';
 
 /*Mobile plan-generator starts*/
 .plan-info-page {
@@ -335,6 +336,7 @@ input[type="range"] {
 .plan-form__buttons {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 40px 40px;
     gap: 10px;
 }
@@ -345,9 +347,7 @@ input[type="range"] {
     color: var(--white);
     font-size: 25px;
     font-weight: 500;
-    /* align-self: center; */
     border-radius: 8px;
-    /* margin-top: 80px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -363,6 +363,25 @@ input[type="range"] {
     width: 200px;
 }
 /*Plan form ends*/
+
+/*Submit button starts*/
+.btn-submit-all {
+    padding: 20px 30px;
+    background-color: var(--gold);
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 15px;
+    animation: clickMe 3s ease-in-out infinite, 
+    submitMe 3s ease-in-out infinite;
+    margin: 40px 0;
+}
+.btn-submit__wrapper {
+    display: flex;
+    justify-content: center;
+}
+/*Submit button ends*/
+
 /*Mobile plan-generator ends*/
 
 /*Desktop plan-generator starts*/
@@ -400,6 +419,9 @@ input[type="range"] {
     .subform__header {
         justify-content: center;
     }
+    .diet-form__question {
+        font-size: 18px;
+    }
     .plan-form .products__header {
         margin: 0 auto 40px;
         width: 100%;
@@ -410,9 +432,58 @@ input[type="range"] {
     }
 
     .header__wrapper {
-        margin: 73px auto 0;
+        margin: 100px auto 0;
         max-width: 1000px;
         text-align: center;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+    .plan-form__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+    .header__text {
+        font-size: 15px;
+    }
+
+    .diet-type {
+        padding: 8px 14px;
+        font-size: 15px;
+        transition: background-color .4s,
+        color .4s;
+    }
+    .diet-type:hover {
+        background-color: var(--orange);
+        color: var(--white)
+    }
+    .portions-info {
+        font-size: 15px;
+    }
+
+    .calendar-input {
+        padding: 10px 20px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    .add-productU,
+    .add-productD {
+        transition: background-color .4s,
+        transform .4s;
+    }
+    .add-productU:hover,
+    .add-productD:hover {
+        background-color: var(--gold);
+        transform: scale(1.1);
+    }
+
+    .portions-bar input[type="range"] {
+        cursor: pointer;
     }
 
 }

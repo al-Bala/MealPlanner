@@ -51,9 +51,14 @@ nav {
       display: block;
       font-size: 18px;
       transition: color 0.4s;
+      color: var(--black);
     }
     nav .menu__item:hover {
+      text-decoration: none;
       color: var(--gold);
+    }
+    nav .menu__item:visited {
+      text-decoration: none;
     }
     nav .menu__desktop {
       display: flex;
