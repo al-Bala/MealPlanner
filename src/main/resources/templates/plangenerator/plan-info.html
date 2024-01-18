@@ -1,92 +1,187 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>Meal Planner</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator planu posiłków</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script th:src="@{'/js/plan-preferences.js'}"></script>
     <script th:src="@{'/js/plan-weekInfo.js'}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Nunito:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/plan-info-style.css}">
 </head>
-<body>
-<nav>
-    <div>
-        <a th:href="@{/home/user}">Home</a>
-        <div>
-            <ul>
-                <li>
-                    <a th:href="@{/logout}">Logout</a>
-                </li>
-            </ul>
+
+<body class="plan-info-page">
+    <nav>
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/info}">Wygeneruj plan</a>
+            <a class="menu__item">Zarządzaj przepisami</a>
+            <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{'/user/' + ${userId}}">Twój profil</a>
+            <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
         </div>
-    </div>
-</nav>
-<br /><br />
-<div>
-    <h1> Plan Generator </h1>
-</div>
-<div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
+            <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${userId}}"><i
+                    class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <header class="header">
+        <div class="header__wrapper">
+            <h1> Jak działa generator planu posiłków? </h1>
+            <p class="header__text">Aby otrzymać spersonalizowany plan posiłków, wypełnij poniższy formularz składający
+                się z 6 pytań, dotyczących twoich preferencji żywieniowych</p>
+            <p class="header__text">Klikając przycisk zatwierdź, plan na cały tydzień zostaje utworzony i zapisany w
+                Twoim profilu. Plan możesz w każdej chwili edytować.</p>
+            <p class="header__text">Do dzieła!</p>
+        </div>
+        <img th:src="@{/images/triangle.svg}" alt="trójkąt - od dymku z informacjami" class="chat-triangle">
+    </header>
     <div th:if="${param.error}">
         <div>Invalid Email or Password</div>
     </div>
     <div th:if="${param.logout}">
         <div> You have been logged out.</div>
     </div>
-    <div>
-        <form method="post" th:action="@{/plan/info}" th:object="${info}">
-            <div>
-                <h2>Preferencje:</h2>
-                <div>
-                    <label>Ilość porcji</label>
-                    <input type="number" min="1" id="portions" name="portions" placeholder="Ilość porcji" th:field="*{preferences.numberOfPortions}"/>
-                </div>
-                <div>
-                    <label>Rodzaj diety</label>
-                    <input type="text" id="diet" name="diet" class="form-control" placeholder="Rodzaj diety" th:field="*{preferences.diet}"/>
-                </div>
-                <div>
-                    <label>Posiadane produkty do wykorzystania</label>
-                    <div th:each="productsU, idU : *{preferences.productsToUse}">
-                        <div class="productsU">
-<!--                            <input class="search" id="productNameU" name="productName" type="text" th:field="*{preferences.productsToUse[__${idU.index}__].name}" placeholder="Name">-->
-<!--                            <input type="number" min="0" th:field="*{preferences.productsToUse[__${idU.index}__].amount}" placeholder="Amount">-->
-<!--                            <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].unit}" placeholder="Unit">-->
-                        </div>
-                    </div>
-                    <button type="button" class="add-productU">Dodaj składnik</button>
+    <main>
+        <form method="post" th:action="@{/plan/info}" th:object="${info}" class="planner-form">
+            <div class="diet-from form-basis">
+                <div class="diet-form__header subform__header">
+                    <p class="question-number">1.</p>
+                    <label class="diet-form__question">Wybierz rodzaj diety:</label>
                 </div>
 
-                <div>
-                    <label>Nielubiane produkty</label>
-                    <div th:each="productsD, idD : *{preferences.dislikedProducts}">
-                        <div class="productsD">
-<!--                            <input type="text" th:field="*{preferences.dislikedProducts[__${idD.index}__].name}" placeholder="Name">-->
-                        </div>
+                <!-- <input type="text" id="diet" name="diet" class="form-control" placeholder="Rodzaj diety"
+                        th:field="*{preferences.diet}" />
+                    <input type=""> -->
+                <div class="diet-types__wrapper">
+                    <div class="diet-type" id="vegetarian" onclick="selectDiet('vegetarian')">
+                        <p class="diet-type__name">Wegetariańska</p>
                     </div>
-                    <button type="button" class="add-productD">Dodaj składnik</button>
-                </div>
-            </div>
-            <br><br>
-            <div>
-                <h2>WeekInfo:</h2>
-                <div>
-                    <label>Wybierz dzień rozpoczęcia planu: </label>
-                    <input type="date" id="startDate" name="startDate" th:field="*{weekInfo.dayInfoList[0].day}" required>
-                    <div th:each="days, idDay : *{weekInfo.dayInfoList}">
-                        <div class="days"></div>
+                    <div class="diet-type" id="vegan" onclick="selectDiet('vegan')">
+                        <p class="diet-type__name">Wegańska</p>
                     </div>
-                    <div>
-                        <button type="button" id="addNextDay">Dodaj plan na kolejny dzień</button>
-                        <button type="button" id="removeLastDay">Usuń ostatni dzień</button>
+                    <div class="diet-type" id="noGluten" onclick="selectDiet('noGluten')">
+                        <p class="diet-type__name"> Bezglutenowa</p>
+                    </div>
+                    <div class="diet-type" id="noDiet" onclick="selectDiet('noDiet')">
+                        <p class="diet-type__name">Nie mam diety</p>
                     </div>
                 </div>
             </div>
-            <div>
-                <button type="submit">Zatwierdź</button>
+
+            <div class="portions-form form-basis">
+                <div class="diet-form__header subform__header">
+                    <p class="question-number">2.</p>
+                    <label class="diet-form__question">Ile porcji przygotowujesz?</label>
+                </div>
+                <div class="portions-bar">
+                    <!-- <input type="number" min="1" id="portions" name="portions" placeholder="Ilość porcji"
+                        th:field="*{preferences.numberOfPortions}" /> -->
+                    <input type="range" id="numberInput" name="numberInput" min="1" max="15" value="1"
+                        th:field="*{preferences.numberOfPortions}">
+                    <!-- zmieniłam tuu -->
+                    <div class="portions-info">
+                        <p class="portion-text">Ilość porcji: <span id="selectedNumber">1</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="products-form form-basis">
+                <div class="products__header subform__header">
+                    <p class="question-number">3.</p>
+                    <label class="diet-form__question">Wybierz składniki, które posiadasz.</label>
+                </div>
+                <button type="button" class="add-productU">Dodaj składnik</button>
+                <div th:each="productsU, idU : *{preferences.productsToUse}">
+                    <div class="productsU">
+                    </div>
+                </div>
+            </div>
+            <div class="disliked-products-form form-basis">
+                <div class="products__header subform__header">
+                    <p class="question-number">4.</p>
+                    <label class="diet-form__question">Wybierz składniki których nie lubisz lub nie możesz
+                        jeść.</label>
+                </div>
+                <button type="button" class="add-productD">Dodaj składnik</button>
+                <div th:each="productsD, idD : *{preferences.dislikedProducts}">
+                    <div class="productsD">
+                    </div>
+                </div>
+            </div>
+            <div class="plan-day-form form-basis">
+                <div class="products__header subform__header">
+                    <p class="question-number">5.</p>
+                    <label class="diet-form__question">Wybierz dzień rozpoczęcia planu:</label>
+                </div>
+                <input type="date" id="startDate" name="startDate" th:field="*{weekInfo.dayInfoList[0].day}" required
+                    class="calendar-input">
+            </div>
+            <div class="plan-form plan-last-basis">
+                <div class="products__header subform__header">
+                    <p class="question-number">6.</p>
+                    <label class="diet-form__question">W każdym dniu zaznacz na ile dni chcesz przygotować posiłki i
+                        ile czasu chcesz poświęcić (chyba że gotowałeś wcześniej na kilka dni wtedy wybierz opcję
+                        gotowałem/am wcześniej lub jeśli nie chcesz gotować w danym dniu wybierz opcję nie
+                        gotuję)</label>
+                </div>
+                <div th:each="days, idDay : *{weekInfo.dayInfoList}">
+                    <div class="days"></div>
+                </div>
+                <div class="plan-form__buttons">
+                    <div class="next-day__button plan-form__button">
+                        <button type="button" class="plan-btn" id="addNextDay"><i class="fa-solid fa-plus"></i></button>
+                        <div class="arrow"><i class="fa-solid fa-arrow-left"></i></div>
+                        <p class="buttons__info">Dodaj plan na kolejny dzień</p>
+                    </div>
+                    <div class="remove-day__button plan-form__button">
+                        <button type="button" id="removeLastDay" class="plan-btn"><i
+                                class="fa-solid fa-trash-arrow-up"></i></button>
+                        <div class="arrow"><i class="fa-solid fa-arrow-left"></i></div>
+                        <p class="buttons__info">Usuń ostatni dzień</p>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-submit__wrapper">
+                <button type="submit" onclick="submitForm()" class="btn-submit-all">Zatwierdź i stwórz plan</button>
             </div>
         </form>
-    </div>
-</div>
+    </main>
+    <footer class="footer">
+        <div class="footer__section contact">
+            <h4 class="footer__header">Kontakt</h4>
+            <div class="email">
+                <i class="fa-solid fa-envelope"></i>
+                <p class="email__text">email@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__section social-media">
+            <h4 class="footer__header">Znajdziesz nas tutaj</h4>
+            <div class="social-media__links">
+                <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/burgerMenu.js}"></script>
+    <script th:src="@{/js/dietFormfunctions.js}"></script>
+    <script th:src="@{/js/portionsForm.js}"></script>
 </body>
+
 </html>

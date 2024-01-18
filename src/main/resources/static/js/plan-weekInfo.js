@@ -52,15 +52,17 @@ $(function() {
 
     function createPlanDiv(x, date) {
         var planDiv =
-            '<div id="days-' + x + '">' +
-            '<label>Dzień ' + (x + 1) + ': ' + date.toISOString().split("T")[0] + '</label>' +
-            '<select name="weekInfo.dayInfoList[' + x + '].eatingPlan.id" class="eating-plan" required>' +
-                '<option value="" disabled selected>Wybierz</option>' +
-                '<option value="C01">Gotuję</option>' +
-                '<option value="B02">Nie gotuję</option>' +
-                '<option value="E03">Gotowałem/am wcześniej</option>' +
-            '</select>' +
-            '<input class="cooking-time" type="number" min="15" name="weekInfo.dayInfoList[' + x + '].eatingPlan.timeMin" style="display:none;" placeholder="Podaj czas gotowania">' +
+            '<div id="days-' + x + '" class="day">' +
+                '<label class="day__header">Dzień ' + (x + 1) + ': ' + date.toISOString().split("T")[0] + '</label>' +
+                '<div class="cooking__wrapper">'+
+                    '<select name="weekInfo.dayInfoList[' + x + '].eatingPlan.id" class="eating-plan" required>' +
+                        '<option value="" disabled selected>Wybierz</option>' +
+                        '<option value="C01">Gotuję</option>' +
+                        '<option value="B02">Nie gotuję</option>' +
+                        '<option value="E03">Gotowałem wcześniej</option>' +
+                    '</select>' +
+                    '<input class="cooking-time" type="number" min="15" name="weekInfo.dayInfoList[' + x + '].eatingPlan.timeMin" style="display:none;" placeholder="Czas">' +
+                '</div>'+
             '</div>';
 
         $(wrapper).append(planDiv);
@@ -80,12 +82,14 @@ $(function() {
 
     function createFirstPlanDiv(date) {
         var firstPlanDiv =
-            '<div id="days-0">' +
-            '<label>Dzień 1: ' + date.toISOString().split("T")[0] + '</label>' +
-            '<select name="weekInfo.dayInfoList[0].eatingPlan.id" class="eating-plan">' +
-            '<option selected value="C01">Gotuję</option>' +
-            '</select>' +
-            '<input class="cooking-time" type="number" min="15" name="weekInfo.dayInfoList[0].eatingPlan.timeMin" placeholder="Podaj czas gotowania">' +
+            '<div id="days-0" class="day">' +
+                '<label class="day__header">Dzień 1: ' + date.toISOString().split("T")[0] + '</label>' +
+                '<div class="cooking__wrapper">'+
+                    '<select name="weekInfo.dayInfoList[0].eatingPlan.id" class="eating-plan">' +
+                    '<option selected value="C01">Gotuję</option>' +
+                    '</select>' +
+                    '<input class="cooking-time" type="number" min="15" name="weekInfo.dayInfoList[0].eatingPlan.timeMin" placeholder="Czas">' +
+                '</div>'+
             '</div>';
 
         $(wrapper).append(firstPlanDiv);

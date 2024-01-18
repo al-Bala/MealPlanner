@@ -1,0 +1,134 @@
+.login-form__wrapper {
+    display: none;
+    font-family: "Now", sans-serif;
+    
+}
+
+.pop-up {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    border-radius: 16px;
+    width: 90%;
+}
+.login-form__background {
+    display: none;
+    
+}
+.display {
+    z-index: 5;
+    display:flex;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    backdrop-filter: blur(5px);
+    filter: brightness(40%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.exit-form-btn {
+    background: none;
+    font-size: 23px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+
+.login-form__header {
+    background-color: var(--orange);
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%;
+    margin: 95px 0 35px;
+    text-align: center;
+    padding: 8px 0;
+}
+
+.header__text {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.profile__graphic {
+    margin-bottom: 40px;
+    
+}
+
+.profile__image {
+    width: 54px;
+}
+
+.login-form {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form__field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form__label {
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.login-form__field input {
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: var(--orange) 1px solid;
+    padding: 3px 0;
+}
+
+.login-form__field input[placeholder] {
+    font-size: 12px;
+    padding: 5px;
+}
+
+.login-submit-btn {
+    background-color: var(--orange);
+    padding: 7px 28px;
+    font-size: 15px;
+    color: var(--white);
+    border-radius: 6px;
+    text-align: center;
+    align-self: center;
+    margin: 25px 0 20px ;
+}
+
+.not-registered-info {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 95px;
+}
+
+.not-registered-info__text,
+.not-registered-info__link {
+    font-size: 12px;
+    text-align: center;
+}
+
+.not-registered-info__link {
+    color: var(--orange);
+}
+
+
+

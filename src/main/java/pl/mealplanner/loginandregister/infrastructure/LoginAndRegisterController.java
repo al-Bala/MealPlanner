@@ -21,13 +21,14 @@ import pl.mealplanner.loginandregister.domain.dto.UserDto;
 class LoginAndRegisterController {
 
     private final LoginAndRegisterFacade facade;
+
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage() {
         return "/loginandregister/login-page";
     }
 
     @GetMapping("/register")
-    public ModelAndView showRegistrationForm(){
+    public ModelAndView showRegistrationForm() {
         // create model object to store form data
         ModelAndView modelAndView = new ModelAndView("/loginandregister/register");
         modelAndView.addObject("user", UserDto.builder().build());
@@ -36,15 +37,15 @@ class LoginAndRegisterController {
 
     @PostMapping("/register/save")
     public String registration(@ModelAttribute("user") @Valid UserDto userDto,
-                                    BindingResult result){
-        if(facade.isUsernameExists(userDto.username())){
+            BindingResult result) {
+        if (facade.isUsernameExists(userDto.username())) {
             result.rejectValue("username", "username.exist");
         }
-        if(facade.isEmailExists(userDto.email())){
+        if (facade.isEmailExists(userDto.email())) {
             result.rejectValue("email", "email.exist");
         }
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "loginandregister/register";
         }
 

@@ -11,15 +11,28 @@ function initializeProductFields(wrapper, addButton, fieldPrefix, deleteButtonCl
         e.preventDefault();
         if (x < max_fields) {
             var fieldHtml =
-                `<div id="${fieldPrefix}-${x}">
-                    <input name="${fieldPrefix}[${x}].name" type="text" placeholder="Name" class="search" onblur="fetchUnits(this.value, ${x})" required/>
-                    ${fieldPrefix.includes("productsToUse") ? 
-                        '<input name="' + fieldPrefix + '[' + x + '].amount" type="number" placeholder="Amount" required/>' : ''}
-                     ${fieldPrefix.includes("productsToUse") ?
-                        '<select id="units-'+x+'" name="' + fieldPrefix + '[' + x + '].unit" required>' +
-                            '<option value="" disabled selected >Wybierz jednostkę</option>' +
-                        '</select>' : ''}
-                    <button type="button" class="${deleteButtonClass}">Usuń</button>
+                `<div id="${fieldPrefix}-${x}" class="products__container">
+                    <div class="test">
+                        <label class="products__label products__label--1">Nazwa produktu</label>
+                        <input name="${fieldPrefix}[${x}].name" type="text" placeholder="Wpisz nazwę produktu" class="search product__field" onblur="fetchUnits(this.value, ${x})" required/>
+                    </div>
+                    
+                    <div class="products__wrapper">
+                        <div class="test">
+                            <label class="products__label products__label--2">Ilość</label>
+                            ${fieldPrefix.includes("productsToUse") ? '<input name="' + fieldPrefix + '[' + x + '].amount" type="number" min="0" placeholder="Wpisz ilość" class="amount product__field" required/>' : ''}
+                        </div>
+                            
+                        <div class="test">
+                            <label class="products__label products__label--2">Jednostka</label>
+                            ${fieldPrefix.includes("productsToUse") ? 
+                                // '<input name="' + fieldPrefix + '[' + x + '].unit" type="text" placeholder="Wybierz jednostkę" class="unit product__field"/>' : ''
+                                '<select id="units-'+x+'" name="' + fieldPrefix + '[' + x + '].unit" required>' +
+                                '<option value="" disabled selected >Wybierz jednostkę</option>' +
+                                '</select>' : ''}
+                        </div>                                        
+                    </div>
+                    <button type="button" title="Usuń produkt" class="${deleteButtonClass}"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
                 </div>`;
 
             $(wrapper).append(fieldHtml);
