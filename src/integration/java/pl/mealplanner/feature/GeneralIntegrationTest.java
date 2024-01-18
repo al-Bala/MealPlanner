@@ -5,17 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import pl.mealplanner.BaseIntegrationTest;
-import pl.mealplanner.plangenerator.mealsfilter.dto.MealPlanElement;
-import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
 import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
+import pl.mealplanner.plangenerator.plan.dto.DisplayPlan;
+import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
 
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GeneralIntegrationTest extends BaseIntegrationTest {
     @Autowired
@@ -28,12 +25,14 @@ public class GeneralIntegrationTest extends BaseIntegrationTest {
         WeekInfoRequest weekInfoRequest = getWeekInfo();
 
         // when
-        List<MealPlanElement> foundMeals = planGeneratorFacade.generateMealPlanner(preferencesRequest, weekInfoRequest);
-        Set<PlanProductInfo> groceryList = planGeneratorFacade.getGroceryListForPlan();
+        List<DisplayPlan> foundMeals = planGeneratorFacade.generateMealPlanner(preferencesRequest, weekInfoRequest);
+        List<GroceryList> groceryList = planGeneratorFacade.getGroceryListForPlan();
+        List<DisplayPlan> currentPlan = planGeneratorFacade.getCurrentPlan();
 
         // then
         System.out.println(foundMeals);
         System.out.println(groceryList);
+        System.out.println(currentPlan);
 
 
     }
@@ -46,7 +45,7 @@ public class GeneralIntegrationTest extends BaseIntegrationTest {
                 List.of(
 //                        new IngredientRequest("marchew", 100, "g")
 //                        new IngredientRequest("marchew", 2, "szt")
-                        new IngredientRequest("brokuł", 1, "szt")
+                        new IngredientRequest("marchew", 100, "g")
                 ),
                 Collections.emptyList()
         );
@@ -61,6 +60,9 @@ public class GeneralIntegrationTest extends BaseIntegrationTest {
                                 new EatingPlansRequest("C01", -1)),
                         new DayInfoRequest(
                                 LocalDate.of(2024, 1,16),
+                                new EatingPlansRequest("E03", -1)),
+                        new DayInfoRequest(
+                                LocalDate.of(2024, 1,17),
                                 new EatingPlansRequest("C01", -1))
                 )
         );

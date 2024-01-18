@@ -18,9 +18,36 @@ db.users.insertMany([
         plan_history: [
             // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')}, // Kasza jaglana z warzywami
             // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9425')}, // Ryż z warzywami i kurczakiem
-            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9424')}  // Koktajl owocowy
+            // {day: new Date(2023, 12, 13), recipe: ObjectId('6577660abbac733a111c9424')},// Koktajl owocowy
+            // {day: new Date(2023, 12, 14), recipe: null},
+            {
+                day: new Date(2023, 12, 13),
+                recipe: {
+                    _id: ObjectId('6577660abbac733a111c9424'),
+                    name: "Koktajl owocowy",
+                    portions: 1,
+                    prepare_time: 10,
+                    diet: "wegetariańska",
+                    ingredients: [
+                        { name: "banan", amount: 1, unit: "szt" },
+                        { name: "truskawki", amount: 100, unit: "g" },
+                        { name: "kiwi", amount: 1, unit: "szt" },
+                        { name: "sok pomarańczowy", amount: 150, unit: "ml" },
+                        { name: "jogurt naturalny", amount: 50, unit: "g" }
+                    ],
+                    steps: ["Włóż owoce do blendera", "Dodaj sok i jogurt", "Miksuj do uzyskania gładkiego koktajlu", "Gotowe do picia"]
+                }
+            },
         ],
-    },
+        grocery_list:[
+            {
+                name: "oliwa z oliwek",
+                packingMeasure: 50.0,
+                nrOfPackets: 1,
+                unit: "ml"
+            }
+        ]
+    }
 ]);
 
 db.recipes.insertMany([

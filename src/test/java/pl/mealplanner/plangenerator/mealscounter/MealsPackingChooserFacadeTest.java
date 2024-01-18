@@ -1,7 +1,10 @@
 package pl.mealplanner.plangenerator.mealscounter;
 
 import org.junit.Test;
+import pl.mealplanner.plangenerator.domain.dto.DayInfo;
+import pl.mealplanner.plangenerator.domain.dto.EatingPlans;
 import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
+import pl.mealplanner.plangenerator.domain.dto.WeekInfo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,7 +16,10 @@ public class MealsPackingChooserFacadeTest {
         // given
         MealsCounterFacade mealsCounterFacade = config.createForTest();
 
-//        WeekInfoRequest weekInfo = new WeekInfoRequest(List.of(
+        WeekInfo weekInfo = new WeekInfo(List.of(
+                new DayInfo(LocalDate.of(2024, 2,9), new EatingPlans("C01", -1)),
+                new DayInfo(LocalDate.of(2024, 2,10), new EatingPlans("E03", -1)),
+                new DayInfo(LocalDate.of(2024, 2,11), new EatingPlans("C01", -1))
 //                new DayInfo(LocalDate.of(2023, 12,9), new EatingPlans("C01", 30)),
 //                new DayInfo(LocalDate.of(2023, 12,10), new EatingPlans("B02", 0)),
 //                new DayInfo(LocalDate.of(2023, 12,11), new EatingPlans("E03", 0)),
@@ -21,16 +27,18 @@ public class MealsPackingChooserFacadeTest {
 //                new DayInfo(LocalDate.of(2023, 12,13), new EatingPlans("E03", 0)),
 //                new DayInfo(LocalDate.of(2023, 12,14), new EatingPlans("C01", 40)),
 //                new DayInfo(LocalDate.of(2023, 12,15), new EatingPlans("E03", 0))
-//        ));
-        // when
-//        List<OneMealInfo> mealsInfoList = mealsCounterFacade.countNumberOfMeals(weekInfo);
+        ));
+
+//      when
+        List<OneMealInfo> mealsInfoList = mealsCounterFacade.countNumberOfMeals(weekInfo);
+        System.out.println(mealsInfoList);
 
         // then
-        List<OneMealInfo> expectedMealsInfo = List.of(
-                new OneMealInfo(LocalDate.of(2023, 12, 14), 2, 40),
-                new OneMealInfo(LocalDate.of(2023, 12, 12), 2, 60),
-                new OneMealInfo(LocalDate.of(2023, 12, 9), 2, 30)
-        );
+//        List<OneMealInfo> expectedMealsInfo = List.of(
+//                new OneMealInfo(LocalDate.of(2023, 12, 14), 2, 40),
+//                new OneMealInfo(LocalDate.of(2023, 12, 12), 2, 60),
+//                new OneMealInfo(LocalDate.of(2023, 12, 9), 2, 30)
+//        );
 //        assertEquals(expectedMealsInfo, mealsInfoList);
     }
 }
