@@ -9,10 +9,8 @@ import java.util.List;
 public record RecipeDto(
         ObjectId id,
         String name,
-        boolean isPublic,
         int portions,
         int prepareTime,
-        int maxStorageTime,
         String diet,
         List<Ingredient> ingredients,
         List<String> steps

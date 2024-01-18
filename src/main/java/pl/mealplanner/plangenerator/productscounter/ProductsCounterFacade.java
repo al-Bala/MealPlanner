@@ -26,8 +26,8 @@ public class ProductsCounterFacade {
         return productsCounterService.findProduct(name);
     }
 
-    public ConvertedRecipe calculateIngredients(ConvertedRecipe convertedRecipe, int nrPortionsUser) {
-        return ingredientsCalculator.calculateIngredients(convertedRecipe, nrPortionsUser);
+    public ConvertedRecipe calculateIngredients(ConvertedRecipe convertedRecipe, int nrPortionsUser, int forHowManyDays) {
+        return ingredientsCalculator.calculateIngredients(convertedRecipe, nrPortionsUser ,forHowManyDays);
     }
 
 }

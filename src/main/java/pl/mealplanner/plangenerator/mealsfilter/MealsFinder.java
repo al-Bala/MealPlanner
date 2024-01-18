@@ -7,10 +7,12 @@ import pl.mealplanner.plangenerator.mealsfilter.dto.MatchingRecipe;
 import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static pl.mealplanner.plangenerator.domain.PlanGeneratorService.allRecipesForPlan;
+import static pl.mealplanner.plangenerator.domain.PlanGeneratorFacade.allRecipesForPlan;
+
 
 @AllArgsConstructor
 @Component
@@ -39,17 +41,27 @@ class MealsFinder {
 
             if (isRepeated(drewRecipe)) {
                 recipesDb.remove(index);
-                break;
+            } else {
+                return drewRecipe;
             }
-            return drewRecipe;
         }
-        return chooseOneRecipe(info, limit+1);
+        if(limit <= info.productsToUse().size()){
+            return chooseOneRecipe(info, limit+1);
+        } else {
+            InfoForFiltering info2 = InfoForFiltering.builder()
+                    .forHowManyDays(info.forHowManyDays())
+                    .diet(info.diet())
+                    .timeForPrepareMin(info.timeForPrepareMin())
+                    .productsToUse(Collections.emptyList())
+                    .dislikedProducts(info.dislikedProducts())
+                    .build();
+            return chooseOneRecipe(info2, 0);
+        }
     }
 
     private boolean isRepeated(Recipe recipeToCheck) {
-        if(recipeToCheck.id() == null) return true;
         return allRecipesForPlan.stream()
-                .anyMatch(r -> r.recipe().id().equals(recipeToCheck.id()));
+                .anyMatch(r -> r.id().equals(recipeToCheck.id()));
     }
     private MatchingRecipe convert(Recipe choseRecipe) {
         return MealsFilterMapper.mapFromRecipeToMatchingRecipe(choseRecipe);

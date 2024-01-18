@@ -7,7 +7,7 @@ import pl.mealplanner.plangenerator.domain.dto.IngredientDto;
 import java.util.Collections;
 import java.util.List;
 
-class PlanMapper {
+class PlanGeneratorMapper {
     public static UserPreferences mapFromUserPreferencesRequestToUserPreferencesDto(UserPreferencesRequest request) {
         return UserPreferences.builder()
                 .numberOfPortions(request.getNumberOfPortions())

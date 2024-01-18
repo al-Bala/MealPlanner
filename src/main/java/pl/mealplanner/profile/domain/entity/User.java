@@ -1,4 +1,4 @@
-package pl.mealplanner.profile.domain;
+package pl.mealplanner.profile.domain.entity;
 
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.mealplanner.loginandregister.domain.dto.Role;
-import pl.mealplanner.loginandregister.domain.entity.PlanHistory;
+import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
+import pl.mealplanner.profile.domain.entity.PlanHistory;
 
 import java.util.Collection;
 import java.util.List;
@@ -37,6 +38,9 @@ public class User implements UserDetails {
 
     @Field("plan_history")
     List<PlanHistory> planHistory;
+
+    @Field("grocery_list")
+    List<GroceryList> groceryList;
 
 //    @Getter
 //    @Id

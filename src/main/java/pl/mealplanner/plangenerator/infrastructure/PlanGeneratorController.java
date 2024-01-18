@@ -1,15 +1,19 @@
 package pl.mealplanner.plangenerator.infrastructure;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
 import pl.mealplanner.plangenerator.mealsfilter.dto.MealPlanElement;
+import pl.mealplanner.plangenerator.plan.dto.DisplayPlan;
 import pl.mealplanner.plangenerator.productscounter.ProductsCounterFacade;
+import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
 import pl.mealplanner.plangenerator.productscounter.entity.Product;
 import pl.mealplanner.plangenerator.productscounter.entity.ProductClass;
 
@@ -33,36 +37,46 @@ class PlanGeneratorController {
 
     @GetMapping("/generator")
     public ModelAndView generatePlan() {
+
         ModelAndView modelAndView = new ModelAndView("plangenerator/plan-info");
 
-        modelAndView.addObject("info",
-                new PlanRequest(
-                        new UserPreferencesRequest(
-                                List.of(new IngredientRequest()),
-                                List.of(new DislikedProductRequest())),
-                        new WeekInfoRequest(
-                                List.of(new DayInfoRequest(new EatingPlansRequest())))
-                ));
+        PlanRequest planRequest = new PlanRequest(
+                new UserPreferencesRequest(
+                        List.of(new IngredientRequest()),
+                        List.of(new DislikedProductRequest())),
+                new WeekInfoRequest(
+                        List.of(new DayInfoRequest(new EatingPlansRequest())))
+        );
+        modelAndView.addObject("info", planRequest);
         return modelAndView;
     }
 
     @PostMapping("/info")
-    public String addInfo(@ModelAttribute("info") PlanRequest planRequest,
-                                BindingResult result,
-                                Model model) {
+    public ModelAndView addInfo(@ModelAttribute("info") PlanRequest planRequest,
+                          BindingResult result,
+                          Model model) {
+        ModelAndView modelAndView = new ModelAndView("plangenerator/planner");
+        List<DisplayPlan> mealPlanner = planGeneratorFacade.generateMealPlanner(planRequest.getPreferences(), planRequest.getWeekInfo());
+        modelAndView.addObject("mealPlanner", mealPlanner);
+        return modelAndView;
+    }
 
-        LocalDate date = planRequest.getWeekInfo().getDayInfoList().get(0).getDay();
-        List<DayInfoRequest> list = planRequest.getWeekInfo().getDayInfoList();
+    @GetMapping("/groceryList")
+    public ModelAndView getGroceryList() {
 
-        int i = 0;
-        for (DayInfoRequest day : list) {
-            day.setDay(date.plusDays(i));
-            i++;
-        }
+        List<GroceryList> groceryList = planGeneratorFacade.getGroceryListForPlan();
+        ModelAndView modelAndView = new ModelAndView("plangenerator/grocery-list");
+        modelAndView.addObject("groceryList", groceryList);
+        return modelAndView;
+    }
 
-        List<MealPlanElement> recipesPlan = planGeneratorFacade.generateMealPlanner(planRequest.getPreferences(), planRequest.getWeekInfo());
-//        System.out.println(recipesPlan);
-        return "plangenerator/planner";
+    @GetMapping("/saved-plan")
+    public ModelAndView getPlan() {
+
+        List<DisplayPlan> plan = planGeneratorFacade.getCurrentPlan();
+        ModelAndView modelAndView = new ModelAndView("plangenerator/saved-plan");
+        modelAndView.addObject("plan", plan);
+        return modelAndView;
     }
 
     @RequestMapping(value="/productNamesAutocomplete")

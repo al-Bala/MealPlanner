@@ -36,7 +36,7 @@ db.recipes.insertMany([
         max_storage_time: 1,
         diet: "wegetariańska",
         ingredients: [
-            { name: "jajka", amount: 4, unit: "szt" },
+            { name: "jajko", amount: 4, unit: "szt" },
             { name: "papryka", amount: 1, unit: "szt" },
             { name: "pomidor", amount: 2, unit: "szt" },
             { name: "cebula", amount: 1, unit: "szt" },

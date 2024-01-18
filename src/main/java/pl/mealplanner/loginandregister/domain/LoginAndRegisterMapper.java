@@ -1,7 +1,7 @@
 package pl.mealplanner.loginandregister.domain;
 
 import pl.mealplanner.loginandregister.domain.dto.UserDto;
-import pl.mealplanner.profile.domain.User;
+import pl.mealplanner.profile.domain.entity.User;
 
 class LoginAndRegisterMapper {
     public static User mapFromUserDtoToUser(UserDto userDto) {

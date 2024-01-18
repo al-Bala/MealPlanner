@@ -12,8 +12,8 @@ public record MatchingRecipe(
         String name,
         int portions,
         int prepare_time,
-        int max_storage_time,
         String diet,
-        List<IngredientDto> ingredients
+        List<IngredientDto> ingredients,
+        List<String> steps
 ) {
 }

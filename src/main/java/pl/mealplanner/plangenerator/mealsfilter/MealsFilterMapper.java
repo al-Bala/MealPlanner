@@ -16,7 +16,7 @@ class MealsFilterMapper {
                 .name(recipe.name())
                 .portions(recipe.portions())
                 .prepare_time(recipe.prepareTimeMin())
-                .max_storage_time(recipe.maxStorageTimeDays())
+//                .max_storage_time(recipe.maxStorageTimeDays())
                 .diet(recipe.diet())
                 .ingredients(recipe.ingredients().stream()
                         .map(ing -> IngredientDto.builder()
@@ -25,6 +25,7 @@ class MealsFilterMapper {
                                 .unit(ing.unit())
                                 .build())
                         .toList())
+                .steps(recipe.steps())
                 .build();
     }
 

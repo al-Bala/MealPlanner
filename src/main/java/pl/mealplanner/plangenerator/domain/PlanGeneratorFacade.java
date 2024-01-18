@@ -2,21 +2,22 @@ package pl.mealplanner.plangenerator.domain;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.loginandregister.domain.entity.PlanHistory;
-import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
-import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
-import pl.mealplanner.plangenerator.domain.dto.UserPreferences;
-import pl.mealplanner.plangenerator.domain.dto.WeekInfo;
+import pl.mealplanner.plangenerator.domain.dto.*;
+import pl.mealplanner.plangenerator.infrastructure.dto.DayInfoRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.UserPreferencesRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.WeekInfoRequest;
 import pl.mealplanner.plangenerator.mealscounter.MealsCounterFacade;
+import pl.mealplanner.plangenerator.mealsfilter.dto.ConvertedRecipe;
 import pl.mealplanner.plangenerator.mealsfilter.dto.MealPlanElement;
+import pl.mealplanner.plangenerator.plan.PlanFacade;
+import pl.mealplanner.plangenerator.plan.dto.DisplayPlan;
 import pl.mealplanner.plangenerator.productscounter.ListOfProductsForPlan;
-import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
-import pl.mealplanner.profile.domain.User;
+import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
+import pl.mealplanner.profile.domain.entity.PlanHistory;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @Component
@@ -25,12 +26,23 @@ public class PlanGeneratorFacade {
     private final MealsCounterFacade mealsCounterFacade;
     private final PlanGeneratorService planGeneratorService;
     private final ListOfProductsForPlan listOfProductsForPlan;
+    private final PlanFacade planFacade;
+    public static List<ConvertedRecipe> allRecipesForPlan = new ArrayList<>();
 
-    public List<MealPlanElement> generateMealPlanner(UserPreferencesRequest preferencesRequest, WeekInfoRequest weekInfoRequest){
+    public List<DisplayPlan> generateMealPlanner(UserPreferencesRequest preferencesRequest, WeekInfoRequest weekInfoRequest){
         listOfProductsForPlan.clearListOfProductsForPlan();
 
-        UserPreferences preferences = PlanMapper.mapFromUserPreferencesRequestToUserPreferencesDto(preferencesRequest);
-        WeekInfo weekInfo = PlanMapper.mapFromWeekInfoRequestToWeekInfoDto(weekInfoRequest);
+        LocalDate date = weekInfoRequest.getDayInfoList().get(0).getDay();
+        List<DayInfoRequest> list = weekInfoRequest.getDayInfoList();
+
+        int i = 0;
+        for (DayInfoRequest day : list) {
+            day.setDay(date.plusDays(i));
+            i++;
+        }
+
+        UserPreferences preferences = PlanGeneratorMapper.mapFromUserPreferencesRequestToUserPreferencesDto(preferencesRequest);
+        WeekInfo weekInfo = PlanGeneratorMapper.mapFromWeekInfoRequestToWeekInfoDto(weekInfoRequest);
 
         List<OneMealInfo> oneMealInfoList = mealsCounterFacade.countNumberOfMeals(weekInfo);
         InfoForMealsSearch infoForMealsSearch = InfoForMealsSearch.builder()
@@ -39,33 +51,17 @@ public class PlanGeneratorFacade {
                 .build();
 
         List<MealPlanElement> mealPlan = planGeneratorService.generatePlan(infoForMealsSearch);
-        saveAsPlanHistory(mealPlan);
-        return mealPlan;
+        planFacade.savePlanAndGroceryList(mealPlan, listOfProductsForPlan.mapToGroceryList());
+
+        return DisplayMapper.mapFromMealPlanElementToDisplay(mealPlan);
     }
 
-    public Set<PlanProductInfo> getGroceryListForPlan(){
-        return listOfProductsForPlan.getListOfProductsForPlan();
-    }
-//    public List<GroceryList> getGroceryListForPlan(){
-//        return listOfProductsForPlan.getListOfProductsForPlan().stream()
-//                .map(p -> GroceryList.builder()
-//                        .name(p.getName())
-//                        .packingMeasure(p.getPackingMeasure())
-//                        .nrOfPackets(p.getNrOfPackets())
-//                        .unit(p.getUnitCount())
-//                        .build())
-//                .toList();
-//    }
-
-    public User saveAsPlanHistory(List<MealPlanElement> mealPlanElement){
-        List<PlanHistory> plan = mealPlanElement.stream()
-                .map(meal -> PlanHistory.builder()
-                        .date(meal.dayOfWeek())
-                        .recipeId(meal.recipe().id())
-                        .build())
-                .toList();
-
-        return planGeneratorService.saveAsPlanHistory(plan);
+    public List<DisplayPlan> getCurrentPlan() {
+        List<PlanHistory> currentPlan = planFacade.getCurrentPlan();
+        return DisplayMapper.mapFromPlanHistoryToDisplay(currentPlan);
     }
 
+    public List<GroceryList> getGroceryListForPlan(){
+        return listOfProductsForPlan.getCurrentGroceryList();
+    }
 }

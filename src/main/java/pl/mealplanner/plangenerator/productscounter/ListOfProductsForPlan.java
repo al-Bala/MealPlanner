@@ -3,7 +3,10 @@ package pl.mealplanner.plangenerator.productscounter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
+import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
 import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
+import pl.mealplanner.profile.domain.UserFacade;
+import pl.mealplanner.profile.domain.entity.User;
 
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +17,7 @@ import java.util.Set;
 @Component
 public class ListOfProductsForPlan {
     private final ProductsCounterService productsCounterService;
+    private final UserFacade userFacade;
     private static final Set<PlanProductInfo> productsForPlan = new HashSet<>();
 
     public void clearListOfProductsForPlan() {
@@ -22,6 +26,22 @@ public class ListOfProductsForPlan {
 
     public Set<PlanProductInfo> getListOfProductsForPlan() {
         return productsForPlan;
+    }
+
+    public List<GroceryList> mapToGroceryList() {
+        return productsForPlan.stream()
+                .map(p -> GroceryList.builder()
+                        .name(p.getName())
+                        .packingMeasure(p.getPackingMeasure())
+                        .nrOfPackets(p.getNrOfPackets())
+                        .unit(p.getUnitCount())
+                        .build())
+                .toList();
+    }
+
+    public List<GroceryList> getCurrentGroceryList() {
+        User currentUser = userFacade.getCurrentUser();
+        return currentUser.getGroceryList();
     }
 
     public void addAll(List<PlanProductInfo> productsToUse) {

@@ -8,21 +8,23 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
-import pl.mealplanner.loginandregister.domain.dto.PlanHistoryDto;
 import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
 import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
-import pl.mealplanner.profile.domain.UserFacade;
+import pl.mealplanner.plangenerator.plan.PlanFacade;
+import pl.mealplanner.profile.domain.entity.PlanHistory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static pl.mealplanner.plangenerator.plan.PlanFacade.EMPTY_DAY_ID;
 
 @AllArgsConstructor
 @Log4j2
 @Repository
 class MealsFilterRepositoryImpl implements MealsFilterRepository{
     private final MongoTemplate mongoTemplate;
-    private final UserFacade userFacade;
+    private final PlanFacade planFacade;
     public List<Recipe> findMatchingRecipes(InfoForFiltering info, int limit) {
         List<ObjectId> previousPlanRecipes = getRecipesFromPreviousPlan();
 
@@ -63,9 +65,10 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
     }
 
     private List<ObjectId> getRecipesFromPreviousPlan(){
-        List<PlanHistoryDto> planHistoryList = userFacade.findPlanHistoryByCurrentUser();
+        List<PlanHistory> planHistoryList = planFacade.getCurrentPlan();
         return planHistoryList.stream()
-                .map(PlanHistoryDto::recipeId)
+                .filter(p -> !p.recipeInPlanHistory().id().equals(EMPTY_DAY_ID))
+                .map(p -> p.recipeInPlanHistory().id())
                 .toList();
     }
 

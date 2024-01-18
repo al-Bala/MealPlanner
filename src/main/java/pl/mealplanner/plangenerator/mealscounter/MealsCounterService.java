@@ -7,6 +7,7 @@ import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
 import pl.mealplanner.plangenerator.domain.dto.WeekInfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Log4j2
@@ -22,7 +23,7 @@ class MealsCounterService {
         for (int i = dayInfoList.size()-1; i >= 0; i--){
             checkEatingPlan(dayInfoList.get(i));
         }
-        // lista informacji o posiłkach do planu - W ODWRÓCONEJ KOLEJNOŚCI
+        Collections.reverse(oneMealInfoList);
         return oneMealInfoList;
     }
 
@@ -30,21 +31,27 @@ class MealsCounterService {
         switch (dayInfo.eatingPlan().id()) {
             case "C01" -> {
                 daysNumber++;
-                oneMealInfoList.add(
-                        OneMealInfo.builder()
-                                .dayOfWeek(dayInfo.day())
-                                .forHowManyDays(daysNumber)
-                                .timeForPrepareMin(dayInfo.eatingPlan().timeMin())
-                                .build()
-                );
+                addToList(dayInfo, daysNumber, dayInfo.eatingPlan().timeMin());
                 daysNumber = 0;
             }
             case "B02" -> {
+                addToList(dayInfo, 0, -1);
             }
             case "E03" -> {
+                addToList(dayInfo, 0, -1);
+
                 daysNumber++;
             }
             default -> log.error("Wrong EatingPlan ID");
         }
+    }
+
+    private void addToList(DayInfo dayInfo, int forHowManyDays, int timeForPrepareMin) {
+        oneMealInfoList.add(
+                OneMealInfo.builder()
+                        .dayOfWeek(dayInfo.day())
+                        .forHowManyDays(forHowManyDays)
+                        .timeForPrepareMin(timeForPrepareMin)
+                        .build());
     }
 }

@@ -20,7 +20,7 @@
 </nav>
 <br /><br />
 <div>
-    <div th:each="element : ${mealPlanner}">
+    <div th:each="element : ${plan}">
         <div th:if="${element.recipeDisplay().id().equals('EMPTY_DAY_ID')}">
             <p th:text="${element.dayOfWeek().getDayOfWeek()} + ': ' + ${element.dayOfWeek()}"></p>
             <p>Masz wolne :)</p>

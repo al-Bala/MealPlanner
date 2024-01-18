@@ -1,10 +1,8 @@
-package pl.mealplanner.loginandregister.domain.entity;
+package pl.mealplanner.profile.domain.entity;
 
 import lombok.Builder;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
 
 import java.time.LocalDate;
 
@@ -12,7 +10,6 @@ import java.time.LocalDate;
 @Document
 public record PlanHistory(
         @Field("day") LocalDate date,
-        @Field("recipe") ObjectId recipeId
-
+        @Field("recipe") RecipeInPlanHistory recipeInPlanHistory
 ) {
 }

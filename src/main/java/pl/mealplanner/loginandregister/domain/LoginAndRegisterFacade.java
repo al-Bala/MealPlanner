@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.mealplanner.loginandregister.domain.dto.Role;
 import pl.mealplanner.loginandregister.domain.dto.UserDto;
-import pl.mealplanner.profile.domain.User;
+import pl.mealplanner.profile.domain.entity.User;
 import pl.mealplanner.profile.domain.UserFacade;
 
 @Log4j2
