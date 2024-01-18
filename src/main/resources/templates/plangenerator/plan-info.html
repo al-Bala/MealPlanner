@@ -15,9 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Nunito:wght@300;400;600&display=swap"
         rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="../../static/css/plan-info-style.css"> -->
     <link rel="stylesheet" th:href="@{/css/plan-info-style.css}">
-    <!-- Pamiętac żeby zmienić linki na th:href="@{}" -->
 </head>
 
 <body class="plan-info-page">
@@ -53,14 +51,12 @@
         </div>
         <img th:src="@{/images/triangle.svg}" alt="trójkąt - od dymku z informacjami" class="chat-triangle">
     </header>
-
     <div th:if="${param.error}">
         <div>Invalid Email or Password</div>
     </div>
     <div th:if="${param.logout}">
         <div> You have been logged out.</div>
     </div>
-
     <main>
         <form method="post" th:action="@{/plan/info}" th:object="${info}" class="planner-form">
             <div class="diet-from form-basis">
@@ -96,13 +92,14 @@
                 <div class="portions-bar">
                     <!-- <input type="number" min="1" id="portions" name="portions" placeholder="Ilość porcji"
                         th:field="*{preferences.numberOfPortions}" /> -->
-                    <input type="range" id="numberInput" name="numberInput" min="1" max="15" value="1">
+                    <input type="range" id="numberInput" name="numberInput" min="1" max="15" value="1"
+                        th:field="*{preferences.numberOfPortions}">
+                    <!-- zmieniłam tuu -->
                     <div class="portions-info">
                         <p class="portion-text">Ilość porcji: <span id="selectedNumber">1</span></p>
                     </div>
                 </div>
             </div>
-
             <div class="products-form form-basis">
                 <div class="products__header subform__header">
                     <p class="question-number">3.</p>
@@ -111,13 +108,9 @@
                 <button type="button" class="add-productU">Dodaj składnik</button>
                 <div th:each="productsU, idU : *{preferences.productsToUse}">
                     <div class="productsU">
-                        <!--                            <input class="search" id="productNameU" name="productName" type="text" th:field="*{preferences.productsToUse[__${idU.index}__].name}" placeholder="Name">-->
-                        <!--                            <input type="number" min="0" th:field="*{preferences.productsToUse[__${idU.index}__].amount}" placeholder="Amount">-->
-                        <!--                            <input type="text" th:field="*{preferences.productsToUse[__${idU.index}__].unit}" placeholder="Unit">-->
                     </div>
                 </div>
             </div>
-
             <div class="disliked-products-form form-basis">
                 <div class="products__header subform__header">
                     <p class="question-number">4.</p>
@@ -127,11 +120,9 @@
                 <button type="button" class="add-productD">Dodaj składnik</button>
                 <div th:each="productsD, idD : *{preferences.dislikedProducts}">
                     <div class="productsD">
-                        <!--                            <input type="text" th:field="*{preferences.dislikedProducts[__${idD.index}__].name}" placeholder="Name">-->
                     </div>
                 </div>
             </div>
-
             <div class="plan-day-form form-basis">
                 <div class="products__header subform__header">
                     <p class="question-number">5.</p>
@@ -140,7 +131,6 @@
                 <input type="date" id="startDate" name="startDate" th:field="*{weekInfo.dayInfoList[0].day}" required
                     class="calendar-input">
             </div>
-
             <div class="plan-form plan-last-basis">
                 <div class="products__header subform__header">
                     <p class="question-number">6.</p>
@@ -170,10 +160,7 @@
                 <button type="submit" onclick="submitForm()" class="btn-submit-all">Zatwierdź i stwórz plan</button>
             </div>
         </form>
-
     </main>
-
-
     <footer class="footer">
         <div class="footer__section contact">
             <h4 class="footer__header">Kontakt</h4>
@@ -191,14 +178,10 @@
             </div>
         </div>
     </footer>
-
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
     <script th:src="@{/js/burgerMenu.js}"></script>
     <script th:src="@{/js/dietFormfunctions.js}"></script>
     <script th:src="@{/js/portionsForm.js}"></script>
-    <!-- <script th:src="@{/js/productsForm.js}"></script> -->
-    <!-- <script src="../../static/js/dietFormfunctions.js"></script>
-    <script src="../../static/js/portionsForm.js"></script> -->
 </body>
 
 </html>

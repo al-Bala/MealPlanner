@@ -8,14 +8,11 @@
     <title>MealPlanner</title>
     <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/css/home-guest-style.css}">
-    <!-- <link rel="stylesheet" href="../../static/css/home-guest-style.css">
-    <link rel="stylesheet" href="../../static/css/login-popup-style.css"> -->
     <link rel="stylesheet" th:href="@{/css/login-popup-style.css}">
 
 </head>
 
 <body class="home-guest-page">
-
     <nav>
         <button class="burger-btn">
             <i class="fa-solid fa-burger"></i>
@@ -29,7 +26,6 @@
             <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
             <!-- th:href="@{/login}" -->
             <a class="menu__item profile menu__login">Zaloguj się</a>
-
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
@@ -37,8 +33,6 @@
         </div>
     </nav>
     <div class="login-form__wrapper">
-
-
         <div th:if="${param.planAth}">
             <div>Musisz sie zalogować aby wygenerować plan.</div>
         </div>
@@ -48,8 +42,6 @@
         <div th:if="${param.successReg}">
             <div> Zostałeś zarejestrowany. Możesz się teraz zalogować.</div>
         </div>
-
-
         <button class="exit-form-btn">
             <i class="fa-solid fa-xmark"></i>
         </button>
@@ -57,7 +49,6 @@
             <h3 class="header__text">Logowanie</h3>
         </div>
         <div class="profile__graphic">
-            <!-- <img src="../../static/images/profile-icon.svg" alt="Ikona profilu" class="profile__image"> -->
             <img th:src="@{/images/profile-icon.svg}" alt="Ikona profilu" class="profile__image">
         </div>
         <form method="post" role="form" th:action="@{/login}" class="form-horizontal login-form">
@@ -65,12 +56,10 @@
                 <label class="login-form__label">Login</label>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Podaj login" />
             </div>
-
             <div class="login-form__field password__field">
                 <label class="login-form__label">Hasło</label>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Podaj hasło" />
             </div>
-
             <button type="submit" class="login-submit-btn">Zaloguj się</button>
             <div class="not-registered-info">
                 <p class="not-registered-info__text">Nie zarejestrowałeś się?</p>
@@ -80,7 +69,6 @@
     </div>
     <div class="login-form__background"></div>
     <main>
-
         <section class="plan-generator">
             <div class="graphic">
                 <img class="graphic__image" th:src="@{/images/Talerz.png}" alt="talerz z pizzą">
@@ -106,7 +94,6 @@
                     Nie zwlekaj i sprawdź co dla Ciebie przygotowaliśmy. </p>
             </div>
         </section>
-
         <section class="about-us container">
             <h2 class="about-us__header">Co znajdziesz na naszej stronie?</h2>
             <div class="about-us__wrapper">
@@ -160,8 +147,6 @@
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
     <script th:src="@{/js/burgerMenu.js}"></script>
     <script th:src="@{/js/loginForm.js}"></script>
-    <!-- <script src="../../static/js/burgerMenu.js"></script>
-    <script src="../../static/js/loginForm.js"></script> -->
 </body>
 
 </html>

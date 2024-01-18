@@ -1,5 +1,4 @@
 let chosenDiet = null;
-
         function selectDiet(diet) {
             const allDiets = document.querySelectorAll('.diet-type');
             allDiets.forEach(div => {
@@ -12,9 +11,8 @@ let chosenDiet = null;
             chosenDietId.style.transition = "0.4s";
             chosenDietId.style.backgroundColor = '#FF7F37';
         }
-
+        
         function submitForm() {
-            //tutaj można pobrać ilość porcji od użytkownika
             if (chosenDiet) {
                 //może tutaj się uda wstawić backend? skoro wiemy którą diete wybrał użytkownik?
                 const allertPlace =  document.querySelector('.diet-types__wrapper');

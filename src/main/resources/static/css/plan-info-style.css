@@ -16,35 +16,31 @@
     background-color: var(--light-gray);
     border-radius: 0px 0px 40px 40px;
 }
-
 h1 {
-    font-size: 16px;
-    text-align: center;
-    color: var(--gold);
-    line-height: 23px;
-    font-weight: 500;
     margin-bottom: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 23px;
+    color: var(--gold);
 }
-
 .header__text {
     color: var(--dark-gray);
     font-size: 13px;
-    line-height: 20px;
     font-weight: 400;
+    line-height: 20px;
 }
-
 .header__text:nth-child(3),
 .header__text:nth-child(2) {
     margin-bottom: 20px;
 }
-
 .chat-triangle {
-    display: block;
     width: 70px;
-    transform: rotate(180deg);
+    display: block;
     position: relative;
     top: -5px;
     margin: 0 auto 40px;
+    transform: rotate(180deg);
 }
 /* Header ends */
 
@@ -56,24 +52,21 @@ h1 {
     gap: 17px;
     margin: 30px 0 40px;
 }
-
 .diet-type {
     width: auto;
     padding: 6px 12px;
     font-size: 13px;
+    text-align: center;
     color: var(--orange);
     border-radius: 10px;
     border: 2px solid #FF7F37;
-    text-align: center;
     cursor: pointer;
 }
-
 .question-number {
     font-family: 'Beau Rivage', cursive;
     font-size: 64px;
     color: var(--dark-gray);
 }
-
 .subform__header {
     display: flex;
     align-items: baseline;
@@ -81,7 +74,6 @@ h1 {
     gap: 20px;
     margin: 0 40px;
 }
-
 .diet-form__question {
     font-size: 16px;
     color: var(--gold);
@@ -93,14 +85,12 @@ input[type="range"] {
     accent-color: var(--orange);
     width: 60%;
 }
-
 .portions-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 40px 0;
 }
-
 .portions-info {
     margin: 15px 0;
     font-size: 13px;
@@ -115,6 +105,7 @@ input[type="range"] {
     flex-direction: column;
 }
 .products__container {
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -122,155 +113,133 @@ input[type="range"] {
     padding: 20px;
     background-color: var(--gray);
     border-radius: 15px;
-    width: 80%;
 }
-
 .products__wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .productsU {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 40px 20px;
     gap: 10px;
+    margin: 40px 20px;
     max-height: 400px;
     overflow-y: auto;
 }
-
 .product__field {
-    border-radius: 6px;
-    border: none;
     padding: 8px 12px;
     margin-bottom: 10px;
+    border-radius: 6px;
+    border: none;
 }
-
 .search {
     width: 57vw;
 }
-
 .amount {
     width: 160px;
 }
-
 .unit {
     width: 160px;
 }
-
 .test {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .deleteU {
+    height: 43px;
+    align-self: end;
     padding: 8px;
+    font-size: 25px;
     color: var(--white);
     background-color: var(--orange);
-    font-size: 25px;
-    align-self: end;
     border-radius: 8px;
-    height: 43px;
 }
-
 .products__label {
-    font-size: 13px;
     margin-bottom: 3px;
+    font-size: 13px;
 }
-
 .ui-menu {
-    background-color: var(--gray);
+    width: 57vw !important;
     height: 135px;
-    overflow: auto;
     top: 1px;
     padding: 8px 12px;
-    width: 57vw !important;
+    background-color: var(--gray);
+    overflow: auto;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
-
 .ui-menu-item {
     font-size: 13px;
     color: var(--black);
     list-style-type: none;
 }
-
 .ui-helper-hidden-accessible {
     display: none;
 }
-
 .products__label--1 {
     width: 57vw;
     text-align: left;
 }
-
 .products__label--2 {
     width: 160px;
 }
-
 .add-productU {
     padding: 8px 14px;
-    background-color: var(--orange);
-    color: var(--white);
+    margin-top: 80px;
+    align-self: center;
     font-size: 14px;
     font-weight: 500;
-    align-self: center;
+    color: var(--white);
+    background-color: var(--orange);
     border-radius: 8px;
-    margin-top: 80px;
 }
 /*Products form ends*/
 
 /*Disliked products form starts*/
 .add-productD {
     padding: 8px 14px;
-    background-color: var(--orange);
-    color: var(--white);
+    margin-top: 80px;
+    align-self: center;
     font-size: 14px;
     font-weight: 500;
-    align-self: center;
-    border-radius: 8px;
-    margin-top: 80px;
-}
-
-.deleteD {
-    padding: 8px;
     color: var(--white);
     background-color: var(--orange);
-    font-size: 25px;
     border-radius: 8px;
-    height: 43px;
-    width: 43px;
-    margin: 0 auto;
 }
-
+.deleteD {
+    width: 43px;
+    height: 43px;
+    padding: 8px;
+    margin: 0 auto;
+    font-size: 25px;
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 8px;
+}
 .productsD {
+    max-height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 40px 20px;
     gap: 10px;
-    max-height: 400px;
+    margin: 40px 20px;
     overflow-y: auto;
 }
-
 .disliked-products-form {
     display: flex;
     flex-direction: column;
 }
-
 .productsD .products__label{
     display: none;
 }
-
 .productsD .products__container {
-    gap: 5px;
     width: 57vw;
+    gap: 5px;
     padding: 0 20px 20px;
 }
-
 .productsD .product__field {
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
@@ -280,11 +249,11 @@ input[type="range"] {
 
 /*Plan day form starts*/
 .calendar-input {
-    display: flex;
     width: 130px;
+    display: flex;
     padding: 8px 12px;
-    font-size: 13px;
     margin: 40px auto 10px;
+    font-size: 13px;
     border-radius: 6px;
     border: solid 2px var(--gold);
 }
@@ -300,11 +269,11 @@ input[type="range"] {
     flex-direction: column;
 }
 .day__header {
-    background-color: var(--orange);
-    color: var(--white);
+    padding: 11px 0;
     font-size: 20px;
     text-align: center;
-    padding: 11px 0;
+    color: var(--white);
+    background-color: var(--orange);
 }
 .cooking__wrapper {
     display: flex;
@@ -313,18 +282,15 @@ input[type="range"] {
     background-color: var(--light-gray);
     padding: 12px 0;
 }
-
 .eating-plan, .cooking-time {
-    border-radius: 6px;
-    border: none;
     padding: 8px 12px;
     font-size: 15px;
+    border-radius: 6px;
+    border: none;
 }
-
 .eating-plan {
     width: 230px;
 }
-
 .cooking-time {
     width: 75px;
 }
@@ -337,28 +303,25 @@ input[type="range"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 40px 40px;
     gap: 10px;
+    margin: 40px 40px;
 }
-
 .plan-btn {
-    padding: 14px;
-    background-color: var(--orange);
-    color: var(--white);
-    font-size: 25px;
-    font-weight: 500;
-    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 14px;
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 8px;
 }
-
 .arrow,
 .buttons__info {
-    color: var(--dark-gray);
     font-size: 13px;
+    color: var(--dark-gray);
 }
-
 .buttons__info {
     width: 200px;
 }
@@ -367,14 +330,14 @@ input[type="range"] {
 /*Submit button starts*/
 .btn-submit-all {
     padding: 20px 30px;
-    background-color: var(--gold);
-    color: var(--white);
+    margin: 40px 0;
     font-size: 20px;
     font-weight: 600;
+    color: var(--white);
+    background-color: var(--gold);
     border-radius: 15px;
     animation: clickMe 3s ease-in-out infinite, 
     submitMe 3s ease-in-out infinite;
-    margin: 40px 0;
 }
 .btn-submit__wrapper {
     display: flex;
@@ -387,19 +350,18 @@ input[type="range"] {
 /*Desktop plan-generator starts*/
 @media (min-width: 992px) {
     .planner-form {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-around;
-
-        margin: 0 auto;
         width: 100%;
         max-width: 1000px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 0 auto;
     }
     .days {
-        margin: 0 auto;
         width: 100%;
         max-width: 600px;
+        margin: 0 auto;
     }
     .form-basis {
         flex-basis: 50%;
@@ -423,20 +385,19 @@ input[type="range"] {
         font-size: 18px;
     }
     .plan-form .products__header {
-        margin: 0 auto 40px;
         width: 100%;
         max-width: 800px;
+        margin: 0 auto 40px;
     }
     .plan-last-basis{
         flex-basis: 100%;
     }
-
     .header__wrapper {
-        margin: 100px auto 0;
         max-width: 1000px;
-        text-align: center;
+        margin: 100px auto 0;
         padding-left: 60px;
         padding-right: 60px;
+        text-align: center;
     }
     .plan-form__button {
         display: flex;
@@ -444,14 +405,12 @@ input[type="range"] {
         justify-content: center;
         gap: 10px;
     }
-
     h1 {
         font-size: 18px;
     }
     .header__text {
         font-size: 15px;
     }
-
     .diet-type {
         padding: 8px 14px;
         font-size: 15px;
@@ -459,13 +418,12 @@ input[type="range"] {
         color .4s;
     }
     .diet-type:hover {
+        color: var(--white);
         background-color: var(--orange);
-        color: var(--white)
     }
     .portions-info {
         font-size: 15px;
     }
-
     .calendar-input {
         padding: 10px 20px;
         font-size: 15px;
@@ -481,19 +439,15 @@ input[type="range"] {
         background-color: var(--gold);
         transform: scale(1.1);
     }
-
     .portions-bar input[type="range"] {
         cursor: pointer;
     }
-
     .plan-btn {
         transition: background-color .4s;
     }
-
     .plan-btn:hover {
         background-color: var(--gold);
     }
-
 }
 /*Desktop plan-generator ends*/
 
