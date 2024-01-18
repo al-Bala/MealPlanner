@@ -6,6 +6,7 @@ import pl.mealplanner.displayer.Recipes;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SearcherService {
@@ -23,4 +24,13 @@ public class SearcherService {
         Collections.shuffle(dietRecipes);
         return dietRecipes.subList(0, Math.min(3, dietRecipes.size()));
     }
+
+    public List<String> getAvailableDiets() {
+        List<Recipes> recipesWithDiet = searcherRepository.findAllDiets();
+        return recipesWithDiet.stream()
+                .map(Recipes::getDiet)
+                .distinct()
+                .collect(Collectors.toList());
+    }
+
 }

@@ -2,15 +2,33 @@
 <html>
 <head>
     <title>User Details</title>
+    <meta charset="UTF-8">
+    <title>Ulubione Przepisy</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script th:src="@{'/js/user-searcher-favorites.js'}"></script>
 </head>
-<body>
+<body data-userid="${id}">
 <h1>Profil użytkownika : </h1>
 <p>Login: <span th:text="${username}"></span></p>
 <p>Role: <span th:text="${role}"></span></p>
+<p>Role: <span th:text="${id}"></span></p>
+
+
 
 <form method="get" th:action="@{/user/{username}/change-profil(username=${username})}">
-    <button type="submit">Dodaj do ulubionych</button>
+    <button type="submit">Edytuj profil</button>
 </form>
+
+<div id="recipe-search-wrapper"></div>
+<script>
+    $(document).ready(function() {
+        var userId = "65972572a98ad12931ceef5e";
+        initializeRecipeFields('#recipe-search-wrapper', 'recipe', userId);
+    });
+</script>
+
 
 <h2>Ulubione przepisy</h2>
 <ul>
