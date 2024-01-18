@@ -486,6 +486,14 @@ input[type="range"] {
         cursor: pointer;
     }
 
+    .plan-btn {
+        transition: background-color .4s;
+    }
+
+    .plan-btn:hover {
+        background-color: var(--gold);
+    }
+
 }
 /*Desktop plan-generator ends*/
 
