@@ -48,9 +48,10 @@
         </div>
 
         <form method="post" th:action="@{/wyszukiwarka/wybrana-dieta}" class="browser__form">
-            <select name="diet" onchange="removeDefaultOption(this)">
-                <option value="" disabled selected>Wybierz dietę</option>
-                <option th:each="diet : ${diets}" th:text="${diet}" th:value="${diet}"></option>
+            <select name="diet" onchange="removeDefaultOption(this)" class="select-diet">
+                <option value="" disabled selected class="select-diet__option">Wybierz dietę</option>
+                <option th:each="diet : ${diets}" th:text="${diet}" th:value="${diet}" class="select-diet__option">
+                </option>
             </select>
             <div class="draw-btn__wrapper">
                 <button type="submit" class="draw-btn"><i class="fa-solid fa-dice"></i></button>

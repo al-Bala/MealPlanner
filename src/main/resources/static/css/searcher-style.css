@@ -134,6 +134,21 @@ h1 {
 ul {
     margin-top: 100px;
 }
+
+.select-diet {
+    width: 150px;
+    padding: 8px 14px;
+    border-radius: 50px;
+    border: none;
+    background-color: var(--gold);
+    color: var(--white);
+}
+
+.select-diet__option {
+    background-color: var(--white);
+    color: var(--black);
+    line-height: 10px;
+}
 /*Browser ends*/
 
 
