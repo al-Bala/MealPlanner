@@ -1,8 +1,7 @@
-
-
 function initializeRecipeFields(wrapper, fieldPrefix) {
-    var fieldHtml = `<div id="${fieldPrefix}-search">
-                        <input name="${fieldPrefix}[0].name" type="text" placeholder="Nazwa przepisu" class="search" required/>
+    var fieldHtml = `<div id="${fieldPrefix}-search" class="browser__wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input name="${fieldPrefix}[0].name" type="text" placeholder="Nazwa przepisu" class="search browser__input" required/>
                     </div>`;
     $(wrapper).append(fieldHtml);
     initializeAutocomplete($(".search"));
@@ -22,3 +21,15 @@ function initializeAutocomplete(search) {
             .appendTo(ul);
     };
 }
+
+function removeDefaultOption(selectElement) {
+    selectElement.options[0].disabled = true;
+    if (selectElement.selectedIndex === 0) {
+        selectElement.selectedIndex = -1;
+    }
+}
+
+$(document).ready(function () {
+    // Inicjalizacja wyszukiwarki przepisów
+    initializeRecipeFields('#recipe-search-wrapper', 'recipe');
+});
