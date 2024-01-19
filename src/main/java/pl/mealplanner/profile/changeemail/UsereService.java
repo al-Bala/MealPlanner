@@ -3,7 +3,6 @@ package pl.mealplanner.profile.changeemail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.mealplanner.loginandregister.domain.entity.User;
 
 @Service
 public class UsereService {

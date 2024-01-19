@@ -2,6 +2,8 @@ package pl.mealplanner.profile.domain.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -19,9 +21,9 @@ import java.util.List;
 @Builder
 @Document(collection = "users")
 public class User implements UserDetails {
-//
-//    @Id
-//    ObjectId id;
+
+    @Id
+    ObjectId id;
 
     @Field("role")
     Role role;
@@ -42,6 +44,8 @@ public class User implements UserDetails {
     @Field("grocery_list")
     List<GroceryList> groceryList;
 
+    List<String> favorites;
+
 //    @Getter
 //    @Id
 //    private String id;
@@ -50,10 +54,6 @@ public class User implements UserDetails {
 //    @Getter
 //    private String role;
 
-
-//    public String getID() {
-//        return id;
-//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

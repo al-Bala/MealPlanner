@@ -1,24 +1,19 @@
 package pl.mealplanner.profile.domain;
 
-import com.mongodb.client.*;
-import com.mongodb.client.model.Filters;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import lombok.AllArgsConstructor;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 import pl.mealplanner.displayer.Recipes;
-import pl.mealplanner.plangenerator.leftproductscounter.entity.ProductClass;
-import pl.mealplanner.searcher.SearcherFetcher;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.bson.Document;
-import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.List;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.in;
 @AllArgsConstructor
 @Component
 

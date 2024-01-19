@@ -1,11 +1,10 @@
-package pl.mealplanner.profile.infrastructure;
+package pl.mealplanner.profile.domain;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.mealplanner.displayer.Recipes;
-import pl.mealplanner.loginandregister.domain.entity.User;
-import pl.mealplanner.profile.domain.RecipeRepository;
-import pl.mealplanner.profile.domain.UserRepository;
+import pl.mealplanner.profile.domain.entity.User;
 import pl.mealplanner.recipeProfile.RecipeProfileRepository;
 
 import java.util.Collections;
@@ -15,8 +14,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-
-
 
     @Autowired
     private UserRepository userRepository;

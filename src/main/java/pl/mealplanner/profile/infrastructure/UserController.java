@@ -1,19 +1,19 @@
 package pl.mealplanner.profile.infrastructure;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import pl.mealplanner.profile.domain.entity.User;
+import org.springframework.web.bind.annotation.*;
+import pl.mealplanner.displayer.Recipes;
 import pl.mealplanner.profile.domain.UserFacade;
+import pl.mealplanner.profile.domain.UserFetcher;
+import pl.mealplanner.profile.domain.UserService;
+import pl.mealplanner.profile.domain.entity.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 class UserController {
@@ -22,9 +22,11 @@ class UserController {
     private UserFetcher userFetcher; // Wstrzyknięcie zależności
 
     private final UserFacade userFacade;
+    private final UserService userService;
 
-    public UserController(UserFacade userFacade) {
+    public UserController(UserFacade userFacade, UserService userService) {
         this.userFacade = userFacade;
+        this.userService = userService;
     }
 
     @GetMapping("/user/{username}")
@@ -36,7 +38,7 @@ class UserController {
 
         if (user != null) {
             model.addAttribute("user", user.getUsername());
-            model.addAttribute("id", user.id());
+            model.addAttribute("id", user.getId());
             model.addAttribute("role", user.getRole());
             model.addAttribute("favorites", userService.getFavoriteRecipes(username));
             return "details/user-details"; // nazwa widoku (user-details.html)

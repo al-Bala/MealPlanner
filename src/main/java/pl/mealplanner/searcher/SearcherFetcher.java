@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import org.bson.Document;
 import org.springframework.stereotype.Component;
 import pl.mealplanner.displayer.Recipes;
-import pl.mealplanner.plangenerator.leftproductscounter.entity.ProductClass;
 
 import java.util.ArrayList;
 import java.util.List;

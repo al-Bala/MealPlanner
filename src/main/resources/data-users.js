@@ -53,6 +53,7 @@ db.users.insertMany([
                 }
             }
         ],
+        favorites: []
     },
     {
         _id: ObjectId('658e801c20709749de3faf9a'),

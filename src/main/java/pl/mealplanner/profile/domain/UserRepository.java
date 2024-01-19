@@ -7,7 +7,7 @@ import pl.mealplanner.profile.domain.entity.User;
 import java.util.Optional;
 
 @Repository
-interface UserRepository extends MongoRepository<User, String> {
+public interface UserRepository extends MongoRepository<User, String> {
     // Dodatkowe metody repozytorium, jeśli są potrzebne
 
     Optional<User> findByUsername(String username);
