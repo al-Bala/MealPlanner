@@ -19,8 +19,6 @@ import static pl.mealplanner.plangenerator.plan.PlanFacade.EMPTY_DAY_ID;
 
 class DisplayMapper {
 
-
-
     public static List<DisplayPlan> mapFromMealPlanElementToDisplay(List<MealPlanElement> mealPlan) {
         return mealPlan.stream()
                 .map(mpe -> DisplayPlan.builder()

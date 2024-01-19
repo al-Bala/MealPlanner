@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.mealplanner.plangenerator.domain.dto.*;
 import pl.mealplanner.plangenerator.infrastructure.dto.DayInfoRequest;
-import pl.mealplanner.plangenerator.infrastructure.dto.IngredientRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.UserPreferencesRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.WeekInfoRequest;
 import pl.mealplanner.plangenerator.mealscounter.MealsCounterFacade;
@@ -19,7 +18,6 @@ import pl.mealplanner.profile.domain.entity.PlanHistory;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @AllArgsConstructor
 @Component
