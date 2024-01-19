@@ -14,10 +14,31 @@ db.users.insertMany([
         },
         user_recipes: [""],
         plan_history: [
-            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')}, // Kasza jaglana z warzywami
-            { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9424')}  // Koktajl owocowy
+            // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')}, // Kasza jaglana z warzywami
+            // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9425')}, // Ryż z warzywami i kurczakiem
+            // {day: new Date(2023, 12, 13), recipe: ObjectId('6577660abbac733a111c9424')},// Koktajl owocowy
+            // {day: new Date(2023, 12, 14), recipe: null},
+            {
+                day: new Date(2023, 12, 13),
+                recipe: {
+                    _id: ObjectId('6577660abbac733a111c9424'),
+                    name: "Koktajl owocowy",
+                    portions: 1,
+                    prepare_time: 10,
+                    diet: "wegetariańska",
+                    ingredients: [
+                        { name: "banan", amount: 1, unit: "szt" },
+                        { name: "truskawki", amount: 100, unit: "g" },
+                        { name: "kiwi", amount: 1, unit: "szt" },
+                        { name: "sok pomarańczowy", amount: 150, unit: "ml" },
+                        { name: "jogurt naturalny", amount: 50, unit: "g" }
+                    ],
+                    steps: ["Włóż owoce do blendera", "Dodaj sok i jogurt", "Miksuj do uzyskania gładkiego koktajlu", "Gotowe do picia"]
+                }
+            },
         ],
-    },
+        grocery_list:[]
+    }
 ]);
 
 db.recipes.insertMany([
@@ -31,7 +52,7 @@ db.recipes.insertMany([
         ingredients: [
             { name: "kasza jaglana", amount: 200, unit: "g" },
             { name: "marchew", amount: 2, unit: "szt" },
-            { name: "brokuły", amount: 150, unit: "g" },
+            { name: "brokuł", amount: 150, unit: "g" },
             { name: "oliwa z oliwek", amount: 30, unit: "ml" }
         ],
         steps: ["Ugotuj kaszę", "Pokrój warzywa", "Smaż warzywa na oliwie", "Podawaj razem"]
@@ -59,7 +80,7 @@ db.recipes.insertMany([
         max_storage_time: 1,
         diet: "wegetariańska",
         ingredients: [
-            { name: "jajka", amount: 4, unit: "szt" },
+            { name: "jajko", amount: 4, unit: "szt" },
             { name: "papryka", amount: 1, unit: "szt" },
             { name: "pomidor", amount: 2, unit: "szt" },
             { name: "cebula", amount: 1, unit: "szt" },
@@ -94,7 +115,7 @@ db.recipes.insertMany([
             { name: "ryż", amount: 300, unit: "g" },
             { name: "kurczak", amount: 250, unit: "g" },
             { name: "marchew", amount: 2, unit: "szt" },
-            { name: "brokuły", amount: 150, unit: "g" },
+            { name: "brokuł", amount: 150, unit: "g" },
             { name: "sos sojowy", amount: 30, unit: "ml" }
         ],
         steps: ["Ugotuj ryż", "Pokrój kurczaka i warzywa", "Smaż kurczaka i warzywa, dodaj sos sojowy", "Podawaj razem z ryżem"]
@@ -103,32 +124,61 @@ db.recipes.insertMany([
 
 db.products.insertMany([
     {
+        _id: ObjectId('658c088e98487458f640453b'),
         name: "kasza jaglana",
-        packing_measures: [
-            { amount: 200, unit: "g" },
-            { amount: 400, unit: "g" }
-        ],
+        packing_units: ["g","kg"],
+        main_unit: "g",
+        packing_measures: [400,1000]
     },
     {
+        _id: ObjectId('658c088e98487458f640453c'),
         name: "marchew",
-        packing_measures: [
-            { amount: 0, unit: "g" },
-            { amount: 0, unit: "szt" }
-        ],
+        packing_units: ["g","kg","szt"],
+        main_unit: "g",
+        packing_measures: [100]
     },
     {
-        name: "brokuły",
-        packing_measures: [
-            { amount: 0, unit: "g" },
-            { amount: 0, unit: "szt" }
-        ],
+        _id: ObjectId('658c088e98487458f640453d'),
+        name: "brokuł",
+        packing_units: ["g","kg","szt"],
+        main_unit: "g",
+        packing_measures: [150]
     },
     {
+        _id: ObjectId('658c088e98487458f640453e'),
         name: "oliwa z oliwek",
-        packing_measures: [
-            { amount: 50, unit: "ml" }
-        ],
-    }
+        packing_units: ["ml","l"],
+        main_unit: "ml",
+        packing_measures: [50,250,1000]
+    },
+    {
+        _id: ObjectId('659d8d69d6d8ec0007e14d76'),
+        name: "jajko",
+        packing_units: ["szt"],
+        main_unit: "szt",
+        packing_measures: [6,10]
+    },
+    {
+        _id: ObjectId('65a43bcc6b150200075ba406'),
+        name: "ryż",
+        packing_units: ["g", "kg"],
+        main_unit: "g",
+        packing_measures: [400, 1000]
+    },
+    {
+        _id: ObjectId('65a43be46b150200075ba407'),
+        name: "kurczak",
+        packing_units: ["g", "kg"],
+        main_unit: "g",
+        packing_measures: [400, 600]
+    },
+    {
+        _id: ObjectId('65a43bfc6b150200075ba408'),
+        name: "sos sojowy",
+        packing_units: ["ml", "l"],
+        main_unit: "ml",
+        packing_measures: [150]
+    },
 ]);
 
 

@@ -8,29 +8,31 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
-import pl.mealplanner.loginandregister.domain.LoginAndRegisterFacade;
-import pl.mealplanner.loginandregister.domain.dto.PlanHistoryDto;
 import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
 import pl.mealplanner.plangenerator.mealsfilter.entity.Recipe;
+import pl.mealplanner.plangenerator.plan.PlanFacade;
+import pl.mealplanner.profile.domain.entity.PlanHistory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
+import static pl.mealplanner.plangenerator.plan.PlanFacade.EMPTY_DAY_ID;
 
 @AllArgsConstructor
 @Log4j2
 @Repository
 class MealsFilterRepositoryImpl implements MealsFilterRepository{
     private final MongoTemplate mongoTemplate;
-    private final LoginAndRegisterFacade loginAndRegisterFacade;
-    public List<Recipe> findMatchingRecipes(InfoForFiltering info) {
-        List<String> namesProductsToUse = MealsFilterMapper.mapFromListIngredientDtoToListString(info.productsToUse());
+    private final PlanFacade planFacade;
+    public List<Recipe> findMatchingRecipes(InfoForFiltering info, int limit) {
         List<ObjectId> previousPlanRecipes = getRecipesFromPreviousPlan();
 
         Criteria criteriaMaxStorageTime = Criteria.where("max_storage_time").gte(info.forHowManyDays());
         Criteria criteriaDiet = isEmptyDiet(info.diet());
         Criteria criteriaPrepareTime = isEmptyPrepareTime(info.timeForPrepareMin());
-        List<AggregationOperation> agrProductsToUse = isEmptyProductsToUse(namesProductsToUse);
+        List<AggregationOperation> agrProductsToUse = isEmptyProductsToUse(info.productsToUse(), limit);
         Criteria criteriaDislikedProducts = isEmptyDislikedProducts(info.dislikedProducts());
         Criteria criteriaPlanHistory = Criteria.where("_id").nin(previousPlanRecipes);
 
@@ -50,6 +52,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
             List<Recipe> documents2 = result2.getMappedResults();
             if(documents2.isEmpty()){
                 log.error("Nie udało się znaleźć żadnego pasującego przepisu :(");
+                return null;
             }
             return documents2;
         }
@@ -63,9 +66,13 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
     }
 
     private List<ObjectId> getRecipesFromPreviousPlan(){
-        List<PlanHistoryDto> planHistoryList = loginAndRegisterFacade.findPlanHistoryByCurrentUser();
+        List<PlanHistory> planHistoryList = planFacade.getCurrentPlan();
+        if(planHistoryList.isEmpty()){
+            return Collections.emptyList();
+        }
         return planHistoryList.stream()
-                .map(PlanHistoryDto::recipeId)
+                .filter(p -> !p.recipeInPlanHistory().id().equals(EMPTY_DAY_ID))
+                .map(p -> p.recipeInPlanHistory().id())
                 .toList();
     }
 
@@ -80,7 +87,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
     }
 
     // NA PEWNO znjadzie przepis z przynjamniej 1 productToUse
-    private List<AggregationOperation> isEmptyProductsToUse(List<String> namesProductsToUse) {
+    private List<AggregationOperation> isEmptyProductsToUse(List<String> namesProductsToUse, int limit) {
         if (!namesProductsToUse.isEmpty()) {
             return Arrays.asList(
                     Aggregation.match(Criteria.where("ingredients.name").in(namesProductsToUse)),
@@ -95,7 +102,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
                     Aggregation.group("matchingIngredientsCount")
                             .push(Aggregation.ROOT).as("recipes"),
                     Aggregation.sort(Sort.Direction.DESC, "_id"),
-                    Aggregation.limit(1),
+                    Aggregation.limit(limit),
                     Aggregation.unwind("$recipes"),
                     Aggregation.replaceRoot("$recipes")
             );
@@ -111,7 +118,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
     }
 
     private Criteria isEmptyDiet(String diet){
-        if(!diet.isEmpty()){
+        if(!diet.equals("brakDiety")){
             return Criteria.where("diet").is(diet);
         }
         return new Criteria();

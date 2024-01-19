@@ -2,6 +2,7 @@ db.createCollection("recipes")
 
 db.recipes.insertMany([
     {
+        _id: ObjectId('6577660abbac733a111c9421'),
         name: "Kasza jaglana z warzywami",
         portions: 4,
         prepare_time: 30,
@@ -16,6 +17,7 @@ db.recipes.insertMany([
         steps: ["Ugotuj kaszę", "Pokrój warzywa", "Smaż warzywa na oliwie", "Podawaj razem"]
     },
     {
+        _id: ObjectId('6577660abbac733a111c9422'),
         name: "Sałatka owocowa",
         portions: 3,
         prepare_time: 15,
@@ -30,13 +32,14 @@ db.recipes.insertMany([
         steps: ["Pokrój owoce", "Połącz z miodem", "Delikatnie wymieszaj", "Gotowe do podania"]
     },
     {
+        _id: ObjectId('6577660abbac733a111c9423'),
         name: "Jajecznica z warzywami",
         portions: 2,
         prepare_time: 15,
         max_storage_time: 1,
         diet: "wegetariańska",
         ingredients: [
-            { name: "jajka", amount: 4, unit: "szt" },
+            { name: "jajko", amount: 4, unit: "szt" },
             { name: "papryka", amount: 1, unit: "szt" },
             { name: "pomidor", amount: 2, unit: "szt" },
             { name: "cebula", amount: 1, unit: "szt" },
@@ -45,6 +48,7 @@ db.recipes.insertMany([
         steps: ["Ubij jajka", "Pokrój warzywa", "Smaż warzywa, dodaj jajka", "Podawaj gorące"]
     },
     {
+        _id: ObjectId('6577660abbac733a111c9424'),
         name: "Koktajl owocowy",
         portions: 1,
         prepare_time: 10,
@@ -60,6 +64,7 @@ db.recipes.insertMany([
         steps: ["Włóż owoce do blendera", "Dodaj sok i jogurt", "Miksuj do uzyskania gładkiego koktajlu", "Gotowe do picia"]
     },
     {
+        _id: ObjectId('6577660abbac733a111c9425'),
         name: "Ryż z warzywami i kurczakiem",
         portions: 3,
         prepare_time: 25,

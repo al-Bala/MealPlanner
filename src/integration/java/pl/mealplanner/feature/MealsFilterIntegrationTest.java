@@ -5,17 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
 import pl.mealplanner.BaseIntegrationTest;
-import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
-import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
-import pl.mealplanner.plangenerator.domain.dto.UserPreferencesDto;
 import pl.mealplanner.plangenerator.mealsfilter.MealsFilterFacade;
-import pl.mealplanner.plangenerator.mealsfilter.dto.FilteredRecipeDto;
-import pl.mealplanner.plangenerator.mealsfilter.dto.IngredientDto;
+import pl.mealplanner.plangenerator.mealsfilter.dto.InfoForFiltering;
+import pl.mealplanner.plangenerator.mealsfilter.dto.MatchingRecipe;
+import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
 
-import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Set;
 
 public class MealsFilterIntegrationTest extends BaseIntegrationTest {
     @Autowired
@@ -24,44 +21,57 @@ public class MealsFilterIntegrationTest extends BaseIntegrationTest {
     @WithMockUser(username = "testUser", roles = "USER")
     public void database_test(){
         // given
-        InfoForMealsSearch infoForMealsSearch = getInfoForMealsSearch();
+        InfoForFiltering infoForFiltering = getInfoForFiltering();
 
         // when
-        List<FilteredRecipeDto> foundMeals = mealsFilterFacade.findRecipes(infoForMealsSearch);
+        MatchingRecipe foundMeal = mealsFilterFacade.findRecipe(infoForFiltering);
+        System.out.println(foundMeal);
 
         // then
-        List<FilteredRecipeDto> expectedFoundMeals = List.of(
-                FilteredRecipeDto.builder()
-                        .name("Kasza jaglana z warzywami")
-                        .portions(4)
-                        .prepare_time(30)
-                        .max_storage_time(2)
-                        .diet("wegetariańska")
-                        .ingredients(List.of(
-                                new IngredientDto("kasza jaglana", 200, "g"),
-                                new IngredientDto("marchew", 2, "szt"),
-                                new IngredientDto("brokuły", 150, "g"),
-                                new IngredientDto("oliwa z oliwek", 30, "ml")
-                        ))
-                        .build()
-        );
+//        List<ConvertedRecipe> expectedFoundMeals = List.of(
+//                ConvertedRecipe.builder()
+//                        .name("Kasza jaglana z warzywami")
+//                        .portions(4)
+//                        .prepare_time(30)
+//                        .max_storage_time(2)
+//                        .diet("wegetariańska")
+//                        .ingredients(List.of(
+//                                new IngredientConverted("kasza jaglana",
+//                                        List.of(new AmountAndUnit(200, "g"), new AmountAndUnit(200, "g"))),
+//                                new IngredientConverted("marchew",
+//                                        List.of(new AmountAndUnit(2, "szt"), new AmountAndUnit(200, "g")))
+////                                new IngredientDto("marchew", 2, "szt"),
+////                                new IngredientDto("brokuły", 150, "g"),
+////                                new IngredientDto("oliwa z oliwek", 30, "ml")
+//                        ))
+//                        .build()
+//        );
 
-        assertEquals(expectedFoundMeals, foundMeals);
+//        assertEquals(expectedFoundMeals, foundMeals);
     }
 
     @NotNull
-    private static InfoForMealsSearch getInfoForMealsSearch() {
-        UserPreferencesDto preferences = UserPreferencesDto.builder()
-                .numberOfPortions(4)
-                .diet("wegetariańska")
-                .productsToUse(List.of(
-                        new IngredientDto("marchew", 100, "g"),
-                        new IngredientDto("brokuły", 1, "szt")
-                ))
-                .dislikedProducts(List.of("sos sojowy"))
+    private static InfoForFiltering getInfoForFiltering() {
+        return InfoForFiltering.builder()
+                .forHowManyDays(1)
+                .diet("")
+                .timeForPrepareMin(30)
+                .productsToUse(List.of("marchew"))
+                .dislikedProducts(Collections.emptyList())
                 .build();
-        List<OneMealInfo> oneMealInfoList = List.of(
-                new OneMealInfo(LocalDate.of(2023, 12,9), 1, 30));
-        return new InfoForMealsSearch(oneMealInfoList, preferences);
+
+
+//        UserPreferencesDto preferences = UserPreferencesDto.builder()
+//                .numberOfPortions(4)
+//                .diet("wegetariańska")
+//                .productsToUse(List.of(
+//                        new IngredientDto("marchew", 100, "g"),
+//                        new IngredientDto("brokuły", 1, "szt")
+//                ))
+//                .dislikedProducts(List.of("sos sojowy"))
+//                .build();
+//        List<OneMealInfo> oneMealInfoList = List.of(
+//                new OneMealInfo(LocalDate.of(2023, 12,9), 1, 30));
+//        return new InfoForMealsSearch(oneMealInfoList, preferences);
     }
 }

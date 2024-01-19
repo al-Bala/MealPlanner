@@ -4,7 +4,7 @@ import com.mongodb.client.*;
 import lombok.AllArgsConstructor;
 import org.bson.Document;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.plangenerator.leftproductscounter.entity.ProductClass;
+import pl.mealplanner.plangenerator.productscounter.entity.ProductClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +19,16 @@ class ProductsFetcher {
         this.collection = database.getCollection("products");
     }
 
-    public List<ProductClass> fetch(String searchFilter) {
-        Document filter = new Document("name", java.util.regex.Pattern.compile(searchFilter, java.util.regex.Pattern.CASE_INSENSITIVE));
+    public List<ProductClass> fetchProducts(String term) {
+        Document filter = new Document("name", java.util.regex.Pattern.compile(term, java.util.regex.Pattern.CASE_INSENSITIVE));
         FindIterable<Document> documents = collection.find(filter);
 
-        List<ProductClass> plants = new ArrayList<>();
+        List<ProductClass> products = new ArrayList<>();
         for (Document document : documents) {
-            ProductClass plantDTO = new ProductClass();
-            plantDTO.setName(document.getString("name"));
-            plants.add(plantDTO);
+            ProductClass product = new ProductClass();
+            product.setName(document.getString("name"));
+            products.add(product);
         }
-        return plants;
+        return products;
     }
 }

@@ -1,0 +1,456 @@
+@import '../css/__reset.css';
+@import '../css/__variables.css';
+@import '../css/__navigation.css';
+@import '../css/__footer.css';
+@import '../css/__animations.css';
+
+/*Mobile plan-generator starts*/
+.plan-info-page {
+    font-family: "Now", sans-serif;
+}
+/* Header starts */
+.header__wrapper {
+    width: 100%;
+    margin-top: 73px;
+    padding: 53px 40px;
+    background-color: var(--light-gray);
+    border-radius: 0px 0px 40px 40px;
+}
+h1 {
+    margin-bottom: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 23px;
+    color: var(--gold);
+}
+.header__text {
+    color: var(--dark-gray);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.header__text:nth-child(3),
+.header__text:nth-child(2) {
+    margin-bottom: 20px;
+}
+.chat-triangle {
+    width: 70px;
+    display: block;
+    position: relative;
+    top: -5px;
+    margin: 0 auto 40px;
+    transform: rotate(180deg);
+}
+/* Header ends */
+
+/*Diet form starts*/
+.diet-types__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+    margin: 30px 0 40px;
+}
+.diet-type {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 13px;
+    text-align: center;
+    color: var(--orange);
+    border-radius: 10px;
+    border: 2px solid #FF7F37;
+    cursor: pointer;
+}
+.question-number {
+    font-family: 'Beau Rivage', cursive;
+    font-size: 64px;
+    color: var(--dark-gray);
+}
+.subform__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: start;
+    gap: 20px;
+    margin: 0 40px;
+}
+.diet-form__question {
+    font-size: 16px;
+    color: var(--gold);
+}
+/*Diet form ends*/
+
+/*Portions form starts*/
+input[type="range"] {
+    accent-color: var(--orange);
+    width: 60%;
+}
+.portions-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0;
+}
+.portions-info {
+    margin: 15px 0;
+    font-size: 13px;
+    color: var(--dark-gray);
+}
+/*Portions form ends*/
+
+/*Products form starts*/
+
+.products-form {
+    display: flex;
+    flex-direction: column;
+}
+.products__container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    background-color: var(--gray);
+    border-radius: 15px;
+}
+.products__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.productsU {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.product__field {
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: none;
+}
+.search {
+    width: 57vw;
+}
+.amount {
+    width: 160px;
+}
+.unit {
+    width: 160px;
+}
+.test {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.deleteU {
+    height: 43px;
+    align-self: end;
+    padding: 8px;
+    font-size: 25px;
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 8px;
+}
+.products__label {
+    margin-bottom: 3px;
+    font-size: 13px;
+}
+.ui-menu {
+    width: 57vw !important;
+    height: 135px;
+    top: 1px;
+    padding: 8px 12px;
+    background-color: var(--gray);
+    overflow: auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.ui-menu-item {
+    font-size: 13px;
+    color: var(--black);
+    list-style-type: none;
+}
+.ui-helper-hidden-accessible {
+    display: none;
+}
+.products__label--1 {
+    width: 57vw;
+    text-align: left;
+}
+.products__label--2 {
+    width: 160px;
+}
+.add-productU {
+    padding: 8px 14px;
+    margin-top: 80px;
+    align-self: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 8px;
+}
+/*Products form ends*/
+
+/*Disliked products form starts*/
+.add-productD {
+    padding: 8px 14px;
+    margin-top: 80px;
+    align-self: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 8px;
+}
+.deleteD {
+    width: 43px;
+    height: 43px;
+    padding: 8px;
+    margin: 0 auto;
+    font-size: 25px;
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 8px;
+}
+.productsD {
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 20px;
+    overflow-y: auto;
+}
+.disliked-products-form {
+    display: flex;
+    flex-direction: column;
+}
+.productsD .products__label{
+    display: none;
+}
+.productsD .products__container {
+    width: 57vw;
+    gap: 5px;
+    padding: 0 20px 20px;
+}
+.productsD .product__field {
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    background-color: var(--light-gray);
+}
+/*Disliked products form ends*/
+
+/*Plan day form starts*/
+.calendar-input {
+    width: 130px;
+    display: flex;
+    padding: 8px 12px;
+    margin: 40px auto 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: solid 2px var(--gold);
+}
+/*Plan day form ends*/
+
+
+/*Plan form starts*/
+.days {
+    margin: 40px 0;
+}
+.day {
+    display: flex;
+    flex-direction: column;
+}
+.day__header {
+    padding: 11px 0;
+    font-size: 20px;
+    text-align: center;
+    color: var(--white);
+    background-color: var(--orange);
+}
+.cooking__wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--light-gray);
+    padding: 12px 0;
+}
+.eating-plan, .cooking-time {
+    padding: 8px 12px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: none;
+}
+.eating-plan {
+    width: 230px;
+}
+.cooking-time {
+    width: 75px;
+}
+.plan-form__button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.plan-form__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 40px;
+}
+.plan-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14px;
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 8px;
+}
+.arrow,
+.buttons__info {
+    font-size: 13px;
+    color: var(--dark-gray);
+}
+.buttons__info {
+    width: 200px;
+}
+/*Plan form ends*/
+
+/*Submit button starts*/
+.btn-submit-all {
+    padding: 20px 30px;
+    margin: 40px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--gold);
+    border-radius: 15px;
+    animation: clickMe 3s ease-in-out infinite, 
+    submitMe 3s ease-in-out infinite;
+}
+.btn-submit__wrapper {
+    display: flex;
+    justify-content: center;
+}
+/*Submit button ends*/
+
+/*Mobile plan-generator ends*/
+
+/*Desktop plan-generator starts*/
+@media (min-width: 992px) {
+    .planner-form {
+        width: 100%;
+        max-width: 1000px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 0 auto;
+    }
+    .days {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .form-basis {
+        flex-basis: 50%;
+    }
+    .search {
+        width: 270px;
+    }
+    .ui-menu {
+        width: 270px !important;
+    }
+    .products__label--1 {
+        width: 270px;
+    }
+    .productsD .products__container {
+        width: 270px;
+    }
+    .subform__header {
+        justify-content: center;
+    }
+    .diet-form__question {
+        font-size: 18px;
+    }
+    .plan-form .products__header {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto 40px;
+    }
+    .plan-last-basis{
+        flex-basis: 100%;
+    }
+    .header__wrapper {
+        max-width: 1000px;
+        margin: 100px auto 0;
+        padding-left: 60px;
+        padding-right: 60px;
+        text-align: center;
+    }
+    .plan-form__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    h1 {
+        font-size: 18px;
+    }
+    .header__text {
+        font-size: 15px;
+    }
+    .diet-type {
+        padding: 8px 14px;
+        font-size: 15px;
+        transition: background-color .4s,
+        color .4s;
+    }
+    .diet-type:hover {
+        color: var(--white);
+        background-color: var(--orange);
+    }
+    .portions-info {
+        font-size: 15px;
+    }
+    .calendar-input {
+        padding: 10px 20px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    .add-productU,
+    .add-productD {
+        transition: background-color .4s,
+        transform .4s;
+    }
+    .add-productU:hover,
+    .add-productD:hover {
+        background-color: var(--gold);
+        transform: scale(1.1);
+    }
+    .portions-bar input[type="range"] {
+        cursor: pointer;
+    }
+    .plan-btn {
+        transition: background-color .4s;
+    }
+    .plan-btn:hover {
+        background-color: var(--gold);
+    }
+}
+/*Desktop plan-generator ends*/
+
+
+
+

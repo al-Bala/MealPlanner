@@ -20,7 +20,26 @@
 </nav>
 <br /><br />
 <div>
+    <div th:each="element : ${mealPlanner}">
+        <div th:if="${element.recipeDisplay().id().equals('EMPTY_DAY_ID')}">
+            <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
+            <p>Masz wolne :)</p>
+        </div>
+        <div th:if="${!element.recipeDisplay().id().equals('EMPTY_DAY_ID')}">
+            <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
+            <p th:text="${element.recipeDisplay().name()}"></p>
+            <p>Składniki:</p>
+            <ul>
+                <li th:each="ing : ${element.recipeDisplay().ingredients()}"
+                    th:text="${ing.name()} + ' - ' + ${ing.amountDisplay()} + ' ' + ${ing.unitDisplay()}"
+                ></li>
+            </ul>
+        </div>
+        <br><br>
+    </div>
 
+    <a th:href="@{/plan/generator}">Wygeneruj plan ponownie</a>
+    <a th:href="@{/plan/groceryList}">Lista zakupów</a>
 </div>
 </body>
 </html>

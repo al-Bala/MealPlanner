@@ -3,7 +3,7 @@ package pl.mealplanner.plangenerator.mealscounter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
-import pl.mealplanner.plangenerator.domain.dto.WeekInfoDto;
+import pl.mealplanner.plangenerator.domain.dto.WeekInfo;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class MealsCounterFacade {
 
     private final MealsCounterService mealsCounterService;
 
-    public List<OneMealInfo> countNumberOfMeals(WeekInfoDto weekInfoDto){
-        return mealsCounterService.countNumberOfMeals(weekInfoDto);
+    public List<OneMealInfo> countNumberOfMeals(WeekInfo weekInfo){
+        return mealsCounterService.countNumberOfMeals(weekInfo);
     }
 }
