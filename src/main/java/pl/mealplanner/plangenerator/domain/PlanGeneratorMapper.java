@@ -6,6 +6,7 @@ import pl.mealplanner.plangenerator.domain.dto.IngredientDto;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 class PlanGeneratorMapper {
     public static UserPreferences mapFromUserPreferencesRequestToUserPreferencesDto(UserPreferencesRequest request) {
@@ -22,6 +23,7 @@ class PlanGeneratorMapper {
             return Collections.emptyList();
         }
         return ingredientRequests.stream()
+                .filter(p -> p.getName() != null)
                 .map(ing -> IngredientDto.builder()
                         .name(ing.getName())
                         .amount(ing.getAmount())
@@ -34,6 +36,7 @@ class PlanGeneratorMapper {
             return Collections.emptyList();
         }
         return dislikedProductsRequests.stream()
+                .filter(p -> p.getName() != null)
                 .map(DislikedProductRequest::getName)
                 .toList();
     }

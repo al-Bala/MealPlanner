@@ -48,7 +48,7 @@ function deleteProduct(wrapper, deleteButtonClass, x, fieldPrefix) {
     $(wrapper).on("click", "." + deleteButtonClass, function(e) {
         e.preventDefault();
         $(this).parent('div').remove();
-        updateIndexes(wrapper, fieldPrefix);
+        // updateIndexes(wrapper, fieldPrefix);
         x--;
     });
 }

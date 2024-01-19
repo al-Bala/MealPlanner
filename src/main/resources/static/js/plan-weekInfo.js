@@ -1,4 +1,5 @@
 $(function() {
+    var daysOfWeekNames = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
     var wrapper = $('.days');
     var startDate = $('#startDate');
     var maxDays = 7;
@@ -53,7 +54,7 @@ $(function() {
     function createPlanDiv(x, date) {
         var planDiv =
             '<div id="days-' + x + '" class="day">' +
-                '<label class="day__header">Dzień ' + (x + 1) + ': ' + date.toISOString().split("T")[0] + '</label>' +
+                '<label class="day__header">' + daysOfWeekNames[date.getDay()] + ': ' + moment(date).format('DD-MM-YYYY') + '</label>' +
                 '<div class="cooking__wrapper">'+
                     '<select name="weekInfo.dayInfoList[' + x + '].eatingPlan.id" class="eating-plan" required>' +
                         '<option value="" disabled selected>Wybierz</option>' +
@@ -83,7 +84,7 @@ $(function() {
     function createFirstPlanDiv(date) {
         var firstPlanDiv =
             '<div id="days-0" class="day">' +
-                '<label class="day__header">Dzień 1: ' + date.toISOString().split("T")[0] + '</label>' +
+                '<label class="day__header">' + daysOfWeekNames[date.getDay()] + ': ' + moment(date).format('DD-MM-YYYY') + '</label>' +
                 '<div class="cooking__wrapper">'+
                     '<select name="weekInfo.dayInfoList[0].eatingPlan.id" class="eating-plan">' +
                     '<option selected value="C01">Gotuję</option>' +

@@ -19,6 +19,7 @@ import pl.mealplanner.plangenerator.productscounter.entity.ProductClass;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @AllArgsConstructor
@@ -97,6 +98,9 @@ class PlanGeneratorController {
     @ResponseBody
     public List<String> getUnitOptions(@RequestParam(value="productName", required = false, defaultValue="") String productName) {
         Product product = productsCounterFacade.findProductByName(productName);
+        if(product == null){
+            return Collections.emptyList();
+        }
         return product.packingUnits();
     }
 }

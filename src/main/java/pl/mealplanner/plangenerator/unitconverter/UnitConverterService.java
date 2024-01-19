@@ -69,20 +69,25 @@ class UnitConverterService {
 
     private AmountAndUnit count(Product product, IngredientDto ingRecipe) {
         switch (ingRecipe.unit()) {
-//          case "g", "ml": return (int) ingRecipe.amount();
+//          case "g", "ml":
+//              return AmountAndUnit.builder()
+//                      .amount(ingRecipe.amount() / product.packingMeasures().get(0))
+//                      .unit(product.mainUnit())
+//                      .build();
+//              return (int) ingRecipe.amount();
             case "kg", "l":
                 return AmountAndUnit.builder()
-                        .amount((int) ingRecipe.amount() * 1000)
+                        .amount(ingRecipe.amount() * 1000)
                         .unit(product.mainUnit())
                         .build();
             case "łyżeczka":
                 return AmountAndUnit.builder()
-                        .amount((int) ingRecipe.amount() * 5)
+                        .amount(ingRecipe.amount() * 5)
                         .unit("g")
                         .build();
             case "łyżka":
                 return AmountAndUnit.builder()
-                        .amount((int) ingRecipe.amount() * 15)
+                        .amount(ingRecipe.amount() * 15)
                         .unit("g")
                         .build();
             case "szczypta":   // ???
@@ -93,7 +98,7 @@ class UnitConverterService {
             case "szt": {
                 if (product.packingMeasures().size() == 1) {
                     return AmountAndUnit.builder()
-                            .amount((int) ingRecipe.amount() * product.packingMeasures().get(0))
+                            .amount(ingRecipe.amount() * product.packingMeasures().get(0))
                             .unit(product.mainUnit())
                             .build();
                 }

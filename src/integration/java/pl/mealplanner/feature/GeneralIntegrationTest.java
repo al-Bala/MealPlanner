@@ -41,7 +41,7 @@ public class GeneralIntegrationTest extends BaseIntegrationTest {
     private static UserPreferencesRequest getPreferences() {
         return new UserPreferencesRequest(
                 2,
-                "",
+                "brakDiety",
                 List.of(
 //                        new IngredientRequest("marchew", 100, "g")
 //                        new IngredientRequest("marchew", 2, "szt")

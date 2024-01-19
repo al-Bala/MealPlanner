@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.mealplanner.plangenerator.domain.dto.*;
 import pl.mealplanner.plangenerator.infrastructure.dto.DayInfoRequest;
+import pl.mealplanner.plangenerator.infrastructure.dto.IngredientRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.UserPreferencesRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.WeekInfoRequest;
 import pl.mealplanner.plangenerator.mealscounter.MealsCounterFacade;
@@ -18,6 +19,7 @@ import pl.mealplanner.profile.domain.entity.PlanHistory;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @Component
@@ -31,16 +33,7 @@ public class PlanGeneratorFacade {
 
     public List<DisplayPlan> generateMealPlanner(UserPreferencesRequest preferencesRequest, WeekInfoRequest weekInfoRequest){
         listOfProductsForPlan.clearListOfProductsForPlan();
-
-        LocalDate date = weekInfoRequest.getDayInfoList().get(0).getDay();
-        List<DayInfoRequest> list = weekInfoRequest.getDayInfoList();
-
-        int i = 0;
-        for (DayInfoRequest day : list) {
-            day.setDay(date.plusDays(i));
-            i++;
-        }
-
+        setDates(weekInfoRequest);
         UserPreferences preferences = PlanGeneratorMapper.mapFromUserPreferencesRequestToUserPreferencesDto(preferencesRequest);
         WeekInfo weekInfo = PlanGeneratorMapper.mapFromWeekInfoRequestToWeekInfoDto(weekInfoRequest);
 
@@ -54,6 +47,16 @@ public class PlanGeneratorFacade {
         planFacade.savePlanAndGroceryList(mealPlan, listOfProductsForPlan.mapToGroceryList());
 
         return DisplayMapper.mapFromMealPlanElementToDisplay(mealPlan);
+    }
+
+    private static void setDates(WeekInfoRequest weekInfoRequest) {
+        LocalDate date = weekInfoRequest.getDayInfoList().get(0).getDay();
+        List<DayInfoRequest> list = weekInfoRequest.getDayInfoList();
+        int i = 0;
+        for (DayInfoRequest day : list) {
+            day.setDay(date.plusDays(i));
+            i++;
+        }
     }
 
     public List<DisplayPlan> getCurrentPlan() {

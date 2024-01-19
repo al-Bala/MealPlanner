@@ -37,7 +37,7 @@ class PackingChooser {
             array.add(MainIngToUseInfo.builder()
                     .packingMeasure(packingMeasure)
                     .nrOfPackets(1)
-                    .surplus(getSurplus(surplus))
+                    .surplus(getSurplus(surplus, recipeAmount))
                     .build());
         }
         return getMinSurplus(array);
@@ -53,15 +53,14 @@ class PackingChooser {
             array.add(MainIngToUseInfo.builder()
                     .packingMeasure(packingMeasure)
                     .nrOfPackets(nrOfPackets + 1)
-                    .surplus(getSurplus(surplus))
+                    .surplus(getSurplus(surplus, recipeAmount))
                     .build());
         }
         return getMinSurplus(array);
     }
 
-    // TODO: nie 50
-    private float getSurplus(float surplus){
-        if(surplus <= 50f){
+    private float getSurplus(float surplus, float recipeAmount){
+        if(surplus <= 0.05 * recipeAmount){
             return 0f;
         } else {
             return surplus;

@@ -15,6 +15,7 @@ import pl.mealplanner.profile.domain.entity.PlanHistory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static pl.mealplanner.plangenerator.plan.PlanFacade.EMPTY_DAY_ID;
@@ -66,6 +67,9 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
 
     private List<ObjectId> getRecipesFromPreviousPlan(){
         List<PlanHistory> planHistoryList = planFacade.getCurrentPlan();
+        if(planHistoryList.isEmpty()){
+            return Collections.emptyList();
+        }
         return planHistoryList.stream()
                 .filter(p -> !p.recipeInPlanHistory().id().equals(EMPTY_DAY_ID))
                 .map(p -> p.recipeInPlanHistory().id())
@@ -114,7 +118,7 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
     }
 
     private Criteria isEmptyDiet(String diet){
-        if(!diet.isEmpty()){
+        if(!diet.equals("brakDiety")){
             return Criteria.where("diet").is(diet);
         }
         return new Criteria();
