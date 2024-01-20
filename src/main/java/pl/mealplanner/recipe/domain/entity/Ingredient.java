@@ -1,8 +1,9 @@
-package pl.mealplanner.recipe.domain;
+package pl.mealplanner.recipe.domain.entity;
 
 import org.springframework.data.mongodb.core.mapping.Field;
 
-record PackingMeasures(
+public record Ingredient(
+        @Field("name") String name,
         @Field("amount") float amount,
         @Field("unit") String unit
 ) {

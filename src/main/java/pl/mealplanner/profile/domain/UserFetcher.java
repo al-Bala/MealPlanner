@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.displayer.Recipes;
+import pl.mealplanner.recipe.domain.entity.RecipeClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,21 +28,21 @@ public class UserFetcher {
         this.recipeCollection = database.getCollection("recipes");
     }
 
-    public List<Recipes> fetchFavorites(String userId, String searchFilter) {
+    public List<RecipeClass> fetchFavorites(String userId, String searchFilter) {
         Document user = userCollection.find(eq("_id", new ObjectId(userId))).first();
         if (user == null) {
             return new ArrayList<>();
         }
 
         List<ObjectId> favoriteIds = user.getList("favorites", ObjectId.class);
-        List<Recipes> favoriteRecipes = new ArrayList<>();
+        List<RecipeClass> favoriteRecipes = new ArrayList<>();
 
         for (ObjectId favoriteId : favoriteIds) {
             Document doc = recipeCollection.find(eq("_id", favoriteId)).first();
             if (doc != null) {
                 String name = doc.getString("name");
                 if (name.toLowerCase().contains(searchFilter.toLowerCase())) {
-                    Recipes recipe = new Recipes();
+                    RecipeClass recipe = new RecipeClass();
                     recipe.setId(doc.getObjectId("_id").toString());
                     recipe.setName(name);
                     favoriteRecipes.add(recipe);

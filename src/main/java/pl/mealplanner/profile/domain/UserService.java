@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.mealplanner.profile.domain.entity.User;
-import pl.mealplanner.recipeProfile.RecipeProfileRepository;
+import pl.mealplanner.recipe.domain.RecipeRepository;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private RecipeProfileRepository recipeProfileRepository;
+    private RecipeRepository recipeRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;

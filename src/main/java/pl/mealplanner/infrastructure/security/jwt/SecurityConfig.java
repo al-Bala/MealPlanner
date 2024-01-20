@@ -55,6 +55,7 @@ public class SecurityConfig {
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/recipes/**").permitAll()
+                        .requestMatchers("/recipeNamesAutocomplete").permitAll()
                         // .requestMatchers("/home/**").hasAnyAuthority("USER", "ADMIN")
                         // .requestMatchers("/plan/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated())

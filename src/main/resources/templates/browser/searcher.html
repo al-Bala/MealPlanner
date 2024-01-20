@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 </head>
 
 <body class="browser-page browser">
-    <nav>
+    <nav sec:authorize="isAuthenticated()">
         <button class="burger-btn">
             <i class="fa-solid fa-burger"></i>
         </button>
@@ -22,7 +22,7 @@
             <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
             <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
             <a class="menu__item">Zarządzaj przepisami</a>
-            <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
             <a class="menu__item" th:href="@{'/user/' + ${username}}">Twój profil</a>
             <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
         </div>
@@ -32,6 +32,26 @@
                     class="fa-solid fa-user"></i></a>
         </div>
     </nav>
+    <nav sec:authorize="!isAuthenticated()">
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/guest}">Wygeneruj plan</a>
+            <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile menu__login " th:href="@{/login}">Zaloguj się</a>
+        </div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
+        </div>
+    </nav>
+
     <header class="browser__hero hero">
         <img th:src="@{/images/51581.jpg}" alt="Równo ułożone talerze z jedzeniem - mała rozdzielczość"
             class="hero__image">
@@ -54,7 +74,7 @@
                 <!-- Tutaj zostanie dodane pole wyszukiwania przez skrypt JS -->
             </div>
 
-            <form method="post" th:action="@{/wyszukiwarka/wybrana-dieta}" class="browser__form">
+            <form method="post" th:action="@{/recipes/diet}" class="browser__form">
                 <select name="diet" onchange="removeDefaultOption(this)" class="select-diet">
                     <option value="" disabled selected class="select-diet__option">Wybierz dietę</option>
                     <option th:each="diet : ${diets}" th:text="${diet}" th:value="${diet}" class="select-diet__option">

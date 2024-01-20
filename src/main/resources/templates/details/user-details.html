@@ -10,6 +10,28 @@
     <script th:src="@{'/js/user-searcher-favorites.js'}"></script>
 </head>
 <body data-userid="${id}">
+<nav>
+    <button class="burger-btn">
+        <i class="fa-solid fa-burger"></i>
+    </button>
+    <button class="exit-btn">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="menu">
+        <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
+        <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
+        <a class="menu__item">Zarządzaj przepisami</a>
+        <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+        <a class="menu__item" th:href="@{'/user/' + ${username}}">Twój profil</a>
+        <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
+    </div>
+    <div class="menu__desktop">
+        <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
+        <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${username}}"><i
+                class="fa-solid fa-user"></i></a>
+    </div>
+</nav>
+
 <h1>Profil użytkownika : </h1>
 <p>Login: <span th:text="${username}"></span></p>
 <p>Role: <span th:text="${role}"></span></p>
