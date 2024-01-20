@@ -26,7 +26,7 @@
         <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
         <a class="menu__item">Zarządzaj przepisami</a>
         <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-        <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}">Twój profil</a>
+        <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
         <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
     </div>
     <div class="menu__desktop">

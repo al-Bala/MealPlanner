@@ -14,7 +14,11 @@ import pl.mealplanner.profile.domain.UserService;
 import pl.mealplanner.profile.domain.entity.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.mealplanner.recipe.domain.entity.RecipeClass;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -23,7 +27,8 @@ class UserController {
 
     @Autowired
     private UserFetcher userFetcher; // Wstrzyknięcie zależności
-
+    private final String bucketName = "mealplannerup.s3.";
+    private final String region = "eu-north-1";
     private final UserFacade userFacade;
     private final UserService userService;
 
@@ -39,10 +44,21 @@ class UserController {
 
         User user = userFacade.getUserByUsername(username);
 
+        List<RecipeClass> favoriteRecipes = userService.getFavoriteRecipes(username);
+        Map<String, String> imageUrlMap = new HashMap<>();
+
+        favoriteRecipes.forEach(recipe -> {
+            String imageUrl = "https://" + bucketName + region + ".amazonaws.com/" + recipe.getId() + ".jpg";
+            imageUrlMap.put(recipe.getId(), imageUrl);
+        });
+
+
         if (user != null) {
             model.addAttribute("user", user.getUsername());
             model.addAttribute("id", user.getId());
             model.addAttribute("role", user.getRole());
+            model.addAttribute("favorites", userService.getFavoriteRecipes(username));
+            model.addAttribute("imageUrlMap", imageUrlMap);
             return "details/user-details"; // nazwa widoku (user-details.html)
         } else {
             return "details/user-details"; // widok informujący o braku użytkownika

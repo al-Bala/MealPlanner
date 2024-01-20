@@ -52,6 +52,8 @@
 <ul>
     <li th:each="recipe : ${favorites}">
         <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a>
+        <a th:href="@{/recipes/{id}(id=${recipe.id})}"><img th:src="${imageUrlMap[recipe.id]}"
+                                                            alt="Obraz przepisu" /></a>
     </li>
 </ul>
 
