@@ -1,28 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
-    <title>Szczegóły przepisu</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przepis</title>
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/recipe-style.css}">
 </head>
+
 <body>
-<h1>Szczegóły przepisu</h1>
-<p>Dieta: <span th:text="${diet}"></span></p>
-<p>Czas przygotowania: <span th:text="${prepareTime}"></span></p>
-<p>Nazwa: <span th:text="${name}"></span></p>
+    <nav>
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
+            <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{'/user/' + ${username}}">Twój profil</a>
+            <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
+        </div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
+            <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${username}}"><i
+                    class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <header class="recipe__header">
+        <h1 th:text="${name}" class="recipe__title"></h1>
+    </header>
+    <main class="recipe__wrapper">
+        <img th:src="${imageUrl}" alt="Obraz" class="recipe__image" />
+        <div class="diet">
+            <i class="fa-solid fa-leaf"></i>
+            <i class="fa-solid fa-circle-check"></i>
+            <i class="fa-solid fa-drumstick-bite"></i>
+            <p th:text="${diet}" class="diet__name"></p>
+        </div>
+        <div class="prepare-time">
+            <i class="fa-regular fa-clock"></i>
+            <p th:text="${prepareTime}" class="prepare-time__text"></p>
+        </div>
 
-<img th:src="${imageUrl}" alt="Obraz"/>
+        <div class="ingredients">
+            <div class="ingredients__names ingredients-part" th:text="${ingredients.name}"></div>
+            <div class="ingredients__amount ingredients-part" th:text="${ingredients.amount}"
+                th:text="${ingredients.unit}"></div>
+        </div>
 
+        <div th:if="${favoriteMessage}" style="color: green;" class="favourite__feedback">
+            <p th:text="${favoriteMessage}"></p>
+        </div>
 
-<div th:if="${favoriteMessage}" style="color: green;">
-    <p th:text="${favoriteMessage}"></p>
-</div>
+        <form method="post" th:action="@{/recipes/{id}/favorite(id=${id})}">
+            <button type="submit">Dodaj do ulubionych</button>
+        </form>
 
-<form method="post" th:action="@{/recipes/{id}/favorite(id=${id})}">
-    <button type="submit">Dodaj do ulubionych</button>
-</form>
+        <!-- Inne pola przepisu, jeśli są -->
+    </main>
 
-<!-- Inne pola przepisu, jeśli są -->
+    <footer class="footer">
+        <div class="footer__section contact">
+            <h4 class="footer__header">Kontakt</h4>
+            <div class="email">
+                <i class="fa-solid fa-envelope"></i>
+                <p class="email__text">email@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__section social-media">
+            <h4 class="footer__header">Znajdziesz nas tutaj</h4>
+            <div class="social-media__links">
+                <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/burgerMenu.js}"></script>
 </body>
-
-
 
 </html>
