@@ -10,14 +10,14 @@
     }
 }
 
-@keyframes submitMe {
+@keyframes pulse {
     0% {
-        background-color: var(--gold);
+        transform: translateX(0);
     }
     50% {
-        background-color: var(--orange);
+        transform: translateX(2px);
     }
     100% {
-        background-color: var(--gold);
+        transform: translateX(0px);
     }
 }

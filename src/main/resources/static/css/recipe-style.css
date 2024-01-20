@@ -1,0 +1,9 @@
+@import '../css/__reset.css';
+@import '../css/__variables.css';
+@import '../css/__navigation.css';
+@import '../css/__footer.css';
+@import '../css/__animations.css';
+
+.recipe__image {
+    width: 200px;
+}
