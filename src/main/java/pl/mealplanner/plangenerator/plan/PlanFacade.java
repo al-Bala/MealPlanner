@@ -7,9 +7,11 @@ import pl.mealplanner.plangenerator.mealsfilter.dto.MealPlanElement;
 import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
 import pl.mealplanner.profile.domain.UserFacade;
 import pl.mealplanner.profile.domain.entity.PlanHistory;
+import pl.mealplanner.profile.domain.entity.RecipeInPlanHistory;
 import pl.mealplanner.profile.domain.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Component
@@ -21,6 +23,14 @@ public class PlanFacade {
     public List<PlanHistory> getCurrentPlan() {
         User currentUser = userFacade.getCurrentUser();
         return currentUser.getPlanHistory();
+    }
+
+    public RecipeInPlanHistory getRecipeFromPlanById(String id) {
+        User currentUser = userFacade.getCurrentUser();
+        return currentUser.getPlanHistory().stream()
+                .filter(r -> r.recipeInPlanHistory().id().toString().equals(id))
+                .findAny()
+                .orElseThrow().recipeInPlanHistory();
     }
 
     public User savePlanAndGroceryList(List<MealPlanElement> mealPlanElement, List<GroceryList> groceryList){

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Meal Planner</title>
+</head>
+<body>
+<nav>
+    <div>
+        <a th:href="@{/home/user}">Home</a>
+        <div>
+            <ul>
+                <li>
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br /><br />
+<div>
+    <div>
+        <p th:text="${planRecipe.name()}"></p>
+        <p th:text="'Czas przygotowania: ' + ${planRecipe.prepare_time()}"></p>
+        <p th:text="'Liczba porcji: ' + ${planRecipe.portions()}"></p>
+        <p>Składniki:</p>
+        <ul>
+            <li th:each="ing : ${planRecipe.ingredients()}"
+                th:text="${ing.name()} + ' - ' + ${ing.amountDisplay()} + ' ' + ${ing.unitDisplay()}"
+            ></li>
+        </ul>
+        <p>Przygotowanie:</p>
+        <ul>
+            <li th:each="step : ${planRecipe.steps()}"
+                th:text="${step}"
+            ></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

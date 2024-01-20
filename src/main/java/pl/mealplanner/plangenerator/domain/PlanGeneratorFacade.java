@@ -11,13 +11,16 @@ import pl.mealplanner.plangenerator.mealsfilter.dto.ConvertedRecipe;
 import pl.mealplanner.plangenerator.mealsfilter.dto.MealPlanElement;
 import pl.mealplanner.plangenerator.plan.PlanFacade;
 import pl.mealplanner.plangenerator.plan.dto.DisplayPlan;
+import pl.mealplanner.plangenerator.plan.dto.DisplayRecipe;
 import pl.mealplanner.plangenerator.productscounter.ListOfProductsForPlan;
 import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
 import pl.mealplanner.profile.domain.entity.PlanHistory;
+import pl.mealplanner.profile.domain.entity.RecipeInPlanHistory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Component
@@ -45,6 +48,7 @@ public class PlanGeneratorFacade {
         planFacade.savePlanAndGroceryList(mealPlan, listOfProductsForPlan.mapToGroceryList());
 
         return DisplayMapper.mapFromMealPlanElementToDisplay(mealPlan);
+//        return getCurrentPlan();
     }
 
     private static void setDates(WeekInfoRequest weekInfoRequest) {
@@ -60,6 +64,11 @@ public class PlanGeneratorFacade {
     public List<DisplayPlan> getCurrentPlan() {
         List<PlanHistory> currentPlan = planFacade.getCurrentPlan();
         return DisplayMapper.mapFromPlanHistoryToDisplay(currentPlan);
+    }
+
+    public DisplayRecipe getRecipeFromPlan(String id) {
+        RecipeInPlanHistory recipeFromPlan = planFacade.getRecipeFromPlanById(id);
+        return DisplayMapper.mapFromRecipeInPlanHistoryToDisplay(recipeFromPlan);
     }
 
     public List<GroceryList> getGroceryListForPlan(){
