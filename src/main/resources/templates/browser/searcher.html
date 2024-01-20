@@ -21,10 +21,7 @@
         <div class="menu">
             <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
             <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
-            <a class="menu__item">Zarządzaj przepisami</a>
             <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-            <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
-            <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
@@ -43,8 +40,6 @@
             <a class="menu__item" th:href="@{/home}">Strona główna</a>
             <a class="menu__item" th:href="@{/plan/guest}">Wygeneruj plan</a>
             <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
-            <a class="menu__item profile menu__login " th:href="@{/login}">Zaloguj się</a>
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
@@ -63,10 +58,10 @@
         </div>
     </header>
 
-    <section class="browser__container">
-        <div id="recipe-search-wrapper" class="recipes-browsing-field">
-            <!-- Tutaj zostanie dodane pole wyszukiwania przez skrypt JS -->
-        </div>
+<!--    <section class="browser__container">-->
+<!--        <div id="recipe-search-wrapper" class="recipes-browsing-field">-->
+<!--            &lt;!&ndash; Tutaj zostanie dodane pole wyszukiwania przez skrypt JS &ndash;&gt;-->
+<!--        </div>-->
 
 
         <section class="browser__container">
