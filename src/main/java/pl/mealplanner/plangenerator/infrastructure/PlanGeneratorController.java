@@ -14,9 +14,7 @@ import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
 import pl.mealplanner.plangenerator.productscounter.entity.Product;
 import pl.mealplanner.plangenerator.productscounter.entity.ProductClass;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @AllArgsConstructor
 @Controller
@@ -26,6 +24,8 @@ class PlanGeneratorController {
     private final PlanGeneratorFacade planGeneratorFacade;
     private final ProductsFetcher productsFetcher;
     private final ProductsCounterFacade productsCounterFacade;
+    private final String bucketName = "mealplannerup.s3.";
+    private final String region = "eu-north-1";
 
     @GetMapping("/guest")
     public String loginToGetPlan() {
@@ -58,7 +58,17 @@ class PlanGeneratorController {
     @GetMapping("/recipes")
     public ModelAndView info() {
         List<DisplayPlan> mealPlanner = planGeneratorFacade.getCurrentPlan();
+
+        // wyświetlanie obrazów
+        Map<String, String> imageUrlMap = new HashMap<>();
+        mealPlanner.forEach(recipe -> {
+            String imageUrl = "https://" + bucketName + region + ".amazonaws.com/" + recipe.firstDisplayRecipe().id() + ".jpg";
+            imageUrlMap.put(recipe.firstDisplayRecipe().id(), imageUrl);
+        });
+
+
         ModelAndView modelAndView = new ModelAndView("plangenerator/planner");
+        modelAndView.addObject("imageUrlMap", imageUrlMap);
         modelAndView.addObject("mealPlanner", mealPlanner);
         return modelAndView;
     }

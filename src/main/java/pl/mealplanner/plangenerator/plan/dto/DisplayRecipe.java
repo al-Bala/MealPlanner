@@ -6,6 +6,8 @@ import java.util.List;
 
 @Builder
 public record DisplayRecipe(
+
+
         String id,
         String name,
         int portions,
@@ -14,4 +16,5 @@ public record DisplayRecipe(
         List<DisplayIngredient> ingredients,
         List<String> steps
 ) {
+
 }
