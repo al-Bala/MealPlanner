@@ -2,13 +2,13 @@ package pl.mealplanner.plangenerator.infrastructure;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.mealplanner.plangenerator.domain.PlanGeneratorFacade;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
 import pl.mealplanner.plangenerator.plan.dto.DisplayPlan;
+import pl.mealplanner.plangenerator.plan.dto.DisplayRecipe;
 import pl.mealplanner.plangenerator.productscounter.ProductsCounterFacade;
 import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
 import pl.mealplanner.plangenerator.productscounter.entity.Product;
@@ -49,30 +49,35 @@ class PlanGeneratorController {
     }
 
     @PostMapping("/info")
-    public ModelAndView addInfo(@ModelAttribute("info") PlanRequest planRequest,
-                          BindingResult result,
-                          Model model) {
+    public String addInfo(@ModelAttribute("info") PlanRequest planRequest,
+                          BindingResult result) {
+        planGeneratorFacade.generateMealPlanner(planRequest.getPreferences(), planRequest.getWeekInfo());
+        return "redirect:/plan/recipes";
+    }
+
+    @GetMapping("/recipes")
+    public ModelAndView info() {
+        List<DisplayPlan> mealPlanner = planGeneratorFacade.getCurrentPlan();
         ModelAndView modelAndView = new ModelAndView("plangenerator/planner");
-        List<DisplayPlan> mealPlanner = planGeneratorFacade.generateMealPlanner(planRequest.getPreferences(), planRequest.getWeekInfo());
         modelAndView.addObject("mealPlanner", mealPlanner);
         return modelAndView;
     }
 
-    @GetMapping("/groceryList")
+    @GetMapping("/recipes/{id}")
+    public ModelAndView getRecipe(@PathVariable String id) {
+
+        DisplayRecipe planRecipe = planGeneratorFacade.getRecipeFromPlan(id);
+        ModelAndView modelAndView = new ModelAndView("plangenerator/recipe-in-plan");
+        modelAndView.addObject("planRecipe", planRecipe);
+        return modelAndView;
+    }
+
+    @GetMapping("/grocery-list")
     public ModelAndView getGroceryList() {
 
         List<GroceryList> groceryList = planGeneratorFacade.getGroceryListForPlan();
         ModelAndView modelAndView = new ModelAndView("plangenerator/grocery-list");
         modelAndView.addObject("groceryList", groceryList);
-        return modelAndView;
-    }
-
-    @GetMapping("/saved-plan")
-    public ModelAndView getPlan() {
-
-        List<DisplayPlan> plan = planGeneratorFacade.getCurrentPlan();
-        ModelAndView modelAndView = new ModelAndView("plangenerator/saved-plan");
-        modelAndView.addObject("plan", plan);
         return modelAndView;
     }
 

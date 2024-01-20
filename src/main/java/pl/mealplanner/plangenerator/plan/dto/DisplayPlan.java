@@ -9,6 +9,7 @@ import java.util.Optional;
 public record DisplayPlan(
         String dayOfWeek,
         String date,
-        DisplayRecipe recipeDisplay
+//        DisplayRecipe recipeDisplay
+        FirstDisplayRecipe firstDisplayRecipe
 ) {
 }
