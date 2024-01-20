@@ -50,12 +50,6 @@
             <p th:text="${prepareTime}" class="prepare-time__text"></p>
         </div>
 
-        <div class="ingredients">
-            <div class="ingredients__names ingredients-part" th:text="${ingredients.name}"></div>
-            <div class="ingredients__amount ingredients-part" th:text="${ingredients.amount}"
-                th:text="${ingredients.unit}"></div>
-        </div>
-
         <div th:if="${favoriteMessage}" style="color: green;" class="favourite__feedback">
             <p th:text="${favoriteMessage}"></p>
         </div>
