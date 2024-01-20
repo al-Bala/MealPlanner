@@ -17,7 +17,8 @@ import java.util.Map;
 @Controller
 public class SearcherController {
 
-
+    private final String bucketName = "mealplannerup.s3.";
+    private final String region = "eu-north-1";
 
 
     @Autowired
@@ -31,14 +32,25 @@ public class SearcherController {
 
     @RequestMapping("/wyszukiwarka")
     public String showRecipes(Model model) {
+
+
         if (!model.containsAttribute("recipes")) {
-            model.addAttribute("recipes", searcherService.getRandomRecipes());
+            List<Recipes> randomRecipes = searcherService.getRandomRecipes();
+            Map<String, String> imageUrlMap = new HashMap<>();
+
+            randomRecipes.forEach(recipe -> {
+                String imageUrl = "https://" + bucketName + region + ".amazonaws.com/" + recipe.getId() + ".jpg";
+                imageUrlMap.put(recipe.getId(), imageUrl);
+            });
+
+            model.addAttribute("recipes", randomRecipes);
+            model.addAttribute("imageUrlMap", imageUrlMap);
         }
         model.addAttribute("diets", searcherService.getAvailableDiets()); // Lista dostępnych diet
         return "browser/searcher";
     }
 
-    @PostMapping("/wyszukiwarka/wegetarianskie")
+    /*@PostMapping("/wyszukiwarka/wegetarianskie")
     public String showVegetarianRecipes(RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("recipes", searcherService.getRandomRecipesByDiet("wegetariańska"));
 
@@ -49,11 +61,20 @@ public class SearcherController {
     public String showMeatRecipes(RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("recipes", searcherService.getRandomRecipesByDiet("mięsna"));
         return "redirect:/wyszukiwarka";
-    }
+    }*/
 
     @PostMapping("/wyszukiwarka/wybrana-dieta")
-    public String showSelectedDietRecipes(@RequestParam("diet") String diet, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("recipes", searcherService.getRandomRecipesByDiet(diet));
+    public String showSelectedDietRecipes(@RequestParam("diet") String diet,RedirectAttributes redirectAttributes) {
+        List<Recipes> randomRecipesByDiet = searcherService.getRandomRecipesByDiet(diet);
+        Map<String, String> imageUrlMap = new HashMap<>();
+
+        randomRecipesByDiet.forEach(recipe -> {
+            String imageUrl = "https://" + bucketName + region + ".amazonaws.com/" + recipe.getId() + ".jpg";
+            imageUrlMap.put(recipe.getId(), imageUrl);
+        });
+
+        redirectAttributes.addFlashAttribute("imageUrlMap", imageUrlMap);
+        redirectAttributes.addFlashAttribute("recipes", randomRecipesByDiet);
         return "redirect:/wyszukiwarka";
     }
 

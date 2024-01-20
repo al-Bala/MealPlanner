@@ -6,6 +6,7 @@ import pl.mealplanner.displayer.Recipes;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +32,10 @@ public class SearcherService {
                 .map(Recipes::getDiet)
                 .distinct()
                 .collect(Collectors.toList());
+    }
+
+    public Optional<Recipes> findRecipeById(String id) {
+        return searcherRepository.findById(id);
     }
 
 }

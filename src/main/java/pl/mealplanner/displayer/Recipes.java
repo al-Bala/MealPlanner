@@ -30,7 +30,7 @@ public class Recipes {
     @Getter
     private String[] steps;
     @Getter
-    private int prepareTime;
+    private int prepare_Time;
     @Getter
     private int maxStorageTime;
     // ... other fields

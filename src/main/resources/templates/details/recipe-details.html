@@ -12,6 +12,17 @@
 <img th:src="${imageUrl}" alt="Obraz"/>
 
 
+<h2>Składniki</h2>
+<ul>
+    <li th:each="ingredient : ${ingredients}" th:text="${ingredient.name} + ' - ' + ${ingredient.amount()} + ' - ' + ${ingredient.unit()}"></li>
+</ul>
+
+<h2>Sposób przygotowania</h2>
+<ol>
+    <li th:each="step : ${steps}" th:text="${step}"></li>
+</ol>
+
+
 <div th:if="${favoriteMessage}" style="color: green;">
     <p th:text="${favoriteMessage}"></p>
 </div>

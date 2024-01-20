@@ -17,7 +17,6 @@
 
 <script>
     $(document).ready(function() {
-        // Inicjalizacja wyszukiwarki przepisów
         initializeRecipeFields('#recipe-search-wrapper', 'recipe');
     });
 </script>
@@ -27,7 +26,7 @@
         <option value="" disabled selected>Wybierz dietę</option>
         <option th:each="diet : ${diets}" th:text="${diet}" th:value="${diet}"></option>
     </select>
-    <button type="submit">Losuj</button>
+    <button type="submit" id="submit-button" disabled>Losuj</button>
 </form>
 
 
@@ -36,8 +35,14 @@
 <script>
     function removeDefaultOption(selectElement) {
         selectElement.options[0].disabled = true;
-        if (selectElement.selectedIndex === 0) {
-            selectElement.selectedIndex = -1;
+
+        // Sprawdź, czy wybrano opcję inną niż domyślna
+        if (selectElement.selectedIndex > 0) {
+            // Aktywuj przycisk "Losuj"
+            document.getElementById("submit-button").disabled = false;
+        } else {
+            // Zablokuj przycisk "Losuj"
+            document.getElementById("submit-button").disabled = true;
         }
     }
 </script>
@@ -45,6 +50,7 @@
 <ul>
     <li th:each="recipe : ${recipes}">
         <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.nazwa()}"></a>
+        <img th:src="${imageUrlMap[recipe.id]}" alt="Obraz przepisu"/>
     </li>
 </ul>
 

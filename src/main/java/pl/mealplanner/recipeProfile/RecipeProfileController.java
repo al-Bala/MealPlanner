@@ -38,8 +38,10 @@ public class RecipeProfileController {
         if (recipeOptional.isPresent()) {
             Recipes recipe = recipeOptional.get();
             model.addAttribute("diet", recipe.getDiet());
-            model.addAttribute("prepareTime", recipe.getPrepareTime());
+            model.addAttribute("prepareTime", recipe.getPrepare_Time());
             model.addAttribute("name", recipe.getName());
+            model.addAttribute("ingredients", recipe.getIngredients());
+            model.addAttribute("steps", recipe.getSteps());
             model.addAttribute("image", recipe.getImage());
             model.addAttribute("imageUrl", imageUrl);
             model.addAttribute("id", recipe.getId());

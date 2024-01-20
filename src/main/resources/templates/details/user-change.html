@@ -12,8 +12,8 @@
 
 <h1>Zmień adres e-mail oraz hasło : </h1>
 
-<form method="post" th:action="@{/user/{username}/change-profil(username=${usere})}" style="display: flex; flex-direction: column;">
-    <input type="email" name="newEmail" placeholder="Nowy adres e-mail" required style="margin-bottom: 10px; width: 200px;">
+<form method="post" th:action="@{/user/{username}/change-profil-date(username=${usere})}" style="display: flex; flex-direction: column;">
+    <input type="email" name="newEmail" placeholder="Nowy adres e-mail" style="margin-bottom: 10px; width: 200px;">
     <input type="password" name="newPassword" placeholder="Nowe hasło" style="margin-bottom: 10px; width: 200px;">
     <input type="password" name="confirmNewPassword" placeholder="Potwierdź nowe hasło" style="margin-bottom: 10px; width: 200px;">
     <button type="submit" style="margin-bottom: 10px; width: 200px;">Edytuj dane</button>

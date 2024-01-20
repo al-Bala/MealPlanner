@@ -21,13 +21,9 @@
     <button type="submit">Edytuj profil</button>
 </form>
 
-<div id="recipe-search-wrapper"></div>
-<script>
-    $(document).ready(function() {
-        var userId = "65972572a98ad12931ceef5e";
-        initializeRecipeFields('#recipe-search-wrapper', 'recipe', userId);
-    });
-</script>
+
+
+<p th:if="${message}" th:text="${message}"></p> <! komunikat o zmianie danych z edycji profilu -- >
 
 
 <h2>Ulubione przepisy</h2>

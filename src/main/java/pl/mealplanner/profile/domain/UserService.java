@@ -3,14 +3,10 @@ package pl.mealplanner.profile.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.mealplanner.displayer.Recipes;
 import pl.mealplanner.profile.domain.entity.User;
 import pl.mealplanner.recipeProfile.RecipeProfileRepository;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -57,7 +53,7 @@ public class UserService {
 
 
 
-    public List<Recipes> getFavoriteRecipes(String username) {
+    /*public List<Recipes> getFavoriteRecipes(String username) {
         User user = userRepository.findByUsername(username).orElse(null);
         if (user != null) {
             return user.getFavorites().stream()
@@ -67,6 +63,19 @@ public class UserService {
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();
+    }*/
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
+
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 
 }
