@@ -3,65 +3,69 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Meal Planner</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie</title>
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/login-style.css}">
 </head>
 
-<body>
+<body class="login-page">
     <nav>
-        <div>
-            <a th:href="@{/home}">Home</a>
-            <div>
-                <ul>
-                    <li>
-                        <a th:href="@{/register}">Register</a>
-                    </li>
-                </ul>
-            </div>
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home}">Strona główna</a>
+            <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile menu__login " th:href="@{/login}">Zaloguj się</a>
+        </div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
         </div>
     </nav>
-    <br /><br />
-    <div>
-        <div>
-            <div>
-                <div th:if="${param.planAth}">
-                    <div>Musisz sie zalogować aby wygenerować plan.</div>
-                </div>
-                <div th:if="${param.error}">
-                    <div>Login lub hasło są niepoprawne.</div>
-                </div>
-                <div th:if="${param.successReg}">
-                    <div> Zostałeś zarejestrowany. Możesz się teraz zalogować.</div>
-                </div>
 
-                <div>
-                    <div>
-                        <h2>Login Form</h2>
-                    </div>
-                    <div>
-                        <form method="post" role="form" th:action="@{/login}" class="form-horizontal">
-                            <div>
-                                <label> Login</label>
-                                <input type="text" id="username" name="username" class="form-control"
-                                    placeholder="Podaj login" />
-                            </div>
-
-                            <div>
-                                <label> Hasło</label>
-                                <input type="password" id="password" name="password" class="form-control"
-                                    placeholder="Podaj hasło" />
-                            </div>
-                            <div>
-                                <button type="submit">Log in</button>
-                                <span> Not registered ?
-                                    <a th:href="@{/register}">Register here</a>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <div class="login-form__wrapper pop-up">
+        <div class="login-form__header">
+            <h3 class="header__text">Logowanie</h3>
         </div>
+        <div class="profile__graphic">
+            <img th:src="@{/images/profile-icon.svg}" alt="Ikona profilu" class="profile__image">
+        </div>
+        <form method="post" role="form" th:action="@{/login}" class="form-horizontal login-form">
+            <div class="login-form__field login__field">
+                <label class="login-form__label">Login</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Podaj login" />
+            </div>
+            <div class="login-form__field password__field">
+                <label class="login-form__label">Hasło</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Podaj hasło" />
+            </div>
+            <div th:if="${param.planAth}" class="login-exception__wrapper">
+                <div class="login-exception">Musisz sie zalogować aby wygenerować plan.</div>
+            </div>
+            <div th:if="${param.error}" class="login-exception__wrapper">
+                <div class="login-exception">Login lub hasło są niepoprawne.</div>
+            </div>
+            <div th:if="${param.successReg}" class="login-exception__wrapper">
+                <div class="login-exception login-aproved"> Zostałeś zarejestrowany. Możesz się teraz zalogować.</div>
+            </div>
+            <button type="submit" class="login-submit-btn">Zaloguj się</button>
+            <div class="not-registered-info">
+                <p class="not-registered-info__text">Nie zarejestrowałeś się?</p>
+                <a th:href="@{/register}" class="not-registered-info__link">Zarejestruj się tutaj!</a>
+            </div>
+        </form>
     </div>
+    <div class="login-form__background display"></div>
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/burgerMenu.js}"></script>
+    <script th:src="@{/js/loginForm.js}"></script>
 </body>
 
 </html>
