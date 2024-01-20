@@ -22,9 +22,21 @@
 <div>
 
     <p>Lista zakupów:</p>
+
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td>Potrzebujesz</td> <td>Kup</td>-->
+<!--        </tr>-->
+<!--        <tr th:each="product : ${groceryList}">-->
+<!--            <td th:text="${product.amountToUse()}"></td>-->
+<!--            <td th:text="${product.nrOfPackets()} + ' x ' + ${product.packingMeasure()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}">4</td>-->
+<!--        </tr>-->
+<!--    </table>-->
+
     <div th:each="product : ${groceryList}">
         <ul>
-            <li th:text="${product.nrOfPackets()} + ' x ' + ${product.packingMeasure()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>
+<!--            <li th:text="${product.nrOfPackets()} + ' x ' + ${product.packingMeasure()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>-->
+            <li th:text="${product.amountToUse()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>
         </ul>
     </div>
 

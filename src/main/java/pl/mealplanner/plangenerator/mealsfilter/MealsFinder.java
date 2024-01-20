@@ -50,10 +50,11 @@ class MealsFinder {
         } else {
             InfoForFiltering info2 = InfoForFiltering.builder()
                     .forHowManyDays(info.forHowManyDays())
-                    .diet(info.diet())
+                    .diet("brakDiety")
+//                    .diet(info.diet())
                     .timeForPrepareMin(info.timeForPrepareMin())
                     .productsToUse(Collections.emptyList())
-                    .dislikedProducts(info.dislikedProducts())
+                    .dislikedProducts(Collections.emptyList())
                     .build();
             return chooseOneRecipe(info2, 0);
         }

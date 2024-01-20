@@ -31,16 +31,7 @@ public class PlanGeneratorFacade {
 
     public List<DisplayPlan> generateMealPlanner(UserPreferencesRequest preferencesRequest, WeekInfoRequest weekInfoRequest){
         listOfProductsForPlan.clearListOfProductsForPlan();
-
-        LocalDate date = weekInfoRequest.getDayInfoList().get(0).getDay();
-        List<DayInfoRequest> list = weekInfoRequest.getDayInfoList();
-
-        int i = 0;
-        for (DayInfoRequest day : list) {
-            day.setDay(date.plusDays(i));
-            i++;
-        }
-
+        setDates(weekInfoRequest);
         UserPreferences preferences = PlanGeneratorMapper.mapFromUserPreferencesRequestToUserPreferencesDto(preferencesRequest);
         WeekInfo weekInfo = PlanGeneratorMapper.mapFromWeekInfoRequestToWeekInfoDto(weekInfoRequest);
 
@@ -54,6 +45,16 @@ public class PlanGeneratorFacade {
         planFacade.savePlanAndGroceryList(mealPlan, listOfProductsForPlan.mapToGroceryList());
 
         return DisplayMapper.mapFromMealPlanElementToDisplay(mealPlan);
+    }
+
+    private static void setDates(WeekInfoRequest weekInfoRequest) {
+        LocalDate date = weekInfoRequest.getDayInfoList().get(0).getDay();
+        List<DayInfoRequest> list = weekInfoRequest.getDayInfoList();
+        int i = 0;
+        for (DayInfoRequest day : list) {
+            day.setDay(date.plusDays(i));
+            i++;
+        }
     }
 
     public List<DisplayPlan> getCurrentPlan() {

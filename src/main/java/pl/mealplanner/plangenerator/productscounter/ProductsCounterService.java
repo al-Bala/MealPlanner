@@ -1,6 +1,7 @@
 package pl.mealplanner.plangenerator.productscounter;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import pl.mealplanner.plangenerator.productscounter.dto.MainIngToUseInfo;
 import pl.mealplanner.plangenerator.productscounter.dto.PlanProductInfo;
@@ -9,6 +10,7 @@ import pl.mealplanner.plangenerator.productscounter.entity.Product;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j2
 @AllArgsConstructor
 @Component
 class ProductsCounterService {
@@ -22,8 +24,13 @@ class ProductsCounterService {
     }
 
     public Product findProduct(String name){
-        return repository.findByName(name)
-                .orElseThrow();
+        try{
+            return repository.findByName(name)
+                    .orElseThrow(() -> new NoProductFoundException("Product: " + name + ", not found"));
+        } catch (NoProductFoundException e){
+            log.error(e.getMessage());
+        }
+        return null;
     }
 
     private PlanProductInfo choosePacketAndCountLeftovers(Product product, float ingAmount){

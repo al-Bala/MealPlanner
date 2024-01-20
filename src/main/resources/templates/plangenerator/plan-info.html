@@ -8,6 +8,7 @@
     <title>Generator planu posiłków</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script th:src="@{'/js/plan-preferences.js'}"></script>
     <script th:src="@{'/js/plan-weekInfo.js'}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,19 +70,29 @@
                         th:field="*{preferences.diet}" />
                     <input type=""> -->
                 <div class="diet-types__wrapper">
-                    <div class="diet-type" id="vegetarian" onclick="selectDiet('vegetarian')">
-                        <p class="diet-type__name">Wegetariańska</p>
-                    </div>
-                    <div class="diet-type" id="vegan" onclick="selectDiet('vegan')">
-                        <p class="diet-type__name">Wegańska</p>
-                    </div>
-                    <div class="diet-type" id="noGluten" onclick="selectDiet('noGluten')">
-                        <p class="diet-type__name"> Bezglutenowa</p>
-                    </div>
-                    <div class="diet-type" id="noDiet" onclick="selectDiet('noDiet')">
-                        <p class="diet-type__name">Nie mam diety</p>
-                    </div>
+                    <select th:field="*{preferences.diet}" required>
+                        <option value="" selected>Wybierz dietę</option>
+                        <option value="wegetariańska">Wegetariańska</option>
+                        <option value="wegańska">Wegańska</option>
+                        <option value="bezglutenowa">Bezglutenowa</option>
+                        <option value="brakDiety">Nie mam diety</option>
+                    </select>
                 </div>
+
+<!--                <div class="diet-types__wrapper">-->
+<!--                    <div th:field="*{preferences.diet}" class="diet-type" id="wegetariańska" onclick="selectDiet('wegetariańska')">-->
+<!--                        <p class="diet-type__name">Wegetariańska</p>-->
+<!--                    </div>-->
+<!--                    <div th:field="*{preferences.diet}" class="diet-type" id="wegańska" onclick="selectDiet('wegańska')">-->
+<!--                        <p class="diet-type__name">Wegańska</p>-->
+<!--                    </div>-->
+<!--                    <div th:field="*{preferences.diet}" class="diet-type" id="bezglutenowa" onclick="selectDiet('bezglutenowa')">-->
+<!--                        <p class="diet-type__name"> Bezglutenowa</p>-->
+<!--                    </div>-->
+<!--                    <div th:field="*{preferences.diet}" class="diet-type" id="brakDiety" onclick="selectDiet('brakDiety')">-->
+<!--                        <p class="diet-type__name">Nie mam diety</p>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
 
             <div class="portions-form form-basis">

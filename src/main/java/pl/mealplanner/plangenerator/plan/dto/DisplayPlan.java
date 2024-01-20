@@ -7,7 +7,8 @@ import java.util.Optional;
 
 @Builder
 public record DisplayPlan(
-        LocalDate dayOfWeek,
+        String dayOfWeek,
+        String date,
         DisplayRecipe recipeDisplay
 ) {
 }

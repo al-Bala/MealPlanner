@@ -30,8 +30,10 @@ public class ListOfProductsForPlan {
 
     public List<GroceryList> mapToGroceryList() {
         return productsForPlan.stream()
+                .filter(p -> p.getPackingMeasure() != 0)
                 .map(p -> GroceryList.builder()
                         .name(p.getName())
+                        .amountToUse(p.getAmountToUseCount())
                         .packingMeasure(p.getPackingMeasure())
                         .nrOfPackets(p.getNrOfPackets())
                         .unit(p.getUnitCount())

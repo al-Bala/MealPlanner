@@ -13,8 +13,6 @@ db.users.insertMany([
             disliked_products: [""]
         },
         user_recipes: [""],
-
-        // co jak jest pusta
         plan_history: [
             // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')}, // Kasza jaglana z warzywami
             // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9425')}, // Ryż z warzywami i kurczakiem
@@ -39,14 +37,7 @@ db.users.insertMany([
                 }
             },
         ],
-        grocery_list:[
-            {
-                name: "oliwa z oliwek",
-                packingMeasure: 50.0,
-                nrOfPackets: 1,
-                unit: "ml"
-            }
-        ]
+        grocery_list:[]
     }
 ]);
 
@@ -89,7 +80,7 @@ db.recipes.insertMany([
         max_storage_time: 1,
         diet: "wegetariańska",
         ingredients: [
-            { name: "jajka", amount: 4, unit: "szt" },
+            { name: "jajko", amount: 4, unit: "szt" },
             { name: "papryka", amount: 1, unit: "szt" },
             { name: "pomidor", amount: 2, unit: "szt" },
             { name: "cebula", amount: 1, unit: "szt" },

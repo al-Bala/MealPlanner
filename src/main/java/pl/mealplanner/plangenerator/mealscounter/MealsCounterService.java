@@ -18,6 +18,7 @@ class MealsCounterService {
     private final List<OneMealInfo> oneMealInfoList = new ArrayList<>();
 
     List<OneMealInfo> countNumberOfMeals(WeekInfo weekInfo){
+        oneMealInfoList.clear();
         List<DayInfo> dayInfoList = weekInfo.dayInfoList();
 
         for (int i = dayInfoList.size()-1; i >= 0; i--){
