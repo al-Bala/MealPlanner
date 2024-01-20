@@ -30,10 +30,10 @@
         </div>
     </nav>
     <div class="login-form__wrapper pop-up">
-        <div class="login-form__header">
+        <div class="login-form__header reg-form__header">
             <h3 class="header__text">Rejestracja</h3>
         </div>
-        <div class="profile__graphic">
+        <div class="profile__graphic graphic-register">
             <img th:src="@{/images/profile-icon.svg}" alt="Ikona profilu" class="profile__image">
         </div>
         <form method="post" role="form" th:action="@{/register/save}" th:object="${user}" class="login-form">
@@ -60,7 +60,7 @@
                 <div class="login-exception login-aproved"> Zostałeś zarejestrowany w MealPlanner!</div>
             </div>
             <button type="submit" class="login-submit-btn">Register</button>
-            <div class="not-registered-info">
+            <div class="not-registered-info registered-info">
                 <p class="not-registered-info__text">Jesteś już zarejestrowany?</p>
                 <a th:href="@{/login}" class="not-registered-info__link">Zaloguj się tutaj!</a>
             </div>

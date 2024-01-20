@@ -4,13 +4,13 @@
 @import '../css/__footer.css';
 @import '../css/__animations.css';
 
+/*Login starts*/
 .login-form__wrapper {
     display: none;
     font-family: "Now", sans-serif;
-    
 }
-
 .pop-up {
+    width: 80%;
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -19,45 +19,41 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 6;
+    transform: translate(-50%, -50%);
     border-radius: 16px;
-    width: 80%;
 }
-
 @media (min-width: 992px) {
     .pop-up {
-        max-width: 580px;
         width: 50%;
+        max-width: 580px;
     }
 }
 .login-form__background {
     display: none;
-    
 }
 .display {
-    z-index: 5;
-    display:flex;
-    height: 101vh;
     width: 101vw;
+    height: 101vh;
+    display:flex;
     position: fixed;
-    backdrop-filter: blur(5px);
-    filter: brightness(40%);
     top: 50%;
     left: 50%;
+    z-index: 5;
     transform: translate(-50%, -50%);
+    filter: brightness(40%);
+    backdrop-filter: blur(5px);
 }
 .login-form__header {
+    width: 100%;
     background-color: var(--orange);
-    color: var(--white);
+    padding: 8px 0;
+    margin: 50px 0 35px;
     font-size: 18px;
     font-weight: 400;
-    width: 100%;
-    margin: 50px 0 35px;
     text-align: center;
-    padding: 8px 0;
+    color: var(--white);
 }
-
 .header__text {
     font-size: 18px;
     font-weight: 500;
@@ -70,11 +66,9 @@
         letter-spacing: 3px;
     }
 }
-
 .profile__graphic {
     margin-bottom: 40px;
 }
-
 .profile__image {
     width: 54px
 }
@@ -83,19 +77,16 @@
         width: 65px
     }
 }
-
 .login-form {
     width: 70%;
     display: flex;
     flex-direction: column;
 }
-
 .login-form__field {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-
 .login-form__label {
     margin-bottom: 4px;
     font-size: 12px;
@@ -105,45 +96,48 @@
         font-size: 16px;
     }
 }
-
 .login-form__field input {
     margin-bottom: 20px;
     border-radius: 6px;
     border: var(--orange) 1px solid;
 }
-
 .login-form__field input[placeholder] {
-    font-size: 12px;
     padding: 5px;
+    font-size: 12px;
 }
 @media (min-width: 992px) {
     .login-form__field input[placeholder] {
-        font-size: 16px;
         padding: 9px 8px;
+        font-size: 16px;
     }
 }
-
 .login-submit-btn {
-    background-color: var(--orange);
+    align-self: center;
     padding: 7px 28px;
-    font-size: 15px;
-    color: var(--white);
-    border-radius: 6px;
-    text-align: center;
-    align-self: center;
     margin: 25px 0 20px ;
+    font-size: 15px;
+    text-align: center;
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 6px;
 }
-
+@media (min-width: 992px) {
+    .login-submit-btn {
+        transition: transform .4s ease-in-out 0s;
+    }
+    .login-submit-btn:hover {
+        transform: translateY(-4px);
+    }
+}
 .not-registered-info {
-    align-self: center;
     display: flex;
+    align-self: center;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     gap: 5px;
-    margin-bottom: 95px;
+    margin-bottom: 80px;
 }
-
 .not-registered-info__text,
 .not-registered-info__link {
     font-size: 12px;
@@ -155,26 +149,49 @@
     font-size: 14px;
     }
 }
-
-
 .not-registered-info__link {
     color: var(--gold);
 }
-
 .login-exception {
-    color: var(--orange);
-    font-size: 12px;
     width: 200px;
     margin: 5px auto;
+    font-size: 12px;
     text-align: center;
+    color: var(--orange);
 }
 @media (min-width: 992px) {
     .login-exception {
-    font-size: 14px;
-    width: 300px;
-
+        width: 300px;
+        font-size: 14px;
     }
 }
+.login-aproved {
+    color: green;
+}
+/*Login ends*/
+
+/*registration starts*/
+.reg__error {
+    position: relative;
+    top: -15px;
+    color: var(--orange);
+}
+@media (min-width: 992px) {
+    .reg__error {
+        font-size: 13px;
+    }
+}
+.reg-form__header {
+    margin: 30px 0 20px;
+}
+.registered-info {
+    margin-bottom: 30px;
+}
+.graphic-register {
+    margin-bottom: 15px;
+}
+/*registration ends*/
+
 
 
 
