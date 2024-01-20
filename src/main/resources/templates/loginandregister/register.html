@@ -5,66 +5,72 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rejestracja - MealPlanner</title>
-
+    <title>Rejestracja</title>
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/login-style.css}">
 </head>
 
-
-<body>
+<body class="registration-page">
     <nav>
-        <div class="menu__wrapper">
-            <ul class="menu">
-                <li class="menu__item">
-                    <a class="menu__link" th:href="@{/home}">Home</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link" th:href="@{/login}">Login</a>
-                </li>
-            </ul>
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home}">Strona główna</a>
+            <a class="menu__item" th:href="@{/wyszukiwarka}">Wyszukaj przepis</a>
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile menu__login " th:href="@{/login}">Zaloguj się</a>
+        </div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
         </div>
     </nav>
-
-    <br /><br /><br />
-    <div>
-        <div>
-            <div>
-                <div>
-                    <h2>Registration</h2>
-                </div>
-                <div th:if="${param.success}">
-                    <div>
-                        You have successfully registered our app!
-                    </div>
-                </div>
-                <div>
-                    <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
-                        <div>
-                            <label>Login</label>
-                            <input id="username" name="username" placeholder="Podaj login" th:field="*{username}" type="text"/>
-                            <p th:errors = "*{username}" th:if="${#fields.hasErrors('username')}">Username Error</p>
-                        </div>
-                        <div>
-                            <label>Email</label>
-                            <input id="email" name="email" placeholder="Enter email address" th:field="*{email}"
-                                type="email" />
-                            <p th:errors="*{email}" th:if="${#fields.hasErrors('email')}">Email Error</p>
-                        </div>
-
-                        <div>
-                            <label>Hasło</label>
-                            <input id="password" name="password" placeholder="Enter password" th:field="*{password}"
-                                type="password" />
-                            <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Password Error</p>
-                        </div>
-                        <div>
-                            <button type="submit">Register</button>
-                            <span>Already registered? <a th:href="@{/login}">Login here</a></span>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <div class="login-form__wrapper pop-up">
+        <div class="login-form__header">
+            <h3 class="header__text">Rejestracja</h3>
         </div>
+        <div class="profile__graphic">
+            <img th:src="@{/images/profile-icon.svg}" alt="Ikona profilu" class="profile__image">
+        </div>
+        <form method="post" role="form" th:action="@{/register/save}" th:object="${user}" class="login-form">
+            <div class="login-form__field login__field">
+                <label class="login-form__label">Login</label>
+                <input id="username" name="username" placeholder="Podaj login" th:field="*{username}" type="text" />
+                <p th:errors="*{username}" th:if="${#fields.hasErrors('username')}" class="reg__error">
+                    Username Error</p>
+            </div>
+            <div class="login-form__field email__field">
+                <label class="login-form__label">Email</label>
+                <input id="email" name="email" placeholder="Podaj adres email" th:field="*{email}" type="email" />
+                <p th:errors="*{email}" th:if="${#fields.hasErrors('email')}" class="reg__error">Email Error
+                </p>
+            </div>
+            <div class="login-form__field password__field">
+                <label class="login-form__label">Hasło</label>
+                <input id="password" name="password" placeholder="Wprowadź hasło" th:field="*{password}"
+                    type="password" />
+                <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}" class="reg__error">
+                    Password Error</p>
+            </div>
+            <div th:if="${param.success}" class="login-exception__wrapper">
+                <div class="login-exception login-aproved"> Zostałeś zarejestrowany w MealPlanner!</div>
+            </div>
+            <button type="submit" class="login-submit-btn">Register</button>
+            <div class="not-registered-info">
+                <p class="not-registered-info__text">Jesteś już zarejestrowany?</p>
+                <a th:href="@{/login}" class="not-registered-info__link">Zaloguj się tutaj!</a>
+            </div>
+        </form>
     </div>
+    <div class="login-form__background display"></div>
+
+
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/loginForm.js}"></script>
 </body>
+
 </html>

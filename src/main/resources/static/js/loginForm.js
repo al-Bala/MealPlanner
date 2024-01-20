@@ -6,15 +6,12 @@ const navigation = document.querySelector('nav');
 const exitFormBtn = document.querySelector('.exit-form-btn');
 
 const displayPopUp = () => {
-    loginForm.classList.add('pop-up');
     navbar.classList.toggle('active');
     menuBurger.classList.toggle('active');
-    backgroundForm.classList.add('display');
 }
 
 const closePopUp = () => {
     loginForm.classList.remove('pop-up');
-    backgroundForm.classList.remove('display');
 }
 
 LogIn.addEventListener('click', displayPopUp);
