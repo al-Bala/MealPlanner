@@ -40,6 +40,17 @@ class ProductsCounterService {
         int convertedRecipeAmount = (int) ingAmount;
         List<Integer> chosePackingMeasures = product.packingMeasures();
 
+        if(chosePackingMeasures.isEmpty()){
+            return PlanProductInfo.builder()
+                    .name(product.name())
+                    .amountToUseCount(convertedRecipeAmount)
+                    .packingMeasure(convertedRecipeAmount)
+                    .nrOfPackets(1)
+                    .surplus(0)
+                    .unitCount(product.mainUnit())
+                    .build();
+        }
+
         for (Integer packingMeasure:chosePackingMeasures) {
             if(packingMeasure == convertedRecipeAmount){
                 return PlanProductInfo.builder()

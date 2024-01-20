@@ -64,7 +64,7 @@ class UnitConverterService {
     1. Jeśli produkt może być kupowany na sztuki to w bazie jest podana tylko waga 1 szt, nic więcej
     2. MainUnit to TYLKO "g", "ml" - chyba że produkt występuje tylko w "szt", to wtedy MainUnit to "szt"
     3. Nie ma możliwości pisania w "dag"
-    4. Nie ma uwzględnionej możliwości kupowania na wagę
+    4. Może być produkt tylko na wage - na wagę i na sztuki sie nie da
     */
 
     private AmountAndUnit count(Product product, IngredientDto ingRecipe) {

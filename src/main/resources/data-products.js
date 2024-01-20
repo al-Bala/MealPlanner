@@ -79,3 +79,4 @@ db.products.insertMany([
         packing_measures: [150]
     },
 ]);
+
