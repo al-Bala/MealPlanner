@@ -22,14 +22,20 @@ function initializeAutocomplete(search) {
     };
 }
 
-function removeDefaultOption(selectElement) {
-    selectElement.options[0].disabled = true;
-    if (selectElement.selectedIndex === 0) {
-        selectElement.selectedIndex = -1;
-    }
-}
-
 $(document).ready(function () {
     // Inicjalizacja wyszukiwarki przepisów
     initializeRecipeFields('#recipe-search-wrapper', 'recipe');
 });
+
+function removeDefaultOption(selectElement) {
+    selectElement.options[0].disabled = true;
+
+    // Sprawdź, czy wybrano opcję inną niż domyślna
+    if (selectElement.selectedIndex > 0) {
+        // Aktywuj przycisk "Losuj"
+        document.getElementById("submit-button").disabled = false;
+    } else {
+        // Zablokuj przycisk "Losuj"
+        document.getElementById("submit-button").disabled = true;
+    }
+}

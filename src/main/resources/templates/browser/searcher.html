@@ -61,8 +61,9 @@
                     </option>
                 </select>
                 <div class="draw-btn__wrapper">
-                    <button type="submit" class="draw-btn" id="submit-button" disabled><i
-                            class="fa-solid fa-dice"></i></button>
+                    <button type="submit" class="draw-btn" id="submit-button" disabled>
+                        <i class="fa-solid fa-dice"></i>
+                    </button>
                     <i class="fa-solid fa-arrow-left"></i>
                     <p class="draw-btn__info">Daj się zainspirować i wylosuj przepisy!</p>
                 </div>
@@ -71,9 +72,7 @@
 
 
 
-        // obsługa poprawnego wyświetlania pola wyboru diety
-
-        <script>
+        <!-- <script>
             function removeDefaultOption(selectElement) {
                 selectElement.options[0].disabled = true;
 
@@ -86,16 +85,18 @@
                     document.getElementById("submit-button").disabled = true;
                 }
             }
-        </script>
+        </script> -->
 
         <section class="random-recipes">
             <ul class="browser__recipes-container">
                 <li th:each="recipe : ${recipes}" class="recipe-container__item">
                     <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.nazwa()}"
                         class="recipe-container__link">
-                        <img th:src="${imageUrlMap[recipe.id]}" alt="Obraz przepisu" />
                         <div class="decor-line"></div>
                     </a>
+                    <a th:href="@{/recipes/{id}(id=${recipe.id})}"><img th:src="${imageUrlMap[recipe.id]}"
+                            alt="Obraz przepisu" /></a>
+
                 </li>
             </ul>
         </section>
