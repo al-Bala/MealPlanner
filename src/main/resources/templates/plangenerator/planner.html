@@ -28,7 +28,7 @@
         <div th:if="${!element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
             <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
             <a th:href="@{/plan/recipes/{id}(id=${element.firstDisplayRecipe().id()})}" th:text="${element.firstDisplayRecipe().name()}"></a>
-            <img th:src="${imageUrlMap[recipe.id]}" alt="Obraz przepisu"/>
+            <img th:src="${imageUrlMap[element.firstDisplayRecipe().id()]}" alt="Obraz przepisu"/>
             <p th:text="'Czas przygotowania: ' + ${element.firstDisplayRecipe().prepareTime()}"></p>
         </div>
         <br><br>
