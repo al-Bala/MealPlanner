@@ -39,9 +39,14 @@
         </div>
         <br><br>
     </div>
+    <p>Lista zakupów:</p>
+    <div th:each="product : ${groceryList}">
+        <ul>
+            <li th:text="${product.amountToUse()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>
+        </ul>
+    </div>
 
     <a th:href="@{/plan/generator}">Wygeneruj plan ponownie</a>
-    <a th:href="@{/plan/grocery-list}">Lista zakupów</a>
 </div>
 </body>
 </html>
