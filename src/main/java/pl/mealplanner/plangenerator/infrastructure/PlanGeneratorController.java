@@ -59,6 +59,7 @@ class PlanGeneratorController {
     @GetMapping("/recipes")
     public ModelAndView info() {
         List<DisplayPlan> mealPlanner = planGeneratorFacade.getCurrentPlan();
+        List<GroceryList> groceryList = planGeneratorFacade.getGroceryListForPlan();
 
         Map<String, String> imageUrlMap = new HashMap<>();
         mealPlanner.forEach(recipe -> {
@@ -69,6 +70,7 @@ class PlanGeneratorController {
         ModelAndView modelAndView = new ModelAndView("plangenerator/planner");
         modelAndView.addObject("imageUrlMap", imageUrlMap);
         modelAndView.addObject("mealPlanner", mealPlanner);
+        modelAndView.addObject("groceryList", groceryList);
         return modelAndView;
     }
 
@@ -85,15 +87,6 @@ class PlanGeneratorController {
         model.addAttribute("imageUrl", imageUrl);
         model.addAttribute("id", planRecipe.id());
         return "details/recipe-details";
-    }
-
-    @GetMapping("/grocery-list")
-    public ModelAndView getGroceryList() {
-
-        List<GroceryList> groceryList = planGeneratorFacade.getGroceryListForPlan();
-        ModelAndView modelAndView = new ModelAndView("plangenerator/grocery-list");
-        modelAndView.addObject("groceryList", groceryList);
-        return modelAndView;
     }
 
     @RequestMapping(value="/productNamesAutocomplete")
