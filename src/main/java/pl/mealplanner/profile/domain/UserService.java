@@ -25,9 +25,10 @@ public class UserService {
     }
 
     public boolean toggleFavorite(String username, String recipeId) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
+        User user = userRepository.findByUsername(username).orElse(null);
+        if(user == null){
+            return false;
+        }
         List<String> favorites = user.getFavorites();
         boolean isInFavorite;
 
@@ -46,9 +47,10 @@ public class UserService {
     }
 
     public boolean isFavorite(String username, String recipeId) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
+        User user = userRepository.findByUsername(username).orElse(null);
+        if(user == null){
+            return false;
+        }
         List<String> favorites = user.getFavorites();
         return favorites.contains(recipeId);
     }

@@ -32,13 +32,13 @@ public class PlanFacade {
                 .orElseThrow().recipeInPlanHistory();
     }
 
-    public User savePlanAndGroceryList(List<MealPlanElement> mealPlanElement, List<GroceryList> groceryList){
+    public void savePlanAndGroceryList(List<MealPlanElement> mealPlanElement, List<GroceryList> groceryList){
         List<PlanHistory> plan = mealPlanElement.stream()
                 .map(this::convertToPlanHistory)
                 .toList();
 
         String username = userFacade.authenticate();
-        return userFacade.updateUserPlanAndGroceryList(username, plan, groceryList);
+        userFacade.updateUserPlanAndGroceryList(username, plan, groceryList);
     }
 
     private PlanHistory convertToPlanHistory(MealPlanElement mealPlanElement){
