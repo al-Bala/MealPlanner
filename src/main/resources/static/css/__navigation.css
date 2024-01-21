@@ -44,6 +44,7 @@ nav {
     }
   }
   nav .menu__item {
+    color: var(--black);
     display: none;
   }
   @media (min-width: 992px) {
@@ -75,9 +76,6 @@ nav {
     nav .menu__desktop .profile-icon {
       font-size: 28px;
       color: var(--dark-gray);
-    }
-    nav .menu__item:nth-child(6), nav .menu__item:nth-child(5) {
-      display: none;
     }
   }
   nav .active {

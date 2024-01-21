@@ -22,6 +22,8 @@
             <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
             <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
             <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
+            <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
@@ -40,6 +42,8 @@
             <a class="menu__item" th:href="@{/home}">Strona główna</a>
             <a class="menu__item" th:href="@{/plan/guest}">Wygeneruj plan</a>
             <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
@@ -57,48 +61,48 @@
             <p class="browser__text-content">Wyszukaj lub wylosuj przepisy</p>
         </div>
     </header>
-        <section class="browser__container">
-            <div id="recipe-search-wrapper" class="recipes-browsing-field">
-                <!-- Tutaj zostanie dodane pole wyszukiwania przez skrypt JS -->
-            </div>
+    <section class="browser__container">
+        <div id="recipe-search-wrapper" class="recipes-browsing-field">
+            <!-- Tutaj zostanie dodane pole wyszukiwania przez skrypt JS -->
+        </div>
 
-            <form method="post" th:action="@{/recipes/diet}" class="browser__form">
-                <select name="diet" class="select-diet" required>
-                    <option value="" selected disabled class="select-diet__option">Wybierz dietę</option>
-                    <option th:each="diet : ${diets}" th:text="${diet}" th:value="${diet}" class="select-diet__option">
-                    </option>
-                </select>
-                <div class="draw-btn__wrapper">
-                    <button type="submit" class="draw-btn" id="submit-button">
-                        <i class="fa-solid fa-dice"></i>
-                    </button>
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <p class="draw-btn__info">Daj się zainspirować i wylosuj przepisy!</p>
-                </div>
-            </form>
-        </section>
-<!--        <section class="random-recipes">-->
-<!--            <ul class="browser__recipes-container">-->
-<!--                <li th:each="recipe : ${recipes}" class="recipe-container__item">-->
-<!--                    <div class="test">-->
-<!--                    <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.getName()}"-->
-<!--                        class="recipe-container__link">-->
-<!--                    </a></div>-->
-<!--                    <div class="decor-line"></div>-->
-<!--                </div>-->
-<!--                <a th:href="@{/recipes/{id}(id=${recipe.id})}" class=" recipe-img__link">-->
-<!--                    <img th:src="${imageUrlMap[recipe.id]}" alt="Obraz przepisu" class="recipe__img" />-->
-<!--                    <div class="overlay"></div>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </section>-->
+        <form method="post" th:action="@{/recipes/diet}" class="browser__form">
+            <select name="diet" class="select-diet" required>
+                <option value="" selected disabled class="select-diet__option">Wybierz dietę</option>
+                <option th:each="diet : ${diets}" th:text="${diet}" th:value="${diet}" class="select-diet__option">
+                </option>
+            </select>
+            <div class="draw-btn__wrapper">
+                <button type="submit" class="draw-btn" id="submit-button">
+                    <i class="fa-solid fa-dice"></i>
+                </button>
+                <i class="fa-solid fa-arrow-left"></i>
+                <p class="draw-btn__info">Daj się zainspirować i wylosuj przepisy!</p>
+            </div>
+        </form>
+    </section>
+    <!--        <section class="random-recipes">-->
+    <!--            <ul class="browser__recipes-container">-->
+    <!--                <li th:each="recipe : ${recipes}" class="recipe-container__item">-->
+    <!--                    <div class="test">-->
+    <!--                    <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.getName()}"-->
+    <!--                        class="recipe-container__link">-->
+    <!--                    </a></div>-->
+    <!--                    <div class="decor-line"></div>-->
+    <!--                </div>-->
+    <!--                <a th:href="@{/recipes/{id}(id=${recipe.id})}" class=" recipe-img__link">-->
+    <!--                    <img th:src="${imageUrlMap[recipe.id]}" alt="Obraz przepisu" class="recipe__img" />-->
+    <!--                    <div class="overlay"></div>-->
+    <!--                </a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--    </section>-->
     <section class="random-recipes">
         <ul class="browser__recipes-container">
             <li th:each="recipe : ${recipes}" class="recipe-container__item">
                 <div class="test">
                     <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.getName()}"
-                       class="recipe-container__link">
+                        class="recipe-container__link">
                     </a>
                     <div class="decor-line"></div>
                 </div>

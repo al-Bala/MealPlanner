@@ -4,6 +4,12 @@
 @import '../css/__footer.css';
 @import '../css/__animations.css';
 
+@media (min-width: 992px) {
+  .menu__item:nth-child(4),
+  .menu__item:nth-child(5) {
+    display: none;
+  }
+}
 main {
     width: 100vw;
     font-family: "Now", sans-serif;
