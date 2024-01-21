@@ -12,7 +12,7 @@ public record DisplayRecipe(
         String name,
         int portions,
         int prepare_time,
-//        String diet,
+        String diet,
         List<DisplayIngredient> ingredients,
         List<String> steps
 ) {

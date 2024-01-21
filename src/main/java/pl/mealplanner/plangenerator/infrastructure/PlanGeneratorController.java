@@ -2,6 +2,7 @@ package pl.mealplanner.plangenerator.infrastructure;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -74,12 +75,18 @@ class PlanGeneratorController {
     }
 
     @GetMapping("/recipes/{id}")
-    public ModelAndView getRecipe(@PathVariable String id) {
-
+    public String getRecipe(@PathVariable String id, Model model) {
         DisplayRecipe planRecipe = planGeneratorFacade.getRecipeFromPlan(id);
-        ModelAndView modelAndView = new ModelAndView("plangenerator/recipe-in-plan");
-        modelAndView.addObject("planRecipe", planRecipe);
-        return modelAndView;
+        String imageUrl = "https://" + bucketName + region + ".amazonaws.com/" + id +".jpg";
+
+        model.addAttribute("diet", planRecipe.diet());
+        model.addAttribute("prepareTime", planRecipe.prepare_time());
+        model.addAttribute("name", planRecipe.name());
+        model.addAttribute("ingredients", planRecipe.ingredients());
+        model.addAttribute("steps", planRecipe.steps());
+        model.addAttribute("imageUrl", imageUrl);
+        model.addAttribute("id", planRecipe.id());
+        return "details/recipe-details";
     }
 
     @GetMapping("/grocery-list")

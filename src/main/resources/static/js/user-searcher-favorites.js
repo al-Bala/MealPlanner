@@ -1,8 +1,9 @@
 
 
 function initializeRecipeFields(wrapper, fieldPrefix, userId) {
-    var fieldHtml = `<div id="${fieldPrefix}-search">
-                        <input name="${fieldPrefix}[0].name" type="text" placeholder="Nazwa przepisu" class="favorite-search" required/>
+    var fieldHtml = `<div id="${fieldPrefix}-search" class="browser__wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input name="${fieldPrefix}[0].name" type="text" placeholder="Nazwa przepisu" class="favorite-search browser__input" required/>
                      </div>`;
     $(wrapper).append(fieldHtml);
     initializeFavoriteRecipeAutocomplete($(".favorite-search"), userId);

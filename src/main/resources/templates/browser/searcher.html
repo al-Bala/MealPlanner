@@ -21,15 +21,12 @@
         <div class="menu">
             <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
             <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
-            <a class="menu__item">Zarządzaj przepisami</a>
             <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-            <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
-            <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
-            <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${#authentication.name}}"><i
-                    class="fa-solid fa-user"></i></a>
+            <a title="Twój profil" class="menu__item profile profile-icon"
+                th:href="@{'/user/' + ${#authentication.name}}"><i class="fa-solid fa-user"></i></a>
         </div>
     </nav>
     <nav sec:authorize="!isAuthenticated()">
@@ -43,8 +40,6 @@
             <a class="menu__item" th:href="@{/home}">Strona główna</a>
             <a class="menu__item" th:href="@{/plan/guest}">Wygeneruj plan</a>
             <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
-            <a class="menu__item profile menu__login " th:href="@{/login}">Zaloguj się</a>
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
@@ -62,87 +57,61 @@
             <p class="browser__text-content">Wyszukaj lub wylosuj przepisy</p>
         </div>
     </header>
-
     <section class="browser__container">
         <div id="recipe-search-wrapper" class="recipes-browsing-field">
             <!-- Tutaj zostanie dodane pole wyszukiwania przez skrypt JS -->
         </div>
-
-
-        <section class="browser__container">
-            <div id="recipe-search-wrapper" class="recipes-browsing-field">
-                <!-- Tutaj zostanie dodane pole wyszukiwania przez skrypt JS -->
+        <form method="post" th:action="@{/recipes/diet}" class="browser__form">
+            <select name="diet" onchange="removeDefaultOption(this)" class="select-diet">
+                <option value="" disabled selected class="select-diet__option">Wybierz dietę</option>
+                <option th:each="diet : ${diets}" th:text="${diet}" th:value="${diet}" class="select-diet__option">
+                </option>
+            </select>
+            <div class="draw-btn__wrapper">
+                <button type="submit" class="draw-btn" id="submit-button" disabled>
+                    <i class="fa-solid fa-dice"></i>
+                </button>
+                <i class="fa-solid fa-arrow-left"></i>
+                <p class="draw-btn__info">Daj się zainspirować i wylosuj przepisy!</p>
             </div>
-
-            <form method="post" th:action="@{/recipes/diet}" class="browser__form">
-                <select name="diet" onchange="removeDefaultOption(this)" class="select-diet">
-                    <option value="" disabled selected class="select-diet__option">Wybierz dietę</option>
-                    <option th:each="diet : ${diets}" th:text="${diet}" th:value="${diet}" class="select-diet__option">
-                    </option>
-                </select>
-                <div class="draw-btn__wrapper">
-                    <button type="submit" class="draw-btn" id="submit-button" disabled>
-                        <i class="fa-solid fa-dice"></i>
-                    </button>
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <p class="draw-btn__info">Daj się zainspirować i wylosuj przepisy!</p>
-                </div>
-            </form>
-        </section>
-
-
-
-        <!-- <script>
-            function removeDefaultOption(selectElement) {
-                selectElement.options[0].disabled = true;
-
-                // Sprawdź, czy wybrano opcję inną niż domyślna
-                if (selectElement.selectedIndex > 0) {
-                    // Aktywuj przycisk "Losuj"
-                    document.getElementById("submit-button").disabled = false;
-                } else {
-                    // Zablokuj przycisk "Losuj"
-                    document.getElementById("submit-button").disabled = true;
-                }
-            }
-        </script> -->
-
-        <section class="random-recipes">
-            <ul class="browser__recipes-container">
-                <li th:each="recipe : ${recipes}" class="recipe-container__item">
+        </form>
+    </section>
+    <section class="random-recipes">
+        <ul class="browser__recipes-container">
+            <li th:each="recipe : ${recipes}" class="recipe-container__item">
+                <div class="test">
                     <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.nazwa()}"
                         class="recipe-container__link">
-                        <div class="decor-line"></div>
                     </a>
-                    <a th:href="@{/recipes/{id}(id=${recipe.id})}"><img th:src="${imageUrlMap[recipe.id]}"
-                            alt="Obraz przepisu" /></a>
-
-                </li>
-            </ul>
-        </section>
-
-
-
-        <footer class="footer">
-            <div class="footer__section contact">
-                <h4 class="footer__header">Kontakt</h4>
-                <div class="email">
-                    <i class="fa-solid fa-envelope"></i>
-                    <p class="email__text">email@gmail.com</p>
+                    <div class="decor-line"></div>
                 </div>
+                <a th:href="@{/recipes/{id}(id=${recipe.id})}" class=" recipe-img__link">
+                    <img th:src="${imageUrlMap[recipe.id]}" alt="Obraz przepisu" class="recipe__img" />
+                    <div class="overlay"></div>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <footer class="footer">
+        <div class="footer__section contact">
+            <h4 class="footer__header">Kontakt</h4>
+            <div class="email">
+                <i class="fa-solid fa-envelope"></i>
+                <p class="email__text">email@gmail.com</p>
             </div>
-            <div class="footer__section social-media">
-                <h4 class="footer__header">Znajdziesz nas tutaj</h4>
-                <div class="social-media__links">
-                    <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
-                    <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
-                    <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
+        </div>
+        <div class="footer__section social-media">
+            <h4 class="footer__header">Znajdziesz nas tutaj</h4>
+            <div class="social-media__links">
+                <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
             </div>
-        </footer>
-        <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
-        <script th:src="@{/js/burgerMenu.js}"></script>
-        <script th:src="@{'/js/searcher-recipe.js'}"></script>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/burgerMenu.js}"></script>
+    <script th:src="@{'/js/searcher-recipe.js'}"></script>
 </body>
 
 </html>

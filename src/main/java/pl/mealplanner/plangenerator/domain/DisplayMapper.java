@@ -48,6 +48,7 @@ class DisplayMapper {
                 .name(recipe.name())
                 .portions(recipe.portions())
                 .prepare_time(recipe.prepareTime())
+                .diet(recipe.diet())
                 .ingredients(mapFromIngredientPlanHistoryToIngredientDisplay(recipe.ingredients()))
                 .steps(recipe.steps())
                 .build();
@@ -71,8 +72,8 @@ class DisplayMapper {
         return ingPlan.stream()
                 .map(ing -> DisplayIngredient.builder()
                         .name(ing.name())
-                        .amountDisplay(roundAmount(ing.amount()))
-                        .unitDisplay(ing.unit())
+                        .amount(roundAmount(ing.amount()))
+                        .unit(ing.unit())
                         .build())
                 .toList();
     }

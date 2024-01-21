@@ -5,7 +5,7 @@ import lombok.Builder;
 @Builder
 public record DisplayIngredient(
         String name,
-        float amountDisplay,
-        String unitDisplay
+        float amount,
+        String unit
 ) {
 }
