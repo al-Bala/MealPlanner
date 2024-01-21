@@ -10,6 +10,14 @@
       display: none;
     }
 }
+nav .active .menu__item:nth-child(3) {
+    order: 1;
+    width: auto;
+    padding: 16px 30px;
+    margin-top: 40px;
+    border: 1px solid var(--gold);
+    border-radius: 5px;
+  }
 
 /*Hero graphic starts*/
 .browser-page {
