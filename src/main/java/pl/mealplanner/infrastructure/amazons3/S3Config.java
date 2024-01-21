@@ -1,4 +1,4 @@
-package pl.mealplanner.amazons3;
+package pl.mealplanner.infrastructure.amazons3;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;

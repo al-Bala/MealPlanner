@@ -1,19 +1,18 @@
 package pl.mealplanner.profile.infrastructure;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.mealplanner.profile.domain.UserFacade;
-import pl.mealplanner.profile.domain.UserFetcher;
-import pl.mealplanner.profile.domain.UserService;
-import pl.mealplanner.profile.domain.entity.User;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.mealplanner.profile.domain.UserFacade;
+import pl.mealplanner.profile.domain.UserService;
+import pl.mealplanner.profile.domain.entity.User;
 import pl.mealplanner.recipe.domain.entity.RecipeClass;
 
 import java.util.HashMap;
@@ -24,9 +23,6 @@ import java.util.Optional;
 
 @Controller
 class UserController {
-
-    @Autowired
-    private UserFetcher userFetcher; // Wstrzyknięcie zależności
     private final String bucketName = "mealplannerup.s3.";
     private final String region = "eu-north-1";
     private final UserFacade userFacade;
@@ -39,10 +35,7 @@ class UserController {
 
     @GetMapping("/user/{username}")
     public String showUserDetails(@PathVariable String username, Model model) {
-
-
         User user = userFacade.getUserByUsername(username);
-
         List<RecipeClass> favoriteRecipes = userService.getFavoriteRecipes(username);
         Map<String, String> imageUrlMap = new HashMap<>();
 
@@ -51,33 +44,17 @@ class UserController {
             imageUrlMap.put(recipe.getId(), imageUrl);
         });
 
-
         if (user != null) {
             model.addAttribute("user", user.getUsername());
             model.addAttribute("id", user.getId());
             model.addAttribute("role", user.getRole());
             model.addAttribute("favorites", userService.getFavoriteRecipes(username));
             model.addAttribute("imageUrlMap", imageUrlMap);
-            return "details/user-details"; //
+            return "details/user-details";
         } else {
-            return "details/user-details"; //
+            return "details/user-details";
         }
     }
-
-    /*@RequestMapping(value="/favoriteRecipesAutocomplete")
-    @ResponseBody
-    public List<Map<String, String>> favoriteRecipesAutocomplete(@RequestParam(value="userId") String userId, @RequestParam(value="term", required = false, defaultValue="") String term) {
-        List<Map<String, String>> suggestions = new ArrayList<>();
-        List<Recipes> favoriteRecipes = userFetcher.fetchFavorites(userId, term);
-        for (Recipes recipe : favoriteRecipes) {
-            Map<String, String> suggestion = new HashMap<>();
-            suggestion.put("id", recipe.getId());
-            suggestion.put("name", recipe.getName());
-            suggestions.add(suggestion);
-        }
-        return suggestions;
-    }*/
-
 
     @GetMapping("/user/{username}/change-profil")
     public String changeEmailForm( @PathVariable String username, Model model) {

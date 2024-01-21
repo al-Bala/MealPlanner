@@ -86,7 +86,6 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
         return agr;
     }
 
-    // NA PEWNO znjadzie przepis z przynjamniej 1 productToUse
     private List<AggregationOperation> isEmptyProductsToUse(List<String> namesProductsToUse, int limit) {
         if (!namesProductsToUse.isEmpty()) {
             return Arrays.asList(

@@ -22,7 +22,6 @@ public class BaseIntegrationTest {
     @Autowired
     public MockMvc mockMvc;
 
-    // stworzenie bazy danych dla testów integracyjnych (kontener)
     @Container
     public static final GenericContainer<?> mongoDBContainer = new GenericContainer<>(DockerImageName.parse("mongo:4.0.10"))
             .withExposedPorts(27017)
@@ -32,7 +31,6 @@ public class BaseIntegrationTest {
         mongoDBContainer.start();
     }
 
-    // połaczenie aplikacji z bazą danych w kontenerze
     @DynamicPropertySource
     public static void propertyOverride(DynamicPropertyRegistry registry){
         registry.add("spring.data.mongodb.uri", () -> "mongodb://" + mongoDBContainer.getHost() + ":" + mongoDBContainer.getFirstMappedPort());

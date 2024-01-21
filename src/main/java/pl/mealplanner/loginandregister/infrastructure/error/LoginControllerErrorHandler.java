@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class TokenControllerErrorHandler {
+public class LoginControllerErrorHandler {
     private static final String BAD_CREDENTIALS = "Bad Credentials";
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(BadCredentialsException.class)
     @ResponseBody
-    public TokenErrorResponse handleBadCredentials() {
-        return new TokenErrorResponse(BAD_CREDENTIALS, HttpStatus.UNAUTHORIZED);
+    public LoginErrorResponse handleBadCredentials() {
+        return new LoginErrorResponse(BAD_CREDENTIALS, HttpStatus.UNAUTHORIZED);
     }
 }

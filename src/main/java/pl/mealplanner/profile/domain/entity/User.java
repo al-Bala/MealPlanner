@@ -12,7 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.mealplanner.loginandregister.domain.dto.Role;
 import pl.mealplanner.plangenerator.productscounter.dto.GroceryList;
-import pl.mealplanner.profile.domain.entity.PlanHistory;
 
 import java.util.Collection;
 import java.util.List;
@@ -44,16 +43,8 @@ public class User implements UserDetails {
     @Field("grocery_list")
     List<GroceryList> groceryList;
 
+    @Field("favorites")
     List<String> favorites;
-
-//    @Getter
-//    @Id
-//    private String id;
-//    @Getter
-//    private String email;
-//    @Getter
-//    private String role;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

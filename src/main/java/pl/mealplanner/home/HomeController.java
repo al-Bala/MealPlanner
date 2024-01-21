@@ -13,21 +13,15 @@ class HomeController {
 
 
     @GetMapping(value = {"/", "/home"})
-    public String home(Model View) {
-
-
-        View.addAttribute("message", "Meal Planner");
-
+    public String home() {
         return "home/home-guest";
     }
 
     @GetMapping("/home/user")
     public String homeUser(Model view) {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName(); // Załóżmy, że ID użytkownika jest przechowywane jako nazwa użytkownika
+        String username = authentication.getName();
 
-        //view.addAttribute("userId", userId);
         view.addAttribute("message", "Meal Planner");
         view.addAttribute("username", username);
         return "home/home-user";

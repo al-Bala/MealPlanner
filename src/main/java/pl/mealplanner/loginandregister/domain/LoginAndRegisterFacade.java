@@ -17,7 +17,6 @@ public class LoginAndRegisterFacade {
 
     private final LoginAndRegisterRepository repository;
     private final PasswordEncoder passwordEncoder;
-    private final UserFacade userFacade;
 
     public UserDto findByUsername(String username) {
         return repository.findByUsername(username)
@@ -32,14 +31,6 @@ public class LoginAndRegisterFacade {
     public boolean isEmailExists(String email) {
         return repository.existsByEmail(email);
     }
-
-//    public List<PlanHistoryDto> findPlanHistoryByCurrentUser() {
-//        String username = userService.authenticate();
-//        User user = repository.findByUsername(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-//        return UserMapper.mapFromUserToPlanHistoryList(user);
-//    }
-
 
     public UserDto saveUser(UserDto userDto) {
         User user = User.builder()

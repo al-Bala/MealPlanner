@@ -11,7 +11,6 @@ import pl.mealplanner.profile.domain.entity.RecipeInPlanHistory;
 import pl.mealplanner.profile.domain.entity.User;
 
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Component

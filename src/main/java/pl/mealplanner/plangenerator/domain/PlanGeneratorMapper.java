@@ -2,11 +2,9 @@ package pl.mealplanner.plangenerator.domain;
 
 import pl.mealplanner.plangenerator.domain.dto.*;
 import pl.mealplanner.plangenerator.infrastructure.dto.*;
-import pl.mealplanner.plangenerator.domain.dto.IngredientDto;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 class PlanGeneratorMapper {
     public static UserPreferences mapFromUserPreferencesRequestToUserPreferencesDto(UserPreferencesRequest request) {

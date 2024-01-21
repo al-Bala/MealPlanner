@@ -60,13 +60,11 @@ class PlanGeneratorController {
     public ModelAndView info() {
         List<DisplayPlan> mealPlanner = planGeneratorFacade.getCurrentPlan();
 
-        // wyświetlanie obrazów
         Map<String, String> imageUrlMap = new HashMap<>();
         mealPlanner.forEach(recipe -> {
             String imageUrl = "https://" + bucketName + region + ".amazonaws.com/" + recipe.firstDisplayRecipe().id() + ".jpg";
             imageUrlMap.put(recipe.firstDisplayRecipe().id(), imageUrl);
         });
-
 
         ModelAndView modelAndView = new ModelAndView("plangenerator/planner");
         modelAndView.addObject("imageUrlMap", imageUrlMap);

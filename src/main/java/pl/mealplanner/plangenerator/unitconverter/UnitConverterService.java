@@ -59,22 +59,8 @@ class UnitConverterService {
         return au;
     }
 
-    /*
-    Założenia:
-    1. Jeśli produkt może być kupowany na sztuki to w bazie jest podana tylko waga 1 szt, nic więcej
-    2. MainUnit to TYLKO "g", "ml" - chyba że produkt występuje tylko w "szt", to wtedy MainUnit to "szt"
-    3. Nie ma możliwości pisania w "dag"
-    4. Może być produkt tylko na wage - na wagę i na sztuki sie nie da
-    */
-
     private AmountAndUnit count(Product product, IngredientDto ingRecipe) {
         switch (ingRecipe.unit()) {
-//          case "g", "ml":
-//              return AmountAndUnit.builder()
-//                      .amount(ingRecipe.amount() / product.packingMeasures().get(0))
-//                      .unit(product.mainUnit())
-//                      .build();
-//              return (int) ingRecipe.amount();
             case "kg", "l":
                 return AmountAndUnit.builder()
                         .amount(ingRecipe.amount() * 1000)

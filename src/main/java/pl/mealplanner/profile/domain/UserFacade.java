@@ -28,12 +28,10 @@ public class UserFacade {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    @Transactional
     public User updateUserPlanAndGroceryList(String username, List<PlanHistory> plan, List<GroceryList> groceryList) {
         User user = userRepository.findByUsername(username).orElse(null);
 
         if (user != null) {
-            userRepository.deleteByUsername(user.getUsername());
             user.setPlanHistory(plan);
             user.setGroceryList(groceryList);
             return userRepository.save(user);

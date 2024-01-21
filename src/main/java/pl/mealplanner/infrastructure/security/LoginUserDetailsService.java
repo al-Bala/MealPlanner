@@ -1,4 +1,4 @@
-package pl.mealplanner.infrastructure.security.jwt;
+package pl.mealplanner.infrastructure.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;

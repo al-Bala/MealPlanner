@@ -6,8 +6,6 @@ import java.util.List;
 
 @Builder
 public record DisplayRecipe(
-
-
         String id,
         String name,
         int portions,

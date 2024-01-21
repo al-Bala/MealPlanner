@@ -32,7 +32,6 @@ public class UnitConverterFacade {
                 .name(recipe.name())
                 .portions(recipe.portions())
                 .prepare_time(recipe.prepare_time())
-//                .max_storage_time(recipe.max_storage_time())
                 .diet(recipe.diet())
                 .ingredients(convertedIngList)
                 .steps(recipe.steps())

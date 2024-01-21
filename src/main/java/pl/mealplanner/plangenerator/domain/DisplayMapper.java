@@ -78,16 +78,6 @@ class DisplayMapper {
                 .toList();
     }
 
-//    private static List<DisplayIngredient> mapFromIngredientConvertedToIngredientDisplay(List<IngredientConverted> ingConverted){
-//        return ingConverted.stream()
-//                .map(ing -> DisplayIngredient.builder()
-//                        .name(ing.name())
-//                        .amountDisplay(roundAmount(ing.amountsAndUnit().getAmountDisplay()))
-//                        .unitDisplay(ing.amountsAndUnit().getUnitDisplay())
-//                        .build())
-//                .toList();
-//    }
-
     private static float roundAmount(float amount){
         return Math.round(amount * 10.0) / 10.0f;
     }
@@ -112,14 +102,4 @@ class DisplayMapper {
                 .prepareTime(recipeInPlanHistory.prepareTime())
                 .build();
     }
-
-//    private static List<DisplayIngredient> mapFromIngredientPlanHistoryToDisplayIngredient(List<IngredientPlanHistory> ingredientPlanHistory) {
-//        return ingredientPlanHistory.stream()
-//                .map(ing -> DisplayIngredient.builder()
-//                        .name(ing.name())
-//                        .amountDisplay(roundAmount(ing.amount()))
-//                        .unitDisplay(ing.unit())
-//                        .build())
-//                .toList();
-//    }
 }

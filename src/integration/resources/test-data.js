@@ -14,10 +14,6 @@ db.users.insertMany([
         },
         user_recipes: [""],
         plan_history: [
-            // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9421')}, // Kasza jaglana z warzywami
-            // { day: new Date(2023,12,13), recipe: ObjectId('6577660abbac733a111c9425')}, // Ryż z warzywami i kurczakiem
-            // {day: new Date(2023, 12, 13), recipe: ObjectId('6577660abbac733a111c9424')},// Koktajl owocowy
-            // {day: new Date(2023, 12, 14), recipe: null},
             {
                 day: new Date(2023, 12, 13),
                 recipe: {

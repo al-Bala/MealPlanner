@@ -2,7 +2,10 @@ package pl.mealplanner.plangenerator.domain;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.mealplanner.plangenerator.domain.dto.*;
+import pl.mealplanner.plangenerator.domain.dto.InfoForMealsSearch;
+import pl.mealplanner.plangenerator.domain.dto.OneMealInfo;
+import pl.mealplanner.plangenerator.domain.dto.UserPreferences;
+import pl.mealplanner.plangenerator.domain.dto.WeekInfo;
 import pl.mealplanner.plangenerator.infrastructure.dto.DayInfoRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.UserPreferencesRequest;
 import pl.mealplanner.plangenerator.infrastructure.dto.WeekInfoRequest;
@@ -20,7 +23,6 @@ import pl.mealplanner.profile.domain.entity.RecipeInPlanHistory;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Component
@@ -48,7 +50,6 @@ public class PlanGeneratorFacade {
         planFacade.savePlanAndGroceryList(mealPlan, listOfProductsForPlan.mapToGroceryList());
 
         return DisplayMapper.mapFromMealPlanElementToDisplay(mealPlan);
-//        return getCurrentPlan();
     }
 
     private static void setDates(WeekInfoRequest weekInfoRequest) {
