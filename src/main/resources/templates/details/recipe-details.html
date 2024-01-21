@@ -9,11 +9,11 @@
     <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/recipe-style.css}">
 </head>
 
-<body>
+<body class="recipe-details">
     <nav>
         <button class="burger-btn">
             <i class="fa-solid fa-burger"></i>
@@ -34,43 +34,55 @@
                     class="fa-solid fa-user"></i></a>
         </div>
     </nav>
-    <header class="recipe__header">
-        <h1 th:text="${name}" class="recipe__title"></h1>
-    </header>
-    <main class="recipe__wrapper">
-        <img th:src="${imageUrl}" alt="Obraz" class="recipe__image" />
-        <div class="diet">
-            <i class="fa-solid fa-leaf"></i>
-            <i class="fa-solid fa-circle-check"></i>
-            <i class="fa-solid fa-drumstick-bite"></i>
-            <p th:text="${diet}" class="diet__name"></p>
+    <main class="recipe__content">
+        <div class="recipe__wrapper">
+            <div class="recipe__header">
+                <h1 th:text="${name}" class="recipe__title"></h1>
+            </div>
+            <img th:src="${imageUrl}" alt="Obraz" class="recipe__image" />
+            <div class="recipe__info">
+                <div class="diet">
+                    <i class="fa-solid fa-leaf"></i>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-drumstick-bite"></i>
+                    <p th:text="${diet}" class="diet__name"></p>
+                </div>
+                <div class="prepare-time">
+                    <i class="fa-regular fa-clock"></i>
+                    <p th:text="${prepareTime}" class="prepare-time__text"></p>
+                </div>
+            </div>
+            <div class="ingredients__wrapper">
+                <h2 class="display-recipe-h2">Składniki</h2>
+                <table class="ingredients-table">
+                    <tr th:each="ingredient : ${ingredients}" class="ingredients-table__record">
+                        <td th:text="${ingredient.name}" class="ingredients-table__cell"></td>
+                        <td th:text="${ingredient.amount()} + ${ingredient.unit()}" class="ingredients-table__cell">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="preparation">
+                <h2 class="display-recipe-h2">Sposób przygotowania</h2>
+                <ol class="prepare__steps">
+                    <li th:each="step : ${steps}" th:text="${step}" class="prepare__step"></li>
+                </ol>
+            </div>
+            <div th:if="${favoriteMessage}" style="color: green;" class="favourite__feedback">
+                <p th:text="${favoriteMessage}"></p>
+            </div>
+
+            <form method="post" th:action="@{/recipes/{id}/favorite(id=${id})}" class="favourite__form">
+                <button type="submit" title="Dodaj do ulubionych" class="favourite__btn">
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </form>
+
+            <!-- Inne pola przepisu, jeśli są -->
         </div>
-        <div class="prepare-time">
-            <i class="fa-regular fa-clock"></i>
-            <p th:text="${prepareTime}" class="prepare-time__text"></p>
-        </div>
-
-        <h2>Składniki</h2>
-        <ul>
-            <li th:each="ingredient : ${ingredients}"
-                th:text="${ingredient.name} + ' - ' + ${ingredient.amount()} + ' - ' + ${ingredient.unit()}"></li>
-        </ul>
-
-        <h2>Sposób przygotowania</h2>
-        <ol>
-            <li th:each="step : ${steps}" th:text="${step}"></li>
-        </ol>
-
-        <div th:if="${favoriteMessage}" style="color: green;" class="favourite__feedback">
-            <p th:text="${favoriteMessage}"></p>
-        </div>
-
-        <form method="post" th:action="@{/recipes/{id}/favorite(id=${id})}">
-            <button type="submit">Dodaj do ulubionych</button>
-        </form>
-
-        <!-- Inne pola przepisu, jeśli są -->
     </main>
+
 
     <footer class="footer">
         <div class="footer__section contact">
@@ -91,6 +103,8 @@
     </footer>
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
     <script th:src="@{/js/burgerMenu.js}"></script>
+    <script th:src="@{/js/dietIcon.js}"></script>
+    <script th:src="@{/js/favRecipe.js}"></script>
 </body>
 
 </html>
