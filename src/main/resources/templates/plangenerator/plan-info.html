@@ -67,7 +67,7 @@
                         th:field="*{preferences.diet}" />
                     <input type=""> -->
                 <div class="diet-types__wrapper">
-                    <select th:field="*{preferences.diet}" required>
+                    <select th:field="*{preferences.diet}" class="diet-types__select" required>
                         <option value="" selected>Wybierz dietę</option>
                         <option value="wegetariańska">Wegetariańska</option>
                         <option value="wegańska">Wegańska</option>
@@ -75,21 +75,6 @@
                         <option value="brakDiety">Nie mam diety</option>
                     </select>
                 </div>
-
-<!--                <div class="diet-types__wrapper">-->
-<!--                    <div th:field="*{preferences.diet}" class="diet-type" id="wegetariańska" onclick="selectDiet('wegetariańska')">-->
-<!--                        <p class="diet-type__name">Wegetariańska</p>-->
-<!--                    </div>-->
-<!--                    <div th:field="*{preferences.diet}" class="diet-type" id="wegańska" onclick="selectDiet('wegańska')">-->
-<!--                        <p class="diet-type__name">Wegańska</p>-->
-<!--                    </div>-->
-<!--                    <div th:field="*{preferences.diet}" class="diet-type" id="bezglutenowa" onclick="selectDiet('bezglutenowa')">-->
-<!--                        <p class="diet-type__name"> Bezglutenowa</p>-->
-<!--                    </div>-->
-<!--                    <div th:field="*{preferences.diet}" class="diet-type" id="brakDiety" onclick="selectDiet('brakDiety')">-->
-<!--                        <p class="diet-type__name">Nie mam diety</p>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
 
             <div class="portions-form form-basis">
