@@ -88,9 +88,12 @@
                 <li th:each="step : ${steps}" th:text="${step}" class="prepare__step"></li>
             </ol>
         </div>
-        <div th:if="${favoriteMessage}" style="color: green;" class="favourite__feedback">
-            <p th:text="${favoriteMessage}"></p>
-        </div>
+
+
+
+        <p th:text="${isInFavorite}" class="prepare-time__text"></p>
+
+
 
             <form method="post" th:action="@{/recipes/{id}/favorite(id=${id})}" class="favourite__form">
                 <button type="submit" title="Dodaj do ulubionych" class="favourite__btn">
