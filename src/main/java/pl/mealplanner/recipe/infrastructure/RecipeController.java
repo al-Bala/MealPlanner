@@ -30,20 +30,26 @@ public class RecipeController {
         Optional<RecipeClass> recipeOptional = recipeService.findRecipeById(id);
         String imageUrl = "https://" + bucketName + region + ".amazonaws.com/" + id +".jpg";
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        boolean isInFavorite = userService.isFavorite(username, id);
+        model.addAttribute("isInFavorite", isInFavorite);
 
         if (recipeOptional.isPresent()) {
             RecipeClass recipe = recipeOptional.get();
             model.addAttribute("diet", recipe.getDiet());
-            model.addAttribute("prepareTime", recipe.getPrepare_Time());
+            model.addAttribute("prepareTime", recipe.getPrepare_time());
             model.addAttribute("name", recipe.getName());
             model.addAttribute("ingredients", recipe.getIngredients());
             model.addAttribute("steps", recipe.getSteps());
             model.addAttribute("image", recipe.getImage());
             model.addAttribute("imageUrl", imageUrl);
+            model.addAttribute("isInFavorite", isInFavorite);
             model.addAttribute("id", recipe.getId());
-            return "details/recipe-details"; // Nazwa pliku HTML z szablonem dla szczegółów przepisu
+            return "details/recipe-details"; // strona z przepisem
         } else {
-            return "details/recipe-details"; // Widok HTML informujący o braku przepisu
+            return "browser/searcher"; //
         }
     }
 
@@ -51,9 +57,9 @@ public class RecipeController {
     public String toggleRecipeFavorite(@PathVariable("id") String id, RedirectAttributes redirectAttributes) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        String message = userService.toggleFavorite(username, id);
 
-        redirectAttributes.addFlashAttribute("favoriteMessage", message);
+
+        userService.toggleFavorite(username, id);
         return "redirect:/recipes/" + id;
     }
 
@@ -106,5 +112,8 @@ public class RecipeController {
         }
         return suggestions;
     }
+
+
+
 
 }

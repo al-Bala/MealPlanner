@@ -39,8 +39,7 @@ class UserController {
 
     @GetMapping("/user/{username}")
     public String showUserDetails(@PathVariable String username, Model model) {
-//        User user = userService.getUserByUsername(username);
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 
         User user = userFacade.getUserByUsername(username);
 
@@ -59,9 +58,9 @@ class UserController {
             model.addAttribute("role", user.getRole());
             model.addAttribute("favorites", userService.getFavoriteRecipes(username));
             model.addAttribute("imageUrlMap", imageUrlMap);
-            return "details/user-details"; // nazwa widoku (user-details.html)
+            return "details/user-details"; //
         } else {
-            return "details/user-details"; // widok informujący o braku użytkownika
+            return "details/user-details"; //
         }
     }
 

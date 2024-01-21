@@ -40,24 +40,34 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    public String toggleFavorite(String username, String recipeId) {
+    public boolean toggleFavorite(String username, String recipeId) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
         List<String> favorites = user.getFavorites();
-        String message;
+        boolean isInFavorite;
 
         if (favorites.contains(recipeId)) {
             favorites.remove(recipeId);
-            message = "Przepis został usunięty z ulubionych.";
+            isInFavorite = false;
+
         } else {
             favorites.add(recipeId);
-            message = "Przepis został dodany do ulubionych.";
+            isInFavorite = true;
         }
 
+        // Zapisz zmiany w użytkowniku, jeśli to konieczne
         userRepository.save(user);
-        return message;
+        return isInFavorite;
     }
 
+    public boolean isFavorite(String username, String recipeId) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<String> favorites = user.getFavorites();
+        return favorites.contains(recipeId);
+    }
 
 
     public List<RecipeClass> getFavoriteRecipes(String username) {

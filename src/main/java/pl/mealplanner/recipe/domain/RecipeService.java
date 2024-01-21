@@ -14,11 +14,7 @@ import java.util.stream.Collectors;
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;
-//    private SearcherRepository searcherRepository;
 
-//    public Optional<Recipes> findRecipeById(String id) {
-//        return recipeProfileRepository.findById(id);
-//    }
 
     public List<RecipeClass> getRandomRecipes() {
         List<RecipeClass> allRecipes = recipeRepository.findAll();
