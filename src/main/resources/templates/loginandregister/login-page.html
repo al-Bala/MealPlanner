@@ -11,25 +11,28 @@
 </head>
 
 <body class="login-page">
-<nav>
-    <button class="burger-btn">
-        <i class="fa-solid fa-burger"></i>
-    </button>
-    <button class="exit-btn">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-    <div class="menu">
-        <a class="menu__item" th:href="@{/home}">Strona główna</a>
-        <a class="menu__item" th:href="@{/plan/guest}">Wygeneruj plan</a>
-        <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-    </div>
-    <div class="menu__desktop">
-        <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
-        <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
-    </div>
-</nav>
+    <nav>
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/guest}">Wygeneruj plan</a>
+            <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+        </div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
+        </div>
+    </nav>
 
     <div class="login-form__wrapper pop-up">
+        <button class="exitBtn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
         <div class="login-form__header">
             <h3 class="header__text">Logowanie</h3>
         </div>
