@@ -27,17 +27,20 @@ h1 {
     display: flex;
     align-items: center;
     flex-direction: column;
+    position: relative;
+    padding-bottom: 40px;
 }
 .recipe__wrapper {
     margin-top: 150px;
     padding: 30px;
     border-radius: 16px;
-    border: 4px solid var(--light-gray);
     width: 85%;
     max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 1;
+    background-color: var(--white);
 }
 .diet {
     display: flex;
@@ -108,5 +111,37 @@ h1 {
 .fa-solid.fa-heart {
     display: none;
 }
+.background-img {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(5px);
+}
+.background-img-large {
+    display: none;
+}
+@media (min-width: 992px) {
+    .background-img-large {
+        display: block;
+        position: absolute;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        filter: blur(5px);
+        object-fit: cover;
+        object-position: center;
+    }
+    .background-img {
+        display: none;
+    }
+}
+.footer {
+    margin-top: 0;
+}
+
 
 

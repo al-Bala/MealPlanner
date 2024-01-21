@@ -7,8 +7,8 @@ const addFavourite = () => {
         solidHeart.style.display = "flex";
         emptyHeart.style.display = "none";
     } else {
-        solidHeart.style.display = "none";
-        emptyHeart.style.display = "flex";
+        solidHeart.style.display = "flex";
+        emptyHeart.style.display = "none";
     }
     
 }
