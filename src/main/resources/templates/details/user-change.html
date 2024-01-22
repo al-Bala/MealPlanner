@@ -1,44 +1,84 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <title>Zmień adres e-mail</title>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script th:src="@{'/js/user-searcher-favorites.js'}"></script>
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/profile-edit-style.css}">
 </head>
-<body>
-<nav>
-    <button class="burger-btn">
-        <i class="fa-solid fa-burger"></i>
-    </button>
-    <button class="exit-btn">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-    <div class="menu">
-        <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
-        <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
-        <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-    </div>
-    <div class="menu__desktop">
-        <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
-        <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${#authentication.name}}"><i
-                class="fa-solid fa-user"></i></a>
-    </div>
-</nav>
 
+<body class="profile-edit-page">
+    <nav sec:authorize="isAuthenticated()">
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
+            <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
+            <a class="menu__item profile user-item" th:href="@{/logout}">Wyloguj się</a>
+        </div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
+            <a title="Twój profil" class="menu__item profile profile-icon"
+                th:href="@{'/user/' + ${#authentication.name}}"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <main>
+        <div class="profile__hero hero">
+            <img th:src="@{/images/parsley-mobile.jpg}" alt="Pietruszka na desce" class="hero__image">
+            <img th:src="@{/images/parsley-large.jpg}" alt="Pietruszka na desce" class="hero__image-large">
+            <div class="hero__content">
+                <h1>Edytuj profil</h1>
+                <div class="profile__data">
+                    <div class="profile__graphic">
+                        <img th:src="@{/images/profile-icon-white.svg}" alt="Ikona profilu" class="profile__image">
+                    </div>
+                    <div class="data__text">
+                        <form method="post" th:action="@{/user/{username}/change-profil-date(username=${usere})}"
+                            class="edit-form">
+                            <input type="email" name="newEmail" placeholder="Nowy adres e-mail" class="edit-input">
+                            <input type="password" name="newPassword" placeholder="Nowe hasło" class="edit-input">
+                            <input type="password" name="confirmNewPassword" placeholder="Potwierdź nowe hasło"
+                                class="edit-input">
 
-<p>Edycja profilu użytkownika :  <span th:text="${usere}"></span></p>
+                            <button type="submit" class="confirm-btn">Edytuj dane</button>
+                            <a th:href="@{'/user/' + ${username}}" class="cancel-btn">Nie zapisuj zmian</a>
 
-
-<h1>Zmień adres e-mail oraz hasło : </h1>
-
-<form method="post" th:action="@{/user/{username}/change-profil-date(username=${usere})}" style="display: flex; flex-direction: column;">
-    <input type="email" name="newEmail" placeholder="Nowy adres e-mail" style="margin-bottom: 10px; width: 200px;">
-    <input type="password" name="newPassword" placeholder="Nowe hasło" style="margin-bottom: 10px; width: 200px;">
-    <input type="password" name="confirmNewPassword" placeholder="Potwierdź nowe hasło" style="margin-bottom: 10px; width: 200px;">
-    <button type="submit" style="margin-bottom: 10px; width: 200px;">Edytuj dane</button>
-
-    <a th:href="@{'/user/' + ${username}}">Nie zapisuj zmian</a>
-    <p th:if="${error}" th:text="${error}"></p> <!-- Wyświetlanie komunikatu o błędzie -->
-</form>
-
-
+                            <p th:if="${error}" th:text="${error}" class="edit-error"></p>
+                            <!-- Wyświetlanie komunikatu o błędzie -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="footer__section contact">
+                <h4 class="footer__header">Kontakt</h4>
+                <div class="email">
+                    <i class="fa-solid fa-envelope"></i>
+                    <p class="email__text">email@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer__section social-media">
+                <h4 class="footer__header">Znajdziesz nas tutaj</h4>
+                <div class="social-media__links">
+                    <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
+                    <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
+                    <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </footer>
+        <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+        <script th:src="@{/js/burgerMenu.js}"></script>
 </body>
+
 </html>
