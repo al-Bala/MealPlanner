@@ -61,7 +61,8 @@
             <h2 class="about-us__header">Co znajdziesz na naszej stronie?</h2>
             <div class="about-us__wrapper">
                 <div class="recipes  element">
-                    <a class="recipes__link">Zarządzaj przepisami</a>
+                    <a th:href="@{'/user/' + ${#authentication.name}}" class="recipes__link">Przejdź do swojego
+                        profilu</a>
                     <img class="about-us__image" th:src="@{/images/nicolettazanella.jpg}" alt="kurkuma i pomarańcze">
                 </div>
                 <div class="about-us__text-content element">
@@ -75,7 +76,7 @@
                         żadnym składniku!</p>
                 </div>
                 <div class="recipes element">
-                    <a class="recipes__link">Wyszukaj przepis</a>
+                    <a th:href="@{/recipes}" class="recipes__link">Wyszukaj przepis</a>
                     <img class="about-us__image" th:src="@{/images/keram.jpg}" alt="warzywa">
                 </div>
                 <div class="about-us__text-content element">

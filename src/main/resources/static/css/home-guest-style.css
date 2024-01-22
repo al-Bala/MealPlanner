@@ -19,7 +19,7 @@
     border-radius: 5px;
   }
   @media (min-width: 992px) {
-    .menu__item:nth-child(3), .menu__item:nth-child(5) {
+    .menu__item:nth-child(4), .menu__item:nth-child(5) {
       display: none;
     }
   }
