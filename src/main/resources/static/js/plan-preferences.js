@@ -27,7 +27,7 @@ function initializeProductFields(wrapper, addButton, fieldPrefix, deleteButtonCl
                             <label class="products__label products__label--2">Jednostka</label>
                             ${fieldPrefix.includes("productsToUse") ? 
                                 // '<input name="' + fieldPrefix + '[' + x + '].unit" type="text" placeholder="Wybierz jednostkę" class="unit product__field"/>' : ''
-                                '<select id="units-'+x+'" name="' + fieldPrefix + '[' + x + '].unit" required>' +
+                                '<select id="units-'+x+'" name="' + fieldPrefix + '[' + x + '].unit" required class="unit product__field">' +
                                 '<option value="" disabled selected >Wybierz jednostkę</option>' +
                                 '</select>' : ''}
                         </div>                                        

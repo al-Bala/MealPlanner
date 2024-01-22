@@ -146,10 +146,10 @@ input[type="range"] {
     width: 57vw;
 }
 .amount {
-    width: 160px;
+    width: 170px;
 }
 .unit {
-    width: 160px;
+    width: 170px;
 }
 .test {
     display: flex;
