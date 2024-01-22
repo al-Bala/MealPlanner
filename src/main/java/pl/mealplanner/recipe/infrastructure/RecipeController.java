@@ -40,6 +40,7 @@ public class RecipeController {
             RecipeClass recipe = recipeOptional.get();
             model.addAttribute("diet", recipe.getDiet());
             model.addAttribute("prepareTime", recipe.getPrepare_time());
+            model.addAttribute("portions", recipe.getPortions());
             model.addAttribute("name", recipe.getName());
             model.addAttribute("ingredients", recipe.getIngredients());
             model.addAttribute("steps", recipe.getSteps());

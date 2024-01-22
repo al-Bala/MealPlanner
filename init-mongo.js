@@ -1018,8 +1018,8 @@ db.recipes.insertMany([
             },
             {
                 name: "pomidory z puszki",
-                amount: 1,
-                unit: "szt"
+                amount: 400,
+                unit: "g"
             },
             {
                 name: "oliwa",
