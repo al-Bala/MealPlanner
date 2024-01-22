@@ -102,13 +102,13 @@ nav {
   nav .active .menu__item:nth-child(2) {
     color: var(--gold);
   }
-  nav .active .menu__item:last-child {
+  /* nav .active .menu__item:last-child {
     width: auto;
     padding: 16px 30px;
     margin-top: 40px;
     border: 1px solid var(--gold);
     border-radius: 5px;
-  }
+  } */
   
   nav.active .burger-btn {
     display: none;

@@ -14,94 +14,89 @@
 </head>
 
 <body class="recipe-details">
-<nav sec:authorize="isAuthenticated()">
-    <button class="burger-btn">
-        <i class="fa-solid fa-burger"></i>
-    </button>
-    <button class="exit-btn">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-    <div class="menu">
-        <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
-        <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
-        <a class="menu__item">Zarządzaj przepisami</a>
-        <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-        <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
-        <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
-    </div>
-    <div class="menu__desktop">
-        <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
-        <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${#authentication.name}}"><i
-                class="fa-solid fa-user"></i></a>
-    </div>
-</nav>
-<nav sec:authorize="!isAuthenticated()">
-    <button class="burger-btn">
-        <i class="fa-solid fa-burger"></i>
-    </button>
-    <button class="exit-btn">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-    <div class="menu">
-        <a class="menu__item" th:href="@{/home}">Strona główna</a>
-        <a class="menu__item" th:href="@{/plan/guest}">Wygeneruj plan</a>
-        <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-    </div>
-    <div class="menu__desktop">
-        <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
-        <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
-    </div>
-</nav>
-<main class="recipe__content">
-    <img th:src="@{/images/herbs-1280.jpg}" alt="Składniki" class="background-img">
-    <img th:src="@{/images/herbs-1920.jpg}" alt="Składniki" class="background-img-large">
-    <div class="recipe__wrapper">
-        <div class="recipe__header">
-            <h1 th:text="${name}" class="recipe__title"></h1>
+    <nav sec:authorize="isAuthenticated()">
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
+            <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
+            <a class="menu__item profile user-item" th:href="@{/logout}">Wyloguj się</a>
         </div>
-        <img th:src="${imageUrl}" alt="Obraz" class="recipe__image" />
-        <div class="recipe__info">
-            <div class="diet">
-                <i class="fa-solid fa-leaf"></i>
-                <i class="fa-solid fa-circle-check"></i>
-                <i class="fa-solid fa-drumstick-bite"></i>
-                <p th:text="${diet}" class="diet__name"></p>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
+            <a title="Twój profil" class="menu__item profile profile-icon"
+                th:href="@{'/user/' + ${#authentication.name}}"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <nav sec:authorize="!isAuthenticated()">
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/guest}">Wygeneruj plan</a>
+            <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+            <a class="menu__item profile guest-item" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile guest-item" th:href="@{/login}">Zaloguj się</a>
+        </div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/register}">Zarejestruj się</a>
+            <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
+        </div>
+    </nav>
+    <main class="recipe__content">
+        <img th:src="@{/images/herbs-1280.jpg}" alt="Składniki" class="background-img">
+        <img th:src="@{/images/herbs-1920.jpg}" alt="Składniki" class="background-img-large">
+        <div class="recipe__wrapper">
+            <div class="recipe__header">
+                <h1 th:text="${name}" class="recipe__title"></h1>
             </div>
-            <div class="prepare-time">
-                <i class="fa-regular fa-clock"></i>
-                <p th:text="${prepareTime}" class="prepare-time__text"></p>
+            <img th:src="${imageUrl}" alt="Obraz" class="recipe__image" />
+            <div class="recipe__info">
+                <div class="diet">
+                    <i class="fa-solid fa-leaf"></i>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-drumstick-bite"></i>
+                    <p th:text="${diet}" class="diet__name"></p>
+                </div>
+                <div class="prepare-time">
+                    <i class="fa-regular fa-clock"></i>
+                    <p th:text="${prepareTime} + ' min'" class="prepare-time__text"></p>
+                </div>
             </div>
-        </div>
-        <div class="ingredients__wrapper">
-            <h2 class="display-recipe-h2">Składniki</h2>
-            <table class="ingredients-table">
-                <tr th:each="ingredient : ${ingredients}" class="ingredients-table__record">
-                    <td th:text="${ingredient.name}" class="ingredients-table__cell"></td>
-                    <td th:text="${ingredient.amount()} + ${ingredient.unit()}" class="ingredients-table__cell">
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="preparation">
-            <h2 class="display-recipe-h2">Sposób przygotowania</h2>
-            <ol class="prepare__steps">
-                <li th:each="step : ${steps}" th:text="${step}" class="prepare__step"></li>
-            </ol>
-        </div>
-
-
-
-        <p th:text="${isInFavorite}" class="prepare-time__text"></p>
-
-
-
+            <div class="ingredients__wrapper">
+                <h2 class="display-recipe-h2">Składniki</h2>
+                <table class="ingredients-table">
+                    <tr th:each="ingredient : ${ingredients}" class="ingredients-table__record">
+                        <td th:text="${ingredient.name}" class="ingredients-table__cell"></td>
+                        <td th:text="${ingredient.amount()} + ' ' + ${ingredient.unit()}"
+                            class="ingredients-table__cell">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="preparation">
+                <h2 class="display-recipe-h2">Sposób przygotowania</h2>
+                <ol class="prepare__steps">
+                    <li th:each="step : ${steps}" th:text="${step}" class="prepare__step"></li>
+                </ol>
+            </div>
+            <p th:text="${isInFavorite}" class="fav-bool"></p>
             <form method="post" th:action="@{/recipes/{id}/favorite(id=${id})}" class="favourite__form">
                 <button type="submit" title="Dodaj do ulubionych" class="favourite__btn">
                     <i class="fa-solid fa-heart"></i>
                     <i class="fa-regular fa-heart"></i>
                 </button>
             </form>
-
             <!-- Inne pola przepisu, jeśli są -->
         </div>
     </main>

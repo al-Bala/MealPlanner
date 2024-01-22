@@ -4,6 +4,26 @@
 @import '../css/__footer.css';
 @import '../css/__animations.css';
 
+@media (min-width: 992px) {
+    .menu__item:nth-child(4),
+    .menu__item:nth-child(5) {
+      display: none;
+    }
+}
+  nav .active .menu__item.user-item {
+    width: auto;
+    padding: 16px 30px;
+    margin-top: 40px;
+    border: 1px solid var(--gold);
+    border-radius: 5px;
+}
+nav .active .menu__item.guest-item {
+    width: auto;
+    padding: 16px 30px;
+    margin-top: 40px;
+    border: 1px solid var(--gold);
+    border-radius: 5px;
+}
 .recipe-details {
     font-family: "Now", sans-serif;
 }
@@ -122,6 +142,9 @@ h1 {
     filter: blur(5px);
 }
 .background-img-large {
+    display: none;
+}
+.fav-bool {
     display: none;
 }
 @media (min-width: 992px) {
