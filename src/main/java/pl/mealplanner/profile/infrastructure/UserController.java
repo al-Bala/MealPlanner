@@ -46,6 +46,7 @@ class UserController {
 
         if (user != null) {
             model.addAttribute("user", user.getUsername());
+            model.addAttribute("email", user.getEmail());
             model.addAttribute("id", user.getId());
             model.addAttribute("role", user.getRole());
             model.addAttribute("favorites", userService.getFavoriteRecipes(username));

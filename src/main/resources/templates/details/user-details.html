@@ -38,13 +38,9 @@
             <div class="hero__content">
                 <h1>Twój profil</h1>
                 <p>Login: <span th:text="${username}"></span></p>przepisy</p>
+                <p>Email: <span th:text="${email}"></span></p>
             </div>
         </div>
-
-        <!-- <h1>Profil użytkownika : </h1>
-        <p>Login: <span th:text="${username}"></span></p>
-        <p>Role: <span th:text="${role}"></span></p>
-        <p>Role: <span th:text="${id}"></span></p> -->
 
         <form method="get" th:action="@{/user/{username}/change-profil(username=${username})}">
             <button type="submit">Edytuj profil</button>
