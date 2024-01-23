@@ -3,6 +3,19 @@
 @import '../css/__navigation.css';
 @import '../css/__footer.css';
 @import '../css/__animations.css';
+@media (min-width: 992px) {
+    .menu__item:nth-child(4),
+    .menu__item:nth-child(5) {
+      display: none;
+    }
+}
+  nav .active .menu__item.user-item {
+    width: auto;
+    padding: 16px 30px;
+    margin-top: 40px;
+    border: 1px solid var(--gold);
+    border-radius: 5px;
+}
 
 /*Mobile plan-generator starts*/
 .plan-info-page {
@@ -133,10 +146,10 @@ input[type="range"] {
     width: 57vw;
 }
 .amount {
-    width: 160px;
+    width: 170px;
 }
 .unit {
-    width: 160px;
+    width: 170px;
 }
 .test {
     display: flex;

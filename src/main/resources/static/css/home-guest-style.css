@@ -3,35 +3,26 @@
 @import '../css/__navigation.css';
 @import '../css/__footer.css';
 
-nav .active .menu__item:nth-child(3) {
-    order: 1;
+  nav .active .menu__item:nth-child(1) {
+    color: var(--black);
+  }
+  nav .active .menu__item:nth-child(2) {
+    color: var(--gold);
+  }
+  nav .active .menu__item:nth-child(4),
+  nav .active .menu__item:nth-child(5)
+   {
     width: auto;
     padding: 16px 30px;
     margin-top: 40px;
     border: 1px solid var(--gold);
     border-radius: 5px;
   }
-  nav .active .menu__item:nth-child(1) {
-    color: var(--gold);
-  }
-  nav .active .menu__item:nth-child(2) {
-    color: var(--dark-gray);
-  }
-  nav .active .menu__item:nth-child(4) {
-    width: 100vw;
-    padding: 28px 0;
-    font-size: 14px;
-    border: 1px solid var(--light-gray);
-    margin: 0;
-  }
-  
   @media (min-width: 992px) {
-    .menu__item:nth-child(3), .menu__item:nth-child(4) {
+    .menu__item:nth-child(4), .menu__item:nth-child(5) {
       display: none;
     }
   }
-
-
   main {
     width: 100vw;
     font-family: "Now", sans-serif;

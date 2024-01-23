@@ -81,6 +81,7 @@ class PlanGeneratorController {
 
         model.addAttribute("diet", planRecipe.diet());
         model.addAttribute("prepareTime", planRecipe.prepare_time());
+        model.addAttribute("portions", planRecipe.portions());
         model.addAttribute("name", planRecipe.name());
         model.addAttribute("ingredients", planRecipe.ingredients());
         model.addAttribute("steps", planRecipe.steps());

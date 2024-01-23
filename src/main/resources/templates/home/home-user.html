@@ -22,11 +22,14 @@
             <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
             <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
             <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
+            <a class="menu__item" th:href="@{/logout}">Wyloguj się</a>
+
         </div>
         <div class="menu__desktop">
             <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
-            <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${#authentication.name}}"><i
-                    class="fa-solid fa-user"></i></a>
+            <a title="Twój profil" class="menu__item profile profile-icon"
+                th:href="@{'/user/' + ${#authentication.name}}"><i class="fa-solid fa-user"></i></a>
         </div>
     </nav>
     <main>
@@ -58,7 +61,8 @@
             <h2 class="about-us__header">Co znajdziesz na naszej stronie?</h2>
             <div class="about-us__wrapper">
                 <div class="recipes  element">
-                    <a class="recipes__link">Zarządzaj przepisami</a>
+                    <a th:href="@{'/user/' + ${#authentication.name}}" class="recipes__link">Przejdź do swojego
+                        profilu</a>
                     <img class="about-us__image" th:src="@{/images/nicolettazanella.jpg}" alt="kurkuma i pomarańcze">
                 </div>
                 <div class="about-us__text-content element">
@@ -72,7 +76,7 @@
                         żadnym składniku!</p>
                 </div>
                 <div class="recipes element">
-                    <a class="recipes__link">Wyszukaj przepis</a>
+                    <a th:href="@{/recipes}" class="recipes__link">Wyszukaj przepis</a>
                     <img class="about-us__image" th:src="@{/images/keram.jpg}" alt="warzywa">
                 </div>
                 <div class="about-us__text-content element">

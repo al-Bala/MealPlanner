@@ -44,6 +44,7 @@ nav {
     }
   }
   nav .menu__item {
+    color: var(--black);
     display: none;
   }
   @media (min-width: 992px) {
@@ -76,9 +77,6 @@ nav {
       font-size: 28px;
       color: var(--dark-gray);
     }
-    nav .menu__item:nth-child(6), nav .menu__item:nth-child(5) {
-      display: none;
-    }
   }
   nav .active {
     width: 100vw;
@@ -104,13 +102,13 @@ nav {
   nav .active .menu__item:nth-child(2) {
     color: var(--gold);
   }
-  nav .active .menu__item:last-child {
+  /* nav .active .menu__item:last-child {
     width: auto;
     padding: 16px 30px;
     margin-top: 40px;
     border: 1px solid var(--gold);
     border-radius: 5px;
-  }
+  } */
   
   nav.active .burger-btn {
     display: none;

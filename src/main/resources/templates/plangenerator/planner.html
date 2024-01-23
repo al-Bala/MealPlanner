@@ -1,52 +1,109 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>Meal Planner</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/meal-plan-style.css}">
+    <title>Twój plan posiłków</title>
 </head>
-<body>
-<nav>
-    <button class="burger-btn">
-        <i class="fa-solid fa-burger"></i>
-    </button>
-    <button class="exit-btn">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-    <div class="menu">
-        <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
-        <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
-        <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-    </div>
-    <div class="menu__desktop">
-        <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
-        <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${#authentication.name}}"><i
-                class="fa-solid fa-user"></i></a>
-    </div>
-</nav>
-<br /><br />
-<div>
-    <div th:each="element : ${mealPlanner}">
-        <div th:if="${element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
-            <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
-            <p>Masz wolne :)</p>
+
+<body class="meal-plan-page">
+    <nav sec:authorize="isAuthenticated()">
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
+            <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
+            <a class="menu__item profile user-item" th:href="@{/logout}">Wyloguj się</a>
         </div>
-        <div th:if="${!element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
-            <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
-            <a th:href="@{/plan/recipes/{id}(id=${element.firstDisplayRecipe().id()})}" th:text="${element.firstDisplayRecipe().name()}"></a>
-            <img th:src="${imageUrlMap[element.firstDisplayRecipe().id()]}" alt="Obraz przepisu"/>
-            <p th:text="'Czas przygotowania: ' + ${element.firstDisplayRecipe().prepareTime()}"></p>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
+            <a title="Twój profil" class="menu__item profile profile-icon"
+                th:href="@{'/user/' + ${#authentication.name}}"><i class="fa-solid fa-user"></i></a>
         </div>
-        <br><br>
-    </div>
-    <p>Lista zakupów:</p>
-    <div th:each="product : ${groceryList}">
-        <ul>
-            <li th:text="${product.amountToUse()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>
-        </ul>
+    </nav>
+    <main>
+        <div>
+            <div th:each="element : ${mealPlanner}">
+
+                <div th:if="${element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
+                    <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
+                    <p>Masz wolne :)</p>
+                </div>
+
+                <div th:if="${!element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
+                    <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
+                    <a th:href="@{/plan/recipes/{id}(id=${element.firstDisplayRecipe().id()})}"
+                        th:text="${element.firstDisplayRecipe().name()}"></a>
+                    <img th:src="${imageUrlMap[element.firstDisplayRecipe().id()]}" alt="Obraz przepisu" />
+                    <p th:text="'Czas przygotowania: ' + ${element.firstDisplayRecipe().prepareTime()}"></p>
+                </div>
+            </div>
+            <p>Lista zakupów:</p>
+            <div th:each="product : ${groceryList}">
+                <ul>
+                    <li th:text="${product.amountToUse()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>
+                </ul>
+            </div>
+
+            <a th:href="@{/plan/generator}">Wygeneruj plan ponownie</a>
+
+        </div>
+    </main>
+    <div>
+        <div th:each="element : ${mealPlanner}">
+            <div th:if="${element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
+                <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
+                <p>Masz wolne :)</p>
+            </div>
+            <div th:if="${!element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
+                <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
+                <a th:href="@{/plan/recipes/{id}(id=${element.firstDisplayRecipe().id()})}"
+                    th:text="${element.firstDisplayRecipe().name()}"></a>
+                <img th:src="${imageUrlMap[element.firstDisplayRecipe().id()]}" alt="Obraz przepisu" />
+                <p th:text="'Czas przygotowania: ' + ${element.firstDisplayRecipe().prepareTime()}"></p>
+            </div>
+            <br><br>
+        </div>
+        <p>Lista zakupów:</p>
+        <div th:each="product : ${groceryList}">
+            <ul>
+                <li th:text="${product.amountToUse()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>
+            </ul>
+        </div>
+
+        <a th:href="@{/plan/generator}">Wygeneruj plan ponownie</a>
+
     </div>
 
-    <a th:href="@{/plan/generator}">Wygeneruj plan ponownie</a>
-</div>
+    <footer class="footer">
+        <div class="footer__section contact">
+            <h4 class="footer__header">Kontakt</h4>
+            <div class="email">
+                <i class="fa-solid fa-envelope"></i>
+                <p class="email__text">email@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__section social-media">
+            <h4 class="footer__header">Znajdziesz nas tutaj</h4>
+            <div class="social-media__links">
+                <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/burgerMenu.js}"></script>
 </body>
+
 </html>

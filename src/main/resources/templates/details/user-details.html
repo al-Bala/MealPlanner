@@ -1,61 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <title>User Details</title>
     <meta charset="UTF-8">
-    <title>Ulubione Przepisy</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>Profil</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script th:src="@{'/js/user-searcher-favorites.js'}"></script>
+    <link href="https://fonts.cdnfonts.com/css/now" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/profile-style.css}">
 </head>
-<body data-userid="${id}">
-<nav>
-    <button class="burger-btn">
-        <i class="fa-solid fa-burger"></i>
-    </button>
-    <button class="exit-btn">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-    <div class="menu">
-        <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
-        <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
-        <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
-    </div>
-    <div class="menu__desktop">
-        <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
-        <a title="Twój profil" class="menu__item profile profile-icon" th:href="@{'/user/' + ${#authentication.name}}"><i
-                class="fa-solid fa-user"></i></a>
-    </div>
-</nav>
 
-<h1>Profil użytkownika : </h1>
-<p>Login: <span th:text="${username}"></span></p>
-<p>Email: <span th:text="${email}"></span></p>
-
-
-
-<form method="get" th:action="@{/user/{username}/change-profil(username=${username})}">
-    <button type="submit">Edytuj profil</button>
-</form>
-
-
-
-<p th:if="${message}" th:text="${message}"></p> <! komunikat o zmianie danych z edycji profilu -- >
-
-
-<h2>Ulubione przepisy</h2>
-<ul>
-    <li th:each="recipe : ${favorites}">
-        <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.name}"></a>
-        <a th:href="@{/recipes/{id}(id=${recipe.id})}"><img th:src="${imageUrlMap[recipe.id]}"
-                                                            alt="Obraz przepisu" /></a>
-    </li>
-</ul>
-
-<!-- Inne pola użytkownika, jeśli są -->
-
-<a th:href="@{/plan/recipes}">Plan i lista zakupów</a>
-
+<body data-userid="${id}" class="user-profile-page">
+    <nav sec:authorize="isAuthenticated()">
+        <button class="burger-btn">
+            <i class="fa-solid fa-burger"></i>
+        </button>
+        <button class="exit-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="menu">
+            <a class="menu__item" th:href="@{/home/user}">Strona główna</a>
+            <a class="menu__item" th:href="@{/plan/generator}">Wygeneruj plan</a>
+            <a class="menu__item" th:href="@{/recipes}">Wyszukaj przepis</a>
+            <a class="menu__item" th:href="@{'/user/' + ${#authentication.name}}">Twój profil</a>
+            <a class="menu__item profile user-item" th:href="@{/logout}">Wyloguj się</a>
+        </div>
+        <div class="menu__desktop">
+            <a class="menu__item profile" th:href="@{/logout}">Wyloguj się</a>
+            <a title="Twój profil" class="menu__item profile profile-icon"
+                th:href="@{'/user/' + ${#authentication.name}}"><i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+    <main class="profile__wrapper">
+        <div class="profile__hero hero">
+            <img th:src="@{/images/parsley-small.jpg}" alt="Pietruszka na desce" class="hero__image">
+            <img th:src="@{/images/parsley-large.jpg}" alt="Pietruszka na desce" class="hero__image-large">
+            <div class="hero__content">
+                <h1>Twój profil</h1>
+                <div class="profile__data">
+                    <div class="profile__graphic">
+                        <img th:src="@{/images/profile-icon-white.svg}" alt="Ikona profilu" class="profile__image">
+                    </div>
+                    <div class="data__text">
+                        <p th:text="${username}" class="profile__user-name"></p>
+                        <p th:text="${email}" class="profile__email"></p>
+                        <form method="get" th:action="@{/user/{username}/change-profil(username=${username})}">
+                            <button type="submit" class="edit-btn">Edytuj profil</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <p th:if="${message}" th:text="${message}"></p>
+        <h2 class="fav-recipes__h2">Ulubione przepisy</h2>
+        <section class="random-recipes">
+            <ul class="browser__recipes-container">
+                <li th:each="recipe : ${favorites}" class="recipe-container__item">
+                    <div class="test">
+                        <a th:href="@{/recipes/{id}(id=${recipe.id})}" th:text="${recipe.name}"
+                            class="recipe-container__link"></a>
+                        <div class="d-line"></div>
+                    </div>
+                    <!-- <div class="d-line"></div> -->
+                    <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="recipe-img__link">
+                        <img th:src="${imageUrlMap[recipe.id]}" alt="Obraz przepisu" class="recipe__img" />
+                        <div class="overlay"></div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <div class="plan-grocery__wrapper">
+            <a th:href="@{/plan/recipes}">
+                <img th:src="@{/images/StockSnap.jpg}" alt="Spaghetti" class="plan-grocery__image">
+            </a>
+            <div class="plan-grocery__text">
+                <div class="decor-line"></div>
+                <a th:href="@{/plan/recipes}" class="plan-grocery__link"> Zobacz swój plan i listę zakupów</a>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer__section contact">
+            <h4 class="footer__header">Kontakt</h4>
+            <div class="email">
+                <i class="fa-solid fa-envelope"></i>
+                <p class="email__text">email@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer__section social-media">
+            <h4 class="footer__header">Znajdziesz nas tutaj</h4>
+            <div class="social-media__links">
+                <a class="social-media__link"><i class="fa-brands fa-square-facebook"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-media__link"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/burgerMenu.js}"></script>
+    <script th:src="@{/js/slider.js}"></script>
 </body>
+
 </html>
