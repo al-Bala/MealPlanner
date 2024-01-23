@@ -33,9 +33,7 @@ public class ListOfProductsForPlan {
                 .filter(p -> p.getNrOfPackets() != 0)
                 .map(p -> GroceryList.builder()
                         .name(p.getName())
-                        .amountToUse(Math.round(p.getAmountToUseCount() * 10.0) / 10.0f)
-                        .packingMeasure(p.getPackingMeasure())
-                        .nrOfPackets(p.getNrOfPackets())
+                        .amount(Math.round(p.getAmountToUseCount() * 10.0) / 10.0f)
                         .unit(p.getUnitCount())
                         .build())
                 .toList();

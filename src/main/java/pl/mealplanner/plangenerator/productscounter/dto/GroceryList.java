@@ -5,9 +5,7 @@ import lombok.Builder;
 @Builder
 public record GroceryList(
         String name,
-        float amountToUse,
-        float packingMeasure,
-        int nrOfPackets,
+        float amount,
         String unit
 ) {
 }
