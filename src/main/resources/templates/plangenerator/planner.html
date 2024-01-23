@@ -82,7 +82,7 @@
             <table class="grocery-table">
                 <tr th:each="product : ${groceryList}" class="grocery-table__row">
                     <td th:text="${product.name()}" class="grocery-table__products grocery-table__cell"></td>
-                    <td th:text="${product.amountToUse()} + ' ' + ${product.unit()}" class="grocery-table__cell"></td>
+                    <td th:text="${product.amount()} + ' ' + ${product.unit()}" class="grocery-table__cell"></td>
                 </tr>
             </table>
         </section>
