@@ -7,6 +7,7 @@ import pl.mealplanner.profile.domain.entity.User;
 import pl.mealplanner.recipe.domain.RecipeRepository;
 import pl.mealplanner.recipe.domain.entity.RecipeClass;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -26,39 +27,47 @@ public class UserService {
 
     public boolean toggleFavorite(String username, String recipeId) {
         User user = userRepository.findByUsername(username).orElse(null);
-        if(user == null){
+        if (user == null) {
             return false;
         }
-        List<String> favorites = user.getFavorites();
-        boolean isInFavorite;
 
+        List<String> favorites = user.getFavorites();
+        if (favorites == null) {
+            favorites = new ArrayList<>();
+            user.setFavorites(favorites); // Zakładam, że istnieje taka metoda w klasie User
+        }
+
+        boolean isInFavorite;
         if (favorites.contains(recipeId)) {
             favorites.remove(recipeId);
             isInFavorite = false;
-
         } else {
             favorites.add(recipeId);
             isInFavorite = true;
         }
 
-        // Zapisz zmiany w użytkowniku, jeśli to konieczne
         userRepository.save(user);
         return isInFavorite;
     }
 
     public boolean isFavorite(String username, String recipeId) {
         User user = userRepository.findByUsername(username).orElse(null);
-        if(user == null){
+        if (user == null) {
             return false;
         }
+
         List<String> favorites = user.getFavorites();
+        if (favorites == null) {
+            return false;
+        }
+
         return favorites.contains(recipeId);
     }
 
 
     public List<RecipeClass> getFavoriteRecipes(String username) {
         User user = userRepository.findByUsername(username).orElse(null);
-        if (user != null) {
+        if (user != null && user.getFavorites() != null) { // Dodane sprawdzenie, czy lista ulubionych nie jest null
             return user.getFavorites().stream()
                     .map(recipeRepository::findById)
                     .filter(Optional::isPresent)
