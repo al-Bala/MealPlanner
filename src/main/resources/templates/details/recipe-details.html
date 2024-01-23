@@ -72,7 +72,11 @@
                     <i class="fa-regular fa-clock"></i>
                     <p th:text="${prepareTime} + ' min'" class="prepare-time__text"></p>
                 </div>
-                <p th:text="${portions}"></p>
+                <div class="portions-info">
+                    <i class="fa-solid fa-utensils"></i>
+                    <p th:text="${portions}"></p>
+                </div>
+
             </div>
             <div class="ingredients__wrapper">
                 <h2 class="display-recipe-h2">Składniki</h2>

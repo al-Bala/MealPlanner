@@ -66,16 +66,23 @@ h1 {
     display: flex;
     gap: 10px;
 }
-.prepare-time {
+.prepare-time, .portions-info {
     display: flex;
     gap: 10px;
 }
 .recipe__info {
     display: flex;
-    align-items: center;
     justify-content: center;
+    flex-direction: column;
+    align-items: start;
     gap: 30px;
     margin-bottom: 40px;
+}
+@media (min-width: 450px) {
+    .recipe__info {
+        flex-direction: row;
+        align-items: center;
+    }
 }
 .display-recipe-h2 {
     font-size: 16px;
@@ -83,7 +90,8 @@ h1 {
     font-weight: 400;
 }
 .diet__name,
-.prepare-time__text {
+.prepare-time__text,
+.portions-info p {
     font-size: 14px;
     color: var(--dark-gray);
 }
@@ -99,7 +107,7 @@ h1 {
 .fa-drumstick-bite {
     color: var(--orange);
 }
-.fa-clock {
+.fa-clock, .fa-utensils {
     color: var(--gold);
     font-size: 18px;
 }
