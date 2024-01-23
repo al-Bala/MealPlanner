@@ -23,14 +23,10 @@ public class PlanProductInfo {
         if (other == null) {
             return false;
         }
-        if (!(other instanceof PlanProductInfo)) {
+        if (!(other instanceof PlanProductInfo otherIng)) {
             return false;
         }
-        PlanProductInfo otherIng = (PlanProductInfo) other;
-        if (otherIng.name.equals(this.name) && otherIng.unitCount.equals(this.unitCount)) {
-            return true;
-        }
-        return false;
+        return otherIng.name.equals(this.name) && otherIng.unitCount.equals(this.unitCount);
     }
 
     @Override

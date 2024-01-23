@@ -36,23 +36,40 @@ class MealsFilterRepositoryImpl implements MealsFilterRepository{
         Criteria criteriaDislikedProducts = isEmptyDislikedProducts(info.dislikedProducts());
         Criteria criteriaPlanHistory = Criteria.where("_id").nin(previousPlanRecipes);
 
-        List<Criteria> c1 = List.of(criteriaMaxStorageTime, criteriaDiet, criteriaPrepareTime, criteriaDislikedProducts, criteriaPlanHistory);  // +agrProductsToUse
-        List<Criteria> c2 = List.of(criteriaMaxStorageTime, criteriaDiet, criteriaPrepareTime, criteriaPlanHistory);    // +agrProductsToUse
+        List<Criteria> c1 = List.of(criteriaPlanHistory, criteriaMaxStorageTime, criteriaPrepareTime, criteriaDiet, criteriaDislikedProducts);  // +agrProductsToUse
+        List<Criteria> c2 = List.of(criteriaPlanHistory, criteriaMaxStorageTime, criteriaPrepareTime, criteriaDiet);    // +agrProductsToUse
+        List<Criteria> c3 = List.of(criteriaPlanHistory, criteriaMaxStorageTime, criteriaPrepareTime);    // +agrProductsToUse
 
         List<AggregationOperation> criteriaList1 = noNullInCriteria(c1);
         List<AggregationOperation> criteriaList2 = noNullInCriteria(c2);
+        List<AggregationOperation> criteriaList3 = noNullInCriteria(c3);
 
         Aggregation agrWithAllReg = createAggregation(agrProductsToUse, criteriaList1);
         Aggregation agrWithoutDislikedProd = createAggregation(agrProductsToUse, criteriaList2);
+        Aggregation agrWithoutDislikedAndDiet = createAggregation(agrProductsToUse, criteriaList3);
+        Aggregation agrWithoutDislikedAndDietAndProToUse = createAggregation(Collections.emptyList(), criteriaList3);
 
-        AggregationResults<Recipe> result1 = mongoTemplate.aggregate(agrWithAllReg, "recipes", Recipe.class);
+        AggregationResults<Recipe> result1 = mongoTemplate
+                .aggregate(agrWithAllReg, "recipes", Recipe.class);
         List<Recipe> documents1 = result1.getMappedResults();
         if(documents1.isEmpty()){
-            AggregationResults<Recipe> result2 = mongoTemplate.aggregate(agrWithoutDislikedProd, "recipes", Recipe.class);
+            AggregationResults<Recipe> result2 = mongoTemplate
+                    .aggregate(agrWithoutDislikedProd, "recipes", Recipe.class);
             List<Recipe> documents2 = result2.getMappedResults();
             if(documents2.isEmpty()){
-                log.error("Nie udało się znaleźć żadnego pasującego przepisu :(");
-                return null;
+                AggregationResults<Recipe> result3 = mongoTemplate
+                        .aggregate(agrWithoutDislikedAndDiet, "recipes", Recipe.class);
+                List<Recipe> documents3 = result3.getMappedResults();
+                if(documents3.isEmpty()){
+                    AggregationResults<Recipe> result4 = mongoTemplate
+                            .aggregate(agrWithoutDislikedAndDietAndProToUse, "recipes", Recipe.class);
+                    List<Recipe> documents4 = result4.getMappedResults();
+                    if(documents4.isEmpty()){
+                        log.error("Nie udało się znaleźć żadnego pasującego przepisu :(");
+                        return null;
+                    }
+                }
+                return documents3;
             }
             return documents2;
         }

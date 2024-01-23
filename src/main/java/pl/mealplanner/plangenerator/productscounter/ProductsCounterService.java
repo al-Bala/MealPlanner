@@ -36,15 +36,13 @@ class ProductsCounterService {
     private PlanProductInfo choosePacketAndCountLeftovers(Product product, float ingAmount){
         List<Integer> biggerPackingMeasures = new ArrayList<>();
         List<Integer> smallerPackingMeasures = new ArrayList<>();
-
-        int convertedRecipeAmount = (int) ingAmount;
         List<Integer> chosePackingMeasures = product.packingMeasures();
 
         if(chosePackingMeasures.isEmpty()){
             return PlanProductInfo.builder()
                     .name(product.name())
-                    .amountToUseCount(convertedRecipeAmount)
-                    .packingMeasure(convertedRecipeAmount)
+                    .amountToUseCount(ingAmount)
+                    .packingMeasure(ingAmount)
                     .nrOfPackets(1)
                     .surplus(0)
                     .unitCount(product.mainUnit())
@@ -52,27 +50,27 @@ class ProductsCounterService {
         }
 
         for (Integer packingMeasure:chosePackingMeasures) {
-            if(packingMeasure == convertedRecipeAmount){
+            if(packingMeasure == ingAmount){
                 return PlanProductInfo.builder()
                         .name(product.name())
-                        .amountToUseCount(convertedRecipeAmount)
+                        .amountToUseCount(ingAmount)
                         .packingMeasure(packingMeasure)
                         .nrOfPackets(1)
                         .surplus(0)
                         .unitCount(product.mainUnit())
                         .build();
             }
-            else if(packingMeasure > convertedRecipeAmount){
+            else if(packingMeasure > ingAmount){
                 biggerPackingMeasures.add(packingMeasure);
             } else {
                 smallerPackingMeasures.add(packingMeasure);
             }
         }
 
-        MainIngToUseInfo mainIngToUseInfo = service.compareAndChooseTheBestPacket(biggerPackingMeasures, smallerPackingMeasures, convertedRecipeAmount);
+        MainIngToUseInfo mainIngToUseInfo = service.compareAndChooseTheBestPacket(biggerPackingMeasures, smallerPackingMeasures, ingAmount);
         return PlanProductInfo.builder()
                 .name(product.name())
-                .amountToUseCount(convertedRecipeAmount)
+                .amountToUseCount(ingAmount)
                 .packingMeasure(mainIngToUseInfo.packingMeasure())
                 .nrOfPackets(mainIngToUseInfo.nrOfPackets())
                 .surplus(mainIngToUseInfo.surplus())

@@ -596,12 +596,12 @@ db.products.insertMany([
     {
         name: "śmietana",
         packing_units: [
-            "g",
-            "kg",
+            "ml",
+            "l",
             "łyżka",
             "łyżeczka"
         ],
-        main_unit: "g",
+        main_unit: "ml",
         packing_measures: [
             200,
             400
@@ -886,7 +886,7 @@ db.recipes.insertMany([
             {
                 name: "musztarda francuska",
                 amount: 25,
-                unit: "ml"
+                unit: "g"
             }
         ],
         steps: [ "Piekarnik rozgrzać do 200 stopni", "W tym czasie ziemniaki obrać i pokroić na ósemki", "Szparagom odciąć zdrewniałe końcówki, obrać i pokroić na kawałki długości około 4 – 5 cm", "Ziemniaki wsypać do miski, dodać olej, sól i dokładnie je natrzeć", "Wysypać na blachę wyłożoną papierem do pieczenia i piec przez 10 – 12 minut", "W międzyczasie do tej samej miski włożyć szparagi i również natrzeć olejem i solą", "Kiedy ziemniaki zaczną się rumienić blachę wysunąć i dodać szparagi, dokładnie wymieszać i piec kolejne 10 minut", "W czasie gdy szparagi się pieką posiekać koper, a w szklance wymieszać wszystkie składniki sosu", "Gotowe szparagi i ziemniaki polać sosem, posypać dużą ilością kopru i podawać na stół", "Można zjeść bez żadnych dodatków lub z surówką z młodej kapusty, dobre na gorąco i na zimno" ]
@@ -1018,8 +1018,8 @@ db.recipes.insertMany([
             },
             {
                 name: "pomidory z puszki",
-                amount: 1,
-                unit: "szt"
+                amount: 400,
+                unit: "g"
             },
             {
                 name: "oliwa",
@@ -1331,7 +1331,7 @@ db.recipes.insertMany([
             {
                 name: "czosnek",
                 amount: 4,
-                unit: "ząbki"
+                unit: "ząbek"
             },
             {
                 name: "śmietana",
@@ -1344,7 +1344,7 @@ db.recipes.insertMany([
                 unit: "ml"
             },
             {
-                name: "nataka pietruszki",
+                name: "natka pietruszki",
                 amount: 1,
                 unit: "szt"
             },
@@ -1391,7 +1391,7 @@ db.recipes.insertMany([
             },
             {
                 name: "cebula",
-                amount: 1,
+                amount: 2,
                 unit: "szt"
             },
             {
@@ -1400,14 +1400,9 @@ db.recipes.insertMany([
                 unit: "g"
             },
             {
-                name: "cebula",
-                amount: 1,
-                unit: "szt"
-            },
-            {
                 name: "czosnek",
                 amount: 1,
-                unit: "ząbki"
+                unit: "ząbek"
             },
             {
                 name: "oliwa",
@@ -1494,7 +1489,7 @@ db.recipes.insertMany([
             {
                 name: "czosnek",
                 amount: 1,
-                unit: "szt"
+                unit: "ząbek"
             },
             {
                 name: "ryż",
@@ -1538,7 +1533,7 @@ db.recipes.insertMany([
                 unit: "szt"
             },
             {
-                name: "żółty ser",
+                name: "ser żółty",
                 amount: 50,
                 unit: "g"
             },
@@ -1694,7 +1689,7 @@ db.recipes.insertMany([
             {
                 name: "czosnek",
                 amount: 1,
-                unit: "ząbki"
+                unit: "ząbek"
             }
         ],
         steps: [

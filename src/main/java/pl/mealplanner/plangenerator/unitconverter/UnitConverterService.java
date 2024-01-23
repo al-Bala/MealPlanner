@@ -76,11 +76,6 @@ class UnitConverterService {
                         .amount(ingRecipe.amount() * 15)
                         .unit("g")
                         .build();
-            case "szczypta":   // ???
-                return AmountAndUnit.builder()
-                        .amount(0)
-                        .unit("g")
-                        .build();
             case "szt": {
                 if (product.packingMeasures().size() == 1) {
                     return AmountAndUnit.builder()
@@ -92,7 +87,7 @@ class UnitConverterService {
                 return null;
             }
         }
-        log.error("Błąd przy przeliczaniu jedonstek w przepisie");
+        log.error("Błąd przy przeliczaniu jedonstek w przepisie dla składnika: " + ingRecipe.name());
         return null;
     }
 }

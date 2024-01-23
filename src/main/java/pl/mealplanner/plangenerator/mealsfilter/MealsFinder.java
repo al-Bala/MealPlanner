@@ -44,10 +44,10 @@ class MealsFinder {
         } else {
             InfoForFiltering info2 = InfoForFiltering.builder()
                     .forHowManyDays(info.forHowManyDays())
-                    .diet("brakDiety")
+                    .diet(info.diet())
                     .timeForPrepareMin(info.timeForPrepareMin())
                     .productsToUse(Collections.emptyList())
-                    .dislikedProducts(Collections.emptyList())
+                    .dislikedProducts(info.dislikedProducts())
                     .build();
             return chooseOneRecipe(info2, 0);
         }

@@ -9,25 +9,29 @@ import java.util.List;
 @Component
 class PackingChooser {
 
-    public MainIngToUseInfo compareAndChooseTheBestPacket(List<Integer> biggerPackingMeasures, List<Integer> smallerPackingMeasures, int convertedRecipeAmount){
+    public MainIngToUseInfo compareAndChooseTheBestPacket(
+            List<Integer> biggerPackingMeasures, List<Integer> smallerPackingMeasures, float convertedRecipeAmount){
         if(smallerPackingMeasures.isEmpty()){
             return chooseTheBestBiggerPacket(convertedRecipeAmount, biggerPackingMeasures);
         } else if (biggerPackingMeasures.isEmpty()){
             return chooseTheBestSmallerPacket(convertedRecipeAmount, smallerPackingMeasures);
         } else {
-            MainIngToUseInfo big = chooseTheBestBiggerPacket(convertedRecipeAmount, biggerPackingMeasures);
-            MainIngToUseInfo small = chooseTheBestSmallerPacket(convertedRecipeAmount, smallerPackingMeasures);
+            MainIngToUseInfo biggerBestPacket =
+                    chooseTheBestBiggerPacket(convertedRecipeAmount, biggerPackingMeasures);
+            MainIngToUseInfo smallerBestPacket =
+                    chooseTheBestSmallerPacket(convertedRecipeAmount, smallerPackingMeasures);
 
-            float bigIdk = big.nrOfPackets() * big.surplus();
-            float smallIdk = small.nrOfPackets() * small.surplus();
+            float factorBigger = biggerBestPacket.nrOfPackets() * biggerBestPacket.surplus();
+            float factorSmaller = smallerBestPacket.nrOfPackets() * smallerBestPacket.surplus();
 
-            if(smallIdk < (0.7 * bigIdk)){
-                return small;
+            if(factorSmaller < (0.7 * factorBigger)){
+                return smallerBestPacket;
             } else {
-                return big;
+                return biggerBestPacket;
             }
         }
     }
+
     private MainIngToUseInfo chooseTheBestBiggerPacket(float recipeAmount, List<Integer> listOfMeasures){
         List<MainIngToUseInfo> array = new ArrayList<>();
 

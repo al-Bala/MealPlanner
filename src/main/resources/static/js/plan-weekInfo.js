@@ -62,7 +62,7 @@ $(function() {
                         '<option value="B02">Nie gotuję</option>' +
                         '<option value="E03">Gotowałem wcześniej</option>' +
                     '</select>' +
-                    '<input class="cooking-time" type="number" min="15" name="weekInfo.dayInfoList[' + x + '].eatingPlan.timeMin" style="display:none;" placeholder="Czas">' +
+                    '<input class="cooking-time" type="number" min="30" name="weekInfo.dayInfoList[' + x + '].eatingPlan.timeMin" style="display:none;" placeholder="Czas">' +
                 '</div>'+
             '</div>';
 
