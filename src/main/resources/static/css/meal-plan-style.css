@@ -249,11 +249,11 @@
     transform: scale(1.1);
   }
   .new-plan__link:hover .new-plan__btn{
-    background-color: var(--gold);
-    color: var(--white);
+    background-color: var(--white);
+    color: var(--gold);
   }
   .new-plan__link {
-    background-color: var(--gold);
+    background-color: var(--white);
   }
 
 

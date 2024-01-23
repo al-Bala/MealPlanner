@@ -248,7 +248,7 @@ h1 {
     .browser__recipes-container {
         width: 80%;
         max-width: 1000px;
-        height: 600px;
+        height: 510px;
         overflow-y: auto;
     }
     .plan-grocery__image {
