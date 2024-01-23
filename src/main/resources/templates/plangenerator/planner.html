@@ -33,7 +33,7 @@
     </nav>
     <header class="header">
         <div class="header-img__wrapper">
-            <img th:src="@{/images/pizza.jpg}" alt="Pizza">
+            <img th:src="@{/images/pizza.jpg}" alt="Pizza" class="pizza">
             <div class="gradinet"></div>
         </div>
         <div class="header__text-content">
@@ -78,29 +78,13 @@
             </div>
         </section>
         <section class="grocery-list">
-
-            <!-- <table class="ingredients-table">
-                <tr th:each="ingredient : ${ingredients}" class="ingredients-table__record">
-                    <td th:text="${ingredient.name}" class="ingredients-table__cell"></td>
-                    <td th:text="${ingredient.amount()} + ' ' + ${ingredient.unit()}" class="ingredients-table__cell">
-                    </td>
-                </tr>
-            </table>
-
-            
-            <div th:each="product : ${groceryList}">
-                <ul>
-                    <li th:text="${product.amountToUse()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>
-                </ul>
-            </div> -->
-            <p>Lista zakupów:</p>
+            <h2 class="grocery-list__title">Lista zakupów:</h2>
             <table class="grocery-table">
                 <tr th:each="product : ${groceryList}" class="grocery-table__row">
-                    <td th:text="${product.name()}" class="grocery-table__cell"></td>
+                    <td th:text="${product.name()}" class="grocery-table__products grocery-table__cell"></td>
                     <td th:text="${product.amountToUse()} + ' ' + ${product.unit()}" class="grocery-table__cell"></td>
                 </tr>
             </table>
-
         </section>
         <section class="new-plan">
             <div class="new-plan__btn">
