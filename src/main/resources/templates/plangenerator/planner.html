@@ -31,60 +31,71 @@
                 th:href="@{'/user/' + ${#authentication.name}}"><i class="fa-solid fa-user"></i></a>
         </div>
     </nav>
+    <header class="header">
+        <div class="header-img__wrapper">
+            <img th:src="@{/images/pizza.jpg}" alt="Pizza" class="pizza">
+            <div class="gradinet"></div>
+        </div>
+        <div class="header__text-content">
+            <p class="header__text">Oto Twój spersonalizowany</p>
+            <h1 class="header__h">Plan Posiłków!</h1>
+        </div>
+        <img th:src="@{/images/chat-cloud.svg}" alt="Chmurka czatu" class="chat-cloud">
+    </header>
     <main>
-        <div>
-            <div th:each="element : ${mealPlanner}">
-
-                <div th:if="${element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
-                    <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
-                    <p>Masz wolne :)</p>
+        <section class="meal-plan">
+            <div th:each="element : ${mealPlanner}" class="meal-plan__day">
+                <div th:if="${element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}" class="free-day">
+                    <h2 th:text="${element.dayOfWeek()} + ': ' + ${element.date()}" class="free-day__date day__text">
+                    </h2>
+                    <div class="free-day__el el">
+                        <img th:src="/images/beach.jpg" alt="Palmy - wolne od gotowania"
+                            class="free-day__image day__image">
+                        <div class="overlay"></div>
+                        <p class="free-day__message free-day__text">Masz wolne :)</p>
+                    </div>
                 </div>
+                <div th:if="${!element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}" class="cook-day">
+                    <h2 th:text="${element.dayOfWeek()} + ': ' + ${element.date()}" class="day__text"></h2>
+                    <div class="cook-day__el el">
 
-                <div th:if="${!element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
-                    <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
-                    <a th:href="@{/plan/recipes/{id}(id=${element.firstDisplayRecipe().id()})}"
-                        th:text="${element.firstDisplayRecipe().name()}"></a>
-                    <img th:src="${imageUrlMap[element.firstDisplayRecipe().id()]}" alt="Obraz przepisu" />
-                    <p th:text="'Czas przygotowania: ' + ${element.firstDisplayRecipe().prepareTime()}"></p>
+                        <a th:href="@{/plan/recipes/{id}(id=${element.firstDisplayRecipe().id()})}"
+                            class="cook-day__link">
+                            <div class="cook-day__recipe-info">
+                                <a th:href="@{/plan/recipes/{id}(id=${element.firstDisplayRecipe().id()})}"
+                                    th:text="${element.firstDisplayRecipe().name()}"></a>
+                                <div class="prepare-time">
+                                    <i class="fa-regular fa-clock"></i>
+                                    <p th:text="${element.firstDisplayRecipe().prepareTime()} + ' min'"></p>
+                                </div>
+                            </div>
+                            <img th:src="${imageUrlMap[element.firstDisplayRecipe().id()]}" alt="Obraz przepisu"
+                                class="day__image" />
+                            <div class="overlay"></div>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <p>Lista zakupów:</p>
-            <div th:each="product : ${groceryList}">
-                <ul>
-                    <li th:text="${product.amountToUse()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>
-                </ul>
+        </section>
+        <section class="grocery-list">
+            <h2 class="grocery-list__title">Lista zakupów:</h2>
+            <table class="grocery-table">
+                <tr th:each="product : ${groceryList}" class="grocery-table__row">
+                    <td th:text="${product.name()}" class="grocery-table__products grocery-table__cell"></td>
+                    <td th:text="${product.amountToUse()} + ' ' + ${product.unit()}" class="grocery-table__cell"></td>
+                </tr>
+            </table>
+        </section>
+        <section class="new-plan">
+            <div class="new-plan__btn">
+                <i class="fa-solid fa-rotate-left"></i>
+                <a th:href="@{/plan/generator}" class="new-plan__link">Wygeneruj plan ponownie</a>
             </div>
+        </section>
 
-            <a th:href="@{/plan/generator}">Wygeneruj plan ponownie</a>
 
-        </div>
+
     </main>
-    <div>
-        <div th:each="element : ${mealPlanner}">
-            <div th:if="${element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
-                <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
-                <p>Masz wolne :)</p>
-            </div>
-            <div th:if="${!element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}">
-                <p th:text="${element.dayOfWeek()} + ': ' + ${element.date()}"></p>
-                <a th:href="@{/plan/recipes/{id}(id=${element.firstDisplayRecipe().id()})}"
-                    th:text="${element.firstDisplayRecipe().name()}"></a>
-                <img th:src="${imageUrlMap[element.firstDisplayRecipe().id()]}" alt="Obraz przepisu" />
-                <p th:text="'Czas przygotowania: ' + ${element.firstDisplayRecipe().prepareTime()}"></p>
-            </div>
-            <br><br>
-        </div>
-        <p>Lista zakupów:</p>
-        <div th:each="product : ${groceryList}">
-            <ul>
-                <li th:text="${product.amountToUse()} + ' ' + ${product.unit()} + ' - ' + ${product.name()}"></li>
-            </ul>
-        </div>
-
-        <a th:href="@{/plan/generator}">Wygeneruj plan ponownie</a>
-
-    </div>
-
     <footer class="footer">
         <div class="footer__section contact">
             <h4 class="footer__header">Kontakt</h4>
