@@ -10,6 +10,7 @@ import pl.mealplanner.profile.domain.entity.PlanHistory;
 import pl.mealplanner.profile.domain.entity.RecipeInPlanHistory;
 import pl.mealplanner.profile.domain.entity.User;
 
+import java.util.Collections;
 import java.util.List;
 
 @AllArgsConstructor
@@ -21,7 +22,11 @@ public class PlanFacade {
 
     public List<PlanHistory> getCurrentPlan() {
         User currentUser = userFacade.getCurrentUser();
-        return currentUser.getPlanHistory();
+        List<PlanHistory> planHistory = currentUser.getPlanHistory();
+        if (planHistory == null) {
+            return Collections.emptyList();
+        }
+        return planHistory;
     }
 
     public RecipeInPlanHistory getRecipeFromPlanById(String id) {
