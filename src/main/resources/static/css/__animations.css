@@ -21,3 +21,16 @@
         transform: translateX(0px);
     }
 }
+
+@keyframes pulseCloud {
+    0% {
+        top: 328px;
+    }
+    50% {
+        top: 331px;
+    }
+    100% {
+        top:328px;
+    }
+}
+

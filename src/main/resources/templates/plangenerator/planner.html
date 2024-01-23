@@ -45,14 +45,15 @@
     <main>
         <section class="meal-plan">
             <div th:each="element : ${mealPlanner}" class="meal-plan__day">
-                <div th:if="${element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}" class="free-day">
+                <div th:if="${element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}" class="free-day cook-day">
                     <h2 th:text="${element.dayOfWeek()} + ': ' + ${element.date()}" class="free-day__date day__text">
                     </h2>
                     <div class="free-day__el el">
-                        <img th:src="/images/beach.jpg" alt="Palmy - wolne od gotowania"
+                        <img th:src="@{/images/beach.jpg}" alt="Palmy - wolne od gotowania"
                             class="free-day__image day__image">
                         <div class="overlay"></div>
-                        <p class="free-day__message free-day__text">Masz wolne :)</p>
+                        <p class="free-day__message free-day__text cook-day__recipe-info">Masz wolne <span><i
+                                    class="fa-solid fa-face-smile-wink"></i></span></p>
                     </div>
                 </div>
                 <div th:if="${!element.firstDisplayRecipe().id().equals('EMPTY_DAY_ID')}" class="cook-day">
@@ -82,7 +83,7 @@
             <table class="grocery-table">
                 <tr th:each="product : ${groceryList}" class="grocery-table__row">
                     <td th:text="${product.name()}" class="grocery-table__products grocery-table__cell"></td>
-                    <td th:text="${product.amountToUse()} + ' ' + ${product.unit()}" class="grocery-table__cell"></td>
+                    <td th:text="${product.amount()} + ' ' + ${product.unit()}" class="grocery-table__cell"></td>
                 </tr>
             </table>
         </section>
