@@ -129,10 +129,13 @@
             <div class="plan-form plan-last-basis">
                 <div class="products__header subform__header">
                     <p class="question-number">6.</p>
-                    <label class="diet-form__question">W każdym dniu zaznacz na ile dni chcesz przygotować posiłki i
-                        ile czasu chcesz poświęcić (chyba że gotowałeś wcześniej na kilka dni wtedy wybierz opcję
-                        gotowałem/am wcześniej lub jeśli nie chcesz gotować w danym dniu wybierz opcję nie
-                        gotuję)</label>
+                    <label class="diet-form__question">
+                        W każdym dniu wybierz jedną z dostępnych opcji.<br>
+                        Jeśli chcesz coś ugotować, zaznacz "Gotuję" i określ, ile masz na to czasu.
+                        Jeżeli nie masz możliwości gotowania, wybierz "Jem to samo co wczoraj",
+                        a zaplanujemy dla Ciebie większą ilość porcji.
+                        Natomiast gdy nie zamierzasz samodzielnie przygotowywać obiadu, zaznacz "Mam inne plany".
+                    </label>
                 </div>
                 <div th:each="days, idDay : *{weekInfo.dayInfoList}">
                     <div class="days"></div>

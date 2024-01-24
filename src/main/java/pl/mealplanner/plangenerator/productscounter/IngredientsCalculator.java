@@ -13,7 +13,7 @@ class IngredientsCalculator {
     public ConvertedRecipe calculateIngredients(ConvertedRecipe convertedRecipe, int nrPortionsUser, int forHowManyDays) {
         int nrPortionsRecipe = convertedRecipe.portions();
 
-        if (nrPortionsRecipe == nrPortionsUser) {
+        if (nrPortionsRecipe == nrPortionsUser * forHowManyDays) {
             return convertedRecipe;
         } else {
             List<IngredientConverted> ingWithCalculatedAmounts = convertedRecipe.ingredients().stream()
@@ -21,7 +21,7 @@ class IngredientsCalculator {
                     .toList();
 
             return convertedRecipe.toBuilder()
-                    .portions(nrPortionsUser)
+                    .portions(nrPortionsUser * forHowManyDays)
                     .ingredients(ingWithCalculatedAmounts)
                     .build();
         }

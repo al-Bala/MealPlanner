@@ -59,8 +59,8 @@ $(function() {
                     '<select name="weekInfo.dayInfoList[' + x + '].eatingPlan.id" class="eating-plan" required>' +
                         '<option value="" disabled selected>Wybierz</option>' +
                         '<option value="C01">Gotuję</option>' +
-                        '<option value="B02">Nie gotuję</option>' +
-                        '<option value="E03">Gotowałem wcześniej</option>' +
+                        '<option value="E03">Jem to samo co wczoraj</option>' +
+                        '<option value="B02">Mam inne plany</option>' +
                     '</select>' +
                     '<input class="cooking-time" type="number" min="30" name="weekInfo.dayInfoList[' + x + '].eatingPlan.timeMin" style="display:none;" placeholder="min">' +
                 '</div>'+
