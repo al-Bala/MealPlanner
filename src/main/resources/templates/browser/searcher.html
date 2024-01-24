@@ -50,7 +50,6 @@
             <a class="menu__item profile" th:href="@{/login}">Zaloguj się</a>
         </div>
     </nav>
-
     <header class="browser__hero hero">
         <img th:src="@{/images/51581.jpg}" alt="Równo ułożone talerze z jedzeniem - mała rozdzielczość"
             class="hero__image">
@@ -63,9 +62,7 @@
     </header>
     <section class="browser__container">
         <div id="recipe-search-wrapper" class="recipes-browsing-field">
-            <!-- Tutaj zostanie dodane pole wyszukiwania przez skrypt JS -->
         </div>
-
         <form method="post" th:action="@{/recipes/diet}" class="browser__form">
             <select name="diet" class="select-diet" required>
                 <option value="" selected disabled class="select-diet__option">Wybierz dietę</option>

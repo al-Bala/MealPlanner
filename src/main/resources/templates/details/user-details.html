@@ -66,7 +66,6 @@
                             class="recipe-container__link"></a>
                         <div class="d-line"></div>
                     </div>
-                    <!-- <div class="d-line"></div> -->
                     <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="recipe-img__link">
                         <img th:src="${imageUrlMap[recipe.id]}" alt="Obraz przepisu" class="recipe__img" />
                         <div class="overlay"></div>
@@ -103,7 +102,6 @@
     </footer>
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
     <script th:src="@{/js/burgerMenu.js}"></script>
-    <script th:src="@{/js/slider.js}"></script>
 </body>
 
 </html>
