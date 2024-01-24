@@ -29,8 +29,8 @@ nav .active .menu__item.guest-item {
 }
 .recipe__image {
     width: 100%;
-    border-radius: 16px;
     margin-bottom: 20px;
+    border-radius: 16px;
 }
 .recipe__header {
     width: 100%;
@@ -38,10 +38,10 @@ nav .active .menu__item.guest-item {
     margin-bottom: 10px;
 }
 h1 {
-    text-align: center;
-    font-size: 22px;
     font-family: 'Alkatra', system-ui;
+    font-size: 22px;
     font-weight: 500;
+    text-align: center;
 }
 .recipe__content {
     display: flex;
@@ -51,14 +51,14 @@ h1 {
     padding-bottom: 40px;
 }
 .recipe__wrapper {
-    margin-top: 150px;
-    padding: 30px;
-    border-radius: 16px;
     width: 85%;
     max-width: 600px;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    margin-top: 150px;
+    border-radius: 16px;
     z-index: 1;
     background-color: var(--white);
 }
@@ -86,8 +86,8 @@ h1 {
 }
 .display-recipe-h2 {
     font-size: 16px;
-    color: var(--gold);
     font-weight: 400;
+    color: var(--gold);
 }
 .diet__name,
 .prepare-time__text,
@@ -108,24 +108,24 @@ h1 {
     color: var(--orange);
 }
 .fa-clock, .fa-utensils {
-    color: var(--gold);
     font-size: 18px;
+    color: var(--gold);
 }
 .ingredients__wrapper {
     align-self: start;
 }
 .ingredients-table {
-    margin: 8px 0 40px;
     max-width: 294px;
+    margin: 8px 0 40px;
 }
 .ingredients-table__cell {
-    border: solid 2px var(--light-gray);
-    font-size: 14px;
     padding: 5px 7px;
+    font-size: 14px;
+    border: solid 2px var(--light-gray);
 }
 .prepare__steps {
-    font-size: 14px;
     margin: 8px 20px;
+    font-size: 14px;
 }
 .favourite__form {
     align-self: end;
@@ -133,18 +133,18 @@ h1 {
 }
 .favourite__btn {
     font-size: 34px;
-    background-color: transparent;
     color: var(--orange);
+    background-color: transparent;
 }
 .fa-solid.fa-heart {
     display: none;
 }
 .background-img {
+    width: 100%;
+    height: 100%;
     display: block;
     position: absolute;
     z-index: 0;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
     object-position: center;
     filter: blur(5px);
@@ -157,11 +157,11 @@ h1 {
 }
 @media (min-width: 992px) {
     .background-img-large {
+        width: 100%;
+        height: 100%;
         display: block;
         position: absolute;
         z-index: 0;
-        width: 100%;
-        height: 100%;
         filter: blur(5px);
         object-fit: cover;
         object-position: center;

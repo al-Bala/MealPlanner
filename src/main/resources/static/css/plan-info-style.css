@@ -3,6 +3,7 @@
 @import '../css/__navigation.css';
 @import '../css/__footer.css';
 @import '../css/__animations.css';
+
 @media (min-width: 992px) {
     .menu__item:nth-child(4),
     .menu__item:nth-child(5) {
@@ -212,9 +213,9 @@ input[type="range"] {
 
 /*Disliked products form starts*/
 .add-productD {
+    align-self: center;
     padding: 8px 14px;
     margin-top: 80px;
-    align-self: center;
     font-size: 14px;
     font-weight: 500;
     color: var(--white);
@@ -356,7 +357,6 @@ input[type="range"] {
     justify-content: center;
 }
 /*Submit button ends*/
-
 /*Mobile plan-generator ends*/
 
 /*Desktop plan-generator starts*/
