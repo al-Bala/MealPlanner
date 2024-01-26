@@ -37,17 +37,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/register/**").permitAll()
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/register/**").permitAll()
                         .requestMatchers("/login/**").permitAll()
-                        .requestMatchers("/wyszukiwarka/**").permitAll()
                         .requestMatchers("/home").permitAll()
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/recipes/**").permitAll()
+                        .requestMatchers("/recipeNamesAutocomplete").permitAll()
                         .requestMatchers("/plan/guest").permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
-                        .requestMatchers("/recipes/**").permitAll()
-                        .requestMatchers("/recipeNamesAutocomplete").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(
                         form -> form

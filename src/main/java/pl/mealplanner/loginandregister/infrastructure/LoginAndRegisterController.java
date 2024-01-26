@@ -24,7 +24,6 @@ class LoginAndRegisterController {
 
     @GetMapping("/register")
     public ModelAndView showRegistrationForm() {
-        // create model object to store form data
         ModelAndView modelAndView = new ModelAndView("loginandregister/register");
         modelAndView.addObject("user", UserDto.builder().build());
         return modelAndView;
