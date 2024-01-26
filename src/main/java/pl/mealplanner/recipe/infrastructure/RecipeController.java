@@ -81,7 +81,7 @@ public class RecipeController {
             model.addAttribute("imageUrlMap", imageUrlMap);
         }
         model.addAttribute("diets", recipeService.getAvailableDiets()); // Lista dostępnych diet
-        return "/browser/searcher";
+        return "browser/searcher";
     }
 
     @PostMapping("/recipes/diet")

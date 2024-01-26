@@ -41,12 +41,12 @@ public class GeneralIntegrationTest extends BaseIntegrationTest {
                 );
 
         List<GroceryList> expectedGroceryList = List.of(
-                new GroceryList("oliwa z oliwek", 30f, 50f ,1, "ml"),
-                new GroceryList("kurczak", 166f, 400f ,1, "g"),
-                new GroceryList("brokuł", 250f, 150f ,2, "g"),
-                new GroceryList("ryż", 200f, 400f ,1, "g"),
-                new GroceryList("marchew", 333f, 100f ,4, "g"),
-                new GroceryList("sos sojowy", 20f, 150f ,1, "ml")
+                new GroceryList("oliwa z oliwek", 30f, "ml"),
+                new GroceryList("kurczak", 166.7f,  "g"),
+                new GroceryList("brokuł", 250f,  "g"),
+                new GroceryList("ryż", 200f,  "g"),
+                new GroceryList("marchew", 333.3f, "g"),
+                new GroceryList("sos sojowy", 20f,  "ml")
         );
 
         Assertions.assertEquals(expectedFoundMeals, foundMeals);

@@ -7,13 +7,11 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.12</version>
-<!--        <version>3.1.5</version>-->
-<!--        <version>2.7.8</version>-->
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>com.mealplanner</groupId>
-    <artifactId>server</artifactId>
+    <artifactId>mealplanner</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>MealPlanner</name>
     <description>MealPlanner</description>
@@ -32,11 +30,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>-->
-<!--            <version>2.0.2</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -44,22 +37,12 @@
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity6</artifactId>
-<!--            <version>${thymeleaf-extras.version}</version>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.12.629</version>
-        </dependency>
-
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -101,14 +84,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--  WIREMOCK -->
-<!--        <dependency>-->
-<!--            <groupId>com.github.tomakehurst</groupId>-->
-<!--            <artifactId>wiremock-jre8-standalone</artifactId>-->
-<!--            <version>${wiremock-jre8.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-
         <!--LOMBOK-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -117,23 +92,11 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- JWT -->
         <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>java-jwt</artifactId>
-            <version>${java-jwt.version}</version>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.12.629</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>jakarta.validation</groupId>-->
-<!--            <artifactId>jakarta.validation-api</artifactId>-->
-<!--            <version>2.0.2</version>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>nl.geodienstencentrum.maven</groupId>
-            <artifactId>sass-maven-plugin</artifactId>
-            <version>3.7.2</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -141,21 +104,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.jasig.maven</groupId>
-                <artifactId>sass-maven-plugin</artifactId>
-                <version>1.1.1</version>
-                <configuration>
-                    <resources>
-                    <resource>
-                        <source>
-                        <directory>${basedir}/src/main/resources/static/sass</directory>
-                        </source>
-                        <destination>${project.build.directory}/css</destination>
-                    </resource>
-                    </resources>
-                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                            <mainClass>
+                                pl.mealplanner.MealPlannerApplication
+                            </mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

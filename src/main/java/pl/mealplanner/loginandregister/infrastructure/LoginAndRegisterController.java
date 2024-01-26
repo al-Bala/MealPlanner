@@ -19,13 +19,13 @@ class LoginAndRegisterController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "/loginandregister/login-page";
+        return "loginandregister/login-page";
     }
 
     @GetMapping("/register")
     public ModelAndView showRegistrationForm() {
         // create model object to store form data
-        ModelAndView modelAndView = new ModelAndView("/loginandregister/register");
+        ModelAndView modelAndView = new ModelAndView("loginandregister/register");
         modelAndView.addObject("user", UserDto.builder().build());
         return modelAndView;
     }
