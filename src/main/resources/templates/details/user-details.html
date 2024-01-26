@@ -56,7 +56,7 @@
             </div>
         </div>
         </div>
-        <p th:if="${message}" th:text="${message}"></p>
+       
         <h2 class="fav-recipes__h2">Ulubione przepisy</h2>
         <section class="random-recipes">
             <ul class="browser__recipes-container">
@@ -66,7 +66,6 @@
                             class="recipe-container__link"></a>
                         <div class="d-line"></div>
                     </div>
-                    <!-- <div class="d-line"></div> -->
                     <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="recipe-img__link">
                         <img th:src="${imageUrlMap[recipe.id]}" alt="Obraz przepisu" class="recipe__img" />
                         <div class="overlay"></div>
@@ -103,7 +102,6 @@
     </footer>
     <script src="https://kit.fontawesome.com/3d3eb47a80.js" crossorigin="anonymous"></script>
     <script th:src="@{/js/burgerMenu.js}"></script>
-    <script th:src="@{/js/slider.js}"></script>
 </body>
 
 </html>

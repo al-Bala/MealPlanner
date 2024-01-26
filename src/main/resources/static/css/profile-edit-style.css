@@ -23,31 +23,29 @@
 .footer {
     margin-top: 0;
 }
-
 main {
     height: 100%;
     margin-top: 73px;
 }
-
 .hero {
-    position: relative;
-    display: flex;
-    justify-content:center;
-    align-items: center;
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    position: relative;
     overflow: hidden;
 }
 .hero__image{
-    display: flex;
-    flex-direction: column;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: -1;
     object-fit: cover;
     object-position: right;
-    position: absolute;
     filter: brightness(90%);
-    z-index: -1;
 }
 .hero__image-large {
     display: none;
@@ -55,18 +53,18 @@ main {
 .hero__content {
     display: flex;
     flex-direction: column;
-    text-align: left;
-    color: #fff;
     position: relative;
-    backdrop-filter: blur(3px);
     padding: 10px;
+    text-align: left;
+    color: var(--white);
     border-radius: 10px;
+    backdrop-filter: blur(3px);
     box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.15);
 }
 .edit-error {
-    color: rgb(179, 0, 0);
     margin-top: 5px;
     font-size: 12px;
+    color: rgb(179, 0, 0);
 }
 @media (min-width: 450px) { 
     .hero__content {
@@ -76,15 +74,15 @@ main {
         margin-bottom: 30px;
     }
     .hero__image-large {
-        display: flex;
-        flex-direction: column;
         width: 100%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        z-index: -1;
         object-fit: cover;
         object-position: right;
-        position: absolute;
         filter: brightness(90%);
-        z-index: -1;
     }
     .hero__image {
         display: none;
@@ -101,8 +99,8 @@ main {
         font-size: 30px;
     }
     button.confirm-btn, a.cancel-btn {
-        padding: 10px 16px;
         width: 230px;
+        padding: 10px 16px;
     }
     .confirm-btn {
         font-size: 16px;
@@ -117,7 +115,6 @@ main {
         width: 110px;
     }
 }
-
 .profile__data {
     display: flex;
     gap: 20px;
@@ -127,16 +124,17 @@ main {
     color: var(--black);
 }
 h1 {
+    max-width: 300px;
+    margin-bottom: 10px;
     font-size: 26px;
-    color: var(--white);
     line-height: 32px;
     letter-spacing: 5px;
-    margin-bottom: 10px;
-    max-width: 300px;
+    color: var(--white);
     text-shadow: 0px 4px 6.7px rgba(0, 0, 0, 0.30);
 }
 .edit-form {
-    display: flex; flex-direction: column;
+    display: flex; 
+    flex-direction: column;
     gap: 10px;
 }
 .edit-input {
@@ -144,20 +142,19 @@ h1 {
     border-radius: 6px;
     border: 2px solid var(--black);
 }
-
 .confirm-btn, .cancel-btn {
-    padding: 8px 14px;
-    border-radius: 6px;
     width: 160px;
     align-self: flex-start;
+    padding: 8px 14px;
+    border-radius: 6px;
 }
 .confirm-btn {
-    background-color: var(--orange);
     color: var(--white);
+    background-color: var(--orange);
 }
 .cancel-btn {
-    background-color: var(--dark-gray);
-    color: var(--white);
-    text-align: center;
     font-size: 13px;
+    text-align: center;
+    color: var(--white);
+    background-color: var(--dark-gray);
 }

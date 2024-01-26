@@ -23,14 +23,14 @@
 
 /*Header starts*/
 .header {
-  margin-top: 73px;
   width: 100%;
   height: 500px;
+  margin-top: 73px;
 }
 .header-img__wrapper {
-  position: relative;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 .pizza {
   width: 100%;
@@ -42,40 +42,40 @@
   position: absolute;
   top: 307px;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 2;
+  transform: translate(-50%, -50%);
 }
 .chat-cloud {
+  width: 90%;
+  max-width: 400px;
   position: absolute;
   top: 328px;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 1;
-  width: 90%;
-  max-width: 400px;
+  transform: translate(-50%, -50%);
   animation: pulseCloud 1s ease-in-out infinite;
 }
 .header__text {
-  text-align: center;
+  max-width: 216px;
   font-size: 24px;
   line-height: 32px;
-  max-width: 216px;
+  text-align: center;
 }
 .header__h {
-  color: var(--gold);
+  margin-top: 10px;
   font-size: 24px;
   font-weight: 700;
+  color: var(--gold);
   letter-spacing: 2.7px;
   text-align: center;
-  margin-top: 10px;
 }
 .gradinet {
+  width: 100%;
+  height: 60%;
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 1;
-  width: 100%;
-  height: 60%;
   background: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0));
 }
 /*Header ends*/
@@ -87,16 +87,16 @@
 .day__text {
   width: 100%;
   padding: 12px;
-  color: var(--white);
-  background-color: var(--orange);
-  text-align: center;
   font-size: 20px;
   font-weight: 400;
+  text-align: center;
+  color: var(--white);
+  background-color: var(--orange);
 }
 
 .el {
-  height: 330px;
   width: 260px;
+  height: 330px;
   position: relative;
   margin: 30px 0;
 }
@@ -106,20 +106,20 @@
   flex-direction: column;
 }
 .cook-day__link {
-  height: 100%;
   width: 100%;
+  height: 100%;
   position: absolute;
 }
 .overlay {
-  height: 35%;
   width: 100%;
+  height: 35%;
   position: absolute;
-  z-index: 1;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(3px);
+  z-index: 1;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(3px);
 }
 .day__image {
   width: 100%;
@@ -130,21 +130,21 @@
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.60);
 }
 .cook-day__recipe-info {
-  position: absolute;
-  left: 20px;
-  top: 235px;
-  z-index: 2;
   max-width: 200px;
+  position: absolute;
+  top: 235px;
+  left: 20px;
+  z-index: 2;
 }
 .cook-day__recipe-info a:nth-child(2) {
   font-size: 17px;
   color: var(--black);
 }
 .prepare-time {
-  margin-top: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 10px;
   font-size: 13px;
 }
 .fa-clock {
@@ -155,29 +155,28 @@
   color: var(--black);
 }
 .fa-face-smile-wink {
-  color: var(--gold);
   padding-left: 5px;
+  color: var(--gold);
 }
 /*Meal plan ends*/
-
 
 /*Grocery list starts*/
 .grocery-list {
   width: 100%;
-  background-color: var(--light-gray);
-  border-top-right-radius: 40px;
-  border-bottom-left-radius: 40px;
+  padding: 40px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 0;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+  background-color: var(--light-gray);
 }
 .grocery-list__title {
-  color: var(--gold);
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
   margin-bottom: 20px;
+  font-size: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
 }
 .grocery-table {
   font-size: 14px;
@@ -199,13 +198,13 @@
 }
 .new-plan__btn {
   display: flex;
-  border: solid 2px var(--gold);
-  color: var(--gold);
-  padding: 10px 20px;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
   font-size: 20px;
+  color: var(--gold);
   border-radius: 10px;
+  border: solid 2px var(--gold);
 }
 .new-plan__link {
   color: var(--gold);
@@ -255,7 +254,5 @@
   .new-plan__link {
     background-color: var(--white);
   }
-
-
 }
 /*Desktop meal plan ends*/
