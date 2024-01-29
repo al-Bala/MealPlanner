@@ -89,10 +89,22 @@ class PlanGeneratorService {
     }
 
     private List<PlanProductInfo> choosePacketsAndCalculateLeftovers(List<IngredientConverted> ingredients) {
-        return productsCounterFacade.choosePacketsAndCountLeftovers(ingredients);
+        List<PlanProductInfo> ingsFromRecipe = ingredients.stream()
+                .map(ing -> PlanProductInfo.builder()
+                        .name(ing.name())
+                        .amountToUseCount(ing.amountsAndUnit().getAmountCount())
+                        .packingMeasure(0)
+                        .nrOfPackets(0)
+                        .surplus(0)
+                        .unitCount(ing.amountsAndUnit().getUnitCount())
+                        .build())
+                .toList();
+
+        ingsFromRecipe.forEach(listOfProductsForPlan::updateAfterChoseRecipe);
+        return productsCounterFacade.choosePacketsAndCountLeftovers(ingsFromRecipe);
     }
 
     private void addProductsToGroceryList(List<PlanProductInfo> productsToUseFromLeftovers) {
-        productsToUseFromLeftovers.forEach(listOfProductsForPlan::add);
+        productsToUseFromLeftovers.forEach(listOfProductsForPlan::addToPlan);
     }
 }

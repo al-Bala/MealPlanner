@@ -21,7 +21,8 @@ public class UnitConverterFacade {
     public void includeUserProductsToUse(List<IngredientDto> productsToUse) {
         List<IngredientConverted> convertedProducts = convertProductsToUseToMainUnit(productsToUse);
         List<PlanProductInfo> productsToUseList = UnitMapper.mapForIncludeUserProductsToUse(convertedProducts);
-        listOfProductsForPlan.addAll(productsToUseList);
+        listOfProductsForPlan.addAllFromUser(productsToUseList);
+        listOfProductsForPlan.addAllForPlan(productsToUseList);
     }
 
     public ConvertedRecipe convertIngsFromRecipeToMainUnit(MatchingRecipe recipe) {

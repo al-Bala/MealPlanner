@@ -19,9 +19,11 @@ public class ListOfProductsForPlan {
     private final ProductsCounterService productsCounterService;
     private final UserFacade userFacade;
     private static final Set<PlanProductInfo> productsForPlan = new HashSet<>();
+    private static final Set<PlanProductInfo> productsFromUser = new HashSet<>();
 
     public void clearListOfProductsForPlan() {
         productsForPlan.clear();
+        productsFromUser.clear();
     }
 
     public Set<PlanProductInfo> getListOfProductsForPlan() {
@@ -44,19 +46,40 @@ public class ListOfProductsForPlan {
         return currentUser.getGroceryList();
     }
 
-    public void addAll(List<PlanProductInfo> productsToUse) {
-        productsToUse.forEach(this::add);
+    public void addAllForPlan(List<PlanProductInfo> productsToUse) {
+        productsForPlan.addAll(productsToUse);
     }
 
-    public void add(PlanProductInfo productToAdd) {
-        if (productsForPlan.isEmpty()) {
-            productsForPlan.add(productToAdd);
-        } else {
-            addAndUpdatePacking(productToAdd);
+    public void addAllFromUser(List<PlanProductInfo> productsToUse) {
+        productsFromUser.addAll(productsToUse);
+    }
+
+    public void updateAfterChoseRecipe(PlanProductInfo productToAdd) {
+        if (!productsFromUser.isEmpty()) {
+            for (PlanProductInfo pInListUser : productsFromUser) {
+                if (pInListUser.equals(productToAdd)) {
+                    float amount = productToAdd.getAmountToUseCount() - pInListUser.getSurplus();
+                    float surplus = pInListUser.getSurplus() - productToAdd.getAmountToUseCount();
+                    float amount1 = amount > 0 ? amount : 0;
+                    float surplus1 = surplus > 0 ? surplus : 0;
+
+                    productToAdd.setAmountToUseCount(amount1);
+                    pInListUser.setSurplus(surplus1);
+                }
+            }
+            productsFromUser.removeIf(s -> s.getSurplus() == 0);
         }
     }
 
-    private void addAndUpdatePacking(PlanProductInfo pToAdd) {
+    public void addToPlan(PlanProductInfo productToAdd) {
+        if (productsForPlan.isEmpty()) {
+            productsForPlan.add(productToAdd);
+        } else {
+            addToPlanAndUpdatePacking(productToAdd);
+        }
+    }
+
+    private void addToPlanAndUpdatePacking(PlanProductInfo pToAdd) {
         int i = 0;
         for (PlanProductInfo pInList : productsForPlan) {
             if (pInList.equals(pToAdd)) {
@@ -66,7 +89,7 @@ public class ListOfProductsForPlan {
 
                 } else {
                     // jeśli pToAdd.amount > pInList.surplus to dobieranie od nowa opakowania
-                    float ingAmount = pInList.getAmountToUseCount() + pToAdd.getAmountToUseCount();
+                    float ingAmount = pInList.getAmountToUseCount() + (pToAdd.getAmountToUseCount() - pInList.getSurplus());
                     PlanProductInfo updatedProduct = productsCounterService.calculateForOneProduct(pToAdd.getName(), ingAmount);
                     replaceProduct(pInList, updatedProduct);
                 }
